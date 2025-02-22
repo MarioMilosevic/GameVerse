@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import errorFactory from "./services/responses/errorFactory";
 import usersRouter from "./routes/users";
+import gamesRouter from "./routes/games";
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/games", gamesRouter);
+
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server running");

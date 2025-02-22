@@ -21,8 +21,23 @@ model User {
   fullName        String
   password        String
   passwordConfirm String?
-
   @@map("users")
+}
+
+model Game {
+  id              Int     @id @default(autoincrement())
+  name String
+  releaseYear String
+  rating String 
+  description String 
+  writers String[]
+  stars String []
+  consoles String[]
+  genre String[]
+  price Int
+  gameplayHours Int
+  trailer String
+  thumbnail String
 }
 
 enum Role {
