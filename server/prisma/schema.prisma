@@ -14,34 +14,82 @@ datasource db {
 }
 
 model User {
-  id              Int     @id @default(autoincrement())
-  role            Role    @default(USER)
-  email           String  @unique
-  createdDate     String
+  id              Int      @id @default(autoincrement())
+  role            Role     @default(USER)
+  email           String   @unique
+  createdDate     DateTime @default(now())
   fullName        String
   password        String
   passwordConfirm String?
-  @@map("users")
-}
+  reviews         Review[]
 
-model Game {
-  id              Int     @id @default(autoincrement())
-  name String
-  releaseYear String
-  rating String 
-  description String 
-  writers String[]
-  stars String []
-  consoles String[]
-  genre String[]
-  price Int
-  gameplayHours Int
-  trailer String
-  thumbnail String
+  @@map("users")
 }
 
 enum Role {
   USER
   ADMIN
   GUEST
+}
+
+model Game {
+  id            Int      @id @default(autoincrement())
+  name          String
+  releaseYear   Int
+  description   String
+  writers       String[]
+  stars         String[]
+  price         Int
+  gameplayHours Int
+  trailer       String
+  thumbnail     String
+  Review        Review[]
+  consoles      GameConsole[]  
+  genre         GameGenre[]
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId    Int
+  rating    Int 
+  comment   String?
+  createdAt DateTime @default(now())
+
+  @@unique([userId, gameId]) 
+}
+
+model Console {
+  id      Int       @id @default(autoincrement())
+  name String @unique
+  image String
+  games GameConsole[]
+}
+
+model GameConsole {
+  gameId Int
+  consoleId Int
+
+  game Game @relation(fields: [gameId], references: [id])
+  console Console @relation(fields: [consoleId], references: [id])
+
+  @@id([gameId, consoleId])
+}
+
+model Genre {
+   id      Int       @id @default(autoincrement())
+  name String @unique
+  games GameGenre[]
+}
+
+model GameGenre {
+  gameId Int
+  genreId Int
+
+ game Game @relation(fields: [gameId], references: [id])
+  genre Genre @relation(fields: [genreId], references: [id])
+
+  @@id([gameId, genreId])
 }
