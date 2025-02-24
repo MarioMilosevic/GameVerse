@@ -91,12 +91,12 @@ export default {
       const newGame = await prisma.game.create({
         data: {
           name,
-          releaseYear: parseInt(releaseYear),
+          releaseYear,
           description,
           writers,
           stars,
-          price: parseFloat(price),
-          gameplayHours: parseFloat(gameplayHours),
+          price,
+          gameplayHours,
           trailer,
           thumbnail,
           consoles: {
