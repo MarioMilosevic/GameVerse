@@ -43,9 +43,9 @@ model Game {
   gameplayHours Int
   trailer       String
   thumbnail     String
-  Review        Review[]
+  reviews        Review[]
   consoles      GameConsole[]  
-  genre         GameGenre[]
+  genres         GameGenre[]
 }
 
 model Review {
@@ -72,7 +72,7 @@ model GameConsole {
   gameId Int
   consoleId Int
 
-  game Game @relation(fields: [gameId], references: [id])
+  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
   console Console @relation(fields: [consoleId], references: [id])
 
   @@id([gameId, consoleId])
@@ -88,7 +88,7 @@ model GameGenre {
   gameId Int
   genreId Int
 
- game Game @relation(fields: [gameId], references: [id])
+ game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
   genre Genre @relation(fields: [genreId], references: [id])
 
   @@id([gameId, genreId])

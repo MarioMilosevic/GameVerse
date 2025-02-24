@@ -18,9 +18,16 @@ export default {
   },
   async createGenre(req: Request, res: Response) {
     try {
-      console.log('tek treba da se napravi')
+      const newGenre = await prisma.genre.create({
+        data: req.body,
+      });
+      if (!newGenre) {
+        errorFactory.badRequest(res);
+        return;
+      }
+      sucessFactory.created(res, newGenre);
     } catch (error) {
-      errorFactory.internalError(res)
+      errorFactory.internalError(res);
     }
-  }
+  },
 };
