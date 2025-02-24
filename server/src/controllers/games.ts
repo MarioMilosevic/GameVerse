@@ -38,6 +38,40 @@ export default {
       errorFactory.internalError(res);
     }
   },
+  async getSingleGame(req: Request, res: Response) {
+    try {
+      const singleGame = await prisma.game.findUnique({
+        where: { id: Number(req.params.id) },
+        include: {
+          consoles: {
+            select: {
+              console: {
+                select: {
+                  image: true,
+                },
+              },
+            },
+          },
+          genres: {
+            select: {
+              genre: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
+        },
+      });
+      if(!singleGame) {
+        errorFactory.notFound(res)
+        return
+      }
+      sucessFactory.ok(res, singleGame)
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
   async createGame(req: Request, res: Response) {
     try {
       const {
@@ -91,16 +125,13 @@ export default {
   },
   async deleteGame(req: Request, res: Response) {
     try {
-      console.log(req.params);
-      const mario = Number(req.params.id);
-      console.log(mario);
-      const game = await prisma.game.findUnique({ where: { id: 1 } });
-      console.log(game);
       const deleted = await prisma.game.delete({
-        where: { id: 1 },
+        where: { id: Number(req.params.id) },
       });
-      console.log("proslo odje");
-      console.log(deleted);
+      if (!deleted) {
+        errorFactory.notFound(res);
+        return;
+      }
       sucessFactory.noContent(res);
     } catch (error) {
       errorFactory.internalError(res);
