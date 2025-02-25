@@ -1,7 +1,9 @@
 <template>
-
-    <h1>Ovo ce da bude komponenta</h1>
-    <img :src="game.thumbnail"/>
+  <li class="border border-black h-[500px] w-[300px]"> 
+    <img :src="game.thumbnail" class="w-full"/>
+    <h2 class="text-center">{{ game.name }}</h2>
+    <p>{{ game.description }}</p>
+  </li>
 </template>
 
 <script setup lang="ts">
