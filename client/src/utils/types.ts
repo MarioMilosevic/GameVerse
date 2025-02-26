@@ -4,6 +4,7 @@ export type GameType = {
   genres: GenreType[];
   id: number;
   name: string;
+  gameplayHours: string;
   price: string;
   releaseYear: string;
   start: string[];
