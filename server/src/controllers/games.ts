@@ -13,6 +13,7 @@ export default {
               console: {
                 select: {
                   image: true,
+                  id:true
                 },
               },
             },

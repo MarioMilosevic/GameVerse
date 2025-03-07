@@ -16,6 +16,7 @@ export type GameType = {
 export type ConsoleType = {
   console: {
     image: string;
+    id: number;
   };
 };
 
