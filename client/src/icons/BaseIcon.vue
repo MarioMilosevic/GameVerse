@@ -50,4 +50,14 @@ const props = defineProps({
 const cursor = computed(() => {
   return props.isDisabled ? 'not-allowed' : 'pointer'
 })
+
+// const iconSizeClass = computed(() => {
+//   return props.size
+// })
+
+
 </script>
+
+<!-- <style scoped>
+
+</style> -->
