@@ -6,15 +6,15 @@
     :stroke-width="strokeWidth"
     :stroke="stroke"
     :class="[`icon-${props.size}`]"
-    :style="{ cursor }"
     :size="size"
-  >
+    >
     <slot />
   </svg>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+// :style="{ cursor }"
+// import { computed } from 'vue'
 
 const props = defineProps({
   xmlns: {
@@ -47,17 +47,9 @@ const props = defineProps({
   },
 })
 
-const cursor = computed(() => {
-  return props.isDisabled ? 'not-allowed' : 'pointer'
-})
-
-// const iconSizeClass = computed(() => {
-//   return props.size
+// const cursor = computed(() => {
+//   return props.isDisabled ? 'not-allowed' : 'pointer'
 // })
-
 
 </script>
 
-<!-- <style scoped>
-
-</style> -->

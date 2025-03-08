@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --color-dark-black: #000000;
+  --color-dark-deep-red: #3d0000;
+  --color-dark-dark-red: #950101;
+  --color-dark-highlight-red: #ff0000;
+}
+
 .icon-small {
   width: 1rem;
   height: 1rem;

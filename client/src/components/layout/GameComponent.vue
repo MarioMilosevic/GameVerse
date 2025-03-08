@@ -1,8 +1,8 @@
 <template>
   <li class="border border-black max-w-[300px] flex flex-col gap-2">
     <img :src="game.thumbnail" class="w-full" />
-    <div class="border border-white flex flex-col">
-      <h2 class="text-center">{{ game.name }}</h2>
+    <div class="border border-white flex flex-col gap-4">
+      <h1 class="text-center">{{ game.name }}</h1>
       <div class="border border-black grid grid-cols-2">
         <GameStat>
           <template #icon>
@@ -33,11 +33,12 @@
           <template #name>price</template>
         </GameStat>
         <p>Available on:</p>
-        <figure class="flex justify-between">
+        <figure class="flex justify-between bg-red-500">
           <ConsoleComponent v-for="obj in game.consoles" :key="obj.console.id" :image="obj.console.image"/>
         </figure>
       </div>
     </div>
+
   </li>
 </template>
 

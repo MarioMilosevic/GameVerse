@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul >
     <GameComponent v-for="game in props.games" :key="game.id" :game="game"/>
   </ul>
 </template>
