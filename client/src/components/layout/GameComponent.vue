@@ -1,6 +1,6 @@
 <template>
-  <li class="max-w-[300px] flex flex-col gap-2">
-    <img :src="game.thumbnail" class="w-full h-[300px] object-cover" />
+  <li class="max-w-[300px] flex flex-col gap-2 relative">
+    <img :src="game.thumbnail" class="w-full h-[300px] object-cover rounded-xl" />
     <div class="flex flex-col gap-4">
       <h1 class="text-center text-xl">{{ game.name }}</h1>
       <div class="grid grid-cols-2 gap-2">
@@ -32,22 +32,20 @@
           <template #value>{{ game.price }}</template>
           <template #name>price</template>
         </GameStat>
-        <div>
-          <p>Available on:</p>
-          <figure
-            class="flex justify-center gap-1 bg-dark-dark-red p-1 rounded-2xl"
-          >
-            <ConsoleComponent
-              v-for="obj in game.consoles"
-              :key="obj.console.id"
-              :image="obj.console.image"
-            />
-          </figure>
-        </div>
-        <ActionButton>
-          <template #content>Details</template>
-        </ActionButton>
       </div>
+      <p>Available on:</p>
+      <figure
+        class="flex justify-center gap-1 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
+      >
+        <ConsoleComponent
+          v-for="obj in game.consoles"
+          :key="obj.console.id"
+          :image="obj.console.image"
+        />
+      </figure>
+      <ActionButton class="self-end absolute bottom-0 right-0" size="big">
+        <template #content>Details</template>
+      </ActionButton>
     </div>
   </li>
 </template>

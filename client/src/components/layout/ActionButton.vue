@@ -1,5 +1,10 @@
 <template>
-  <button :class="['px-4 py-2 rounded-3xl', colorOptions[props.color]]">
+  <button
+    :class="[
+      'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1',
+      colorOptions[props.color] ,buttonSize[props.size],
+    ]"
+  >
     <slot name="content" />
   </button>
 </template>
@@ -8,15 +13,16 @@
 import { PropType } from "vue";
 
 const colorOptions = {
-  lightRed: "bg-dark-highlight-red hover:bg-dark-dark-red",
+  lightRed: "bg-red-600 hover:bg-dark-dark-red ",
+//   lightRed: "bg-dark-highlight-red hover:bg-dark-dark-red ",
   red: "bg-dark-deep-red hover:bg-dark-dark-red",
   darkRed: "bg-dark-dark-red",
 };
 
 const buttonSize = {
-  small: "px-2 py-1",
-  medium: "px-3 py-6",
-  big: "px-4 py-8",
+  small: "px-2 py-1 text-small",
+  medium: "px-6 py-3 text-base",
+  big: "px-8 py-4 text-lg",
 };
 type SizeType = keyof typeof buttonSize;
 type ColorType = keyof typeof colorOptions;
