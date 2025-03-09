@@ -1,9 +1,9 @@
 <template>
-  <li class="border border-black max-w-[300px] flex flex-col gap-2">
+  <li class="max-w-[300px] flex flex-col gap-2">
     <img :src="game.thumbnail" class="w-full h-[300px] object-cover" />
-    <div class="border border-white flex flex-col gap-4">
-      <h1 class="text-center">{{ game.name }}</h1>
-      <div class="border border-black grid grid-cols-2">
+    <div class="flex flex-col gap-4">
+      <h1 class="text-center text-xl">{{ game.name }}</h1>
+      <div class="grid grid-cols-2 gap-2">
         <GameStat>
           <template #icon>
             <ClockIcon />
@@ -32,13 +32,23 @@
           <template #value>{{ game.price }}</template>
           <template #name>price</template>
         </GameStat>
-        <p>Available on:</p>
-        <figure class="flex justify-between bg-red-500">
-          <ConsoleComponent v-for="obj in game.consoles" :key="obj.console.id" :image="obj.console.image"/>
-        </figure>
+        <div>
+          <p>Available on:</p>
+          <figure
+            class="flex justify-center gap-1 bg-dark-dark-red p-1 rounded-2xl"
+          >
+            <ConsoleComponent
+              v-for="obj in game.consoles"
+              :key="obj.console.id"
+              :image="obj.console.image"
+            />
+          </figure>
+        </div>
+        <ActionButton>
+          <template #content>Details</template>
+        </ActionButton>
       </div>
     </div>
-
   </li>
 </template>
 
@@ -51,6 +61,7 @@ import DollarIcon from "src/icons/DollarIcon.vue";
 import CalendarIcon from "src/icons/CalendarIcon.vue";
 import GameStat from "src/components/layout/GameStat.vue";
 import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
+import ActionButton from "src/components/layout/ActionButton.vue";
 
 const props = defineProps({
   game: {
@@ -59,5 +70,5 @@ const props = defineProps({
   },
 });
 
-console.log(props.game);
+// console.log(props.game);
 </script>
