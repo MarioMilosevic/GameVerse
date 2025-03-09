@@ -1,5 +1,5 @@
 <template>
-  <ul >
+  <ul class="max-w-[1280px] mx-auto grid grid-cols-3 gap-4">
     <GameComponent v-for="game in props.games" :key="game.id" :game="game"/>
   </ul>
 </template>

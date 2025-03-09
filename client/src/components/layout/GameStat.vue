@@ -1,5 +1,5 @@
 <template>
-  <p class="border border-white flex gap-2 items-center">
+  <div class="border border-white flex gap-2 items-center">
     <BaseIcon size="medium">
       <slot name="icon" />
     </BaseIcon>
@@ -9,7 +9,7 @@
     <h4>
       <slot name="name" />
     </h4>
-  </p>
+  </div>
 </template>
 
 <script setup lang="ts">

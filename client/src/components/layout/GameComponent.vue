@@ -1,6 +1,6 @@
 <template>
   <li class="border border-black max-w-[300px] flex flex-col gap-2">
-    <img :src="game.thumbnail" class="w-full" />
+    <img :src="game.thumbnail" class="w-full h-[300px] object-cover" />
     <div class="border border-white flex flex-col gap-4">
       <h1 class="text-center">{{ game.name }}</h1>
       <div class="border border-black grid grid-cols-2">
