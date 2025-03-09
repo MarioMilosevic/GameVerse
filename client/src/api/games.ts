@@ -12,7 +12,6 @@ export const getAllGames = async () => {
 export const getSingleGame = async (id: number) => {
   try {
     const response = await fetch(`${baseUrl}/games/${id}`);
-    console.log(response);
     return await response.json();
   } catch (error) {
     console.error(error);

@@ -6,6 +6,11 @@ export const routes = [
     name: "Home",
     component: () => import("src/views/HomeView.vue"),
   },
+  {
+    path: '/details:id',
+    name: "GameDetails",
+    component:() => import("src/views/SingleGameView.vue")
+  }
 ];
 
 const router = createRouter({

@@ -1,14 +1,17 @@
 <template>
-  <li class="max-w-[300px] flex flex-col gap-2 relative">
-    <img :src="game.thumbnail" class="w-full h-[300px] object-cover rounded-xl" />
+  <section class="max-w-[300px] flex flex-col gap-2 relative">
+    <img
+      :src="game.thumbnail"
+      class="w-full h-[300px] object-cover rounded-xl"
+    />
     <div class="flex flex-col gap-4">
-      <h1 class="text-center text-xl">{{ game.name }}</h1>
+      <h1 class="text-center text-xl">{{ name }}</h1>
       <div class="grid grid-cols-2 gap-2">
         <GameStat>
           <template #icon>
             <ClockIcon />
           </template>
-          <template #value>{{ game.gameplayHours }}</template>
+          <template #value>{{ gameplayHours }}</template>
           <template #name>hours</template>
         </GameStat>
         <GameStat>
@@ -22,14 +25,14 @@
           <template #icon>
             <CalendarIcon />
           </template>
-          <template #value>{{ game.releaseYear }}</template>
+          <template #value>{{ releaseYear }}</template>
           <template #name>year</template>
         </GameStat>
         <GameStat>
           <template #icon>
             <DollarIcon />
           </template>
-          <template #value>{{ game.price }}</template>
+          <template #value>{{ price }}</template>
           <template #name>price</template>
         </GameStat>
       </div>
@@ -43,16 +46,21 @@
           :image="obj.console.image"
         />
       </figure>
-      <ActionButton class="self-end absolute bottom-0 right-0" size="big">
+      <ActionButton
+        class="absolute bottom-0 right-0"
+        size="big"
+        @click="seeGameDetails(id)"
+      >
         <template #content>Details</template>
       </ActionButton>
     </div>
-  </li>
+  </section>
 </template>
 
 <script setup lang="ts">
 import { PropType } from "vue";
 import { GameType } from "src/utils/types";
+import { useRouter } from "vue-router";
 import ClockIcon from "src/icons/ClockIcon.vue";
 import StarIcon from "src/icons/StarIcon.vue";
 import DollarIcon from "src/icons/DollarIcon.vue";
@@ -68,5 +76,11 @@ const props = defineProps({
   },
 });
 
-// console.log(props.game);
+const { name, releaseYear, price, gameplayHours, id } = props.game;
+const router = useRouter();
+
+const seeGameDetails = (id: number) => {
+  router.push({ name: 'GameDetails', params: { id } });
+};
+
 </script>

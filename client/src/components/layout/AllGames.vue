@@ -1,7 +1,7 @@
 <template>
-  <ul class="max-w-[1280px] mx-auto grid grid-cols-3 gap-16">
+  <main class="max-w-[1280px] mx-auto grid grid-cols-3 gap-16">
     <GameComponent v-for="game in props.games" :key="game.id" :game="game" />
-  </ul>
+  </main>
 </template>
 
 <script setup lang="ts">
