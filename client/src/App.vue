@@ -1,8 +1,8 @@
 <template>
-  <MainNavigation/>
+  <SharedLayout/>
   <RouterView />
 </template>
 
 <script lang="ts" setup>
-import MainNavigation from 'src/components/layout/MainNavigation.vue';
+import SharedLayout from 'src/components/layout/SharedLayout.vue';
 </script>

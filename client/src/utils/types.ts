@@ -7,7 +7,7 @@ export type GameType = {
   gameplayHours: string;
   price: string;
   releaseYear: string;
-  start: string[];
+  stars: string[];
   thumbnail: string;
   trailer: string;
   writers: string[];
