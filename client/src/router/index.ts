@@ -10,6 +10,11 @@ export const routes = [
     path: '/details:id',
     name: "GameDetails",
     component:() => import("src/views/SingleGameView.vue")
+  },
+  {
+    path: "/login",
+    name: "LoginPage",
+    component:() => import('src/views/LoginPage.vue')
   }
 ];
 
