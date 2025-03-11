@@ -25,3 +25,8 @@ export type GenreType = {
     name: string;
   };
 };
+
+export type LoginCredentialsType = {
+  email: string;
+  password:string
+}
