@@ -9,7 +9,7 @@
   >
     <!-- <img :src="singleGame.thumbnail" :alt="singleGame.thumbnail" class="absolute top-[12%] right-0 w-full"> -->
     <section
-      class="max-w-[1280px] mx-auto border border-black bg-red-400 py-16 flex flex-col gap-4"
+      class="max-w-[1280px] mx-auto border border-black py-16 flex flex-col gap-4"
     >
       <h1 class="text-5xl text-center">{{ singleGame.name }}</h1>
       <div class="flex gap-4">
