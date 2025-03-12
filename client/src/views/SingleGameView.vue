@@ -1,23 +1,31 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <main
-    v-else
-    class="border border-white mx-auto min-h-screen bg-no-repeat bg-cover"
-    :style="{
-      backgroundImage: `url(${singleGame.thumbnail})`,
-    }"
-  >
-    <!-- <img :src="singleGame.thumbnail" :alt="singleGame.thumbnail" class="absolute top-[12%] right-0 w-full"> -->
+  <main v-else class="mx-auto min-h-screen">
+    <img
+      :src="singleGame.thumbnail"
+      :alt="singleGame.thumbnail"
+      class="w-full max-h-screen object-cover opacity-50"
+    />
     <section
-      class="max-w-[1280px] mx-auto border border-black py-16 flex flex-col gap-4"
+      class="max-w-[1280px] mx-auto border border-white py-16 flex flex-col gap-4"
     >
       <h1 class="text-5xl text-center">{{ singleGame.name }}</h1>
-      <div class="flex gap-4">
+      <div class="flex gap-4 border border-white">
         <YouTube :src="singleGame.trailer" ref="youtube" @ready="playVideo" />
-        <div>
-          <p>{{ singleGame.description }}</p>
-          <p v-for="writer in singleGame.writers" :key="writer">{{ writer }}</p>
-          <p v-for="star in singleGame.stars" :key="star">{{ star }}</p>
+        <div class="border border-white">
+          <div class="flex gap-4 text-justify pb-8">
+            <p>{{ singleGame.description }}</p>
+          </div>
+          <div class="flex gap-4 text-justify">
+            <h3>Writers:</h3>
+            <p v-for="writer in singleGame.writers" :key="writer">
+              {{ writer }}
+            </p>
+          </div>
+          <div class="flex gap-4 text-justify">
+            <h3>Stars:</h3>
+            <p v-for="star in singleGame.stars" :key="star">{{ star }}</p>
+          </div>
         </div>
       </div>
       <p>Available on:</p>
@@ -77,7 +85,6 @@ const playVideo = () => {
   }
 };
 </script>
-
 
 <!-- 
 

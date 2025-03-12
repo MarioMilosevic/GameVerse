@@ -13,7 +13,7 @@ export default {
               console: {
                 select: {
                   image: true,
-                  id:true
+                  id: true,
                 },
               },
             },
@@ -64,11 +64,11 @@ export default {
           },
         },
       });
-      if(!singleGame) {
-        errorFactory.notFound(res)
-        return
+      if (!singleGame) {
+        errorFactory.notFound(res);
+        return;
       }
-      sucessFactory.ok(res, singleGame)
+      sucessFactory.ok(res, singleGame);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -134,6 +134,23 @@ export default {
         return;
       }
       sucessFactory.noContent(res);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+
+  async editGame(req: Request, res: Response) {
+    try {
+      const { description } = req.body;
+      const updatedGame = await prisma.game.update({
+        where: { id: Number(req.params.id) },
+        data: {
+          description: description,
+        },
+      });
+      console.log(updatedGame);
+
+      sucessFactory.ok(res, updatedGame);
     } catch (error) {
       errorFactory.internalError(res);
     }
