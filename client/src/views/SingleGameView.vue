@@ -7,7 +7,7 @@
       class="w-full max-h-screen object-cover opacity-50"
     />
     <section
-      class="max-w-[1280px] mx-auto border border-white py-16 flex flex-col gap-4"
+      class="max-w-[1280px] mx-auto border border-white py-8 flex flex-col gap-8"
     >
       <h1 class="text-5xl text-center">{{ singleGame.name }}</h1>
       <div class="flex gap-4 border border-white">
@@ -28,16 +28,23 @@
           </div>
         </div>
       </div>
-      <p>Available on:</p>
-      <figure
+      <div class="flex gap-4">
+        <GenreComponent v-for="genre in singleGame.genres" :key="genre.genre.name">
+          <template #default>{{ genre.genre.name }} </template>
+        </GenreComponent>
+      </div>
+      <div class="flex items-center gap-8">
+        <h3>Available on:</h3>
+        <figure
         class="flex justify-center gap-1 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
-      >
+        >
         <ConsoleComponent
-          v-for="obj in singleGame.consoles"
-          :key="obj.console.id"
-          :image="obj.console.image"
+        v-for="obj in singleGame.consoles"
+        :key="obj.console.id"
+        :image="obj.console.image"
         />
       </figure>
+    </div>
     </section>
   </main>
 </template>
@@ -52,6 +59,7 @@ import { useLoadingStore } from "src/stores/loadingStore";
 import { storeToRefs } from "pinia";
 import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
 import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
+import GenreComponent from "src/components/layout/GenreComponent.vue";
 import YouTube from "vue3-youtube";
 
 onBeforeMount(async () => {
