@@ -141,45 +141,15 @@ export default {
 
   async editGame(req: Request, res: Response) {
     try {
-      const { description } = req.body;
+      const { thumbnail } = req.body;
       const updatedGame = await prisma.game.update({
         where: { id: Number(req.params.id) },
         data: {
-          description: description,
+          thumbnail,
         },
       });
       sucessFactory.ok(res, updatedGame);
     } catch (error) {
-      errorFactory.internalError(res);
-    }
-  },
-  async addPhoto(req: Request, res: Response) {
-    try {
-      const gameId = Number(req.params.id)
-      const newPhoto = req.body.photo; // Assuming the photo URL is sent in `req.body.photo`
-      console.log(newPhoto)
-      // Fetch the current game to get existing photos
-      const game = await prisma.game.findUnique({
-        where: { id: gameId },
-        select: { photos: true }, // Only select the `photos` array
-      });
-      console.log(game)
-
-      if (!game) {
-        return errorFactory.notFound(res, "Game not found");
-      }
-
-      // Append the new photo to the existing array
-      const updatedGame = await prisma.game.update({
-        where: { id: gameId },
-        data: {
-          photos: [...game.photos, newPhoto], // Spread existing photos and add new one
-        },
-      });
-
-      sucessFactory.ok(res, updatedGame);
-    } catch (error) {
-      console.error(error);
       errorFactory.internalError(res);
     }
   },

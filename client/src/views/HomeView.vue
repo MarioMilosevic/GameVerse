@@ -19,6 +19,7 @@ const { loading } = storeToRefs(loadingStore);
 
 onBeforeMount(async () => {
   try {
+    loadingStore.setLoading(true)
     const { data, message } = await getAllGames();
     if (message) {
       showToast(message, "error");

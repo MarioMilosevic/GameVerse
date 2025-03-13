@@ -6,7 +6,7 @@
       class="w-full max-h-screen object-cover opacity-50"
     />
     <SectionComponent>
-      <template #header>
+      <template #title>
         {{ name }}
       </template>
       <template #main>
@@ -48,7 +48,7 @@
           </div>
         </div>
       </template>
-      <template #footer>
+      <template #submain>
         <div class="flex gap-4 col-start-1 col-end-3">
           <GenreComponent
             v-for="genre in genres"
@@ -75,14 +75,14 @@
     <SectionComponent>
       <template #main>
         <fieldset
-          class="grid grid-cols-3 col-start-1 col-end-2 gap-4 border border-white"
+          class="grid grid-cols-3 col-start-1 col-end-2 gap-4"
         >
           <img
             v-for="img in photos"
             :key="img"
             :src="img"
             :alt="img"
-            class="cursor-pointer rounded-xl w-full object-cover"
+            class="cursor-pointer rounded-xl w-full h-full object-cover"
           />
         </fieldset>
         <ReviewsSlider class="col-start-2 col-end-3" />

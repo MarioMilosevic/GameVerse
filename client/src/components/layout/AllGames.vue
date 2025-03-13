@@ -1,5 +1,5 @@
 <template>
-  <main class="mx-auto grid grid-cols-3 gap-16 max-w-[1280px]">
+  <main class="mx-auto grid grid-cols-3 gap-16 max-w-[1280px] py-8">
     <GameComponent v-for="game in props.games" :key="game.id" :game="game" />
   </main>
 </template>
@@ -15,5 +15,3 @@ const props = defineProps({
   },
 });
 </script>
-
-<style scoped></style>
