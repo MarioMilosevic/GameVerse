@@ -8,6 +8,7 @@ export type GameType = {
   price: string;
   releaseYear: string;
   stars: string[];
+  photos: string[];
   thumbnail: string;
   trailer: string;
   writers: string[];

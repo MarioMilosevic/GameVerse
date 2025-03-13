@@ -8,6 +8,8 @@ router
   .route("/:id")
   .get(gamesController.getSingleGame)
   .delete(gamesController.deleteGame)
-  .patch(gamesController.editGame)
+  // .patch(gamesController.editGame)
+  // @ts-ignore
+  .patch(gamesController.addPhoto)
 
 export default router;

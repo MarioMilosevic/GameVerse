@@ -39,6 +39,7 @@ model Game {
   description   String
   writers       String[]
   stars         String[]
+  photos        String[]
   price         String
   gameplayHours String
   trailer       String

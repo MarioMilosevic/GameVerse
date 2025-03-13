@@ -26,7 +26,6 @@
             <CalendarIcon />
           </template>
           <template #value>{{ releaseYear }}</template>
-          <template #name>year</template>
         </GameStat>
         <GameStat>
           <template #icon>
