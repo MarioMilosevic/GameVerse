@@ -9,10 +9,12 @@ export const loginInputs = [
     name: "email",
     placeholder: "you@example.com",
     type: "email",
+    label:"Email Address"
   },
   {
     name: "password",
     placeholder: "••••••••",
     type: "password",
+    label:"Password"
   },
 ];
