@@ -1,7 +1,7 @@
 <template>
   <AuthForm
     @submit.prevent="submitHandler"
-    class="max-w-[400px] w-full bg-slate-800 mt-40 rounded-xl px-5 py-6 mx-auto flex flex-col gap-5"
+    class=""
   >
     <template #title>
       <h1 class="text-2xl text-center uppercase">Login</h1>
