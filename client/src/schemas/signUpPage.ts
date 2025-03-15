@@ -35,7 +35,7 @@ export type SignUpTouchedFields = {
   [key in SignUpFields]?: boolean;
 };
 
-export function getFieldError<
+export function getSignUpFieldError<
   T extends SignUpFields,
   K extends SignUpSchema[T]
 >(property: T, value: K) {
@@ -44,7 +44,7 @@ export function getFieldError<
   return error.issues[0]?.message;
 }
 
-export const getErrors = (error: ZodError) => {
+export const getSignUpErrors = (error: ZodError) => {
   return error.issues.reduce((all, issue) => {
     const path = issue.path.join("") as keyof SignUpSchema;
     const message = all[path] ? all[path] : "";

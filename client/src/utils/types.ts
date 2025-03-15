@@ -29,5 +29,12 @@ export type GenreType = {
 
 export type LoginCredentialsType = {
   email: string;
-  password:string
-}
+  password: string;
+};
+
+export type SignUpCredentialsType = {
+  fullName: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
