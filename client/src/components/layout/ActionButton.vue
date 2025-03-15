@@ -15,8 +15,8 @@
 import { PropType } from "vue";
 
 const colorOptions = {
-  lightRed: "bg-red-600 hover:bg-dark-dark-red ",
-  //   lightRed: "bg-dark-highlight-red hover:bg-dark-dark-red ",
+  transparent: "bg-transparent hover:transform-none hover:translate-y-0",
+  lightRed: "bg-red-600 hover:bg-dark-dark-red",
   red: "bg-dark-deep-red hover:bg-dark-dark-red",
   darkRed: "bg-dark-dark-red",
 };
@@ -26,6 +26,7 @@ const buttonSize = {
   medium: "px-6 py-3 text-base",
   big: "px-8 py-4 text-lg",
 };
+
 type SizeType = keyof typeof buttonSize;
 type ColorType = keyof typeof colorOptions;
 

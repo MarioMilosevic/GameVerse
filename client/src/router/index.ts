@@ -7,15 +7,20 @@ export const routes = [
     component: () => import("src/views/HomeView.vue"),
   },
   {
-    path: '/details:id',
+    path: "/details:id",
     name: "GameDetails",
-    component:() => import("src/views/SingleGameView.vue")
+    component: () => import("src/views/SingleGameView.vue"),
   },
   {
     path: "/login",
     name: "LoginPage",
-    component:() => import('src/views/LoginPage.vue')
-  }
+    component: () => import("src/views/LoginPage.vue"),
+  },
+  {
+    path: "/sign-up",
+    name: "SignUpPage",
+    component: () => import("src/views/SignUpView.vue"),
+  },
 ];
 
 const router = createRouter({
