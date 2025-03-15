@@ -1,8 +1,10 @@
 <template>
   <button
+    :type="props.type"
     :class="[
       'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1',
-      colorOptions[props.color] ,buttonSize[props.size],
+      colorOptions[props.color],
+      buttonSize[props.size],
     ]"
   >
     <slot name="content" />
@@ -14,7 +16,7 @@ import { PropType } from "vue";
 
 const colorOptions = {
   lightRed: "bg-red-600 hover:bg-dark-dark-red ",
-//   lightRed: "bg-dark-highlight-red hover:bg-dark-dark-red ",
+  //   lightRed: "bg-dark-highlight-red hover:bg-dark-dark-red ",
   red: "bg-dark-deep-red hover:bg-dark-dark-red",
   darkRed: "bg-dark-dark-red",
 };
@@ -35,6 +37,10 @@ const props = defineProps({
   size: {
     type: String as PropType<SizeType>,
     default: "medium",
+  },
+  type: {
+    type: String as PropType<"button" | "submit" | "reset" | undefined>,
+    default: "button",
   },
 });
 </script>
