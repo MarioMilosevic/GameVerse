@@ -28,4 +28,17 @@ const router = createRouter({
   routes,
 });
 
+
+// router.beforeEach(async (to) => {
+//   // const userStore = useUserStore()
+//   // const userToken = localStorage.getItem('gameVerse-token')
+
+//   const isAuthRoute = to.name === "LoginPage" || to.name === "SignUpPage";
+
+//   if (!isAuthRoute) return { name: "LoginPage" }
+//   if (isAuthRoute) return { name: "Home" }
+  
+
+// })
+
 export default router;

@@ -9,7 +9,7 @@
     <div class="flex gap-4 items-center">
       <ActionButton
         v-for="(page, index) in authPages"
-        :color="selectedPage === index ? 'transparent' : 'lightRed'"
+        :color="selectedPage === index ? 'lightRed' : 'transparent'"
         :key="page"
         @click="pageHandler(index)"
       >

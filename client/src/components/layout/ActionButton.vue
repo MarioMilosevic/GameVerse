@@ -15,7 +15,7 @@
 import { PropType } from "vue";
 
 const colorOptions = {
-  transparent: "bg-transparent hover:transform-none hover:translate-y-0",
+  transparent: "bg-transparent ring-1 ring-slate-100",
   lightRed: "bg-red-600 hover:bg-dark-dark-red",
   red: "bg-dark-deep-red hover:bg-dark-dark-red",
   darkRed: "bg-dark-dark-red",

@@ -24,13 +24,13 @@ export const signUpInputs = [
     name: "fullName",
     placeholder: "John Doe",
     type: "text",
-    label: "Your Full Name",
+    label: "Full Name",
   },
   {
     name: "email",
     placeholder: "you@example.com",
     type: "email",
-    label: "EmailAddress",
+    label: "Email Address",
   },
   {
     name: "password",
