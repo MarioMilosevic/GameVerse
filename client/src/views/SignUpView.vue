@@ -51,7 +51,6 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
-import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
 import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
 import { profileImg, signUpInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
@@ -63,7 +62,7 @@ import {
   signUpSchema,
   SignUpTouchedFields,
 } from "src/schemas/signUpPage";
-import { SignUpCredentialsType, UserType } from "src/utils/types";
+import { SignUpCredentialsType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import { createUser } from "src/api/users";
 import { useRouter } from "vue-router";
@@ -105,9 +104,8 @@ const submitHandler = async () => {
         role: "USER",
         image: profileImg,
       };
-      const { data, message } = await createUser(newUser as UserType);
+      const { data, message } = await createUser(newUser);
       if (data) {
-        console.log(data);
         router.push("/login");
         setTimeout(() => {
           showToast("User Created");

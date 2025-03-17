@@ -1,7 +1,7 @@
-import { UserType } from "src/utils/types";
+import { LoginCredentialsType, SignUpCredentialsType } from "src/utils/types";
 import { baseUrl } from "src/utils/constants";
 
-export const createUser = async (newUser: UserType) => {
+export const createUser = async (newUser: SignUpCredentialsType) => {
   try {
     const response = await fetch(`${baseUrl}/users/sign-up`, {
       method: "POST",
@@ -10,7 +10,22 @@ export const createUser = async (newUser: UserType) => {
       },
       body: JSON.stringify(newUser),
     });
-      return await response.json()
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const loginUser = async (user: LoginCredentialsType) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    return await response.json();
   } catch (error) {
     console.error(error);
   }

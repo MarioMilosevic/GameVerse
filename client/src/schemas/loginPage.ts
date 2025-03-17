@@ -19,17 +19,17 @@ export type LoginTouchedFields = {
   [key in LoginFields]?: boolean;
 };
 
-export function getFieldError<T extends LoginFields, K extends LoginSchema[T]>(
-  property: T,
-  value: K
-) {
+export function getLoginFieldError<
+  T extends LoginFields,
+  K extends LoginSchema[T]
+>(property: T, value: K) {
   const { error } = loginSchema.shape[property].safeParse(value);
   return error
     ? error.issues.map((issue) => issue.message).join(", ")
     : undefined;
 }
 
-export const getErrors = (error: ZodError) =>
+export const getLoginErrors = (error: ZodError) =>
   error.issues.reduce((all, issue) => {
     const path = issue.path.join("") as keyof LoginSchema;
     const message = all[path] ? all[path] + ", " : "";

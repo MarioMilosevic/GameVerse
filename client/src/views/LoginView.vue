@@ -39,6 +39,7 @@
       <ActionButton
         size="medium"
         type="submit"
+        :disabled="!allFieldsCompleted"
         :style="{ marginTop: '0.5rem' }"
       >
         <template #content> LOG IN </template>
@@ -55,28 +56,61 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormError from "src/components/form/FormError.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
+import FormLine from "src/components/form/FormLine.vue";
 import { loginInputs } from "src/utils/constants";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { LoginCredentialsType } from "src/utils/types";
 import {
-  getFieldError,
+  getLoginFieldError,
+  loginSchema,
   LoginFieldErrors,
   LoginFields,
   LoginTouchedFields,
+  getLoginErrors,
 } from "src/schemas/loginPage";
-import FormLine from "src/components/form/FormLine.vue";
+import { loginUser } from "src/api/users";
+import { useRouter } from "vue-router";
+import { showToast } from "src/utils/toast";
 
 const loginCredentials = ref<LoginCredentialsType>({ email: "", password: "" });
 const touchedFields = ref<LoginTouchedFields>({});
 const loginFormErrors = ref<LoginFieldErrors>({});
 
+const allFieldsCompleted = computed(() => {
+  return loginSchema.safeParse(loginCredentials.value).success;
+});
+
+const router = useRouter();
+
 const blurHandler = (property: LoginFields) => {
-  const message = getFieldError(property, loginCredentials.value[property]);
+  const message = getLoginFieldError(
+    property,
+    loginCredentials.value[property]
+  );
   loginFormErrors.value[property] = message;
   touchedFields.value[property] = true;
 };
 
-const submitHandler = () => {
-  console.log("radi");
+const submitHandler = async () => {
+  try {
+    const { error } = loginSchema.safeParse(loginCredentials.value);
+    if (error) {
+      Object.entries(getLoginErrors(error)).forEach(([key, value]) => {
+        loginFormErrors.value[key as LoginFields] = value;
+      });
+    }
+    const { data, message } = await loginUser(loginCredentials.value);
+
+    if (data) {
+      router.push("/");
+      setTimeout(() => {
+        showToast(`Welcome back ${data.fullName}`);
+      }, 1000);
+    } else {
+      showToast(message, "error");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };
 </script>

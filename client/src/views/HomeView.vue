@@ -13,11 +13,11 @@ import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 
 const games = ref<GameType[]>([]);
-const {loading, setLoading} = useGetLoadingStore()
+const { loading, setLoading } = useGetLoadingStore();
 
 onBeforeMount(async () => {
   try {
-    setLoading(true)
+    setLoading(true);
     const { data, message } = await getAllGames();
     if (message) {
       showToast(message, "error");
