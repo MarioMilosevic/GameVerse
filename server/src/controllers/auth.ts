@@ -6,10 +6,8 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import config from "../config";
 
-// const signToken = (id: number) =>
-//   jwt.sign({ id }, config.secrets.jwt, {
-//     expiresIn: config.secrets.expiresIn,
-//   });
+const signToken = (id: number) =>  jwt.sign({ id }, config.secrets.jwt);
+
 
 export default {
   async signUp(req: Request, res: Response) {
@@ -59,6 +57,50 @@ export default {
       });
 
       sucessFactory.created(res, user);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+  async login(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      const userInfo = await prisma.user.findUnique({
+        where: { email },
+        select: {
+          password: true,
+        },
+      });
+
+
+      if (!userInfo) {
+        errorFactory.notAuthorized(res, "Invalid login credentials");
+        return;
+      }
+
+      const checkPassword = await prisma.user.checkPassword(
+        password,
+        userInfo.password
+      );
+
+      if (!checkPassword) {
+        errorFactory.notAuthorized(res, "Invalid login credentials");
+        return;
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { email },
+        select: {
+          id: true,
+          fullName: true,
+          email: true,
+        },
+      });
+      if (user && user.id) {
+        const token = signToken(user.id);
+        sucessFactory.ok(res, token);
+      } else {
+        errorFactory.badRequest(res);
+      }
     } catch (error) {
       errorFactory.internalError(res);
     }

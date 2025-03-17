@@ -9,6 +9,7 @@ if (stage === "production") {
   envConfig = require("./prod").default;
 } else {
   envConfig = require("./local").default;
+  console.log('uslo u else', envConfig)
 }
 
 export default merge(
@@ -18,7 +19,7 @@ export default merge(
     port: 3000,
     secrets: {
       jwt: process.env.JWT_SECRET,
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: process.env.JWT_EXPIRES_IN as string,
       dbUrl: process.env.DATABASE_URL,
     },
   },
