@@ -36,7 +36,7 @@
       </RenderlessComponent>
     </template>
     <template #submit>
-      <ActionButton type="submit" :style="{ marginTop: '0.5rem' }">
+      <ActionButton type="submit" :style="{ marginTop: '0.5rem' }" :disabled="!allFieldsCompleted">
         <template #content> SIGN UP </template>
       </ActionButton>
     </template>
@@ -53,7 +53,7 @@ import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
 import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
 import { profileImg, signUpInputs } from "src/utils/constants";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
   getSignUpErrors,
   getSignUpFieldError,
@@ -75,6 +75,12 @@ const signUpCredentials = ref<SignUpCredentialsType>({
   password: "",
   passwordConfirm: "",
 });
+
+const allFieldsCompleted = computed(() => {
+  return signUpSchema.safeParse(signUpCredentials.value).success
+})
+
+console.log(allFieldsCompleted.value)
 
 const router = useRouter();
 

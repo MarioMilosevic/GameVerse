@@ -1,8 +1,9 @@
 <template>
   <button
     :type="props.type"
+    :disabled="props.disabled"
     :class="[
-      'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1',
+      'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1 disabled:bg-gray-500 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
       colorOptions[props.color],
       buttonSize[props.size],
     ]"
@@ -42,6 +43,10 @@ const props = defineProps({
   type: {
     type: String as PropType<"button" | "submit" | "reset" | undefined>,
     default: "button",
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
