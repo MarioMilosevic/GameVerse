@@ -14,6 +14,8 @@ export type GameType = {
   writers: string[];
 };
 
+
+
 export type ConsoleType = {
   console: {
     image: string;

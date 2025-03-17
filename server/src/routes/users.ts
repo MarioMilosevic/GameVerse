@@ -1,15 +1,17 @@
 import { Router } from "express";
-import usersController from "../controllers/users"
-import authController from '../controllers/auth'
+import usersController from "../controllers/users";
+import authController from "../controllers/auth";
 
-const router = Router()
+const router = Router();
 
-router.route('/').get(usersController.getUsers)
+router.route("/").get(usersController.getUsers);
 
-router.route('/:id').delete(usersController.deleteUser).get(usersController.getUser)
+router
+  .route("/:id")
+  .delete(usersController.deleteUser)
+  .get(usersController.getUser);
 
-router.post('/sign-up', authController.signUp)
-router.post('/login', authController.login)
+router.post("/sign-up", authController.signUp);
+router.post("/login", authController.login);
 
-
-export default router
+export default router;

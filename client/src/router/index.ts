@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useUserStore } from "src/stores/userStore";
 
 export const routes = [
   {
@@ -13,13 +14,13 @@ export const routes = [
   },
   {
     path: "/login",
-    name: "LoginPage",
-    component: () => import("src/views/LoginPage.vue"),
+    name: "Login",
+    component: () => import("src/views/LoginView.vue"),
   },
   {
     path: "/sign-up",
-    name: "SignUpPage",
-    component: () => import("src/views/SignUpPage.vue"),
+    name: "Sign Up",
+    component: () => import("src/views/SignUpView.vue"),
   },
 ];
 
@@ -28,16 +29,18 @@ const router = createRouter({
   routes,
 });
 
-
 // router.beforeEach(async (to) => {
-//   // const userStore = useUserStore()
-//   // const userToken = localStorage.getItem('gameVerse-token')
+//   const userStore = useUserStore()
+//   const userToken = localStorage.getItem('gameVerse-token')
+//   console.log("ovo bi trebao biti token",userToken)
 
-//   const isAuthRoute = to.name === "LoginPage" || to.name === "SignUpPage";
+//   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
 
-//   if (!isAuthRoute) return { name: "LoginPage" }
-//   if (isAuthRoute) return { name: "Home" }
-  
+//   if (!userToken || !isAuthRoute) return { name: "Login" }
+//   if (userToken && isAuthRoute) return { name: "Home" }
+//   if (userToken) {
+//     const data = await getUserData(userToken)
+//   }
 
 // })
 
