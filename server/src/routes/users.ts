@@ -4,7 +4,9 @@ import authController from '../controllers/auth'
 
 const router = Router()
 
-router.get('/', usersController.getUsers)
+router.route('/').get(usersController.getUsers)
+
+router.route('/:id').delete(usersController.deleteUser)
 
 router.post('/sign-up', authController.signUp)
 router.post('/login', authController.login)

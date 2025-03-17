@@ -9,7 +9,6 @@ if (stage === "production") {
   envConfig = require("./prod").default;
 } else {
   envConfig = require("./local").default;
-  console.log('uslo u else', envConfig)
 }
 
 export default merge(
