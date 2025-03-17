@@ -14,7 +14,13 @@ export type GameType = {
   writers: string[];
 };
 
-
+export type UserType = {
+  id?: number;
+  role: "USER" | "ADMIN" | "GUEST";
+  email: string;
+  fullName: string;
+  image: string;
+};
 
 export type ConsoleType = {
   console: {

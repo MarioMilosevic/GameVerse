@@ -5,7 +5,7 @@
     <div class="border border-white flex items-end gap-2">
       <fieldset class="w-[50px]">
         <img
-          src="https://social-network-js.vercel.app/img/profile5.png"
+          :src="profileImg"
           class="w-full"
         />
       </fieldset>
@@ -31,6 +31,7 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
+import { profileImg } from "src/utils/constants";
 // import FormBlock from "src/components/form/FormBlock.vue";
 // import FormInput from "src/components/form/FormInput.vue";
 </script>

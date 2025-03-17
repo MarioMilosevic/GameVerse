@@ -3,7 +3,6 @@
     <template #title>
       <h1 class="text-2xl text-center uppercase">Create your account</h1>
     </template>
-
     <template #inputs>
       <RenderlessComponent>
         <template v-for="input in signUpInputs" :key="input.name">
@@ -53,15 +52,20 @@ import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
 import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
-import { signUpInputs } from "src/utils/constants";
+import { profileImg, signUpInputs } from "src/utils/constants";
 import { ref } from "vue";
 import {
+  getSignUpErrors,
   getSignUpFieldError,
   SignUpFieldErorrs,
   SignUpFields,
+  signUpSchema,
   SignUpTouchedFields,
 } from "src/schemas/signUpPage";
-import { SignUpCredentialsType } from "src/utils/types";
+import { SignUpCredentialsType, UserType } from "src/utils/types";
+import { showToast } from "src/utils/toast";
+import { createUser } from "src/api/users";
+import { useRouter } from "vue-router";
 
 const touchedFields = ref<SignUpTouchedFields>({});
 const signUpFormErrors = ref<SignUpFieldErorrs>({});
@@ -72,6 +76,8 @@ const signUpCredentials = ref<SignUpCredentialsType>({
   passwordConfirm: "",
 });
 
+const router = useRouter();
+
 const blurHandler = (property: SignUpFields) => {
   const message = getSignUpFieldError(
     property,
@@ -81,7 +87,33 @@ const blurHandler = (property: SignUpFields) => {
   touchedFields.value[property] = true;
 };
 
-const submitHandler = () => {
-  console.log("submit");
+const submitHandler = async () => {
+  try {
+    const { error } = signUpSchema.safeParse(signUpCredentials.value);
+    if (error) {
+      Object.entries(getSignUpErrors(error)).forEach(([key, value]) => {
+        signUpFormErrors.value[key as SignUpFields] = value;
+      });
+    } else {
+      const newUser = {
+        ...signUpCredentials.value,
+        role: "USER",
+        image: profileImg,
+      };
+      const { data, message } = await createUser(newUser as UserType);
+      if (data) {
+        console.log(data);
+        router.push("/login");
+        setTimeout(() => {
+          showToast("User Created");
+        }, 1000);
+      } else {
+        showToast(message, "error");
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    showToast("Unexpected error occured", "error");
+  }
 };
 </script>

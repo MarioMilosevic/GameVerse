@@ -1,9 +1,17 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
 import prisma from "../../prisma/prismaClient";
 
 export default {
+  // async getUserFromToken(req: Request, res: Response, next: NextFunction) {
+  //   try {
+      
+  //   } catch (error) {
+  //     errorFactory.internalError(res)
+  //   }
+    
+  // },
   async getUsers(req: Request, res: Response) {
     try {
       const allUsers = await prisma.user.findMany();

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { UserType } from "src/utils/types";
 
 const emptyUser: UserType = {
   id: 0,
@@ -9,13 +10,6 @@ const emptyUser: UserType = {
   email: "",
 };
 
-type UserType = {
-  id: number;
-  role: "USER" | "ADMIN" | "GUEST";
-  email: string;
-  fullName: string;
-  image: string;
-};
 
 export const useUserStore = defineStore("userStore", () => {
   const user = ref<UserType>({ ...emptyUser });
