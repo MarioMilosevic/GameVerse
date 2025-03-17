@@ -1,6 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SingleGame v-else :single-game="singleGame"/>
+  <SingleGame v-else :single-game="singleGame" />
 </template>
 
 <script setup lang="ts">
@@ -9,15 +9,13 @@ import { getSingleGame } from "src/api/games";
 import { onBeforeMount, ref } from "vue";
 import { GameType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
-import { useLoadingStore } from "src/stores/loadingStore";
-import { storeToRefs } from "pinia";
+import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import SingleGame from "src/components/layout/SingleGame.vue";
 import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
 
-
 onBeforeMount(async () => {
   try {
-    loadingStore.setLoading(true)
+    setLoading(true);
     const { message, data } = await getSingleGame(Number(route.params.id));
     if (message) {
       showToast(message, "error");
@@ -29,18 +27,15 @@ onBeforeMount(async () => {
     showToast("Unexpected error occured", "error");
     console.error(error);
   } finally {
-    loadingStore.setLoading(false);
+    setLoading(false);
   }
 });
 
-const loadingStore = useLoadingStore();
-const { loading } = storeToRefs(loadingStore);
+const { loading, setLoading } = useGetLoadingStore();
 
 const route = useRoute();
 
 const singleGame = ref<GameType>({} as GameType);
-
-
 </script>
 
 <!-- 

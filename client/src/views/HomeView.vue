@@ -10,16 +10,14 @@ import { GameType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import AllGames from "src/components/layout/AllGames.vue";
 import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
-import { useLoadingStore } from "src/stores/loadingStore";
-import { storeToRefs } from "pinia";
+import useGetLoadingStore from "src/composables/useGetLoadingStore";
 
 const games = ref<GameType[]>([]);
-const loadingStore = useLoadingStore();
-const { loading } = storeToRefs(loadingStore);
+const {loading, setLoading} = useGetLoadingStore()
 
 onBeforeMount(async () => {
   try {
-    loadingStore.setLoading(true)
+    setLoading(true)
     const { data, message } = await getAllGames();
     if (message) {
       showToast(message, "error");
@@ -29,7 +27,7 @@ onBeforeMount(async () => {
   } catch (error) {
     console.error("Unexpected erorr occured");
   } finally {
-    loadingStore.setLoading(false);
+    setLoading(false);
   }
 });
 </script>

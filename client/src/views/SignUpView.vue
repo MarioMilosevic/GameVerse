@@ -51,6 +51,7 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
+import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
 import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
 import { profileImg, signUpInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
@@ -79,8 +80,6 @@ const signUpCredentials = ref<SignUpCredentialsType>({
 const allFieldsCompleted = computed(() => {
   return signUpSchema.safeParse(signUpCredentials.value).success
 })
-
-console.log(allFieldsCompleted.value)
 
 const router = useRouter();
 
