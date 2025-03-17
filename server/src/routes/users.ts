@@ -6,7 +6,7 @@ const router = Router()
 
 router.route('/').get(usersController.getUsers)
 
-router.route('/:id').delete(usersController.deleteUser)
+router.route('/:id').delete(usersController.deleteUser).get(usersController.getUser)
 
 router.post('/sign-up', authController.signUp)
 router.post('/login', authController.login)
