@@ -1,17 +1,43 @@
 import { NextFunction, Request, Response } from "express";
+import { CustomRequest } from "../services/customRequest";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
 import prisma from "../../prisma/prismaClient";
+import jwt from "jsonwebtoken";
+import config from "../config";
 
 export default {
-  // async getUserFromToken(req: Request, res: Response, next: NextFunction) {
-  //   try {
-      
-  //   } catch (error) {
-  //     errorFactory.internalError(res)
-  //   }
-    
-  // },
+  
+  async getUserFromToken(
+    req: CustomRequest,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const authHeader = req.headers.authorization;
+
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        return errorFactory.notAuthorized(res);
+      }
+
+      const token = authHeader.split(" ")[1];
+
+      try {
+        const decoded = jwt.verify(token, config.secrets.jwt) as { id: string };
+
+        if (!decoded?.id) {
+          return errorFactory.forbidden(res);
+        }
+
+        req.requestPayload.id = Number(decoded.id);
+        next();
+      } catch (err) {
+        return errorFactory.notAuthorized(res);
+      }
+    } catch (error) {
+      return errorFactory.internalError(res);
+    }
+  },
   async getUsers(req: Request, res: Response) {
     try {
       const allUsers = await prisma.user.findMany();
@@ -24,10 +50,9 @@ export default {
       errorFactory.internalError(res);
     }
   },
-  async getUser(req: Request, res: Response) {
+  async getUser(req: CustomRequest, res: Response) {
     try {
-      const id = Number(req.params.id);
-
+      const id = req.requestPayload.id;
       const user = await prisma.user.findUnique({
         where: { id },
         select: {

@@ -57,7 +57,7 @@ import FormBlock from "src/components/form/FormBlock.vue";
 import FormError from "src/components/form/FormError.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
 import FormLine from "src/components/form/FormLine.vue";
-import { loginInputs } from "src/utils/constants";
+import { loginInputs, tokenName } from "src/utils/constants";
 import { ref, computed } from "vue";
 import { LoginCredentialsType } from "src/utils/types";
 import {
@@ -100,12 +100,9 @@ const submitHandler = async () => {
       });
     }
     const { data, message } = await loginUser(loginCredentials.value);
-
     if (data) {
+      localStorage.setItem(tokenName, data)
       router.push("/");
-      setTimeout(() => {
-        showToast(`Welcome back ${data.fullName}`);
-      }, 1000);
     } else {
       showToast(message, "error");
     }

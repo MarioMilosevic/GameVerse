@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useUserStore } from "src/stores/userStore";
+import { getUserData } from "src/api/users";
+import useGetUserStore from "src/composables/useGetUserStore";
+import { tokenName } from "src/utils/constants";
 
 export const routes = [
   {
@@ -29,19 +31,30 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to) => {
-//   const userStore = useUserStore()
-//   const userToken = localStorage.getItem('gameVerse-token')
-//   console.log("ovo bi trebao biti token",userToken)
+router.beforeEach(async (to) => {
+  const { user, setUser } = useGetUserStore();
+  const userToken = localStorage.getItem(tokenName);
 
-//   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
+  console.log("ovo bi trebao biti token", userToken);
 
-//   if (!userToken || !isAuthRoute) return { name: "Login" }
-//   if (userToken && isAuthRoute) return { name: "Home" }
-//   if (userToken) {
-//     const data = await getUserData(userToken)
-//   }
+  const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
+  // console.log()
 
-// })
+  if (!userToken && !isAuthRoute) return { name: "Login" };
+  // console.log("ide li dalje");
+  if (userToken && isAuthRoute) return { name: "Home" };
+  if(userToken){
+    const data = await getUserData(userToken)
+    console.log("ovo bi trebale biti informacije usera",data)
+  }
+  // if (userToken) {
+  //   const data = await getUserData(userToken as string);
+  //   console.log(data);
+    // setUser(user)
+    // if (user?.role !== 'ADMIN' && to.name !== "Home") {
+    // return {name:'Home'}
+    // }
+  // }
+});
 
 export default router;

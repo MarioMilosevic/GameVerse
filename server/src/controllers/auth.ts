@@ -8,7 +8,6 @@ import config from "../config";
 
 const signToken = (id: number) =>  jwt.sign({ id }, config.secrets.jwt);
 
-
 export default {
   async signUp(req: Request, res: Response) {
     try {

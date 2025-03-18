@@ -30,3 +30,16 @@ export const loginUser = async (user: LoginCredentialsType) => {
     console.error(error);
   }
 };
+
+export const getUserData = async (token: string) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/user`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
