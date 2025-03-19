@@ -1,23 +1,18 @@
 import { NextFunction, Request, Response } from "express";
-import { CustomRequest } from "../services/customRequest";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
 import prisma from "../../prisma/prismaClient";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 import config from "../config";
 
 export default {
-  
-  async getUserFromToken(
-    req: CustomRequest,
-    res: Response,
-    next: NextFunction
-  ) {
+  async getUserFromToken(req: Request, res: Response, next: NextFunction) {
     try {
       const authHeader = req.headers.authorization;
 
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        return errorFactory.notAuthorized(res);
+        errorFactory.notAuthorized(res);
+        return
       }
 
       const token = authHeader.split(" ")[1];
@@ -26,16 +21,24 @@ export default {
         const decoded = jwt.verify(token, config.secrets.jwt) as { id: string };
 
         if (!decoded?.id) {
-          return errorFactory.forbidden(res);
+          errorFactory.forbidden(res);
+          return
         }
-
-        req.requestPayload.id = Number(decoded.id);
-        next();
+        const user = await prisma.user.findUnique({
+          where: { id: Number(decoded.id) },
+        });
+        if (!user) {
+          errorFactory.notFound(res);
+          return;
+        }
+        sucessFactory.ok(res, user);
       } catch (err) {
-        return errorFactory.notAuthorized(res);
+        errorFactory.notAuthorized(res);
+        return
       }
     } catch (error) {
-      return errorFactory.internalError(res);
+      errorFactory.internalError(res);
+      return
     }
   },
   async getUsers(req: Request, res: Response) {
@@ -50,9 +53,9 @@ export default {
       errorFactory.internalError(res);
     }
   },
-  async getUser(req: CustomRequest, res: Response) {
+  async getUser(req: Request, res: Response) {
     try {
-      const id = req.requestPayload.id;
+      const id = Number(req.params.id);
       const user = await prisma.user.findUnique({
         where: { id },
         select: {
