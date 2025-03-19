@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getUserData } from "src/api/users";
-import useGetUserStore from "src/composables/useGetUserStore";
 import { tokenName } from "src/utils/constants";
+import { showToast } from "src/utils/toast";
+import useGetUserStore from "src/composables/useGetUserStore";
 
 export const routes = [
   {
@@ -34,26 +35,23 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const { user, setUser } = useGetUserStore();
   const userToken = localStorage.getItem(tokenName);
-
-  console.log("ovo bi trebao biti token", userToken);
-
   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
-  // console.log()
 
   if (!userToken && !isAuthRoute) return { name: "Login" };
-  // console.log("ide li dalje");
+
   if (userToken && isAuthRoute) return { name: "Home" };
-  if(userToken){
-    const data = await getUserData(userToken)
-    console.log("ovo bi trebale biti informacije usera",data)
+
+  if (userToken && !user.value.id) {
+    
+    const { data:userData } = await getUserData(userToken);
+    if (userData.id) {
+      setUser(userData)
+    } else {
+      showToast('Unable to fetch user data', 'error')
+    }
   }
-  // if (userToken) {
-  //   const data = await getUserData(userToken as string);
-  //   console.log(data);
-    // setUser(user)
-    // if (user?.role !== 'ADMIN' && to.name !== "Home") {
-    // return {name:'Home'}
-    // }
+  // if (user.value.role !== 'ADMIN' && to.name !== "Home") {
+  //   return {name:"Home"}
   // }
 });
 

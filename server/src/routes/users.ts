@@ -6,9 +6,7 @@ const router = Router();
 
 router.route("/").get(usersController.getUsers);
 
-// router.route('/user').get(usersController.getUserFromToken)
-
-router.route('/user').get(usersController.getUserFromToken)
+router.route("/user").get(usersController.getUserFromToken);
 
 router
   .route("/:id")
