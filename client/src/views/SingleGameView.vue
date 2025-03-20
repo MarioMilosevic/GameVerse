@@ -37,9 +37,3 @@ const route = useRoute();
 
 const singleGame = ref<GameType>({} as GameType);
 </script>
-
-<!-- 
-
-In a LinkedIn quick apply I came across this question "How many years of work experience do you have with Application Programming Interfaces (API)?" - this as akin to asking how long have you been breathing. If you have done any sort of software development then you have been working with APIs. Maybe they meant with specific types of API like REST, SOAP or GraphQL but it looks like they don't have a clue about what they are asking
-
--->

@@ -4,6 +4,6 @@
       <slot name="title" />
     </h1>
     <slot name="main" />
-    <slot name="submain" v-if="$slots.footer"/>
+    <slot name="submain" v-if="$slots.submain"/>
   </section>
 </template>

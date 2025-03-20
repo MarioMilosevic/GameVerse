@@ -83,11 +83,14 @@
             :src="img"
             :alt="img"
             class="cursor-pointer rounded-xl w-full h-full object-cover"
+            @click="openModal(img)"
           />
         </fieldset>
         <ReviewsSlider class="col-start-2 col-end-3" />
       </template>
     </SectionComponent>
+
+    <ImageModal v-if="isModalOpen" :image="selectedImage"/>
   </main>
 </template>
 
@@ -97,8 +100,9 @@ import GameInfo from "src/components/layout/GameInfo.vue";
 import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
 import SectionComponent from "src/components/layout/SectionComponent.vue";
 import GenreComponent from "src/components/layout/GenreComponent.vue";
+import ImageModal from "src/components/layout/ImageModal.vue";
 import YouTube from "vue3-youtube";
-import { PropType, useTemplateRef } from "vue";
+import { PropType, useTemplateRef, ref } from "vue";
 import { GameType } from "src/utils/types";
 
 const props = defineProps({
@@ -108,13 +112,20 @@ const props = defineProps({
   },
 });
 
+const isModalOpen = ref<boolean>(false)
+const selectedImage = ref<string>('')
+
 const {name, gameplayHours, photos, description, writers, stars, genres, consoles} = props.singleGame
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
-  if (youtubeRef.value) {
-    // youtubeRef.value.playVideo();
-    console.log("mario");
-  }
+  // if (youtubeRef.value) {
+  //  youtubeRef.value.playVideo();
+  // }
 };
+
+const openModal = (imageSrc: string) => {
+  isModalOpen.value = true;
+  selectedImage.value = imageSrc
+}
 </script>
