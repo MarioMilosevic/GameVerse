@@ -90,7 +90,11 @@
       </template>
     </SectionComponent>
 
-    <ImageModal v-if="isModalOpen" :image="selectedImage"/>
+    <OverlayComponent v-if="isModalOpen">
+      <template #default>
+        <ImageModal :image="selectedImage"/>
+      </template>
+    </OverlayComponent>
   </main>
 </template>
 
@@ -101,6 +105,7 @@ import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
 import SectionComponent from "src/components/layout/SectionComponent.vue";
 import GenreComponent from "src/components/layout/GenreComponent.vue";
 import ImageModal from "src/components/layout/ImageModal.vue";
+import OverlayComponent from "./OverlayComponent.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
 import { GameType } from "src/utils/types";
