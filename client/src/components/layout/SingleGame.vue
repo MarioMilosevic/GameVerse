@@ -92,7 +92,7 @@
 
     <OverlayComponent v-if="isModalOpen">
       <template #default>
-        <ImageModal :image="selectedImage"/>
+        <ImageModal :image="selectedImage" :all-photos="photos"/>
       </template>
     </OverlayComponent>
   </main>
@@ -120,7 +120,7 @@ const props = defineProps({
 const isModalOpen = ref<boolean>(false)
 const selectedImage = ref<string>('')
 
-const {name, gameplayHours, photos, description, writers, stars, genres, consoles} = props.singleGame
+const { name, gameplayHours, photos, description, writers, stars, genres, consoles } = props.singleGame
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
