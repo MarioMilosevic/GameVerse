@@ -73,12 +73,12 @@
       <template #main>
         <fieldset class="grid grid-cols-3 col-start-1 col-end-2 gap-4">
           <img
-            v-for="img in photos"
+            v-for="(img,index) in photos"
             :key="img"
             :src="img"
             :alt="img"
             class="cursor-pointer rounded-xl w-full h-full object-cover"
-            @click="openModal(img)"
+            @click="openModal(index)"
           />
         </fieldset>
         <ReviewsSlider class="col-start-2 col-end-3" />
@@ -88,7 +88,7 @@
     <OverlayComponent v-if="isModalOpen">
       <template #default>
         <ImageModal
-          :image="selectedImage"
+          :selectedImageIndex="selectedImageIndex"
           :all-photos="photos"
           @close-modal-event="isModalOpen = false"
         />
@@ -117,7 +117,7 @@ const props = defineProps({
 });
 
 const isModalOpen = ref<boolean>(false);
-const selectedImage = ref<string>("");
+const selectedImageIndex = ref<number>(0);
 
 const {
   name,
@@ -137,9 +137,9 @@ const playVideo = () => {
   // }
 };
 
-const openModal = (imageSrc: string) => {
+const openModal = (imageIndex:number) => {
   isModalOpen.value = true;
-  selectedImage.value = imageSrc;
+  selectedImageIndex.value = imageIndex;
 };
 
 </script>
