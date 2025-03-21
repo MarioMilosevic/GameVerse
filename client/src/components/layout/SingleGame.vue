@@ -134,9 +134,9 @@ const {
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
-  // if (youtubeRef.value) {
-  //  youtubeRef.value.playVideo();
-  // }
+  if (youtubeRef.value) {
+   youtubeRef.value.playVideo();
+  }
 };
 
 const openModal = (imageIndex: number) => {
