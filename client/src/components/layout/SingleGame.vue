@@ -73,7 +73,7 @@
       <template #main>
         <fieldset class="grid grid-cols-3 col-start-1 col-end-2 gap-4">
           <img
-            v-for="(img,index) in photos"
+            v-for="(img, index) in photos"
             :key="img"
             :src="img"
             :alt="img"
@@ -91,6 +91,8 @@
           :selectedImageIndex="selectedImageIndex"
           :all-photos="photos"
           @close-modal-event="isModalOpen = false"
+          @next-event="nextImage"
+          @prev-event="prevImage"
         />
       </template>
     </OverlayComponent>
@@ -137,9 +139,25 @@ const playVideo = () => {
   // }
 };
 
-const openModal = (imageIndex:number) => {
+const openModal = (imageIndex: number) => {
   isModalOpen.value = true;
   selectedImageIndex.value = imageIndex;
 };
 
+const nextImage = () => {
+  if (selectedImageIndex.value === photos.length - 1) {
+    console.log("sada treba da obrnem");
+    selectedImageIndex.value = 0;
+  } else {
+    selectedImageIndex.value += 1;
+  }
+};
+
+const prevImage = () => {
+  if (selectedImageIndex.value === 0) {
+    selectedImageIndex.value = photos.length - 1;
+  } else {
+    selectedImageIndex.value -= 1;
+  }
+};
 </script>
