@@ -50,10 +50,7 @@
       </template>
       <template #submain>
         <div class="flex gap-4 col-start-1 col-end-3">
-          <GenreComponent
-            v-for="genre in genres"
-            :key="genre.genre.name"
-          >
+          <GenreComponent v-for="genre in genres" :key="genre.genre.name">
             <template #default>{{ genre.genre.name }} </template>
           </GenreComponent>
         </div>
@@ -74,9 +71,7 @@
 
     <SectionComponent>
       <template #main>
-        <fieldset
-          class="grid grid-cols-3 col-start-1 col-end-2 gap-4"
-        >
+        <fieldset class="grid grid-cols-3 col-start-1 col-end-2 gap-4">
           <img
             v-for="img in photos"
             :key="img"
@@ -92,7 +87,11 @@
 
     <OverlayComponent v-if="isModalOpen">
       <template #default>
-        <ImageModal :image="selectedImage" :all-photos="photos"/>
+        <ImageModal
+          :image="selectedImage"
+          :all-photos="photos"
+          @close-modal-event="isModalOpen = false"
+        />
       </template>
     </OverlayComponent>
   </main>
@@ -117,10 +116,19 @@ const props = defineProps({
   },
 });
 
-const isModalOpen = ref<boolean>(false)
-const selectedImage = ref<string>('')
+const isModalOpen = ref<boolean>(false);
+const selectedImage = ref<string>("");
 
-const { name, gameplayHours, photos, description, writers, stars, genres, consoles } = props.singleGame
+const {
+  name,
+  gameplayHours,
+  photos,
+  description,
+  writers,
+  stars,
+  genres,
+  consoles,
+} = props.singleGame;
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
@@ -131,6 +139,7 @@ const playVideo = () => {
 
 const openModal = (imageSrc: string) => {
   isModalOpen.value = true;
-  selectedImage.value = imageSrc
-}
+  selectedImage.value = imageSrc;
+};
+
 </script>
