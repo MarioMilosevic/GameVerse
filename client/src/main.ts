@@ -2,9 +2,9 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import router from "src/router";
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { BiStarHalf, BiStarFill } from 'oh-vue-icons/icons'
+import { BiStarHalf, BiStarFill, BiStar } from 'oh-vue-icons/icons'
 
-addIcons(BiStarHalf, BiStarFill)
+addIcons(BiStarHalf, BiStarFill, BiStar)
 
 import "./style.css";
 import App from "./App.vue";

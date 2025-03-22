@@ -21,7 +21,7 @@
           <div class="flex flex-col gap-2 text-justify">
             <GameInfo>
               <template #title>
-                <h3>Writers</h3>
+                Writers:
               </template>
               <template #content>
                 <p v-for="writer in writers" :key="writer">
@@ -31,7 +31,7 @@
             </GameInfo>
             <GameInfo>
               <template #title>
-                <h3>Stars:</h3>
+                Stars:
               </template>
               <template #content>
                 <p v-for="star in stars" :key="star">{{ star }}</p>
@@ -39,7 +39,7 @@
             </GameInfo>
             <GameInfo>
               <template #title>
-                <h3>Gameplay duration:</h3>
+                Gameplay duration:
               </template>
               <template #content>
                 <p>Main story is {{ gameplayHours }} hours long</p>
@@ -54,10 +54,10 @@
             <template #default>{{ genre.genre.name }} </template>
           </GenreComponent>
         </div>
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-6">
           <h3>Available on:</h3>
           <figure
-            class="flex justify-center gap-1 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
+            class="flex justify-center gap-2 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
           >
             <ConsoleComponent
               v-for="obj in consoles"
@@ -81,7 +81,7 @@
             @click="openModal(index)"
           />
         </fieldset>
-        <ReviewsSlider class="col-start-2 col-end-3" />
+        <ReviewsSlider :rating="7" class="col-start-2 col-end-3" />
       </template>
     </SectionComponent>
 

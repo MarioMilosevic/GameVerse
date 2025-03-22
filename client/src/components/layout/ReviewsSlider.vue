@@ -1,5 +1,5 @@
 <template>
-  <article class=" relative px-4 flex flex-col gap-4">
+  <article class="relative px-4 flex flex-col gap-4">
     <h2 class="uppercase text-red-600 text-center text-3xl">Reviews</h2>
 
     <div class="flex items-end gap-2">
@@ -12,11 +12,25 @@
 
     <div class="flex items-center gap-2">
       <div>
+        <v-icon
+          v-for="(star, index) in createStarsArray(props.rating)"
+          :key="index"
+          animation="pulse"
+          speed="slow"
+          fill="red"
+          :name="
+            star === 'full'
+              ? 'bi-star-fill'
+              : star === 'half'
+              ? 'bi-star-half'
+              : 'bi-star'
+          "
+        />
+        <!-- <v-icon v-for="rating in props.rating" speed="slow" animation="pulse" fill="red" name="bi-star-fill" /> -->
+        <!-- <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
         <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
         <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-half" />
+        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-half" /> -->
       </div>
       <p>
         <span> 4.9/5 </span>
@@ -26,13 +40,13 @@
     <p>Very nice. Loved it!</p>
 
     <div
-      class="border border-dark-dark-red flex items-center justify-between px-6 py-4 rounded-2xl"
+      class="border border-dark-dark-red flex items-center justify-between px-6 py-4 mt-4 rounded-2xl"
     >
       <p class="text-lg">Want to leave a review ?</p>
       <ActionButton>
         <template #content> Click here </template>
       </ActionButton>
-    </div> 
+    </div>
     <SliderButton class="-left-9">
       <template #icon>
         <BaseIcon>
@@ -61,15 +75,29 @@ import { profileImg } from "src/utils/constants";
 // import FormBlock from "src/components/form/FormBlock.vue";
 // import FormInput from "src/components/form/FormInput.vue";
 
-// const createStarsArray = (stars: number) => {
-//   const starsArray = [];
-//   for (let i = 0; i < 5; i++) {
-//     const halfStar = i + 0.5;
-//     if (stars >= i + 1) starsArray.push(<FaStar color="orange" />);
-//     else if (stars >= halfStar) {
-//       starsArray.push(<FaRegStarHalfStroke color="orange" />);
-//     } else starsArray.push(<FaRegStar color="orange" />);
-//   }
-//   return starsArray;
-// };
+const props = defineProps({
+  rating: {
+    type: Number,
+    required: true,
+  },
+});
+
+const createStarsArray = (rating: number) => {
+  const starsArray = [];
+  const scaledRating = (rating / 10) * 5; // Convert 10-point rating to 5-star scale
+  let remainingRating = scaledRating; // Track how much rating is left to distribute
+
+  for (let i = 0; i < 5; i++) {
+    if (remainingRating >= 1) {
+      starsArray.push("full");
+    } else if (remainingRating >= 0.5) {
+      starsArray.push("half");
+    } else {
+      starsArray.push("empty");
+    }
+    remainingRating--; // Decrease the remaining rating for the next iteration
+  }
+
+  return starsArray;
+};
 </script>
