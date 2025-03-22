@@ -1,16 +1,21 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import router from "src/router";
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import { BiStarHalf, BiStarFill } from 'oh-vue-icons/icons'
+
+addIcons(BiStarHalf, BiStarFill)
+
 import "./style.css";
 import App from "./App.vue";
 import Vue3Toastify, { ToastContainerOptions } from "vue3-toastify";
-// import VueVideoPlayer from "@videojs-player/vue"
-// import 'video.js/dist/video-js.css'
 
-createApp(App)
+const app = createApp(App)
+
+
+app.component('v-icon', OhVueIcon)
   .use(router)
   .use(createPinia())
-  // .use(VueVideoPlayer)
   .use(Vue3Toastify, {
     autoClose: 3000,
   } as ToastContainerOptions)

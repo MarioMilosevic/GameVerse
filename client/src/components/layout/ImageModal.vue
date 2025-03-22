@@ -11,9 +11,9 @@
         <XIcon />
       </BaseIcon>
     </button>
-    <SliderButton position="left" @click="emits('prev-event')">
+    <SliderButton class="-left-16" @click="emits('prev-event')">
       <template #icon>
-        <BaseIcon class="" size="big">
+        <BaseIcon size="big">
           <LeftIcon />
         </BaseIcon>
       </template>
@@ -27,7 +27,7 @@
         :style="{ transform: translateImage(index) }"
       />
     </fieldset>
-    <SliderButton position="right" @click="emits('next-event')">
+    <SliderButton class="-right-16" @click="emits('next-event')">
       <template #icon>
         <BaseIcon size="big">
           <RightIcon />
