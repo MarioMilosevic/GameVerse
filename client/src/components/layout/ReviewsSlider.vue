@@ -11,12 +11,12 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <div>
+      <div class="flex items-center">
         <v-icon
           v-for="(star, index) in createStarsArray(props.rating)"
           :key="index"
           animation="pulse"
-          speed="slow"
+          speed="fast"
           fill="red"
           :name="
             star === 'full'

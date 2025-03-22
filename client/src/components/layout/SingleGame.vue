@@ -85,21 +85,29 @@
       </template>
     </SectionComponent>
 
-    <OverlayComponent v-if="isImageModalOpen">
+    <OverlayComponent v-if="isGameImageModalOpen">
       <template #default>
-        <ImageModal
-          :selectedImageIndex="selectedImageIndex"
-          :all-photos="photos"
-          @close-modal-event="isImageModalOpen = false"
-          @next-event="nextImage"
-          @prev-event="prevImage"
-        />
+        <ModalComponent size="big">
+          <template #default>
+            <GameImageModal
+              :selectedImageIndex="selectedImageIndex"
+              :all-photos="photos"
+              @close-modal-event="isGameImageModalOpen = false"
+              @next-event="nextImage"
+              @prev-event="prevImage"
+            />
+          </template>
+        </ModalComponent>
       </template>
     </OverlayComponent>
 
     <OverlayComponent v-if="isReviewModalOpen">
       <template #default>
-        <ReviewModal @close-modal-event="isReviewModalOpen = false"/>
+        <ModalComponent size="small">
+          <template #default>
+            <ReviewModal @close-modal-event="isReviewModalOpen = false" />
+          </template>
+        </ModalComponent>
       </template>
     </OverlayComponent>
   </main>
@@ -111,7 +119,7 @@ import GameInfo from "src/components/layout/GameInfo.vue";
 import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
 import SectionComponent from "src/components/layout/SectionComponent.vue";
 import GenreComponent from "src/components/layout/GenreComponent.vue";
-import ImageModal from "src/components/layout/ImageModal.vue";
+import GameImageModal from "src/components/layout/GameImageModal.vue";
 import ReviewModal from "src/components/layout/ReviewModal.vue";
 import OverlayComponent from "./OverlayComponent.vue";
 import ModalComponent from "src/components/layout/ModalComponent.vue";
@@ -126,7 +134,7 @@ const props = defineProps({
   },
 });
 
-const isImageModalOpen = ref<boolean>(false);
+const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false)
 const selectedImageIndex = ref<number>(0);
 
@@ -143,13 +151,14 @@ const {
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
-  // if (youtubeRef.value) {
+  if (youtubeRef.value) {
+    console.log('ovo treba pustit')
   //  youtubeRef.value.playVideo();
-  // }
+  }
 };
 
 const openImageModal = (imageIndex: number) => {
-  isImageModalOpen.value = true;
+  isGameImageModalOpen.value = true;
   selectedImageIndex.value = imageIndex;
 };
 

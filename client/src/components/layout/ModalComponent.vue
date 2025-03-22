@@ -5,7 +5,7 @@
       modalSize[props.size],
     ]"
   >
-  <slot/>
+    <slot />
   </div>
 </template>
 

@@ -1,7 +1,4 @@
 <template>
-  <div
-    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-2/3 h-2/3"
-  >
     <button
       class="absolute -top-11 right-0 border border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 hover:border-slate-50 hover:border hover:bg-slate-950"
       @click="emits('close-modal-event')"
@@ -34,7 +31,6 @@
         </BaseIcon>
       </template>
     </SliderButton>
-  </div>
 </template>
 
 <script setup lang="ts">
