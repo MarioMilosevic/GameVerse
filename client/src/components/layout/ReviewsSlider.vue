@@ -26,11 +26,6 @@
               : 'bi-star'
           "
         />
-        <!-- <v-icon v-for="rating in props.rating" speed="slow" animation="pulse" fill="red" name="bi-star-fill" /> -->
-        <!-- <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-fill" />
-        <v-icon speed="slow" animation="pulse" fill="red" name="bi-star-half" /> -->
       </div>
       <p>
         <span> 4.9/5 </span>
@@ -43,7 +38,7 @@
       class="border border-dark-dark-red flex items-center justify-between px-6 py-4 mt-4 rounded-2xl"
     >
       <p class="text-lg">Want to leave a review ?</p>
-      <ActionButton>
+      <ActionButton @click="emits('open-modal-event')">
         <template #content> Click here </template>
       </ActionButton>
     </div>
@@ -72,8 +67,6 @@ import RightIcon from "src/icons/RightIcon.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
 import SliderButton from "src/components/layout/SliderButton.vue";
 import { profileImg } from "src/utils/constants";
-// import FormBlock from "src/components/form/FormBlock.vue";
-// import FormInput from "src/components/form/FormInput.vue";
 
 const props = defineProps({
   rating: {
@@ -82,11 +75,12 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['open-modal-event'])
+
 const createStarsArray = (rating: number) => {
   const starsArray = [];
-  const scaledRating = (rating / 10) * 5; // Convert 10-point rating to 5-star scale
-  let remainingRating = scaledRating; // Track how much rating is left to distribute
-
+  const scaledRating = (rating / 10) * 5;
+  let remainingRating = scaledRating;
   for (let i = 0; i < 5; i++) {
     if (remainingRating >= 1) {
       starsArray.push("full");
@@ -95,7 +89,7 @@ const createStarsArray = (rating: number) => {
     } else {
       starsArray.push("empty");
     }
-    remainingRating--; // Decrease the remaining rating for the next iteration
+    remainingRating--;
   }
 
   return starsArray;

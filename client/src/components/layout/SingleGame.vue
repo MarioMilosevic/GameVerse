@@ -50,8 +50,8 @@
       </template>
       <template #submain>
         <div class="flex gap-4 col-start-1 col-end-3">
-          <GenreComponent v-for="genre in genres" :key="genre.genre.name">
-            <template #default>{{ genre.genre.name }} </template>
+          <GenreComponent v-for="{ genre } in genres" :key="genre.name">
+            <template #default>{{ genre.name }} </template>
           </GenreComponent>
         </div>
         <div class="flex items-center gap-6">
@@ -78,22 +78,28 @@
             :src="img"
             :alt="img"
             class="cursor-pointer rounded-xl w-full h-full object-cover"
-            @click="openModal(index)"
+            @click="openImageModal(index)"
           />
         </fieldset>
-        <ReviewsSlider :rating="7" class="col-start-2 col-end-3" />
+        <ReviewsSlider :rating="7" class="col-start-2 col-end-3" @open-modal-event="isReviewModalOpen = true"/>
       </template>
     </SectionComponent>
 
-    <OverlayComponent v-if="isModalOpen">
+    <OverlayComponent v-if="isImageModalOpen">
       <template #default>
         <ImageModal
           :selectedImageIndex="selectedImageIndex"
           :all-photos="photos"
-          @close-modal-event="isModalOpen = false"
+          @close-modal-event="isImageModalOpen = false"
           @next-event="nextImage"
           @prev-event="prevImage"
         />
+      </template>
+    </OverlayComponent>
+
+    <OverlayComponent v-if="isReviewModalOpen">
+      <template #default>
+        <ReviewModal @close-modal-event="isReviewModalOpen = false"/>
       </template>
     </OverlayComponent>
   </main>
@@ -106,7 +112,9 @@ import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
 import SectionComponent from "src/components/layout/SectionComponent.vue";
 import GenreComponent from "src/components/layout/GenreComponent.vue";
 import ImageModal from "src/components/layout/ImageModal.vue";
+import ReviewModal from "src/components/layout/ReviewModal.vue";
 import OverlayComponent from "./OverlayComponent.vue";
+import ModalComponent from "src/components/layout/ModalComponent.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
 import { GameType } from "src/utils/types";
@@ -118,7 +126,8 @@ const props = defineProps({
   },
 });
 
-const isModalOpen = ref<boolean>(false);
+const isImageModalOpen = ref<boolean>(false);
+const isReviewModalOpen = ref<boolean>(false)
 const selectedImageIndex = ref<number>(0);
 
 const {
@@ -139,8 +148,8 @@ const playVideo = () => {
   // }
 };
 
-const openModal = (imageIndex: number) => {
-  isModalOpen.value = true;
+const openImageModal = (imageIndex: number) => {
+  isImageModalOpen.value = true;
   selectedImageIndex.value = imageIndex;
 };
 
