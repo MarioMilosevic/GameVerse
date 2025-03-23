@@ -20,27 +20,23 @@
           <p>{{ description }}</p>
           <div class="flex flex-col gap-2 text-justify">
             <GameInfo>
-              <template #title>
-                Writers:
-              </template>
+              <template #title> Writers: </template>
               <template #content>
-                <p v-for="writer in writers" :key="writer">
-                  {{ writer }}
+                <p>
+                  {{ writers.join(" • ") }}
                 </p>
               </template>
             </GameInfo>
             <GameInfo>
-              <template #title>
-                Stars:
-              </template>
+              <template #title> Stars: </template>
               <template #content>
-                <p v-for="star in stars" :key="star">{{ star }}</p>
+                <p>
+                  {{ stars.join(" • ") }}
+                </p>
               </template>
             </GameInfo>
             <GameInfo>
-              <template #title>
-                Gameplay duration:
-              </template>
+              <template #title> Duration: </template>
               <template #content>
                 <p>Main story is {{ gameplayHours }} hours long</p>
               </template>
@@ -81,7 +77,11 @@
             @click="openImageModal(index)"
           />
         </fieldset>
-        <ReviewsSlider :rating="7" class="col-start-2 col-end-3" @open-modal-event="isReviewModalOpen = true"/>
+        <ReviewsSlider
+          :rating="7"
+          class="col-start-2 col-end-3"
+          @open-modal-event="isReviewModalOpen = true"
+        />
       </template>
     </SectionComponent>
 
@@ -135,7 +135,7 @@ const props = defineProps({
 });
 
 const isGameImageModalOpen = ref<boolean>(false);
-const isReviewModalOpen = ref<boolean>(false)
+const isReviewModalOpen = ref<boolean>(false);
 const selectedImageIndex = ref<number>(0);
 
 const {
@@ -152,8 +152,8 @@ const {
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
   if (youtubeRef.value) {
-    console.log('ovo treba pustit')
-  //  youtubeRef.value.playVideo();
+    console.log("ovo treba pustit");
+    //  youtubeRef.value.playVideo();
   }
 };
 

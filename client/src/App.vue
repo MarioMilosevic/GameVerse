@@ -1,8 +1,13 @@
 <template>
-  <SharedLayout/>
+  <LoadingSpinner v-if="loading" />
+  <SharedLayout v-else />
   <RouterView />
 </template>
 
 <script lang="ts" setup>
-import SharedLayout from 'src/components/layout/SharedLayout.vue';
+import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
+import SharedLayout from "src/components/layout/SharedLayout.vue";
+import useGetLoadingStore from "./composables/useGetLoadingStore";
+
+const { loading } = useGetLoadingStore();
 </script>

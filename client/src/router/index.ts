@@ -3,6 +3,7 @@ import { getUserData } from "src/api/users";
 import { tokenName } from "src/utils/constants";
 import { showToast } from "src/utils/toast";
 import useGetUserStore from "src/composables/useGetUserStore";
+import useGetLoadingStore from "src/composables/useGetLoadingStore";
 
 export const routes = [
   {
@@ -34,6 +35,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const { user, setUser } = useGetUserStore();
+  const { setLoading} = useGetLoadingStore()
   const userToken = localStorage.getItem(tokenName);
   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
 
@@ -42,13 +44,19 @@ router.beforeEach(async (to) => {
   if (userToken && isAuthRoute) return { name: "Home" };
 
   if (userToken && !user.value.id) {
-    
-    const { data:userData } = await getUserData(userToken);
-    if (userData.id) {
-      console.log('ovo je korisnik', userData)
-      setUser(userData)
-    } else {
-      showToast('Unable to fetch user data', 'error')
+    try {
+      setLoading(true)
+      const { data:userData } = await getUserData(userToken);
+      if (userData.id) {
+        console.log('ovo je korisnik', userData)
+        setUser(userData)
+      } else {
+        showToast('Unable to fetch user data', 'error')
+      }
+    } catch (error) {
+      console.error(error)      
+    } finally {
+      setLoading(false)
     }
   }
   // if (user.value.role !== 'ADMIN' && to.name !== "Home") {
