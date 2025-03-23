@@ -2,6 +2,7 @@
   <textarea
     class="border w-full min-h-24 rounded-xl p-2 mt-4"
     :maxlength="props.maxCharacters"
+    :value="modelValue"
     :placeholder="props.placeholder"
     @input="(e) => emits('update:modelValue', (e.target as HTMLTextAreaElement)?.value)"
   >

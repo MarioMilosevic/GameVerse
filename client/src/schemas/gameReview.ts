@@ -10,12 +10,3 @@ export const gameReviewSchema = z
   .required();
 
 export type GameReviewSchema = z.infer<typeof gameReviewSchema>;
-export type GameReviewFields = keyof GameReviewSchema;
-
-export type GameReviewFieldErrors = {
-  [key in GameReviewFields]?: string;
-};
-
-export type GameReviewTouchedFields = {
-  [key in GameReviewFields]?: boolean;
-};

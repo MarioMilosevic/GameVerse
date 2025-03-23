@@ -6,18 +6,22 @@ import usersRouter from "./routes/users";
 import gamesRouter from "./routes/games";
 import consolesRouter from "./routes/consoles";
 import genresRouter from "./routes/genres";
+import reviewsRouter from "./routes/reviews"
 
 const app = express();
+
+const baseUrl = '/api/v1/'
 
 app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/v1/users", usersRouter);
-app.use("/api/v1/games", gamesRouter);
-app.use("/api/v1/consoles", consolesRouter);
-app.use("/api/v1/genres", genresRouter);
+app.use(`${baseUrl}users`, usersRouter);
+app.use(`${baseUrl}games`, gamesRouter);
+app.use(`${baseUrl}consoles`, consolesRouter);
+app.use(`${baseUrl}genres`, genresRouter);
+app.use(`${baseUrl}reviews`, reviewsRouter)
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Server running");
