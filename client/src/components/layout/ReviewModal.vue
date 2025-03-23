@@ -9,14 +9,18 @@
     >
       <XIcon />
     </BaseIcon>
-    <v-icon
-      class="absolute -top-18 right-1/2 translate-x-1/2"
-      name="bi-star-fill"
-      :scale="7"
-    />
-    <h1 class="text-red-500 text-3xl absolute -top-5 right-1/2 translate-x-1/2">
-      {{ gameRating ?? "?" }}
-    </h1>
+    <div class="absolute -top-10 right-1/2 translate-x-1/2 w-[75px] h-[75px]">
+      <v-icon
+        class="transform absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
+        name="bi-star-fill"
+        :scale="scale"
+      />
+      <h1
+        class="text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2"
+      >
+        {{ gameRating ?? "?" }}
+      </h1>
+    </div>
     <p class="text-red-500">RATE THIS</p>
     <h2 class="text-xl">God of War</h2>
     <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
@@ -36,7 +40,7 @@
 <script setup lang="ts">
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 
 const props = defineProps({
@@ -47,6 +51,15 @@ const props = defineProps({
 });
 
 const gameRating = ref<number | null>(props.rating ?? null);
+
+const scale = computed(() => {
+  let scale = 5;
+  const increment = 0.2;
+  if (gameRating.value) {
+    scale += gameRating.value * increment;
+  }
+  return scale;
+});
 
 const starsArray = ref<string[]>([...emptyStarsArray]);
 
