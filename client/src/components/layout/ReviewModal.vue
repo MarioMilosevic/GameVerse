@@ -25,23 +25,39 @@
     <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
       <p class="text-red-500">RATE THIS</p>
       <h2 class="text-xl">{{ props.name }}</h2>
-      <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
-        <v-icon
-          v-for="(star, index) in starsArray"
-          class="cursor-pointer"
-          :key="index"
-          scale="1.3"
-          :name="star === 'empty' ? 'bi-star' : 'bi-star-fill'"
-          @mouseenter="mouseEnterHandler(index)"
-          @click="ratingClickHandler(index)"
-        />
-      </div>
-      <FormTextarea
-        v-model="gameReview.content"
-        placeholder="Your thoughts..."
-        :max-characters="200"
-      />
-      <ActionButton class="self-end">
+      <FormBlock>
+        <template #input>
+          <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
+            <v-icon
+              v-for="(star, index) in starsArray"
+              class="cursor-pointer"
+              :key="index"
+              scale="1.3"
+              :name="star === 'empty' ? 'bi-star' : 'bi-star-fill'"
+              @mouseenter="mouseEnterHandler(index)"
+              @click="ratingClickHandler(index)"
+            />
+          </div>
+        </template>
+        <!-- <template #error>
+          <FormError>
+            <template #default>{{
+              gameReviewErrors[gameReview.content]
+              // loginFormErrors[input.name as LoginFields]
+            }}</template>
+          </FormError>
+        </template> -->
+      </FormBlock>
+      <FormBlock class="w-full">
+        <template #input>
+          <FormTextarea
+            v-model="gameReview.content"
+            placeholder="Your thoughts..."
+            :max-characters="200"
+          />
+        </template>
+      </FormBlock>
+      <ActionButton class="self-end" :disabled="!allFieldsCompleted">
         <template #content> SEND REVIEW </template>
       </ActionButton>
     </div>
@@ -53,9 +69,16 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
-import { ref } from "vue";
+import FormBlock from "src/components/form/FormBlock.vue";
+import FormError from "src/components/form/FormError.vue";
+import { ref, computed } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType } from "src/utils/types";
+import {
+  GameReviewFieldErrors,
+  GameReviewTouchedFields,
+  gameReviewSchema
+} from "src/schemas/gameReview";
 
 const props = defineProps({
   rating: {
@@ -75,6 +98,13 @@ const props = defineProps({
 const gameReview = ref<GameReviewType>({
   rating: props.rating ?? null,
   content: props.content ?? "",
+});
+
+const gameReviewErrors = ref<GameReviewFieldErrors>({});
+const gameReviewTouchedFields = ref<GameReviewTouchedFields>({});
+
+const allFieldsCompleted = computed(() => {
+  return gameReviewSchema.safeParse(gameReview.value).success;
 });
 
 const scale = (scale: number, increment: number) => {
