@@ -47,3 +47,5 @@ export const signUpInputs = [
     label: "Confirm Password",
   },
 ];
+
+export const emptyStarsArray = new Array(10).fill("empty");

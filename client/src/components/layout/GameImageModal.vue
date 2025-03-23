@@ -1,36 +1,36 @@
 <template>
-    <button
-      class="absolute -top-11 right-0 border border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 hover:border-slate-50 hover:border hover:bg-slate-950"
-      @click="emits('close-modal-event')"
-    >
-      <p>Close</p>
-      <BaseIcon>
-        <XIcon />
+  <button
+    class="absolute -top-11 right-0 border border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 hover:border-slate-50 hover:border hover:bg-slate-950"
+    @click="emits('close-modal-event')"
+  >
+    <p>Close</p>
+    <BaseIcon>
+      <XIcon />
+    </BaseIcon>
+  </button>
+  <SliderButton class="-left-16" @click="emits('prev-event')">
+    <template #icon>
+      <BaseIcon size="big">
+        <LeftIcon />
       </BaseIcon>
-    </button>
-    <SliderButton class="-left-16" @click="emits('prev-event')">
-      <template #icon>
-        <BaseIcon size="big">
-          <LeftIcon />
-        </BaseIcon>
-      </template>
-    </SliderButton>
-    <fieldset class="w-full h-full relative overflow-x-hidden">
-      <img
-        v-for="(photo, index) in props.allPhotos"
-        :src="photo"
-        :alt="photo"
-        class="rounded-xl w-full h-full absolute top-0 left-0 transition-all duration-500"
-        :style="{ transform: translateImage(index) }"
-      />
-    </fieldset>
-    <SliderButton class="-right-16" @click="emits('next-event')">
-      <template #icon>
-        <BaseIcon size="big">
-          <RightIcon />
-        </BaseIcon>
-      </template>
-    </SliderButton>
+    </template>
+  </SliderButton>
+  <fieldset class="w-full h-full relative overflow-x-hidden">
+    <img
+      v-for="(photo, index) in props.allPhotos"
+      :src="photo"
+      :alt="photo"
+      class="rounded-xl w-full h-full absolute top-0 left-0 transition-all duration-500"
+      :style="{ transform: translateImage(index) }"
+    />
+  </fieldset>
+  <SliderButton class="-right-16" @click="emits('next-event')">
+    <template #icon>
+      <BaseIcon size="big">
+        <RightIcon />
+      </BaseIcon>
+    </template>
+  </SliderButton>
 </template>
 
 <script setup lang="ts">

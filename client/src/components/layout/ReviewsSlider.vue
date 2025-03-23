@@ -16,7 +16,7 @@
           v-for="(star, index) in createStarsArray(props.rating)"
           :key="index"
           animation="pulse"
-          speed="fast"
+          speed="slow"
           fill="red"
           :name="
             star === 'full'
@@ -91,7 +91,7 @@ const createStarsArray = (rating: number) => {
     }
     remainingRating--;
   }
-
+  console.log(starsArray)
   return starsArray;
 };
 </script>
