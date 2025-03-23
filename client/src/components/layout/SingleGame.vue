@@ -105,7 +105,7 @@
       <template #default>
         <ModalComponent size="small">
           <template #default>
-            <ReviewModal @close-modal-event="isReviewModalOpen = false" />
+            <ReviewModal @close-modal-event="isReviewModalOpen = false" :name="name"/>
           </template>
         </ModalComponent>
       </template>

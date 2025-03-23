@@ -20,7 +20,6 @@ onBeforeMount(async () => {
     if (message) {
       showToast(message, "error");
     } else {
-      console.log(data);
       singleGame.value = data;
     }
   } catch (error) {

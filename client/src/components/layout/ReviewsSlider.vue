@@ -91,7 +91,6 @@ const createStarsArray = (rating: number) => {
     }
     remainingRating--;
   }
-  console.log(starsArray)
   return starsArray;
 };
 </script>

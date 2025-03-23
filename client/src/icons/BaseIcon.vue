@@ -13,9 +13,6 @@
 </template>
 
 <script setup lang="ts">
-// :style="{ cursor }"
-// import { computed } from 'vue'
-
 const props = defineProps({
   xmlns: {
     type: String,
@@ -46,10 +43,6 @@ const props = defineProps({
     default: false,
   },
 })
-
-// const cursor = computed(() => {
-//   return props.isDisabled ? 'not-allowed' : 'pointer'
-// })
 
 </script>
 

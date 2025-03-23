@@ -46,3 +46,8 @@ export type SignUpCredentialsType = {
   password: string;
   passwordConfirm: string;
 };
+
+export type GameReviewType = {
+  rating: number | null;
+  content:string
+}

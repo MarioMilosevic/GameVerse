@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-slate-900 relative h-full flex flex-col gap-4 pt-16 items-center"
-  >
+  <form class="bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl">
     <BaseIcon
       class="absolute top-2 right-2 cursor-pointer"
       size="big"
@@ -9,57 +7,82 @@
     >
       <XIcon />
     </BaseIcon>
+
     <div class="absolute -top-10 right-1/2 translate-x-1/2 w-[75px] h-[75px]">
       <v-icon
         class="transform absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         name="bi-star-fill"
-        :scale="scale"
+        :scale="scale(5, 0.2)"
       />
       <h1
-        class="text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2"
+        class="text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
+        :style="{ scale: scale(1, 0.02) }"
       >
-        {{ gameRating ?? "?" }}
+        {{ gameReview.rating ?? "?" }}
       </h1>
     </div>
-    <p class="text-red-500">RATE THIS</p>
-    <h2 class="text-xl">God of War</h2>
-    <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
-      <v-icon
-        v-for="(star, index) in starsArray"
-        class="cursor-pointer"
-        :key="index"
-        scale="1.3"
-        :name="star === 'empty' ? 'bi-star' : 'bi-star-fill'"
-        @mouseenter="mouseEnterHandler(index)"
-        @click="ratingClickHandler(index)"
+
+    <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
+      <p class="text-red-500">RATE THIS</p>
+      <h2 class="text-xl">{{ props.name }}</h2>
+      <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
+        <v-icon
+          v-for="(star, index) in starsArray"
+          class="cursor-pointer"
+          :key="index"
+          scale="1.3"
+          :name="star === 'empty' ? 'bi-star' : 'bi-star-fill'"
+          @mouseenter="mouseEnterHandler(index)"
+          @click="ratingClickHandler(index)"
+        />
+      </div>
+      <FormTextarea
+        v-model="gameReview.content"
+        placeholder="Your thoughts..."
+        :max-characters="200"
       />
+      <ActionButton class="self-end">
+        <template #content> SEND REVIEW </template>
+      </ActionButton>
     </div>
-  </div>
+  </form>
 </template>
 
 <script setup lang="ts">
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
-import { computed, ref } from "vue";
+import FormTextarea from "src/components/form/FormTextarea.vue";
+import ActionButton from "src/components/layout/ActionButton.vue";
+import { ref } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
+import { GameReviewType } from "src/utils/types";
 
 const props = defineProps({
   rating: {
     type: Number,
     required: false,
   },
+  content: {
+    type: String,
+    required: false,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
 });
 
-const gameRating = ref<number | null>(props.rating ?? null);
+const gameReview = ref<GameReviewType>({
+  rating: props.rating ?? null,
+  content: props.content ?? "",
+});
 
-const scale = computed(() => {
-  let scale = 5;
-  const increment = 0.2;
-  if (gameRating.value) {
-    scale += gameRating.value * increment;
+const scale = (scale: number, increment: number) => {
+  if (gameReview.value.rating) {
+    scale += gameReview.value.rating * increment;
   }
   return scale;
-});
+};
 
 const starsArray = ref<string[]>([...emptyStarsArray]);
 
@@ -67,7 +90,7 @@ const emits = defineEmits(["close-modal-event"]);
 
 const ratingClickHandler = (rating: number) => {
   fillStars(rating);
-  gameRating.value = rating + 1;
+  gameReview.value.rating = rating + 1;
 };
 
 const mouseEnterHandler = (rating: number) => {
@@ -75,10 +98,10 @@ const mouseEnterHandler = (rating: number) => {
 };
 
 const mouseLeaveHandler = () => {
-  if (!gameRating.value) {
+  if (!gameReview.value.rating) {
     starsArray.value = [...emptyStarsArray];
   } else {
-    fillStars(gameRating.value - 1);
+    fillStars(gameReview.value.rating - 1);
   }
 };
 

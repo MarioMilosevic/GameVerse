@@ -48,7 +48,6 @@ router.beforeEach(async (to) => {
       setLoading(true)
       const { data:userData } = await getUserData(userToken);
       if (userData.id) {
-        console.log('ovo je korisnik', userData)
         setUser(userData)
       } else {
         showToast('Unable to fetch user data', 'error')
