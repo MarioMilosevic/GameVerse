@@ -60,6 +60,7 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
+import useGetUserStore from "src/composables/useGetUserStore";
 import { ref, computed } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType } from "src/utils/types";
@@ -78,7 +79,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  gameId: {
+    type: Number,
+    required: true,
+  },
 });
+
+const { user } = useGetUserStore();
 
 const gameReview = ref<GameReviewType>({
   rating: props.rating ?? null,
@@ -125,5 +132,7 @@ const fillStars = (index: number) => {
 
 const submitReviewHandler = async () => {
   console.log("ovo na submit", gameReview.value);
+  console.log(user.value.id);
+  console.log(props.gameId);
 };
 </script>

@@ -105,7 +105,7 @@
       <template #default>
         <ModalComponent size="small">
           <template #default>
-            <ReviewModal @close-modal-event="isReviewModalOpen = false" :name="name"/>
+            <ReviewModal @close-modal-event="isReviewModalOpen = false" :name="name" :game-id="singleGame.id"/>
           </template>
         </ModalComponent>
       </template>
