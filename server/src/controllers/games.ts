@@ -44,6 +44,21 @@ export default {
       const singleGame = await prisma.game.findUnique({
         where: { id: Number(req.params.id) },
         include: {
+          reviews: {
+            select: {
+              content: true,
+              createdAt: true,
+              rating:true,
+              user: {
+                select: {
+                  createdDate:true,
+                  id: true,
+                  fullName: true,
+                  image: true,
+                },
+              },
+            },
+          },
           consoles: {
             select: {
               console: {
