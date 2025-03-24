@@ -44,7 +44,6 @@ router.beforeEach(async (to) => {
   if (userToken && isAuthRoute) return { name: "Home" };
 
   if (userToken && !user.value.id) {
-    console.log('da li udje odje')
     try {
       setLoading(true)
       const { data:userData } = await getUserData(userToken);

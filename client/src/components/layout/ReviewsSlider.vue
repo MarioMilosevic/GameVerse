@@ -1,39 +1,7 @@
 <template>
   <article class="relative px-4 flex flex-col gap-4">
     <h2 class="uppercase text-red-600 text-center text-3xl">Reviews</h2>
-
-    <div class="flex items-end gap-2">
-      <fieldset class="h-[50px] w-[50px]">
-        <img :src="profileImg" class="h-full" />
-      </fieldset>
-      <h2>Mario Milosevic</h2>
-      <p>Joined on 20/03/2025</p>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <div class="flex items-center">
-        <v-icon
-          v-for="(star, index) in createStarsArray(props.rating)"
-          :key="index"
-          animation="pulse"
-          speed="slow"
-          fill="red"
-          :name="
-            star === 'full'
-              ? 'bi-star-fill'
-              : star === 'half'
-              ? 'bi-star-half'
-              : 'bi-star'
-          "
-        />
-      </div>
-      <p>
-        <span> 4.9/5 </span>
-        - Reviewed on July 20, 2023
-      </p>
-    </div>
-    <p>Very nice. Loved it!</p>
-
+    <ReviewComponent v-for="review in props.reviews" :key="review.id" :review="review"/>
     <div
       class="border border-dark-dark-red flex items-center justify-between px-6 py-4 mt-4 rounded-2xl"
     >
@@ -66,31 +34,16 @@ import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
 import ActionButton from "src/components/layout/ActionButton.vue";
 import SliderButton from "src/components/layout/SliderButton.vue";
-import { profileImg } from "src/utils/constants";
+import ReviewComponent from "src/components/layout/ReviewComponent.vue";
+import { PropType } from "vue";
+import { ReviewType } from "src/utils/types";
 
 const props = defineProps({
-  rating: {
-    type: Number,
+  reviews: {
+    type: Array as PropType<ReviewType[]>,
     required: true,
   },
 });
 
-const emits = defineEmits(['open-modal-event'])
-
-const createStarsArray = (rating: number) => {
-  const starsArray = [];
-  const scaledRating = (rating / 10) * 5;
-  let remainingRating = scaledRating;
-  for (let i = 0; i < 5; i++) {
-    if (remainingRating >= 1) {
-      starsArray.push("full");
-    } else if (remainingRating >= 0.5) {
-      starsArray.push("half");
-    } else {
-      starsArray.push("empty");
-    }
-    remainingRating--;
-  }
-  return starsArray;
-};
+const emits = defineEmits(["open-modal-event"]);
 </script>

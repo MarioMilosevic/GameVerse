@@ -78,7 +78,7 @@
           />
         </fieldset>
         <ReviewsSlider
-          :rating="7"
+        :reviews="singleGame.reviews"
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
         />
@@ -105,7 +105,7 @@
       <template #default>
         <ModalComponent size="small">
           <template #default>
-            <ReviewModal @close-modal-event="isReviewModalOpen = false" :name="name" :game-id="singleGame.id"/>
+            <ReviewModal @close-modal-event="isReviewModalOpen = false" :name="name" :game-id="singleGame.id" :reviews="reviews"/>
           </template>
         </ModalComponent>
       </template>
@@ -138,6 +138,7 @@ const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false);
 const selectedImageIndex = ref<number>(0);
 
+
 const {
   name,
   gameplayHours,
@@ -147,6 +148,7 @@ const {
   stars,
   genres,
   consoles,
+  reviews
 } = props.singleGame;
 
 const youtubeRef = useTemplateRef("youtube");

@@ -46,6 +46,7 @@ export default {
         include: {
           reviews: {
             select: {
+              id:true,
               content: true,
               createdAt: true,
               rating:true,

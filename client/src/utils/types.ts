@@ -1,8 +1,8 @@
 export type GameType = {
+  id: number;
   consoles: ConsoleType[];
   description: string;
   genres: GenreType[];
-  id: number;
   name: string;
   gameplayHours: string;
   price: string;
@@ -12,7 +12,16 @@ export type GameType = {
   thumbnail: string;
   trailer: string;
   writers: string[];
+  reviews: ReviewType[]
 };
+
+export type ReviewType = {
+  id: number;
+  content: string;
+  createdAt: string;
+  rating: number;
+  user:UserType
+}
 
 export type UserType = {
   id?: number;
@@ -20,6 +29,7 @@ export type UserType = {
   email: string;
   fullName: string;
   image: string;
+  createdDate:string
 };
 
 export type ConsoleType = {
