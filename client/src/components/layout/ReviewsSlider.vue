@@ -1,9 +1,16 @@
 <template>
-  <article class="relative px-4 flex flex-col justify-between">
+  <article
+    class="relative px-4 flex flex-col justify-between overflow-x-hidden"
+  >
     <h2 class="uppercase text-red-600 text-center text-3xl">Reviews</h2>
-    <ReviewComponent v-for="review in reviews" :key="review.id" :review="review"/>
-    <LeaveReview/>
-    <SliderButton class="-left-9">
+    <ReviewComponent
+      v-for="(review, index) in props.reviews"
+      :key="review.id"
+      :review="review"
+      :style="{ transform: translateElement(index, selectedReviewIndex) }"
+    />
+    <LeaveReview />
+    <SliderButton class="-left-0" @click="previousReview">
       <template #icon>
         <BaseIcon>
           <LeftIcon />
@@ -11,7 +18,7 @@
       </template>
     </SliderButton>
 
-    <SliderButton class="-right-9">
+    <SliderButton class="right-0" @click="nextReview">
       <template #icon>
         <BaseIcon>
           <RightIcon />
@@ -28,8 +35,9 @@ import RightIcon from "src/icons/RightIcon.vue";
 import SliderButton from "src/components/layout/SliderButton.vue";
 import ReviewComponent from "src/components/layout/ReviewComponent.vue";
 import LeaveReview from "src/components/layout/LeaveReview.vue";
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 import { ReviewType } from "src/utils/types";
+import { translateElement } from "src/utils/helpers";
 
 const props = defineProps({
   reviews: {
@@ -38,7 +46,24 @@ const props = defineProps({
   },
 });
 
-const {reviews} = props
+const selectedReviewIndex = ref<number>(0);
 
 const emits = defineEmits(["open-modal-event"]);
+
+const nextReview = () => {
+  if (selectedReviewIndex.value === props.reviews.length - 1) {
+    selectedReviewIndex.value = 0;
+  } else {
+    selectedReviewIndex.value += 1;
+  }
+}
+
+const previousReview = () => {
+   if (selectedReviewIndex.value === 0) {
+    selectedReviewIndex.value = props.reviews.length - 1;
+  } else {
+    selectedReviewIndex.value -= 1;
+  }
+}
+
 </script>

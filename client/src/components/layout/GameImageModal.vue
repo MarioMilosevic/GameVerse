@@ -21,7 +21,7 @@
       :src="photo"
       :alt="photo"
       class="rounded-xl w-full h-full absolute top-0 left-0 transition-all duration-500"
-      :style="{ transform: translateImage(index) }"
+      :style="{ transform: translateElement(index, props.selectedImageIndex) }"
     />
   </fieldset>
   <SliderButton class="-right-16" @click="emits('next-event')">
@@ -35,6 +35,7 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
+import { translateElement } from "src/utils/helpers";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
@@ -52,10 +53,11 @@ const props = defineProps({
   },
 });
 
+
 const emits = defineEmits(["close-modal-event", "next-event", "prev-event"]);
 
-const translateImage = (index: number) => {
-  const calculation = 100 * (index - props.selectedImageIndex);
-  return `translateX(${calculation}%)`;
-};
+// const translateImage = (index: number) => {
+//   const calculation = 100 * (index - props.selectedImageIndex);
+//   return `translateX(${calculation}%)`;
+// };
 </script>

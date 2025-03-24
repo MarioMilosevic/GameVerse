@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border border-dark-dark-red flex items-center justify-between px-5 py-3  rounded-2xl"
+    class="border border-dark-dark-red flex items-center justify-between px-5 py-3 w-[90%] mx-auto rounded-2xl"
   >
     <p class="text-lg">Want to leave a review ?</p>
     <ActionButton @click="emits('open-modal-event')">

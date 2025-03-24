@@ -82,8 +82,7 @@
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
         />
-        </template>
-       
+      </template>
     </SectionComponent>
 
     <OverlayComponent v-if="isGameImageModalOpen">
@@ -171,7 +170,6 @@ const openImageModal = (imageIndex: number) => {
 
 const nextImage = () => {
   if (selectedImageIndex.value === photos.length - 1) {
-    console.log("sada treba da obrnem");
     selectedImageIndex.value = 0;
   } else {
     selectedImageIndex.value += 1;

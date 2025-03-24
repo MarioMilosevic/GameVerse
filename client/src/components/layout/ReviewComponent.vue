@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col gap-2 absolute top-10 right-1/2 translate-x-1/2 w-[90%] overflow-y-auto">
+  <div
+    class="flex flex-col pl-12 gap-2 absolute top-10 right-1/2 translate-x-1/2 w-full overflow-y-auto transition-all duration-300"
+  >
     <div class="flex items-end gap-2">
       <fieldset class="h-[50px] w-[50px]">
         <img :src="image" class="h-full" />
