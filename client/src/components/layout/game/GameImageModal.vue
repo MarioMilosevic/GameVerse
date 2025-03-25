@@ -40,7 +40,7 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
-import SliderButton from "src/components/layout/SliderButton.vue";
+import SliderButton from "src/components/layout/buttons/SliderButton.vue";
 
 const props = defineProps({
   selectedImageIndex: {
@@ -52,7 +52,6 @@ const props = defineProps({
     required: true,
   },
 });
-
 
 const emits = defineEmits(["close-modal-event", "next-event", "prev-event"]);
 

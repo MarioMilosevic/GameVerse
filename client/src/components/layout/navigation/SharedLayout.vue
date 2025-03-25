@@ -23,14 +23,14 @@
       <BaseIcon size="big" :style="{ cursor: 'pointer' }">
         <MoonIcon />
       </BaseIcon>
-      <h1 class="text-2xl">{{ firstName }}</h1>
       <img :src="user.image" :alt="user.image" class="h-full" />
+      <h1 class="text-2xl">{{ firstName }}</h1>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/ActionButton.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue"
 import useGetUserStore from "src/composables/useGetUserStore";
 import BaseIcon from "src/icons/BaseIcon.vue";
 // import SunIcon from "src/icons/SunIcon.vue";
@@ -39,6 +39,8 @@ import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 
 const { user } = useGetUserStore();
+
+const isNavigationBarOpen = ref<boolean>(true);
 
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];

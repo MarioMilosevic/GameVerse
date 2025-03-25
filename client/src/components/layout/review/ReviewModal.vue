@@ -59,7 +59,7 @@
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/layout/ActionButton.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { ref, computed } from "vue";
 import { emptyStarsArray } from "src/utils/constants";

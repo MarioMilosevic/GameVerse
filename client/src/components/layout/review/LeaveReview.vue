@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/ActionButton.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 
 const emits = defineEmits(["open-modal-event"]);
 </script>

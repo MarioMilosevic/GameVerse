@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import GameComponent from "src/components/layout/GameComponent.vue";
+import GameComponent from "src/components/layout/game/GameComponent.vue";
 import { GameType } from "src/utils/types";
 import { PropType } from "vue";
 

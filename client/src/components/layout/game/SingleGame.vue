@@ -119,14 +119,14 @@
 </template>
 
 <script setup lang="ts">
-import ReviewsSlider from "src/components/layout/ReviewsSlider.vue";
-import GameInfo from "src/components/layout/GameInfo.vue";
-import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
+import ReviewsSlider from "src/components/layout/review/ReviewsSlider.vue";
+import GameInfo from "src/components/layout/game/GameInfo.vue";
+import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
 import SectionComponent from "src/components/layout/SectionComponent.vue";
-import GenreComponent from "src/components/layout/GenreComponent.vue";
-import GameImageModal from "src/components/layout/GameImageModal.vue";
-import ReviewModal from "src/components/layout/ReviewModal.vue";
-import OverlayComponent from "./OverlayComponent.vue";
+import GenreComponent from "src/components/layout/game/GenreComponent.vue";
+import GameImageModal from "src/components/layout/game/GameImageModal.vue";
+import ReviewModal from "src/components/layout/review/ReviewModal.vue";
+import OverlayComponent from "src/components/layout/OverlayComponent.vue";
 import ModalComponent from "src/components/layout/ModalComponent.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
@@ -158,8 +158,7 @@ const {
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
   if (youtubeRef.value) {
-    console.log("ovo treba pustit");
-    //  youtubeRef.value.playVideo();
+    // youtubeRef.value.playVideo();
   }
 };
 

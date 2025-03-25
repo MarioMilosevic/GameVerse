@@ -10,7 +10,7 @@ import { onBeforeMount, ref } from "vue";
 import { GameType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import SingleGame from "src/components/layout/SingleGame.vue";
+import SingleGame from "src/components/layout/game/SingleGame.vue";
 import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
 
 onBeforeMount(async () => {

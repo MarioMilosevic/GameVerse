@@ -9,7 +9,7 @@
       :review="review"
       :style="{ transform: translateElement(index, selectedReviewIndex) }"
     />
-    <LeaveReview />
+    <LeaveReview @open-modal-event="emits('open-modal-event')"/>
     <SliderButton class="-left-0" @click="previousReview">
       <template #icon>
         <BaseIcon>
@@ -32,9 +32,9 @@
 import BaseIcon from "src/icons/BaseIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
-import SliderButton from "src/components/layout/SliderButton.vue";
-import ReviewComponent from "src/components/layout/ReviewComponent.vue";
-import LeaveReview from "src/components/layout/LeaveReview.vue";
+import SliderButton from "src/components/layout/buttons/SliderButton.vue";
+import ReviewComponent from "src/components/layout/review/ReviewComponent.vue";
+import LeaveReview from "src/components/layout/review/LeaveReview.vue";
 import { PropType, ref } from "vue";
 import { ReviewType } from "src/utils/types";
 import { translateElement } from "src/utils/helpers";
@@ -56,14 +56,13 @@ const nextReview = () => {
   } else {
     selectedReviewIndex.value += 1;
   }
-}
+};
 
 const previousReview = () => {
-   if (selectedReviewIndex.value === 0) {
+  if (selectedReviewIndex.value === 0) {
     selectedReviewIndex.value = props.reviews.length - 1;
   } else {
     selectedReviewIndex.value -= 1;
   }
-}
-
+};
 </script>

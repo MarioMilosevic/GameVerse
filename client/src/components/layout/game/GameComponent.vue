@@ -64,9 +64,9 @@ import ClockIcon from "src/icons/ClockIcon.vue";
 import StarIcon from "src/icons/StarIcon.vue";
 import DollarIcon from "src/icons/DollarIcon.vue";
 import CalendarIcon from "src/icons/CalendarIcon.vue";
-import GameStat from "src/components/layout/GameStat.vue";
-import ConsoleComponent from "src/components/layout/ConsoleComponent.vue";
-import ActionButton from "src/components/layout/ActionButton.vue";
+import GameStat from "src/components/layout/game/GameStat.vue";
+import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 
 const props = defineProps({
   game: {
@@ -79,7 +79,6 @@ const { name, releaseYear, price, gameplayHours, id } = props.game;
 const router = useRouter();
 
 const seeGameDetails = (id: number) => {
-  router.push({ name: 'GameDetails', params: { id } });
+  router.push({ name: "GameDetails", params: { id } });
 };
-
 </script>

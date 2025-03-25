@@ -55,7 +55,7 @@ import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormError from "src/components/form/FormError.vue";
-import ActionButton from "src/components/layout/ActionButton.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import { loginInputs, tokenName } from "src/utils/constants";
 import { ref, computed } from "vue";
@@ -101,7 +101,7 @@ const submitHandler = async () => {
     }
     const { data, message } = await loginUser(loginCredentials.value);
     if (data) {
-      localStorage.setItem(tokenName, data)
+      localStorage.setItem(tokenName, data);
       router.push("/");
     } else {
       showToast(message, "error");
