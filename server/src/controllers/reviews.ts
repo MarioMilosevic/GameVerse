@@ -14,33 +14,34 @@ export default {
   },
   async addReview(req: Request, res: Response) {
     try {
-      const { userId, gameId, rating, content } = req.body;
+      console.log('uslo u add review')
+      // const { userId, gameId, rating, content } = req.body;
 
-      if (!userId || !gameId || !rating || !content) {
-        errorFactory.badRequest(res);
-        return;
-      }
+      // if (!userId || !gameId || !rating || !content) {
+      //   errorFactory.badRequest(res);
+      //   return;
+      // }
 
-      const existingReview = await prisma.review.findUnique({
-        where: {
-          userId_gameId: { userId, gameId },
-        },
-      });
+      // const existingReview = await prisma.review.findUnique({
+      //   where: {
+      //     userId_gameId: { userId, gameId },
+      //   },
+      // });
 
-      if (existingReview) {
-        errorFactory.badRequest(res, "You have already reviewed this game");
-        return;
-      }
+      // if (existingReview) {
+      //   errorFactory.badRequest(res, "You have already reviewed this game");
+      //   return;
+      // }
 
-      const review = await prisma.review.create({
-        data: {
-          userId,
-          gameId,
-          rating,
-          content,
-        },
-      });
-      sucessFactory.created(res, review);
+      // const review = await prisma.review.create({
+      //   data: {
+      //     userId,
+      //     gameId,
+      //     rating,
+      //     content,
+      //   },
+      // });
+      sucessFactory.created(res, 'uslo add review');
     } catch (error) {
       errorFactory.internalError(res);
     }

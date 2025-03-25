@@ -131,8 +131,12 @@ const fillStars = (index: number) => {
 };
 
 const submitReviewHandler = async () => {
-  console.log("ovo na submit", gameReview.value);
-  console.log(user.value.id);
-  console.log(props.gameId);
+  const review = {
+    userId: user.value.id,
+    gameId: props.gameId,
+    rating: gameReview.value.rating,
+    content:gameReview.value.content
+  }
+  console.log("ovo na submit", review);
 };
 </script>

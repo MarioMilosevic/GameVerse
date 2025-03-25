@@ -40,7 +40,7 @@ import { ref, computed } from "vue";
 
 const { user } = useGetUserStore();
 
-const isNavigationBarOpen = ref<boolean>(true);
+// const isNavigationBarOpen = ref<boolean>(true);
 
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];
