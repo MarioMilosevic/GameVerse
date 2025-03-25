@@ -16,10 +16,12 @@ export type GameType = {
 };
 
 export type ReviewType = {
-  id: number;
+  id?: number;
   content: string;
-  createdAt: string;
-  rating: number;
+  createdAt?: string;
+  rating: number | null;
+  gameId: number;
+  userId:number
   user:UserType
 }
 

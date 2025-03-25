@@ -65,6 +65,7 @@ import { ref, computed } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
+import { createReview } from "src/api/reviews";
 
 const props = defineProps({
   rating: {
@@ -105,7 +106,7 @@ const scale = (scale: number, increment: number) => {
 
 const starsArray = ref<string[]>([...emptyStarsArray]);
 
-const emits = defineEmits(["close-modal-event"]);
+const emits = defineEmits(["close-modal-event", 'submit-event']);
 
 const ratingClickHandler = (rating: number) => {
   fillStars(rating);
@@ -131,12 +132,16 @@ const fillStars = (index: number) => {
 };
 
 const submitReviewHandler = async () => {
-  const review = {
-    userId: user.value.id,
-    gameId: props.gameId,
-    rating: gameReview.value.rating,
-    content:gameReview.value.content
-  }
-  console.log("ovo na submit", review);
-};
+  if (user.value.id) {
+    const review = {
+      userId: user.value.id,
+      gameId: props.gameId,
+      rating: gameReview.value.rating,
+      content:gameReview.value.content
+    }
+    const data = await createReview(review)
+    console.log(data)
+    emits('submit-event', data)
+  };
+}
 </script>

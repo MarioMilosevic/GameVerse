@@ -1,13 +1,13 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SingleGame v-else :single-game="singleGame" />
+  <SingleGame v-else :single-game="singleGame" @review-event="reviewHandler"/>
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { getSingleGame } from "src/api/games";
 import { onBeforeMount, ref } from "vue";
-import { GameType } from "src/utils/types";
+import { GameType, ReviewType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import SingleGame from "src/components/layout/game/SingleGame.vue";
@@ -35,4 +35,9 @@ const { loading, setLoading } = useGetLoadingStore();
 const route = useRoute();
 
 const singleGame = ref<GameType>({} as GameType);
+
+const reviewHandler = (review: ReviewType) => {
+  console.log('da li je odje doslo', review)
+singleGame.value.reviews.push(review)
+}
 </script>

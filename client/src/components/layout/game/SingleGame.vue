@@ -107,6 +107,7 @@
           <template #default>
             <ReviewModal
               @close-modal-event="isReviewModalOpen = false"
+              @submit-event="submitModalHandler"
               :name="name"
               :game-id="singleGame.id"
               :reviews="reviews"
@@ -130,7 +131,7 @@ import OverlayComponent from "src/components/layout/OverlayComponent.vue";
 import ModalComponent from "src/components/layout/ModalComponent.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
-import { GameType } from "src/utils/types";
+import { GameType, ReviewType } from "src/utils/types";
 
 const props = defineProps({
   singleGame: {
@@ -154,6 +155,8 @@ const {
   consoles,
   reviews,
 } = props.singleGame;
+
+const emits = defineEmits(["review-event"]);
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
@@ -181,5 +184,11 @@ const prevImage = () => {
   } else {
     selectedImageIndex.value -= 1;
   }
+};
+
+const submitModalHandler = (review: ReviewType) => {
+  isReviewModalOpen.value = false;
+  console.log("doslo u single game",review)
+  emits("review-event", review);
 };
 </script>

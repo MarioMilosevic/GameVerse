@@ -3,9 +3,7 @@ import { passwordMessage } from "src/utils/constants";
 
 export const loginSchema = z
   .object({
-    email: z.string().min(2, {
-      message: "Not valid input",
-    }),
+    email: z.string().email(),
     password: z.string().min(8, passwordMessage),
   })
   .required();

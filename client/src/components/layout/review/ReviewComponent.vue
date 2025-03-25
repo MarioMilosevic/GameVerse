@@ -7,13 +7,13 @@
         <img :src="image" class="h-full" />
       </fieldset>
       <h2>{{ fullName }}</h2>
-      <p>Joined on {{ createdDate }}</p>
+      <p>Joined on {{ formattedDate(createdDate) }}</p>
     </div>
 
     <div class="flex items-center gap-2">
       <div class="flex items-center">
         <v-icon
-          v-for="(star, index) in createStarsArray(rating)"
+          v-for="(star, index) in createStarsArray(rating as number)"
           :key="index"
           animation="pulse"
           speed="slow"
@@ -29,7 +29,7 @@
       </div>
       <p>
         <span> 4.9/5 </span>
-        - Reviewed on {{ createdAt }}
+        - Reviewed on {{ formattedDate(createdAt) }}
       </p>
     </div>
     <p>{{ content }}</p>
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { ReviewType } from "src/utils/types";
 import { PropType } from "vue";
+import { formattedDate } from "src/utils/helpers";
 
 const props = defineProps({
   review: {
