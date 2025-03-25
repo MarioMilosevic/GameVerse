@@ -63,7 +63,7 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { ref, computed } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
-import { GameReviewType } from "src/utils/types";
+import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
 
@@ -106,7 +106,7 @@ const scale = (scale: number, increment: number) => {
 
 const starsArray = ref<string[]>([...emptyStarsArray]);
 
-const emits = defineEmits(["close-modal-event", 'submit-event']);
+const emits = defineEmits(["close-modal-event", "submit-event"]);
 
 const ratingClickHandler = (rating: number) => {
   fillStars(rating);
@@ -137,11 +137,10 @@ const submitReviewHandler = async () => {
       userId: user.value.id,
       gameId: props.gameId,
       rating: gameReview.value.rating,
-      content:gameReview.value.content
-    }
-    const data = await createReview(review)
-    console.log(data)
-    emits('submit-event', data)
-  };
-}
+      content: gameReview.value.content,
+    };
+    const { data } = await createReview(review as ReviewType);
+    emits("submit-event", data);
+  }
+};
 </script>

@@ -8,4 +8,6 @@ router
   .get(reviewsController.getAll)
   .post(reviewsController.addReview);
 
+router.route("/:id").delete(reviewsController.deleteReview);
+
 export default router;

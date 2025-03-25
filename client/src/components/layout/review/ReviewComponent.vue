@@ -29,7 +29,7 @@
       </div>
       <p>
         <span> 4.9/5 </span>
-        - Reviewed on {{ formattedDate(createdAt) }}
+        - Reviewed on {{ formattedDate(createdAt as string) }}
       </p>
     </div>
     <p>{{ content }}</p>
@@ -47,6 +47,7 @@ const props = defineProps({
     required: true,
   },
 });
+
 
 const {
   content,

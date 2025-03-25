@@ -37,7 +37,6 @@ const route = useRoute();
 const singleGame = ref<GameType>({} as GameType);
 
 const reviewHandler = (review: ReviewType) => {
-  console.log('da li je odje doslo', review)
 singleGame.value.reviews.push(review)
 }
 </script>

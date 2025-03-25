@@ -188,7 +188,6 @@ const prevImage = () => {
 
 const submitModalHandler = (review: ReviewType) => {
   isReviewModalOpen.value = false;
-  console.log("doslo u single game",review)
   emits("review-event", review);
 };
 </script>
