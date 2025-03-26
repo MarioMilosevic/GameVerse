@@ -1,6 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SingleGame v-else :single-game="singleGame" @review-event="reviewHandler"/>
+  <SingleGame v-else :single-game="singleGame" @review-event="reviewHandler" />
 </template>
 
 <script setup lang="ts">
@@ -11,7 +11,7 @@ import { GameType, ReviewType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import SingleGame from "src/components/layout/game/SingleGame.vue";
-import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
+import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 
 onBeforeMount(async () => {
   try {
@@ -37,6 +37,6 @@ const route = useRoute();
 const singleGame = ref<GameType>({} as GameType);
 
 const reviewHandler = (review: ReviewType) => {
-singleGame.value.reviews.push(review)
-}
+  singleGame.value.reviews.push(review);
+};
 </script>

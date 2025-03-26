@@ -9,7 +9,7 @@ import { getAllGames } from "src/api/games";
 import { GameType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import AllGames from "src/components/layout/game/AllGames.vue";
-import LoadingSpinner from "src/components/layout/LoadingSpinner.vue";
+import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 
 const games = ref<GameType[]>([]);

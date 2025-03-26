@@ -4,7 +4,7 @@
   >
     <p class="text-lg">Want to leave a review ?</p>
     <ActionButton @click="emits('open-modal-event')">
-      <template #content> Click here </template>
+      Click here
     </ActionButton>
   </div>
 </template>

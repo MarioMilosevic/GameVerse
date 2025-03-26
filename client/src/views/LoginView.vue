@@ -42,7 +42,7 @@
         :disabled="!allFieldsCompleted"
         :style="{ marginTop: '0.5rem' }"
       >
-        <template #content> LOG IN </template>
+      LOG IN
       </ActionButton>
     </template>
   </AuthForm>
@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import AuthForm from "src/components/form/AuthForm.vue";
-import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
+import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormBlock from "src/components/form/FormBlock.vue";

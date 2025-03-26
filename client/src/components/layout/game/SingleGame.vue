@@ -123,12 +123,12 @@
 import ReviewsSlider from "src/components/layout/review/ReviewsSlider.vue";
 import GameInfo from "src/components/layout/game/GameInfo.vue";
 import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
-import SectionComponent from "src/components/layout/SectionComponent.vue";
+import SectionComponent from "src/components/layout/others/SectionComponent.vue";
 import GenreComponent from "src/components/layout/game/GenreComponent.vue";
 import GameImageModal from "src/components/layout/game/GameImageModal.vue";
 import ReviewModal from "src/components/layout/review/ReviewModal.vue";
-import OverlayComponent from "src/components/layout/OverlayComponent.vue";
-import ModalComponent from "src/components/layout/ModalComponent.vue";
+import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
+import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
 import { GameType, ReviewType } from "src/utils/types";

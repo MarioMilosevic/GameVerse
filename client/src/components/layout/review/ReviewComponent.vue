@@ -28,7 +28,7 @@
         />
       </div>
       <p>
-        <span> 4.9/5 </span>
+        <span> {{rating}}/10 </span>
         - Reviewed on {{ formattedDate(createdAt as string) }}
       </p>
     </div>

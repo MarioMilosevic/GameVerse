@@ -41,7 +41,7 @@
         :style="{ marginTop: '0.5rem' }"
         :disabled="!allFieldsCompleted"
       >
-        <template #content> SIGN UP </template>
+        SIGN UP
       </ActionButton>
     </template>
   </AuthForm>
@@ -55,7 +55,7 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import RenderlessComponent from "src/components/layout/RenderlessComponent.vue";
+import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
 import { profileImg, signUpInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {

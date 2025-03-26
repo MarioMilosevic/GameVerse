@@ -18,9 +18,7 @@ export type GameType = {
 export type ReviewType = {
   id?: number;
   createdAt?: string;
-  // ovo iznad prisma napravi
   gameId?: number;
-  // 
   content: string;
   rating: number | null;
   userId:number

@@ -50,7 +50,7 @@
         size="big"
         @click="seeGameDetails(id)"
       >
-        <template #content>Details</template>
+        Details
       </ActionButton>
     </div>
   </section>

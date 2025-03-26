@@ -8,7 +8,7 @@
       buttonSize[props.size],
     ]"
   >
-    <slot name="content" />
+    <slot />
   </button>
 </template>
 

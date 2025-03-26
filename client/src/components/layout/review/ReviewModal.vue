@@ -49,7 +49,7 @@
         class="self-end"
         :disabled="!allFieldsCompleted"
       >
-        <template #content> SEND REVIEW </template>
+        SEND REVIEW
       </ActionButton>
     </div>
   </form>
