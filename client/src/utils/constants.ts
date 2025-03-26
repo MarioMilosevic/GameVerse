@@ -49,3 +49,5 @@ export const signUpInputs = [
 ];
 
 export const emptyStarsArray = new Array(10).fill("empty");
+
+export const storageThemeName = 'gameVerse-theme'

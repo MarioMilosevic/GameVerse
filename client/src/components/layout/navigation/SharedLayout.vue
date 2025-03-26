@@ -11,7 +11,7 @@
 
     <div
       v-if="user.id"
-      class="relative flex items-center -bottom-4 pb-6 gap-4 group"
+      class="relative flex items-center -bottom-4 pb-6 gap-6 group"
     >
       <BaseIcon size="big" class="cursor-pointer">
         <MoonIcon />
@@ -20,8 +20,10 @@
       <h1 class="text-2xl">{{ firstName }}</h1>
 
       <NavigationMenu
-        class="absolute bottom-0 left-0 translate-y-full scale-y-0 opacity-0 origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
+        class="absolute bottom-0 left-0 translate-y-full origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
+        :theme="theme"
         @sign-out-event="signOutHandler"
+        @toggle-theme-event="handleTheme"
       />
     </div>
     <div class="flex gap-4 items-center" v-else>
@@ -46,9 +48,18 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
-import { ref, computed } from "vue";
+import { ref, computed, PropType } from "vue";
 
 const { user, resetUser } = useGetUserStore();
+
+defineProps({
+  theme: {
+    type: String as PropType<"light" | "dark">,
+    required: true,
+  },
+});
+
+const emits = defineEmits(['toggle-theme-event'])
 
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];
@@ -70,4 +81,10 @@ const signOutHandler = () => {
   signOut(router, user.value);
   resetUser();
 };
+
+const handleTheme = (darkMode:boolean) => {
+  emits('toggle-theme-event', darkMode)
+}
+
+
 </script>
