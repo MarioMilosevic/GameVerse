@@ -8,7 +8,7 @@
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import SharedLayout from "src/components/layout/navigation/SharedLayout.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import {storageThemeName} from 'src/utils/constants'; 
+import { storageThemeName } from "src/utils/constants";
 import { ref, onBeforeMount } from "vue";
 
 type theme = "light" | "dark";
@@ -18,18 +18,27 @@ const theme = ref<theme>("light");
 
 onBeforeMount(() => {
   const savedTheme = localStorage.getItem(storageThemeName);
-  if (!savedTheme) {
-    localStorage.setItem(storageThemeName, theme.value);
-  } else {
+  if (savedTheme) {
     theme.value = savedTheme === "dark" ? "dark" : "light";
+  } else {
+    localStorage.setItem(storageThemeName, theme.value);
   }
-  document.documentElement.classList.toggle("dark", savedTheme === "dark");
+  if (theme.value === "dark" && savedTheme) {
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
 });
 
 const handleTheme = (darkMode: boolean) => {
-  const newTheme = darkMode ? 'dark' : 'light'
-  theme.value = newTheme
-  localStorage.setItem(storageThemeName, theme.value)
-  document.documentElement.classList.toggle('dark', newTheme === 'dark')
+  const newTheme = darkMode ? "dark" : "light";
+  theme.value = newTheme;
+  console.log(theme.value);
+  localStorage.setItem(storageThemeName, theme.value);
+  if (darkMode) {
+    document.documentElement.setAttribute("data-theme", "dark");
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
 };
 </script>
