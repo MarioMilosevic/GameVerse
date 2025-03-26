@@ -6,7 +6,25 @@
       <img src="/game-controller.png" />
       <h1 class="text-2xl">GameVerse</h1>
     </RouterLink>
-    <div class="flex gap-4 items-center" v-if="!user.id">
+
+    <!--  -->
+
+    <div
+      v-if="user.id"
+      class="relative flex items-center -bottom-4 pb-6 gap-4 group"
+    >
+      <BaseIcon size="big" class="cursor-pointer">
+        <MoonIcon />
+      </BaseIcon>
+      <img :src="user.image" :alt="user.image" class="h-[50px]" />
+      <h1 class="text-2xl">{{ firstName }}</h1>
+
+      <NavigationMenu
+        class="absolute bottom-0 left-0 translate-y-full scale-y-0 opacity-0 origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
+        @sign-out-event="signOutHandler"
+      />
+    </div>
+    <div class="flex gap-4 items-center" v-else>
       <ActionButton
         v-for="(page, index) in authPages"
         :color="selectedPage === index ? 'lightRed' : 'transparent'"
@@ -15,18 +33,6 @@
       >
         {{ page }}
       </ActionButton>
-    </div>
-
-    <div v-else class="h-[50px] flex gap-4 items-center relative border">
-      <BaseIcon size="big" :style="{ cursor: 'pointer' }">
-        <MoonIcon />
-      </BaseIcon>
-      <img :src="user.image" :alt="user.image" class="h-full" />
-      <h1 class="text-2xl">{{ firstName }}</h1>
-      <NavigationMenu
-        class="absolute -bottom-6 translate-y-full left-0"
-        @sign-out-event="signOut(router, user)"
-      />
     </div>
   </nav>
 </template>
@@ -42,9 +48,7 @@ import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 
-const { user } = useGetUserStore();
-
-const isNavigationBarOpen = ref<boolean>(true);
+const { user, resetUser } = useGetUserStore();
 
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];
@@ -62,7 +66,8 @@ const pageHandler = (index: number) => {
   selectedPage.value = index;
 };
 
-const openModal = () => {
-  console.log("radi");
+const signOutHandler = () => {
+  signOut(router, user.value);
+  resetUser();
 };
 </script>

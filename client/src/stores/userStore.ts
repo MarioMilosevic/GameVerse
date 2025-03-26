@@ -6,6 +6,7 @@ const emptyUser: UserType = {
   id: 0,
   fullName: "",
   image: "",
+  createdDate:"",
   role: "USER",
   email: "",
 };
@@ -18,8 +19,13 @@ export const useUserStore = defineStore("userStore", () => {
     user.value = newUser;
   }
 
+  function resetUser() {
+    user.value = emptyUser
+  }
+
   return {
     user,
     setUser,
+    resetUser
   };
 });
