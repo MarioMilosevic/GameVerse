@@ -1,25 +1,48 @@
-import { LoginCredentialsType, SignUpCredentialsType } from "src/utils/types";
+import {
+  LoginCredentialsType,
+  SignUpCredentialsType,
+  UserType,
+} from "src/utils/types";
 import { baseUrl } from "src/utils/constants";
-
+import { Router } from "vue-router";
+import { showToast } from "src/utils/toast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
   try {
     const response = await fetch(`${baseUrl}/users/${endpoint}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type':"application/json"
+        "Content-Type": "application/json",
       },
-      body:JSON.stringify(data)
-    })
-    return await response.json()
+      body: JSON.stringify(data),
+    });
+    return await response.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
-export const createUser = (newUser: SignUpCredentialsType) => fetchAuth('sign-up', newUser)
+export const createUser = (newUser: SignUpCredentialsType) =>
+  fetchAuth("sign-up", newUser);
 
-export const loginUser = (user:LoginCredentialsType) => fetchAuth('login', user)
+export const loginUser = (user: LoginCredentialsType) =>
+  fetchAuth("login", user);
+
+export const signOut = (router: Router, user: UserType) => {
+  router.push("/login");
+  localStorage.removeItem("gameVerse-token");
+  const firstName = user.fullName.split(" ")[0];
+  setTimeout(() => {
+    showToast(`${firstName} signed out`);
+  }, 500);
+  if (user.role === "GUEST" && user.id) {
+    try {
+      // da se izbrise guest user iz baze
+    } catch (error) {
+      console.error(error);
+    }
+  }
+};
 
 export const getUserData = async (token: string) => {
   try {

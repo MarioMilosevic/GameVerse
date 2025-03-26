@@ -13,7 +13,7 @@
         :key="page"
         @click="pageHandler(index)"
       >
-          {{ page }}
+        {{ page }}
       </ActionButton>
     </div>
 
@@ -23,18 +23,22 @@
       </BaseIcon>
       <img :src="user.image" :alt="user.image" class="h-full" />
       <h1 class="text-2xl">{{ firstName }}</h1>
-      <NavigationMenu class="absolute -bottom-6 translate-y-full left-0" @sign-out-event="signOutHandler"/>
+      <NavigationMenu
+        class="absolute -bottom-6 translate-y-full left-0"
+        @sign-out-event="signOut(router, user)"
+      />
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/buttons/ActionButton.vue"
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import NavigationMenu from "src/components/layout/navigation/NavigationMenu.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 // import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
+import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { ref, computed } from "vue";
 
@@ -59,10 +63,6 @@ const pageHandler = (index: number) => {
 };
 
 const openModal = () => {
-  console.log('radi')
-}
-
-const signOutHandler = () => {
-  console.log('radi')
-}
+  console.log("radi");
+};
 </script>
