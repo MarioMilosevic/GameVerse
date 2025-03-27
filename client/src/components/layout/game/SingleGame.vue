@@ -19,7 +19,9 @@
         <div class="col-start-2 col-end-3 flex flex-col justify-between">
           <p>{{ description }}</p>
           <div class="flex flex-col gap-2 text-justify">
-            <GameInfo class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1">
+            <GameInfo
+              class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1"
+            >
               <template #title> Writers: </template>
               <template #content>
                 <p>
@@ -59,10 +61,15 @@
               :image="obj.console.image"
             />
           </ConsoleWrapper>
+          <div class="flex items-center gap-2">
+            <BaseIcon>
+              <StarIcon />
+            </BaseIcon>
+            <h3>Rated 9/10</h3>
+          </div>
         </div>
       </template>
     </SectionComponent>
-
 
     <SectionComponent>
       <template #main>
@@ -132,6 +139,8 @@ import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
 import { GameType, ReviewType } from "src/utils/types";
+import BaseIcon from "src/icons/BaseIcon.vue";
+import StarIcon from "src/icons/StarIcon.vue";
 
 const props = defineProps({
   singleGame: {
@@ -140,7 +149,7 @@ const props = defineProps({
   },
 });
 
-const {singleGame} = props
+const { singleGame } = props;
 
 const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false);

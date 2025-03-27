@@ -1,7 +1,7 @@
 <template>
   <section class="max-w-[300px] flex flex-col gap-2 relative">
     <img
-      :src="game.thumbnail"
+      :src="thumbnail"
       class="w-full h-[300px] object-cover rounded-xl"
     />
     <div class="flex flex-col gap-4">
@@ -18,7 +18,7 @@
           <template #icon>
             <StarIcon />
           </template>
-          <template #value>9.6</template>
+          <template #value>{{ rating }}</template>
           <template #name>rating</template>
         </GameStat>
         <GameStat>
@@ -38,7 +38,7 @@
       <p>Available on:</p>
       <ConsoleWrapper>
         <ConsoleComponent
-          v-for="obj in game.consoles"
+          v-for="obj in consoles"
           :key="obj.console.id"
           :image="obj.console.image"
         />
@@ -74,7 +74,7 @@ const props = defineProps({
   },
 });
 
-const { name, releaseYear, price, gameplayHours, id } = props.game;
+const { name, releaseYear, price, gameplayHours, id, thumbnail, consoles, rating } = props.game;
 const router = useRouter();
 
 const seeGameDetails = (id: number) => {

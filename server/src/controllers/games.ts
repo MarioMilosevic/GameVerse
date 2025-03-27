@@ -27,6 +27,11 @@ export default {
               },
             },
           },
+          reviews: {
+            select: {
+              rating: true,
+            },
+          },
         },
       });
 
@@ -34,7 +39,26 @@ export default {
         errorFactory.badRequest(res);
         return;
       }
-      sucessFactory.ok(res, games);
+
+      const gamesWithAvgRating = await Promise.all(
+        games.map(async (game) => {
+          const ratingAggregation = await prisma.review.aggregate({
+            where: { gameId: game.id },
+            _avg: {
+              rating: true,
+            },
+          });
+
+          const avgRating = ratingAggregation._avg.rating?.toFixed(2) || 0;
+
+          return {
+            ...game,
+            rating: avgRating,
+          };
+        })
+      );
+
+      sucessFactory.ok(res, gamesWithAvgRating);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -46,13 +70,13 @@ export default {
         include: {
           reviews: {
             select: {
-              id:true,
+              id: true,
               content: true,
               createdAt: true,
-              rating:true,
+              rating: true,
               user: {
                 select: {
-                  createdDate:true,
+                  createdDate: true,
                   id: true,
                   fullName: true,
                   image: true,
@@ -84,6 +108,20 @@ export default {
         errorFactory.notFound(res);
         return;
       }
+
+      const rating = await prisma.game.aggregate({
+        _avg: {
+          rating: true,
+        },
+      });
+
+      const totalRatings = singleGame.reviews.length;
+      const totalRatingValue = singleGame.reviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
+      const averageRating = totalRatingValue / totalRatings;
+      singleGame.rating = averageRating;
       sucessFactory.ok(res, singleGame);
     } catch (error) {
       errorFactory.internalError(res);
