@@ -8,18 +8,17 @@
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import SharedLayout from "src/components/layout/navigation/SharedLayout.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
+import useTheme from "src/composables/useTheme";
 import { storageThemeName } from "src/utils/constants";
-import { ref, onBeforeMount } from "vue";
-
-type theme = "light" | "dark";
+import { onBeforeMount } from "vue";
 
 const { loading } = useGetLoadingStore();
-const theme = ref<theme>("light");
+const { theme, setTheme } = useTheme();
 
 onBeforeMount(() => {
   const savedTheme = localStorage.getItem(storageThemeName);
   if (savedTheme) {
-    theme.value = savedTheme === "dark" ? "dark" : "light";
+    setTheme(savedTheme === "dark" ? "dark" : "light");
   } else {
     localStorage.setItem(storageThemeName, theme.value);
   }
@@ -32,8 +31,7 @@ onBeforeMount(() => {
 
 const handleTheme = (darkMode: boolean) => {
   const newTheme = darkMode ? "dark" : "light";
-  theme.value = newTheme;
-  console.log(theme.value);
+  setTheme(newTheme);
   localStorage.setItem(storageThemeName, theme.value);
   if (darkMode) {
     document.documentElement.setAttribute("data-theme", "dark");

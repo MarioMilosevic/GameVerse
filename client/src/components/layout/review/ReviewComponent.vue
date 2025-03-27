@@ -17,7 +17,7 @@
           :key="index"
           animation="pulse"
           speed="slow"
-          fill="red"
+          :fill="theme === 'light' ? 'blue' : 'red'"
           :name="
             star === 'full'
               ? 'bi-star-fill'
@@ -28,7 +28,7 @@
         />
       </div>
       <p>
-        <span> {{rating}}/10 </span>
+        <span> {{ rating }}/10 </span>
         - Reviewed on {{ formattedDate(createdAt as string) }}
       </p>
     </div>
@@ -40,6 +40,7 @@
 import { ReviewType } from "src/utils/types";
 import { PropType } from "vue";
 import { formattedDate } from "src/utils/helpers";
+import useTheme from "src/composables/useTheme";
 
 const props = defineProps({
   review: {
@@ -48,6 +49,7 @@ const props = defineProps({
   },
 });
 
+const { theme } = useTheme();
 
 const {
   content,

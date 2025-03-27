@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="flex flex-col mt-8 gap-2 list-none bg-slate-700 z-20 w-full rounded-md transition-all duration-300"
+    class="flex flex-col mt-8 gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-md transition-all duration-300"
   >
     <NavigationLink>
       <v-icon name="md-dashboardcustomize" />

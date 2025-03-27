@@ -3,7 +3,7 @@
     <img
       :src="singleGame.thumbnail"
       :alt="singleGame.thumbnail"
-      class="w-full max-h-screen object-cover opacity-50"
+      class="w-full max-h-screen object-cover opacity-90 dark:opacity-50"
     />
     <SectionComponent>
       <template #title>
@@ -19,7 +19,7 @@
         <div class="col-start-2 col-end-3 flex flex-col justify-between">
           <p>{{ description }}</p>
           <div class="flex flex-col gap-2 text-justify">
-            <GameInfo class="border-t border-t-dark-dark-red pt-1">
+            <GameInfo class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1">
               <template #title> Writers: </template>
               <template #content>
                 <p>
@@ -52,15 +52,13 @@
         </div>
         <div class="flex items-center gap-6">
           <h3>Available on:</h3>
-          <figure
-            class="flex justify-center gap-2 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
-          >
+          <ConsoleWrapper>
             <ConsoleComponent
               v-for="obj in consoles"
               :key="obj.console.id"
               :image="obj.console.image"
             />
-          </figure>
+          </ConsoleWrapper>
         </div>
       </template>
     </SectionComponent>
@@ -129,6 +127,7 @@ import GameImageModal from "src/components/layout/game/GameImageModal.vue";
 import ReviewModal from "src/components/layout/review/ReviewModal.vue";
 import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
 import ModalComponent from "src/components/layout/others/ModalComponent.vue";
+import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 import YouTube from "vue3-youtube";
 import { PropType, useTemplateRef, ref } from "vue";
 import { GameType, ReviewType } from "src/utils/types";

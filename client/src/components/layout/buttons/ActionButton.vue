@@ -3,7 +3,7 @@
     :type="props.type"
     :disabled="props.disabled"
     :class="[
-      'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1 disabled:bg-gray-500 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
+      'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1 dark:disabled:bg-gray-500 disabled:bg-gray-600 disabled:text-gray-100 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
       colorOptions[props.color],
       buttonSize[props.size],
     ]"
@@ -17,9 +17,9 @@ import { PropType } from "vue";
 
 const colorOptions = {
   transparent: "bg-transparent ring-1 ring-slate-100",
-  lightRed: "bg-red-600 hover:bg-dark-dark-red",
-  red: "bg-dark-deep-red hover:bg-dark-dark-red",
-  darkRed: "bg-dark-dark-red",
+  primary: "bg-sky-400 hover:bg-sky-500 dark:bg-red-600 dark:hover:bg-dark-dark-red",
+  red: "dark:bg-dark-deep-red dark:hover:bg-dark-dark-red",
+  darkRed: "dark:bg-dark-dark-red",
 };
 
 const buttonSize = {
@@ -34,7 +34,7 @@ type ColorType = keyof typeof colorOptions;
 const props = defineProps({
   color: {
     type: String as PropType<ColorType>,
-    default: "lightRed",
+    default: "primary",
   },
   size: {
     type: String as PropType<SizeType>,

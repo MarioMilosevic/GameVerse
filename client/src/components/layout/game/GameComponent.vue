@@ -36,15 +36,13 @@
         </GameStat>
       </div>
       <p>Available on:</p>
-      <figure
-        class="flex justify-center gap-1 bg-dark-dark-red px-2 py-1 rounded-2xl self-start"
-      >
+      <ConsoleWrapper>
         <ConsoleComponent
           v-for="obj in game.consoles"
           :key="obj.console.id"
           :image="obj.console.image"
         />
-      </figure>
+      </ConsoleWrapper>
       <ActionButton
         class="absolute bottom-0 right-0"
         size="big"
@@ -67,6 +65,7 @@ import CalendarIcon from "src/icons/CalendarIcon.vue";
 import GameStat from "src/components/layout/game/GameStat.vue";
 import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 
 const props = defineProps({
   game: {

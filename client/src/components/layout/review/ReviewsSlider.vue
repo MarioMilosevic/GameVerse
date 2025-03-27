@@ -2,7 +2,7 @@
   <article
     class="relative px-4 flex flex-col justify-between overflow-x-hidden"
   >
-    <h2 class="uppercase text-red-600 text-center text-3xl">Reviews</h2>
+    <h2 class="uppercase text-sky-500 dark:text-red-600 text-center text-3xl">Reviews</h2>
     <ReviewComponent
       v-for="(review, index) in props.reviews"
       :key="review.id"

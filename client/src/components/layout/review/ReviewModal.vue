@@ -1,6 +1,6 @@
 <template>
   <form
-    class="bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl"
+    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl"
     @submit.prevent="submitReviewHandler"
   >
     <BaseIcon
@@ -18,7 +18,7 @@
         :scale="scale(5, 0.2)"
       />
       <h1
-        class="text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
+        class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         :style="{ scale: scale(1, 0.02) }"
       >
         {{ gameReview.rating ?? "?" }}
@@ -26,7 +26,7 @@
     </div>
 
     <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
-      <p class="text-red-500">RATE THIS</p>
+      <p class="text-sky-500 dark:text-red-500">RATE THIS</p>
       <h2 class="text-xl">{{ props.name }}</h2>
       <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
         <v-icon
