@@ -49,7 +49,7 @@ export default {
             },
           });
 
-          const avgRating = ratingAggregation._avg.rating?.toFixed(2) || 0;
+          const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
 
           return {
             ...game,
@@ -109,20 +109,21 @@ export default {
         return;
       }
 
-      const rating = await prisma.game.aggregate({
+      const ratingAggregation = await prisma.review.aggregate({
+        where: { gameId: singleGame.id },
         _avg: {
           rating: true,
         },
       });
 
-      const totalRatings = singleGame.reviews.length;
-      const totalRatingValue = singleGame.reviews.reduce(
-        (acc, review) => acc + review.rating,
-        0
-      );
-      const averageRating = totalRatingValue / totalRatings;
-      singleGame.rating = averageRating;
-      sucessFactory.ok(res, singleGame);
+      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0
+
+      const updatedGame = {
+        ...singleGame,
+        rating:avgRating
+      }
+
+      sucessFactory.ok(res, updatedGame);
     } catch (error) {
       errorFactory.internalError(res);
     }

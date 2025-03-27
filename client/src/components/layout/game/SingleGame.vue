@@ -65,7 +65,7 @@
             <BaseIcon>
               <StarIcon />
             </BaseIcon>
-            <h3>Rated 9/10</h3>
+            <h3>Rated {{ singleGame.rating }}/10</h3>
           </div>
         </div>
       </template>
