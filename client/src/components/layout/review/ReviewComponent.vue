@@ -1,7 +1,12 @@
-<template>
+<!-- 
   <div
     class="flex flex-col pl-12 gap-2 absolute top-10 right-1/2 translate-x-1/2 w-full overflow-y-auto transition-all duration-300"
-  >
+  > 
+-->
+<template>
+   <div
+    class="flex flex-col pl-12 gap-2 absolute top-10 right-1/2 translate-x-1/2 w-full overflow-y-auto transition-all duration-300"
+  > 
     <div class="flex items-end gap-2">
       <fieldset class="h-[50px] w-[50px]">
         <img :src="image" class="h-full" />
@@ -16,7 +21,6 @@
           v-for="(star, index) in createStarsArray(rating as number)"
           :key="index"
           animation="pulse"
-          speed="slow"
           :fill="theme === 'light' ? 'blue' : 'red'"
           :name="
             star === 'full'
@@ -32,7 +36,7 @@
         - Reviewed on {{ formattedDate(createdAt as string) }}
       </p>
     </div>
-    <p>{{ content }}</p>
+    <p class="pl-2 w-[92%]">{{ content }}</p>
   </div>
 </template>
 

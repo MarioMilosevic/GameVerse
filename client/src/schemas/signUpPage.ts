@@ -8,9 +8,15 @@ export const signUpSchema = z
       .min(5, {
         message: "Must be at least 5 character(s)",
       })
-      .includes(" ", {
-        message: "Must contain at least 2 words",
-      }),
+      .refine(
+        (value) => {
+          const names = value.trim().split(" ");
+          return names.length >= 2 && names[1].length >= 2;
+        },
+        {
+          message: "Last name must have at least 2 characters",
+        }
+      ),
     email: z.string().email(),
   })
   .extend({

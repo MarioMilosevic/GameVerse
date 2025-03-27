@@ -1,6 +1,6 @@
 <template>
   <article
-    class="relative px-4 flex flex-col justify-between overflow-x-hidden"
+    class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[330px]"
   >
     <h2 class="uppercase text-sky-500 dark:text-red-600 text-center text-3xl">Reviews</h2>
     <ReviewComponent

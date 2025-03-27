@@ -63,6 +63,7 @@
       </template>
     </SectionComponent>
 
+
     <SectionComponent>
       <template #main>
         <fieldset class="grid grid-cols-3 col-start-1 col-end-2 gap-4">
@@ -138,6 +139,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const {singleGame} = props
 
 const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false);

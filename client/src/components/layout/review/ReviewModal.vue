@@ -16,6 +16,7 @@
         class="transform absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         name="bi-star-fill"
         :scale="scale(5, 0.2)"
+        
       />
       <h1
         class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
@@ -42,7 +43,7 @@
       <FormTextarea
         v-model="gameReview.content"
         placeholder="Your thoughts..."
-        :max-characters="200"
+        :max-characters="300"
       />
       <ActionButton
         type="submit"
@@ -66,6 +67,7 @@ import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
+import { showToast } from "src/utils/toast";
 
 const props = defineProps({
   rating: {
@@ -132,15 +134,25 @@ const fillStars = (index: number) => {
 };
 
 const submitReviewHandler = async () => {
-  if (user.value.id) {
-    const review = {
-      userId: user.value.id,
-      gameId: props.gameId,
-      rating: gameReview.value.rating,
-      content: gameReview.value.content,
-    };
-    const { data } = await createReview(review as ReviewType);
-    emits("submit-event", data);
+  try {
+    if (user.value.id) {
+      const review = {
+        userId: user.value.id,
+        gameId: props.gameId,
+        rating: gameReview.value.rating,
+        content: gameReview.value.content,
+      };
+      const { data, message } = await createReview(review as ReviewType);
+      if (data) {
+        emits("submit-event", data);
+        showToast("Review successfully created");
+      } else {
+        showToast(message, "error");
+        emits("close-modal-event");
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 </script>

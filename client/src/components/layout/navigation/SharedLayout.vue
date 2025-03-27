@@ -11,9 +11,9 @@
       v-if="user.id"
       class="relative flex items-center -bottom-4 pb-6 gap-6 group"
     >
-      <BaseIcon size="big" class="cursor-pointer">
-        <MoonIcon v-if="theme === 'dark'"/>
-        <SunIcon v-else/>
+      <BaseIcon size="big">
+        <MoonIcon v-if="theme === 'dark'" />
+        <SunIcon v-else />
       </BaseIcon>
       <img :src="user.image" :alt="user.image" class="h-[50px]" />
       <h1 class="text-2xl">{{ firstName }}</h1>
@@ -47,7 +47,7 @@ import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
-import { ref, computed, PropType } from "vue";
+import { computed, PropType } from "vue";
 
 const { user, resetUser } = useGetUserStore();
 
@@ -69,11 +69,13 @@ const authRoutes = ["/login", "/sign-up"];
 
 const router = useRouter();
 
-const selectedPage = ref<number>(0);
+const selectedPage = computed(() => {
+  if (router.currentRoute.value.fullPath === "/login") return 0;
+  if (router.currentRoute.value.fullPath === "/sign-up") return 1;
+});
 
 const pageHandler = (index: number) => {
   router.push(authRoutes[index]);
-  selectedPage.value = index;
 };
 
 const signOutHandler = () => {
