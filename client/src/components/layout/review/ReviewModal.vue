@@ -16,7 +16,6 @@
         class="transform absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         name="bi-star-fill"
         :scale="scale(5, 0.2)"
-        
       />
       <h1
         class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
@@ -62,7 +61,7 @@ import XIcon from "src/icons/XIcon.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import { ref, computed } from "vue";
+import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
@@ -70,10 +69,6 @@ import { createReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
 
 const props = defineProps({
-  rating: {
-    type: Number,
-    required: false,
-  },
   content: {
     type: String,
     required: false,
@@ -86,13 +81,19 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  userReview: {
+    type: Object as PropType<ReviewType | undefined>,
+    required: true,
+  },
 });
+
+console.log(props.userReview);
 
 const { user } = useGetUserStore();
 
 const gameReview = ref<GameReviewType>({
-  rating: props.rating ?? null,
-  content: props.content ?? "",
+  rating: props.userReview?.rating ?? null,
+  content: props.userReview?.content ?? "",
 });
 
 const allFieldsCompleted = computed(() => {
@@ -106,7 +107,17 @@ const scale = (scale: number, increment: number) => {
   return scale;
 };
 
+const fillStars = (index: number, length: number = 10) => {
+  for (let i = 0; i < length; i++) {
+    starsArray.value[i] = i <= index ? "fill" : "empty";
+  }
+};
+
 const starsArray = ref<string[]>([...emptyStarsArray]);
+
+if (props.userReview?.rating) {
+  fillStars(props.userReview.rating - 1);
+}
 
 const emits = defineEmits(["close-modal-event", "submit-event"]);
 
@@ -120,16 +131,10 @@ const mouseEnterHandler = (rating: number) => {
 };
 
 const mouseLeaveHandler = () => {
-  if (!gameReview.value.rating) {
+  if (!props.userReview?.rating) {
     starsArray.value = [...emptyStarsArray];
   } else {
-    fillStars(gameReview.value.rating - 1);
-  }
-};
-
-const fillStars = (index: number) => {
-  for (let i = 0; i < starsArray.value.length; i++) {
-    starsArray.value[i] = i <= index ? "fill" : "empty";
+    fillStars(props.userReview.rating - 1);
   }
 };
 

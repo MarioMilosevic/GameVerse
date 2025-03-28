@@ -9,7 +9,7 @@
 
     <div
       v-if="user.id"
-      class="relative flex items-center -bottom-4 pb-6 gap-6 group"
+      class="relative flex items-center -bottom-4 pb-6 gap-6 group min-w-[195px]"
     >
       <BaseIcon size="big">
         <MoonIcon v-if="theme === 'dark'" />

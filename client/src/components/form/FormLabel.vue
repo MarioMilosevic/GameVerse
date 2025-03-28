@@ -1,11 +1,11 @@
 <template>
-  <label :for="props.id" class="relative w-full h-full rounded-md">
+  <label :for="id" class="relative w-full h-full rounded-md">
     <slot />
   </label>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   id: {
     type: String,
     required: true,

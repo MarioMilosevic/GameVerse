@@ -14,6 +14,7 @@
           <template #value>{{ gameplayHours }}</template>
           <template #name>hours</template>
         </GameStat>
+        
         <GameStat>
           <template #icon>
             <StarIcon />

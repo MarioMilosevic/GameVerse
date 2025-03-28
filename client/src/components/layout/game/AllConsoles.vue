@@ -2,7 +2,7 @@
   <figure class="border border-purple">
     <img
       class="w-[30px]"
-      v-for="image in props.consoles"
+      v-for="image in consoles"
       :src="image.console.image"
       :alt="image.console.image"
     />
@@ -17,9 +17,8 @@ type ConsoleType = {
 };
 
 import { PropType } from "vue";
-import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
 
-const props = defineProps({
+defineProps({
   consoles: {
     type: Array as PropType<ConsoleType[]>,
     required: true,

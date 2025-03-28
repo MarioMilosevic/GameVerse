@@ -1,11 +1,11 @@
 <template>
   <button
-    :type="props.type"
-    :disabled="props.disabled"
+    :type="type"
+    :disabled="disabled"
     :class="[
       'rounded-3xl cursor-pointer transition-all duration-300 hover:transform hover:-translate-y-1 dark:disabled:bg-gray-500 disabled:bg-gray-600 disabled:text-gray-100 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
-      colorOptions[props.color],
-      buttonSize[props.size],
+      colorOptions[color],
+      buttonSize[size],
     ]"
   >
     <slot />
@@ -31,7 +31,7 @@ const buttonSize = {
 type SizeType = keyof typeof buttonSize;
 type ColorType = keyof typeof colorOptions;
 
-const props = defineProps({
+defineProps({
   color: {
     type: String as PropType<ColorType>,
     default: "primary",

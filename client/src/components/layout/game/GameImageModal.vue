@@ -1,6 +1,6 @@
 <template>
   <button
-    class="absolute -top-11 right-0 border bg-sky-500 hover:bg-sky-600 hover:scale-105 dark:border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 dark:hover:border-slate-50 hover:border dark:hover:bg-slate-950"
+    class="absolute -top-11 right-0 border bg-sky-500 hover:bg-sky-600 dark:bg-transparent hover:scale-105 dark:border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 dark:hover:border-slate-50 hover:border dark:hover:bg-slate-950"
     @click="emits('close-modal-event')"
   >
     <p>Close</p>
@@ -17,11 +17,11 @@
   </SliderButton>
   <fieldset class="w-full h-full relative overflow-x-hidden">
     <img
-      v-for="(photo, index) in props.allPhotos"
+      v-for="(photo, index) in allPhotos"
       :src="photo"
       :alt="photo"
       class="rounded-xl w-full h-full absolute top-0 left-0 transition-all duration-500"
-      :style="{ transform: translateElement(index, props.selectedImageIndex) }"
+      :style="{ transform: translateElement(index, selectedImageIndex) }"
     />
   </fieldset>
   <SliderButton class="-right-16" @click="emits('next-event')">
@@ -42,7 +42,7 @@ import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
 import SliderButton from "src/components/layout/buttons/SliderButton.vue";
 
-const props = defineProps({
+defineProps({
   selectedImageIndex: {
     type: Number,
     required: true,
@@ -54,9 +54,4 @@ const props = defineProps({
 });
 
 const emits = defineEmits(["close-modal-event", "next-event", "prev-event"]);
-
-// const translateImage = (index: number) => {
-//   const calculation = 100 * (index - props.selectedImageIndex);
-//   return `translateX(${calculation}%)`;
-// };
 </script>

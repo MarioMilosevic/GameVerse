@@ -5,7 +5,7 @@
     :viewBox="viewBox"
     :stroke-width="strokeWidth"
     :stroke="stroke"
-    :class="[`icon-${props.size}`]"
+    :class="[`icon-${size}`]"
     :size="size"
     >
     <slot />
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   xmlns: {
     type: String,
     default: 'http://www.w3.org/2000/svg',

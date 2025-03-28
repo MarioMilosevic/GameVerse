@@ -65,7 +65,10 @@
             <BaseIcon>
               <StarIcon />
             </BaseIcon>
-            <h3>Rated {{ singleGame.rating }}/10</h3>
+            <h3>
+              Rated
+              <span class="font-semibold"> {{ singleGame.rating }} </span>/10
+            </h3>
           </div>
         </div>
       </template>
@@ -116,7 +119,7 @@
               @submit-event="submitModalHandler"
               :name="name"
               :game-id="singleGame.id"
-              :reviews="reviews"
+              :user-review="userReview"
             />
           </template>
         </ModalComponent>
@@ -137,10 +140,11 @@ import OverlayComponent from "src/components/layout/others/OverlayComponent.vue"
 import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 import YouTube from "vue3-youtube";
-import { PropType, useTemplateRef, ref } from "vue";
-import { GameType, ReviewType } from "src/utils/types";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import StarIcon from "src/icons/StarIcon.vue";
+import useGetUserStore from "src/composables/useGetUserStore";
+import { GameType, ReviewType } from "src/utils/types";
+import { PropType, useTemplateRef, ref, computed } from "vue";
 
 const props = defineProps({
   singleGame: {
@@ -149,11 +153,9 @@ const props = defineProps({
   },
 });
 
-const { singleGame } = props;
+const { user } = useGetUserStore();
 
-const isGameImageModalOpen = ref<boolean>(false);
-const isReviewModalOpen = ref<boolean>(false);
-const selectedImageIndex = ref<number>(0);
+const { singleGame } = props;
 
 const {
   name,
@@ -166,6 +168,16 @@ const {
   consoles,
   reviews,
 } = props.singleGame;
+
+const userReview = computed(() => {
+  return reviews.find((review) => review.user.id === user.value.id)
+})
+
+const isGameImageModalOpen = ref<boolean>(false);
+const isReviewModalOpen = ref<boolean>(false);
+const selectedImageIndex = ref<number>(0);
+
+
 
 const emits = defineEmits(["review-event"]);
 

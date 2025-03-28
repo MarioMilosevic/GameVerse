@@ -3,30 +3,48 @@
     class="flex flex-col mt-8 gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-md transition-all duration-300"
   >
     <NavigationLink>
-      <v-icon name="md-dashboardcustomize" />
-      Dashboard</NavigationLink
-    >
-    <NavigationLink>
-      <v-icon name="md-accountbox" />
-      Account
+      <template #default>
+        <v-icon name="md-dashboardcustomize" />
+      </template>
+      <template #text> Dashboard </template>
     </NavigationLink>
+
     <NavigationLink>
-      <v-icon name="md-ratereview" />
-      My reviews
+      <template #default>
+        <v-icon name="md-accountbox" />
+      </template>
+      <template #text> Account </template>
     </NavigationLink>
+
     <NavigationLink>
-      <span class="flex items-center gap-1">
+      <template #default>
+        <v-icon name="md-ratereview" />
+      </template>
+      <template #text> My reviews </template>
+    </NavigationLink>
+
+    <NavigationLink>
+      <template #default>
         <v-icon name="co-moon" />
-        Dark mode
-        <ToggleSwitch
-          v-model="darkModeOn"
-          @update:model-value="handleDarkMode"
-        />
-      </span>
+      </template>
+
+      <template #text>
+        <span class="flex items-center gap-2">
+          Dark mode
+          <ToggleSwitch
+            v-model="darkModeOn"
+            @update:model-value="handleDarkMode"
+          />
+        </span>
+      </template>
     </NavigationLink>
+
     <NavigationLink @click="emits('sign-out-event')">
-      <v-icon name="gi-exit-door" />
-      Log out
+      <template #default>
+        <v-icon name="gi-exit-door" />
+      </template>
+
+      <template #text> Log out </template>
     </NavigationLink>
   </ul>
 </template>

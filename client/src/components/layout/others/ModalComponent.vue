@@ -2,7 +2,7 @@
   <div
     :class="[
       'fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20',
-      modalSize[props.size],
+      modalSize[size],
     ]"
   >
     <slot />
@@ -18,7 +18,7 @@ const modalSize = {
   big: "w-2/3 h-2/3",
 };
 
-const props = defineProps({
+defineProps({
   size: {
     type: String as PropType<"small" | "medium" | "big">,
     default: "medium",

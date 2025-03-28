@@ -3,12 +3,14 @@
     <BaseIcon size="medium">
       <slot name="icon" />
     </BaseIcon>
-    <h4>
-      <slot name="value" />
-    </h4>
-    <h4>
-      <slot name="name" />
-    </h4>
+    <div class="flex items-center gap-4 w-full">
+      <h4 class="font-semibold w-[40%]">
+        <slot name="value" />
+      </h4>
+      <span>
+        <slot name="name" />
+      </span>
+    </div>
   </div>
 </template>
 
