@@ -17,7 +17,6 @@
         name="bi-star-fill"
         :scale="scale(5, 0.2)"
       />
-      <!-- Ovo ispod je glavna ZVIJEZDA -->
       <h1
         class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         :style="{ scale: scale(1, 0.02) }"
@@ -31,17 +30,8 @@
         RATE THIS
       </p>
       <h2 class="text-xl">{{ props.name }}</h2>
+      <EditReview v-if="userReview?.id" :review="userReview" :stars-array="starsArray"/>
 
-      <!-- <RatingStars
-        :stars-array="starsArray"
-        @mouse-leave-event="mouseLeaveHandler"
-        @mouse-enter-event="mouseEnterHandler"
-        @click-event="ratingClickHandler"
-      /> -->
-
-      <!-- prvo ide ako imam review -->
-
-      <EditReview v-if="userReview?.id" />
       <AddReview
         v-else
         :all-fields-completed="allFieldsCompleted"
@@ -51,8 +41,6 @@
         @mouse-leave-event="mouseLeaveHandler"
         v-model="gameReview.content"
       />
-
-      <!-- ako nije bio rejting prije -->
     </div>
   </form>
 </template>
@@ -60,10 +48,7 @@
 <script setup lang="ts">
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
-import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import RatingStars from "src/components/layout/review/RatingStars.vue";
 import EditReview from "src/components/layout/review/EditReview.vue";
 import AddReview from "src/components/layout/review/AddReview.vue";
 import { ref, computed, PropType } from "vue";
@@ -92,21 +77,23 @@ const props = defineProps({
   },
 });
 
-console.log(props.userReview);
-
-// const clickEvent = (index: number) => {
-//   console.log("click event value", index);
-// };
-// const mouseEnterEvent = (index: number) => {
-//   console.log("mouse enter event value", index);
-// };
-// const mouseLeaveEvent = () => {
-//   console.log("leave event value");
-// };
-
 const { user } = useGetUserStore();
 
-const starsArray = ref<string[]>([...emptyStarsArray]);
+const fillStars = (index: number, length: number = 10) => {
+  const newStarsArr = [];
+  for (let i = 0; i < length; i++) {
+    const value = i <= index ? "fill" : "empty";
+    newStarsArr.push(value);
+  }
+  return newStarsArr;
+};
+
+const starsArray = ref<string[]>(
+  props.userReview?.rating
+    ? fillStars(props.userReview.rating - 1)
+    : [...emptyStarsArray]
+);
+
 
 const gameReview = ref<GameReviewType>({
   rating: props.userReview?.rating ?? null,
@@ -124,34 +111,25 @@ const scale = (scale: number, increment: number) => {
   return scale;
 };
 
-const fillStars = (index: number, length: number = 10) => {
-  for (let i = 0; i < length; i++) {
-    starsArray.value[i] = i <= index ? "fill" : "empty";
-  }
-};
-
-if (props.userReview?.rating) {
-  fillStars(props.userReview.rating - 1);
-}
-
 const emits = defineEmits(["close-modal-event", "submit-event"]);
 
 const ratingClickHandler = (rating: number) => {
-  fillStars(rating);
+  starsArray.value = fillStars(rating);
   gameReview.value.rating = rating + 1;
 };
 
 const mouseEnterHandler = (rating: number) => {
-  fillStars(rating);
+  starsArray.value = fillStars(rating);
 };
 
 const mouseLeaveHandler = () => {
   if (!gameReview.value.rating) {
     starsArray.value = [...emptyStarsArray];
   } else {
-    fillStars(gameReview.value.rating - 1);
+    starsArray.value = fillStars(gameReview.value.rating - 1);
   }
 };
+
 
 const submitReviewHandler = async () => {
   try {

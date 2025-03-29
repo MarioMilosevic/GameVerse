@@ -17,7 +17,7 @@
           class="col-start-1 col-end-2"
         />
         <div class="col-start-2 col-end-3 flex flex-col justify-between">
-          <p>{{ description }}</p>
+          <p class="text-justify">{{ description }}</p>
           <div class="flex flex-col gap-2 text-justify">
             <GameInfo
               class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1"
