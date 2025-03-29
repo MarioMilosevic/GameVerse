@@ -153,6 +153,8 @@ const props = defineProps({
   },
 });
 
+console.log('moram odje da provjerim singleGame jer je nekada undefined')
+
 const { user } = useGetUserStore();
 
 const { singleGame } = props;

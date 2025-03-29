@@ -17,18 +17,28 @@
         name="bi-star-fill"
         :scale="scale(5, 0.2)"
       />
+<!-- Ovo ispod je glavna ZVIJEZDA -->
       <h1
         class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         :style="{ scale: scale(1, 0.02) }"
       >
         {{ gameReview.rating ?? "?" }}
       </h1>
+
     </div>
 
     <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
       <p class="text-sky-500 dark:text-red-500">RATE THIS</p>
       <h2 class="text-xl">{{ props.name }}</h2>
-      <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
+
+      <RatingStars
+        :stars-array="starsArray"
+        @mouse-leave-event="mouseLeaveHandler"
+        @mouse-enter-event="mouseEnterHandler"
+        @click-event="ratingClickHandler"
+      />
+
+      <!-- <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
         <v-icon
           v-for="(star, index) in starsArray"
           class="cursor-pointer"
@@ -38,19 +48,29 @@
           @mouseenter="mouseEnterHandler(index)"
           @click="ratingClickHandler(index)"
         />
-      </div>
-      <FormTextarea
-        v-model="gameReview.content"
-        placeholder="Your thoughts..."
-        :max-characters="300"
-      />
-      <ActionButton
-        type="submit"
-        class="self-end"
-        :disabled="!allFieldsCompleted"
-      >
-        SEND REVIEW
-      </ActionButton>
+      </div> -->
+      <!--  -->
+
+      <template v-if="userReview?.id">
+        <p>Mario</p>
+      </template>
+
+      <!-- ako nije bio rejting prije -->
+
+      <template v-else>
+        <FormTextarea
+          v-model="gameReview.content"
+          placeholder="Your thoughts..."
+          :max-characters="300"
+        />
+        <ActionButton
+          type="submit"
+          class="self-end"
+          :disabled="!allFieldsCompleted"
+        >
+          SEND REVIEW
+        </ActionButton>
+      </template>
     </div>
   </form>
 </template>
@@ -61,6 +81,7 @@ import XIcon from "src/icons/XIcon.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
+import RatingStars from "src/components/layout/review/RatingStars.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType, ReviewType } from "src/utils/types";
@@ -91,6 +112,8 @@ console.log(props.userReview);
 
 const { user } = useGetUserStore();
 
+const starsArray = ref<string[]>([...emptyStarsArray]);
+
 const gameReview = ref<GameReviewType>({
   rating: props.userReview?.rating ?? null,
   content: props.userReview?.content ?? "",
@@ -113,8 +136,6 @@ const fillStars = (index: number, length: number = 10) => {
   }
 };
 
-const starsArray = ref<string[]>([...emptyStarsArray]);
-
 if (props.userReview?.rating) {
   fillStars(props.userReview.rating - 1);
 }
@@ -131,10 +152,10 @@ const mouseEnterHandler = (rating: number) => {
 };
 
 const mouseLeaveHandler = () => {
-  if (!props.userReview?.rating) {
+  if (!gameReview.value.rating) {
     starsArray.value = [...emptyStarsArray];
   } else {
-    fillStars(props.userReview.rating - 1);
+    fillStars(gameReview.value.rating - 1);
   }
 };
 
