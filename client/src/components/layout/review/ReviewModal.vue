@@ -17,60 +17,42 @@
         name="bi-star-fill"
         :scale="scale(5, 0.2)"
       />
-<!-- Ovo ispod je glavna ZVIJEZDA -->
+      <!-- Ovo ispod je glavna ZVIJEZDA -->
       <h1
         class="text-sky-500 dark:text-red-500 text-3xl absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         :style="{ scale: scale(1, 0.02) }"
       >
         {{ gameReview.rating ?? "?" }}
       </h1>
-
     </div>
 
     <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
-      <p class="text-sky-500 dark:text-red-500">RATE THIS</p>
+      <p v-if="!userReview?.id" class="text-sky-500 dark:text-red-500">
+        RATE THIS
+      </p>
       <h2 class="text-xl">{{ props.name }}</h2>
 
-      <RatingStars
+      <!-- <RatingStars
         :stars-array="starsArray"
         @mouse-leave-event="mouseLeaveHandler"
         @mouse-enter-event="mouseEnterHandler"
         @click-event="ratingClickHandler"
+      /> -->
+
+      <!-- prvo ide ako imam review -->
+
+      <EditReview v-if="userReview?.id" />
+      <AddReview
+        v-else
+        :all-fields-completed="allFieldsCompleted"
+        :stars-array="starsArray"
+        @click-event="ratingClickHandler"
+        @mouse-enter-event="mouseEnterHandler"
+        @mouse-leave-event="mouseLeaveHandler"
+        v-model="gameReview.content"
       />
 
-      <!-- <div class="flex items-center gap-1" @mouseleave="mouseLeaveHandler">
-        <v-icon
-          v-for="(star, index) in starsArray"
-          class="cursor-pointer"
-          :key="index"
-          scale="1.3"
-          :name="star === 'empty' ? 'bi-star' : 'bi-star-fill'"
-          @mouseenter="mouseEnterHandler(index)"
-          @click="ratingClickHandler(index)"
-        />
-      </div> -->
-      <!--  -->
-
-      <template v-if="userReview?.id">
-        <p>Mario</p>
-      </template>
-
       <!-- ako nije bio rejting prije -->
-
-      <template v-else>
-        <FormTextarea
-          v-model="gameReview.content"
-          placeholder="Your thoughts..."
-          :max-characters="300"
-        />
-        <ActionButton
-          type="submit"
-          class="self-end"
-          :disabled="!allFieldsCompleted"
-        >
-          SEND REVIEW
-        </ActionButton>
-      </template>
     </div>
   </form>
 </template>
@@ -82,6 +64,8 @@ import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import RatingStars from "src/components/layout/review/RatingStars.vue";
+import EditReview from "src/components/layout/review/EditReview.vue";
+import AddReview from "src/components/layout/review/AddReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType, ReviewType } from "src/utils/types";
@@ -109,6 +93,16 @@ const props = defineProps({
 });
 
 console.log(props.userReview);
+
+// const clickEvent = (index: number) => {
+//   console.log("click event value", index);
+// };
+// const mouseEnterEvent = (index: number) => {
+//   console.log("mouse enter event value", index);
+// };
+// const mouseLeaveEvent = () => {
+//   console.log("leave event value");
+// };
 
 const { user } = useGetUserStore();
 
