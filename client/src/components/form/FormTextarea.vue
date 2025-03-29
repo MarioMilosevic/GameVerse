@@ -13,7 +13,7 @@
 defineProps({
   maxCharacters: {
     type: Number,
-    default: 250,
+    default: 300,
   },
   modelValue: {
     type: String,
@@ -21,7 +21,7 @@ defineProps({
   },
   placeholder: {
     type: String,
-    required: true,
+    default: 'Your thoughts...',
   },
 });
 

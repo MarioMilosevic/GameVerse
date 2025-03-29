@@ -30,9 +30,13 @@
         RATE THIS
       </p>
       <h2 class="text-xl">{{ props.name }}</h2>
-      <EditReview v-if="userReview?.id" :review="userReview" :stars-array="starsArray"/>
+      <ExistingReview
+        v-if="userReview?.id"
+        :review="userReview"
+        :stars-array="starsArray"
+      />
 
-      <AddReview
+      <CreateReview
         v-else
         :all-fields-completed="allFieldsCompleted"
         :stars-array="starsArray"
@@ -49,8 +53,8 @@
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import EditReview from "src/components/layout/review/EditReview.vue";
-import AddReview from "src/components/layout/review/AddReview.vue";
+import ExistingReview from "src/components/layout/review/ExistingReview.vue";
+import CreateReview from "src/components/layout/review/CreateReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { GameReviewType, ReviewType } from "src/utils/types";
@@ -94,7 +98,6 @@ const starsArray = ref<string[]>(
     : [...emptyStarsArray]
 );
 
-
 const gameReview = ref<GameReviewType>({
   rating: props.userReview?.rating ?? null,
   content: props.userReview?.content ?? "",
@@ -129,7 +132,6 @@ const mouseLeaveHandler = () => {
     starsArray.value = fillStars(gameReview.value.rating - 1);
   }
 };
-
 
 const submitReviewHandler = async () => {
   try {

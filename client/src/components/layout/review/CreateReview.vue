@@ -7,8 +7,6 @@
   />
   <FormTextarea
     v-model="content"
-    placeholder="Your thoughts..."
-    :max-characters="300"
   />
   <ActionButton type="submit" class="self-end" :disabled="!allFieldsCompleted">
     SEND REVIEW
