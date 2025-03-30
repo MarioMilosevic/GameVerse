@@ -4,7 +4,7 @@
 <template>
   <RatingStars :stars-array="starsArray" :cursor-pointer="isEditing" />
 
-  <EditReview v-if="isEditing" v-model="review.content" @cancel-event="isEditing = false"/>
+  <EditReview v-if="isEditing" :content="review.content" @cancel-event="isEditing = false"/>
 
   <PreviewReview
     v-else

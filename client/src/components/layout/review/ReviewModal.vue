@@ -30,6 +30,7 @@
         RATE THIS
       </p>
       <h2 class="text-xl">{{ props.name }}</h2>
+
       <ExistingReview
         v-if="userReview?.id"
         :review="userReview"
@@ -155,4 +156,5 @@ const submitReviewHandler = async () => {
     console.error(error);
   }
 };
+
 </script>

@@ -1,8 +1,5 @@
 <template>
-  <FormTextarea
-    :model-value="props.modelValue"
-    @update:model-value="updateContent"
-  />
+  <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
     <ActionButton color="green">Save Changes</ActionButton>
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
@@ -12,17 +9,16 @@
 <script setup lang="ts">
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import { ref } from "vue";
 
 const props = defineProps({
-  modelValue: {
+  content: {
     type: String,
     required: true,
   },
 });
 
-const emits = defineEmits(["update:modelValue", 'cancel-event']);
+const localValue = ref<string>(props.content);
 
-const updateContent = (value: string) => {
-  emits("update:modelValue", value);
-};
+const emits = defineEmits(["cancel-event"]);
 </script>
