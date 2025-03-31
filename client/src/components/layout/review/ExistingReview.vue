@@ -1,16 +1,11 @@
 <template>
-  <MainRatingStar :rating="editRating"/>
-  <RatingStars
-    :stars-array="editingStarsArray"
-    :cursor-pointer="isEditing"
-    @mouse-enter-event="mouseEnterEvent"
-    @mouse-leave-event="mouseLeaveEvent"
-    @click-event="clickEvent"
-  />
-
   <EditReview
     v-if="isEditing"
     :content="review.content"
+    :rating="review.rating"
+    @mouse-enter-event="mouseEnterEvent"
+    @mouse-leave-event="mouseLeaveEvent"
+    @click-event="clickEvent"
     @cancel-event="isEditing = false"
   />
 
@@ -23,10 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import RatingStars from "src/components/layout/review/RatingStars.vue";
+
 import PreviewReview from "src/components/layout/review/PreviewReview.vue";
 import EditReview from "src/components/layout/review/EditReview.vue";
-import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
 import { ReviewType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { fillStars } from "src/utils/helpers";
@@ -56,7 +50,6 @@ const mouseLeaveEvent = () => {
 };
 const clickEvent = (rating: number) => {
   if (isEditing.value) {
-    console.log(rating);
     editingStarsArray.value = fillStars(rating);
     editRating.value = rating + 1;
   }

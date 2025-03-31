@@ -121,6 +121,7 @@ const submitNewReviewHandler = async () => {
 };
 
 const submitEditReviewHandler = () => {
-  console.log('ovo ide kada se edituje review')
-}
+  console.log("ovo ide kada se edituje review");
+  console.log(gameReview.value);
+};
 </script>
