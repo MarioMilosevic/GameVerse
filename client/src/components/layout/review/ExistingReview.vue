@@ -1,5 +1,5 @@
 <template>
-  <MainRatingStar :rating="review.rating"/>
+  <MainRatingStar :rating="editRating"/>
   <RatingStars
     :stars-array="editingStarsArray"
     :cursor-pointer="isEditing"
@@ -61,4 +61,11 @@ const clickEvent = (rating: number) => {
     editRating.value = rating + 1;
   }
 };
+
+// const scale = (scale: number, increment: number) => {
+//   if (gameReview.value.rating) {
+//     scale += gameReview.value.rating * increment;
+//   }
+//   return scale;
+// };
 </script>

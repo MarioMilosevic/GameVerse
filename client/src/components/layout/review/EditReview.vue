@@ -1,7 +1,7 @@
 <template>
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="saveChanges" color="green">Save Changes</ActionButton>
+    <ActionButton @click="saveChanges" type="submit" color="green">Save Changes</ActionButton>
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
   </div>
 </template>

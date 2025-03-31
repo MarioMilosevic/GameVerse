@@ -1,16 +1,15 @@
 <template>
-  <MainRatingStar :rating="rating" />
-  <RatingStars
+    <MainRatingStar :rating="rating" />
+    <RatingStars
     :stars-array="starsArray"
     @mouse-enter-event="mouseEnterEvent"
     @mouse-leave-event="mouseLeaveEvent"
     @click-event="clickEvent"
-    v-model="rating"
-  />
-  <FormTextarea v-model="content" />
-  <ActionButton type="submit" class="self-end" :disabled="!allFieldsCompleted">
-    SEND REVIEW
-  </ActionButton>
+    />
+    <FormTextarea v-model="content" />
+    <ActionButton type="submit" class="self-end" :disabled="!allFieldsCompleted">
+      SEND REVIEW
+    </ActionButton>
 </template>
 
 <script setup lang="ts">

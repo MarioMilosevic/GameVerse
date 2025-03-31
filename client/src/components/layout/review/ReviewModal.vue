@@ -1,44 +1,37 @@
 <template>
-  <form
-    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl"
-    @submit.prevent="submitReviewHandler"
+  <FormReview
+    v-if="userReview?.id"
+    :name="name"
+    :user-id="userReview.user.id"
+    @close-modal-event="emits('close-modal-event')"
+    @submit.prevent="submitEditReviewHandler"
   >
-    <BaseIcon
-      class="absolute top-2 right-2 cursor-pointer"
-      size="big"
-      @click="emits('close-modal-event')"
-    >
-      <XIcon />
-    </BaseIcon>
+    <ExistingReview :review="userReview" />
+  </FormReview>
 
-    <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
-      <p v-if="!userReview?.id" class="text-sky-500 dark:text-red-500">
-        RATE THIS
-      </p>
-      <h2 class="text-xl">{{ props.name }}</h2>
-
-      <ExistingReview v-if="userReview?.id" :review="userReview" />
-
-      <CreateReview
-        v-else
-        :all-fields-completed="allFieldsCompleted"
-        :stars-array="starsArray"
-        @click-event="ratingClickHandler"
-        @mouse-enter-event="mouseEnterHandler"
-        @mouse-leave-event="mouseLeaveHandler"
-        v-model:content="gameReview.content"
-        v-model:rating="gameReview.rating"
-      />
-    </div>
-  </form>
+  <FormReview
+    v-else
+    :name="name"
+    @close-modal-event="emits('close-modal-event')"
+    @submit.prevent="submitNewReviewHandler"
+  >
+    <CreateReview
+      :all-fields-completed="allFieldsCompleted"
+      :stars-array="starsArray"
+      @click-event="ratingClickHandler"
+      @mouse-enter-event="mouseEnterHandler"
+      @mouse-leave-event="mouseLeaveHandler"
+      v-model:content="gameReview.content"
+      v-model:rating="gameReview.rating"
+    />
+  </FormReview>
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
-import XIcon from "src/icons/XIcon.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import ExistingReview from "src/components/layout/review/ExistingReview.vue";
 import CreateReview from "src/components/layout/review/CreateReview.vue";
+import FormReview from "src/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
 import { fillStars } from "src/utils/helpers";
@@ -83,13 +76,6 @@ const allFieldsCompleted = computed(() => {
   return gameReviewSchema.safeParse(gameReview.value).success;
 });
 
-// const scale = (scale: number, increment: number) => {
-//   if (gameReview.value.rating) {
-//     scale += gameReview.value.rating * increment;
-//   }
-//   return scale;
-// };
-
 const emits = defineEmits(["close-modal-event", "submit-event"]);
 
 const ratingClickHandler = (rating: number) => {
@@ -109,7 +95,7 @@ const mouseLeaveHandler = () => {
   }
 };
 
-const submitReviewHandler = async () => {
+const submitNewReviewHandler = async () => {
   try {
     if (user.value.id) {
       const review = {
@@ -126,9 +112,15 @@ const submitReviewHandler = async () => {
         showToast(message, "error");
         emits("close-modal-event");
       }
+    } else {
+      console.log("ovo kada je edit");
     }
   } catch (error) {
     console.error(error);
   }
 };
+
+const submitEditReviewHandler = () => {
+  console.log('ovo ide kada se edituje review')
+}
 </script>
