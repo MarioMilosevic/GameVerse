@@ -1,5 +1,5 @@
 <template>
-  <MainRatingStar :rating="null" />
+  <MainRatingStar :rating="rating" />
   <RatingStars
     :stars-array="starsArray"
     @mouse-enter-event="mouseEnterEvent"
