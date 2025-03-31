@@ -1,13 +1,13 @@
 <template>
+  <MainRatingStar :rating="null" />
   <RatingStars
     :stars-array="starsArray"
     @mouse-enter-event="mouseEnterEvent"
     @mouse-leave-event="mouseLeaveEvent"
     @click-event="clickEvent"
+    v-model="rating"
   />
-  <FormTextarea
-    v-model="content"
-  />
+  <FormTextarea v-model="content" />
   <ActionButton type="submit" class="self-end" :disabled="!allFieldsCompleted">
     SEND REVIEW
   </ActionButton>
@@ -17,6 +17,7 @@
 import RatingStars from "src/components/layout/review/RatingStars.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
 import { PropType, computed } from "vue";
 
 const props = defineProps({
@@ -28,22 +29,32 @@ const props = defineProps({
     type: Array as PropType<String[]>,
     required: true,
   },
-  modelValue: {
+  rating: {
+    type: [Number, null],
+    required: true,
+  },
+  content: {
     type: String,
     required: true,
   },
 });
 
 const content = computed({
-  get: () => props.modelValue,
-  set: (value) => emits("update:modelValue", value),
+  get: () => props.content,
+  set: (value) => emits("update:content", value),
 });
+
+const rating = computed({
+  get: () => props.rating,
+  set:(value) => emits('update:rating', value) 
+})
 
 const emits = defineEmits([
   "mouse-leave-event",
   "mouse-enter-event",
   "click-event",
-  "update:modelValue",
+  "update:content",
+  "update:rating",
 ]);
 
 const clickEvent = (index: number) => {

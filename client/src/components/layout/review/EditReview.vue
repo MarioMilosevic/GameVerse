@@ -1,7 +1,7 @@
 <template>
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton color="green">Save Changes</ActionButton>
+    <ActionButton @click="saveChanges" color="green">Save Changes</ActionButton>
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
   </div>
 </template>
@@ -21,4 +21,9 @@ const props = defineProps({
 const localValue = ref<string>(props.content);
 
 const emits = defineEmits(["cancel-event"]);
+
+const saveChanges = () => {
+  console.log('radi')
+  console.log(localValue.value)
+}
 </script>

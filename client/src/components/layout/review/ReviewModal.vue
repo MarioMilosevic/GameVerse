@@ -11,7 +11,9 @@
       <XIcon />
     </BaseIcon>
 
-    <div class="absolute -top-10 right-1/2 translate-x-1/2 w-[75px] h-[75px]">
+
+    <!-- <MainRatingStar :rating="gameReview.rating"/> -->
+    <!-- <div class="absolute -top-10 right-1/2 translate-x-1/2 w-[75px] h-[75px]">
       <v-icon
         class="transform absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transition-all duration-300"
         name="bi-star-fill"
@@ -23,7 +25,7 @@
       >
         {{ gameReview.rating ?? "?" }}
       </h1>
-    </div>
+    </div> -->
 
     <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
       <p v-if="!userReview?.id" class="text-sky-500 dark:text-red-500">
@@ -31,11 +33,7 @@
       </p>
       <h2 class="text-xl">{{ props.name }}</h2>
 
-      <ExistingReview
-        v-if="userReview?.id"
-        :review="userReview"
-        :stars-array="starsArray"
-      />
+      <ExistingReview v-if="userReview?.id" :review="userReview" />
 
       <CreateReview
         v-else
@@ -44,7 +42,8 @@
         @click-event="ratingClickHandler"
         @mouse-enter-event="mouseEnterHandler"
         @mouse-leave-event="mouseLeaveHandler"
-        v-model="gameReview.content"
+        v-model:content="gameReview.content"
+        v-model:rating="gameReview.rating"
       />
     </div>
   </form>
@@ -58,6 +57,7 @@ import ExistingReview from "src/components/layout/review/ExistingReview.vue";
 import CreateReview from "src/components/layout/review/CreateReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray } from "src/utils/constants";
+import { fillStars } from "src/utils/helpers";
 import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
@@ -83,15 +83,6 @@ const props = defineProps({
 });
 
 const { user } = useGetUserStore();
-
-const fillStars = (index: number, length: number = 10) => {
-  const newStarsArr = [];
-  for (let i = 0; i < length; i++) {
-    const value = i <= index ? "fill" : "empty";
-    newStarsArr.push(value);
-  }
-  return newStarsArr;
-};
 
 const starsArray = ref<string[]>(
   props.userReview?.rating
@@ -156,5 +147,4 @@ const submitReviewHandler = async () => {
     console.error(error);
   }
 };
-
 </script>
