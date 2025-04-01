@@ -6,7 +6,7 @@
     @close-modal-event="emits('close-modal-event')"
     @submit.prevent="submitEditReviewHandler"
   >
-    <ExistingReview :review="userReview" />
+    <ExistingReview :review="userReview" @delete-event="deleteReviewHandler" />
   </FormReview>
 
   <FormReview
@@ -39,6 +39,7 @@ import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
+import { deleteReview } from "src/api/reviews";
 
 const props = defineProps({
   content: {
@@ -123,5 +124,18 @@ const submitNewReviewHandler = async () => {
 const submitEditReviewHandler = () => {
   console.log("ovo ide kada se edituje review");
   console.log(gameReview.value);
+};
+
+const deleteReviewHandler = async (id: number) => {
+  try {
+    const response = await deleteReview(id);
+    if (response?.ok) {
+      emits("close-modal-event");
+      showToast("Review deleted");
+    }
+  } catch (error) {
+    console.error(error);
+    showToast("Unexpected error occured", "error");
+  }
 };
 </script>

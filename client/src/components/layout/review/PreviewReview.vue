@@ -10,7 +10,7 @@
     <ActionButton color="green" @click="emits('edit-event')"
       >Edit Review</ActionButton
     >
-    <ActionButton>Delete Review</ActionButton>
+    <ActionButton @click="emits('delete-event')">Delete Review</ActionButton>
   </div>
 </template>
 
@@ -31,14 +31,12 @@ const props = defineProps({
     required: false,
   },
   rating: {
-    type: Number,
+    type: [Number, null],
     required: true,
   },
 });
 
-const emits = defineEmits(["edit-event"]);
+const emits = defineEmits(["edit-event", "delete-event"]);
 
-const starsArray = computed(() => {
-  return fillStars(props.rating - 1);
-});
+const starsArray = computed(() => fillStars((props.rating ?? 0) - 1));
 </script>

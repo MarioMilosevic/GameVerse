@@ -12,6 +12,7 @@
   <PreviewReview
     v-else
     @edit-event="isEditing = true"
+    @delete-event="emits('delete-event', review.id)"
     :rating="review.rating"
     :content="review.content"
     :created-at="review.createdAt"
@@ -35,6 +36,8 @@ const props = defineProps({
   },
 });
 
+const emits = defineEmits(['delete-event'])
+
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
 const editRating = ref<number>(props.review.rating ?? 0);
 
@@ -56,10 +59,4 @@ const clickEvent = (rating: number) => {
   }
 };
 
-// const scale = (scale: number, increment: number) => {
-//   if (gameReview.value.rating) {
-//     scale += gameReview.value.rating * increment;
-//   }
-//   return scale;
-// };
 </script>
