@@ -56,11 +56,19 @@ export default {
         },
       });
 
+      const ratingAggregation = await prisma.review.aggregate({
+        where: { gameId },
+        _avg: {
+          rating: true,
+        },
+      });
+
+      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
 
       const review = {
         id: newReview.id,
         content: newReview.content,
-        createdAt:newReview.createdAt,
+        createdAt: newReview.createdAt,
         rating: newReview.rating,
         user: {
           id: existingUser.id,
@@ -70,7 +78,12 @@ export default {
         },
       };
 
-      sucessFactory.created(res, review);
+      const data = {
+        review,
+        avgRating
+      }
+
+      sucessFactory.created(res, data);
     } catch (error) {
       errorFactory.internalError(res);
     }

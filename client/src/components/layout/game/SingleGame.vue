@@ -87,7 +87,7 @@
           />
         </fieldset>
         <ReviewsSlider
-          :reviews="singleGame.reviews"
+          :reviews="allReviews"
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
         />
@@ -117,6 +117,7 @@
             <ReviewModal
               @close-modal-event="isReviewModalOpen = false"
               @submit-event="submitModalHandler"
+              @delete-review-event="deleteReviewUI"
               :name="name"
               :game-id="singleGame.id"
               :user-review="userReview"
@@ -143,7 +144,7 @@ import YouTube from "vue3-youtube";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import StarIcon from "src/icons/StarIcon.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import { GameType, ReviewType } from "src/utils/types";
+import { GameType, ReviewType, NewReviewResponseType } from "src/utils/types";
 import { PropType, useTemplateRef, ref, computed } from "vue";
 
 const props = defineProps({
@@ -153,11 +154,7 @@ const props = defineProps({
   },
 });
 
-console.log('moram odje da provjerim singleGame jer je nekada undefined')
-
 const { user } = useGetUserStore();
-
-const { singleGame } = props;
 
 const {
   name,
@@ -171,17 +168,17 @@ const {
   reviews,
 } = props.singleGame;
 
+const allReviews = ref<ReviewType[]>(reviews);
+
 const userReview = computed(() => {
-  return reviews.find((review) => review.user.id === user.value.id)
-})
+  return allReviews.value.find((review) => review.user.id === user.value.id);
+});
 
 const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false);
 const selectedImageIndex = ref<number>(0);
 
-
-
-const emits = defineEmits(["review-event"]);
+const emits = defineEmits(["create-review-event", "delete-review-event"]);
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
@@ -211,8 +208,13 @@ const prevImage = () => {
   }
 };
 
-const submitModalHandler = (review: ReviewType) => {
+const submitModalHandler = (response: NewReviewResponseType) => {
   isReviewModalOpen.value = false;
-  emits("review-event", review);
+  emits("create-review-event", response);
+};
+
+const deleteReviewUI = (id: number) => {
+  emits("delete-review-event", id);
+  isReviewModalOpen.value = false;
 };
 </script>

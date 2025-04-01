@@ -77,7 +77,11 @@ const allFieldsCompleted = computed(() => {
   return gameReviewSchema.safeParse(gameReview.value).success;
 });
 
-const emits = defineEmits(["close-modal-event", "submit-event"]);
+const emits = defineEmits([
+  "close-modal-event",
+  "submit-event",
+  "delete-review-event",
+]);
 
 const ratingClickHandler = (rating: number) => {
   starsArray.value = fillStars(rating);
@@ -107,6 +111,7 @@ const submitNewReviewHandler = async () => {
       };
       const { data, message } = await createReview(review as ReviewType);
       if (data) {
+        console.log("ovo me zanima", data);
         emits("submit-event", data);
         showToast("Review successfully created");
       } else {
@@ -130,7 +135,7 @@ const deleteReviewHandler = async (id: number) => {
   try {
     const response = await deleteReview(id);
     if (response?.ok) {
-      emits("close-modal-event");
+      emits("delete-review-event", id);
       showToast("Review deleted");
     }
   } catch (error) {

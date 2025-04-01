@@ -1,13 +1,18 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SingleGame v-else :single-game="singleGame" @review-event="reviewHandler" />
+  <SingleGame
+    v-else
+    :single-game="singleGame"
+    @create-review-event="createHandler"
+    @delete-review-event="deleteHandler"
+  />
 </template>
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { getSingleGame } from "src/api/games";
 import { onBeforeMount, ref } from "vue";
-import { GameType, ReviewType } from "src/utils/types";
+import { GameType, NewReviewResponseType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import SingleGame from "src/components/layout/game/SingleGame.vue";
@@ -36,7 +41,17 @@ const route = useRoute();
 
 const singleGame = ref<GameType>({} as GameType);
 
-const reviewHandler = (review: ReviewType) => {
-  singleGame.value.reviews.push(review);
+const createHandler = (response: NewReviewResponseType) => {
+  singleGame.value.reviews.push(response.review);
+  singleGame.value.rating = Number(response.avgRating)
+};
+
+const deleteHandler = (id: number) => {
+  const index = singleGame.value.reviews.findIndex(
+    (review) => review.id === id
+  );
+  if (index !== -1) {
+    singleGame.value.reviews.splice(index, 1);
+  }
 };
 </script>

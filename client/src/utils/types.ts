@@ -64,3 +64,8 @@ export type GameReviewType = {
   rating: number | null;
   content:string
 }
+
+export type NewReviewResponseType = {
+  review: ReviewType,
+  avgRating: string;
+}
