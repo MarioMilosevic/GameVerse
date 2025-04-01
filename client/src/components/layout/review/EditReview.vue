@@ -9,7 +9,7 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton type="submit" color="green">Save Changes</ActionButton>
+    <ActionButton @click="submitHandler" type="submit" color="green">Save Changes</ActionButton>
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
   </div>
 </template>
@@ -44,7 +44,16 @@ const emits = defineEmits([
   "mouse-enter-event",
   "mouse-leave-event",
   "click-event",
+  'submit-event'
 ]);
+
+const submitHandler = () => {
+  const mario = {
+    firstName: 'mario',
+    age:28
+  }
+  emits('submit-event', mario)
+}
 
 const mouseEnterEvent = (rating: number) => {
   editingStarsArray.value = fillStars(rating);

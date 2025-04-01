@@ -1,12 +1,6 @@
 <template>
-  <!-- <MainRatingStar :rating="editRating" />
-  <RatingStars
-    :stars-array="editingStarsArray"
-    :cursor-pointer="isEditing"
-    @mouse-enter-event="mouseEnterEvent"
-    @mouse-leave-event="mouseLeaveEvent"
-    @click-event="clickEvent"
-  /> -->
+  <MainRatingStar :rating="props.rating" />
+  <RatingStars :stars-array="starsArray" :cursor-pointer="false" />
   <p class="text-justify border p-4 rounded-2xl">{{ content }}</p>
   <p class="pl-4 self-start text-sm">
     Reviewed on {{ formattedDate(createdAt as string) }}
@@ -24,9 +18,10 @@
 import RatingStars from "src/components/layout/review/RatingStars.vue";
 import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import { formattedDate } from "src/utils/helpers";
+import { fillStars, formattedDate } from "src/utils/helpers";
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   content: {
     type: String,
     required: true,
@@ -35,7 +30,15 @@ defineProps({
     type: String,
     required: false,
   },
+  rating: {
+    type: Number,
+    required: true,
+  },
 });
 
 const emits = defineEmits(["edit-event"]);
+
+const starsArray = computed(() => {
+  return fillStars(props.rating - 1);
+});
 </script>

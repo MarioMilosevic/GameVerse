@@ -12,6 +12,7 @@
   <PreviewReview
     v-else
     @edit-event="isEditing = true"
+    :rating="review.rating"
     :content="review.content"
     :created-at="review.createdAt"
   />
