@@ -18,7 +18,6 @@ export const createReview = async (review: ReviewType) => {
 
 export const deleteReview = async (reviewId: number, gameId: number) => {
   try {
-    console.log("ovo je reviewId", reviewId, "a ovo je gameId", gameId);
     const response = await fetch(`${baseUrl}/reviews/${reviewId}/${gameId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

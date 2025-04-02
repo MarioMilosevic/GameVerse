@@ -87,9 +87,12 @@
           />
         </fieldset>
         <ReviewsSlider
-          :reviews="reviews"
+          :reviews="props.singleGame.reviews"
+          :selected-review-index="selectedReviewIndex"
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
+          @next-review-event="nextReview"
+          @previous-review-event="previousReview"
         />
       </template>
     </SectionComponent>
@@ -165,18 +168,20 @@ const {
   stars,
   genres,
   consoles,
-  reviews,
 } = props.singleGame;
 
 // const allReviews = ref<ReviewType[]>(reviews);
 
 const userReview = computed(() => {
-  return reviews.find((review) => review.user.id === user.value.id);
+  return props.singleGame.reviews.find(
+    (review) => review.user.id === user.value.id
+  );
 });
 
 const isGameImageModalOpen = ref<boolean>(false);
 const isReviewModalOpen = ref<boolean>(false);
 const selectedImageIndex = ref<number>(0);
+const selectedReviewIndex = ref<number>(0);
 
 const emits = defineEmits(["create-review-event", "delete-review-event"]);
 
@@ -208,13 +213,30 @@ const prevImage = () => {
   }
 };
 
+const nextReview = () => {
+  if (selectedReviewIndex.value === props.singleGame.reviews.length - 1) {
+    selectedReviewIndex.value = 0;
+  } else {
+    selectedReviewIndex.value += 1;
+  }
+};
+
+const previousReview = () => {
+  if (selectedReviewIndex.value === 0) {
+    selectedReviewIndex.value = props.singleGame.reviews.length - 1;
+  } else {
+    selectedReviewIndex.value -= 1;
+  }
+};
+
 const submitModalHandler = (response: NewReviewResponseType) => {
   isReviewModalOpen.value = false;
   emits("create-review-event", response);
 };
 
-const deleteReviewUI = (id: number, avgRating:string) => {
+const deleteReviewUI = (id: number, avgRating: string) => {
   emits("delete-review-event", id, avgRating);
   isReviewModalOpen.value = false;
+  selectedReviewIndex.value = 0;
 };
 </script>

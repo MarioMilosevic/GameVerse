@@ -111,15 +111,12 @@ const submitNewReviewHandler = async () => {
       };
       const { data, message } = await createReview(review as ReviewType);
       if (data) {
-        console.log("ovo me zanima", data);
         emits("submit-event", data);
         showToast("Review successfully created");
       } else {
         showToast(message, "error");
         emits("close-modal-event");
       }
-    } else {
-      console.log("ovo kada je edit");
     }
   } catch (error) {
     console.error(error);
@@ -135,7 +132,6 @@ const deleteReviewHandler = async (reviewId: number) => {
   try {
     const { data, message } = await deleteReview(reviewId, props.gameId);
     if (data) {
-      console.log("ovo me zanima", data);
       emits("delete-review-event", reviewId, data);
       showToast("Review deleted");
     } else {

@@ -2,15 +2,17 @@
   <article
     class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[330px]"
   >
-    <h2 class="uppercase text-sky-500 dark:text-red-600 text-center text-3xl">Reviews</h2>
+    <h2 class="uppercase text-sky-500 dark:text-red-600 text-center text-3xl">
+      Reviews
+    </h2>
     <ReviewComponent
       v-for="(review, index) in props.reviews"
       :key="review.id"
       :review="review"
       :style="{ transform: translateElement(index, selectedReviewIndex) }"
     />
-    <LeaveReview @open-modal-event="emits('open-modal-event')"/>
-    <SliderButton class="-left-0" @click="previousReview">
+    <LeaveReview @open-modal-event="emits('open-modal-event')" />
+    <SliderButton class="-left-0" @click="emits('previous-review-event')">
       <template #icon>
         <BaseIcon>
           <LeftIcon />
@@ -18,7 +20,7 @@
       </template>
     </SliderButton>
 
-    <SliderButton class="right-0" @click="nextReview">
+    <SliderButton class="right-0" @click="emits('next-review-event')">
       <template #icon>
         <BaseIcon>
           <RightIcon />
@@ -35,7 +37,7 @@ import RightIcon from "src/icons/RightIcon.vue";
 import SliderButton from "src/components/layout/buttons/SliderButton.vue";
 import ReviewComponent from "src/components/layout/review/ReviewComponent.vue";
 import LeaveReview from "src/components/layout/review/LeaveReview.vue";
-import { PropType, ref } from "vue";
+import { PropType } from "vue";
 import { ReviewType } from "src/utils/types";
 import { translateElement } from "src/utils/helpers";
 
@@ -44,25 +46,15 @@ const props = defineProps({
     type: Array as PropType<ReviewType[]>,
     required: true,
   },
+  selectedReviewIndex: {
+    type: Number,
+    required: true,
+  },
 });
 
-const selectedReviewIndex = ref<number>(0);
-
-const emits = defineEmits(["open-modal-event"]);
-
-const nextReview = () => {
-  if (selectedReviewIndex.value === props.reviews.length - 1) {
-    selectedReviewIndex.value = 0;
-  } else {
-    selectedReviewIndex.value += 1;
-  }
-};
-
-const previousReview = () => {
-  if (selectedReviewIndex.value === 0) {
-    selectedReviewIndex.value = props.reviews.length - 1;
-  } else {
-    selectedReviewIndex.value -= 1;
-  }
-};
+const emits = defineEmits([
+  "open-modal-event",
+  "next-review-event",
+  "previous-review-event",
+]);
 </script>
