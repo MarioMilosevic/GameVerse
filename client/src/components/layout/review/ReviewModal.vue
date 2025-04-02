@@ -131,12 +131,16 @@ const submitEditReviewHandler = () => {
   console.log(gameReview.value);
 };
 
-const deleteReviewHandler = async (id: number) => {
+const deleteReviewHandler = async (reviewId: number) => {
   try {
-    const response = await deleteReview(id);
-    if (response?.ok) {
-      emits("delete-review-event", id);
+    const { data, message } = await deleteReview(reviewId, props.gameId);
+    if (data) {
+      console.log("ovo me zanima", data);
+      emits("delete-review-event", reviewId, data);
       showToast("Review deleted");
+    } else {
+      showToast(message, "error");
+      emits("close-modal-event");
     }
   } catch (error) {
     console.error(error);

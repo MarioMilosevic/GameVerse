@@ -16,12 +16,16 @@ export const createReview = async (review: ReviewType) => {
   }
 };
 
-export const deleteReview = async (id: number) => {
+export const deleteReview = async (reviewId: number, gameId: number) => {
   try {
-    const response = await fetch(`${baseUrl}/reviews/${id}`, {
+    console.log("ovo je reviewId", reviewId, "a ovo je gameId", gameId);
+    const response = await fetch(`${baseUrl}/reviews/${reviewId}/${gameId}`, {
       method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reviewId, gameId }),
     });
-    return response;
+
+    return await response.json();
   } catch (error) {
     console.error(error);
   }

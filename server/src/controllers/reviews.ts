@@ -70,6 +70,7 @@ export default {
         content: newReview.content,
         createdAt: newReview.createdAt,
         rating: newReview.rating,
+        gameId: newReview.gameId,
         user: {
           id: existingUser.id,
           fullName: existingUser.fullName,
@@ -80,8 +81,8 @@ export default {
 
       const data = {
         review,
-        avgRating
-      }
+        avgRating,
+      };
 
       sucessFactory.created(res, data);
     } catch (error) {
@@ -91,11 +92,21 @@ export default {
 
   async deleteReview(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const { reviewId, gameId } = req.params;
       await prisma.review.delete({
-        where: { id },
+        where: { id: Number(reviewId) },
       });
-      sucessFactory.noContent(res);
+
+      const ratingAggregation = await prisma.review.aggregate({
+        where: { gameId: Number(gameId) },
+        _avg: {
+          rating: true,
+        },
+      });
+
+      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
+
+      sucessFactory.ok(res, avgRating);
     } catch (error) {
       errorFactory.internalError(res);
     }

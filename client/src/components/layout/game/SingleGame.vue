@@ -87,7 +87,7 @@
           />
         </fieldset>
         <ReviewsSlider
-          :reviews="allReviews"
+          :reviews="reviews"
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
         />
@@ -144,7 +144,7 @@ import YouTube from "vue3-youtube";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import StarIcon from "src/icons/StarIcon.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import { GameType, ReviewType, NewReviewResponseType } from "src/utils/types";
+import { GameType, NewReviewResponseType } from "src/utils/types";
 import { PropType, useTemplateRef, ref, computed } from "vue";
 
 const props = defineProps({
@@ -168,10 +168,10 @@ const {
   reviews,
 } = props.singleGame;
 
-const allReviews = ref<ReviewType[]>(reviews);
+// const allReviews = ref<ReviewType[]>(reviews);
 
 const userReview = computed(() => {
-  return allReviews.value.find((review) => review.user.id === user.value.id);
+  return reviews.find((review) => review.user.id === user.value.id);
 });
 
 const isGameImageModalOpen = ref<boolean>(false);
@@ -213,8 +213,8 @@ const submitModalHandler = (response: NewReviewResponseType) => {
   emits("create-review-event", response);
 };
 
-const deleteReviewUI = (id: number) => {
-  emits("delete-review-event", id);
+const deleteReviewUI = (id: number, avgRating:string) => {
+  emits("delete-review-event", id, avgRating);
   isReviewModalOpen.value = false;
 };
 </script>

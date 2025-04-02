@@ -36,6 +36,8 @@ const props = defineProps({
   },
 });
 
+console.log(props.review)
+
 const emits = defineEmits(['delete-event'])
 
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
