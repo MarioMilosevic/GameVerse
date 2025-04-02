@@ -12,22 +12,57 @@
   <PreviewReview
     v-else
     @edit-event="isEditing = true"
-    @delete-event="emits('delete-event', review.id)"
+    @delete-event="isDeleteOpen = true"
     :rating="review.rating"
     :content="review.content"
     :created-at="review.createdAt"
   />
+
+  <Teleport to="body" v-if="isDeleteOpen">
+    <OverlayComponent>
+      <ModalComponent
+        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center justify-center rounded-2xl"
+      >
+        <BaseIcon
+          :style="{ width: '7rem', height: '7rem' }"
+          class="absolute top-[-15%] right-1/2 translate-x-1/2"
+        >
+          <XCircle />
+        </BaseIcon>
+        <div class="flex flex-col gap-4 items-center w-1/2">
+          <h1 class="text-5xl">Are you sure ?</h1>
+          <p class="text-lg">
+            Do you really want to delete your review? This action cannot be
+            undone
+          </p>
+          <div class="flex justify-between w-full">
+            <ActionButton color="green" @click="isDeleteOpen = false"
+              >Cancel</ActionButton
+            >
+            <ActionButton @click="deleteReviewHandler">Confirm</ActionButton>
+          </div>
+        </div>
+      </ModalComponent>
+    </OverlayComponent>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
-
 import PreviewReview from "src/components/layout/review/PreviewReview.vue";
 import EditReview from "src/components/layout/review/EditReview.vue";
+import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
+import ModalComponent from "src/components/layout/others/ModalComponent.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import BaseIcon from "src/icons/BaseIcon.vue";
+import XCircle from "src/icons/XCircle.vue";
+
 import { ReviewType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { fillStars } from "src/utils/helpers";
 
 const isEditing = ref<boolean>(false);
+
+const isDeleteOpen = ref<boolean>(false);
 
 const props = defineProps({
   review: {
@@ -36,9 +71,7 @@ const props = defineProps({
   },
 });
 
-console.log(props.review)
-
-const emits = defineEmits(['delete-event'])
+const emits = defineEmits(["delete-event"]);
 
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
 const editRating = ref<number>(props.review.rating ?? 0);
@@ -61,4 +94,8 @@ const clickEvent = (rating: number) => {
   }
 };
 
+const deleteReviewHandler = () => {
+  emits("delete-event", props.review.id);
+  isDeleteOpen.value = false;
+};
 </script>
