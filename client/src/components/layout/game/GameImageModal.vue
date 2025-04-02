@@ -1,6 +1,6 @@
 <template>
   <button
-    class="absolute -top-11 right-0 border bg-sky-500 hover:bg-sky-600 dark:bg-transparent hover:scale-105 dark:border-transparent flex gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 dark:hover:border-slate-50 hover:border dark:hover:bg-slate-950"
+    class="absolute -top-11 right-0 border bg-sky-500 hover:bg-sky-600 dark:bg-transparent hover:scale-105 dark:border-transparent flex items-center gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 dark:hover:border-slate-50 hover:border dark:hover:bg-slate-950"
     @click="emits('close-modal-event')"
   >
     <p>Close</p>

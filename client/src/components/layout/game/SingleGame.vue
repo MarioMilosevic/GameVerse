@@ -89,6 +89,7 @@
         <ReviewsSlider
           :reviews="props.singleGame.reviews"
           :selected-review-index="selectedReviewIndex"
+          :user-review="userReview"
           class="col-start-2 col-end-3"
           @open-modal-event="isReviewModalOpen = true"
           @next-review-event="nextReview"

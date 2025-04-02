@@ -11,7 +11,7 @@
       :review="review"
       :style="{ transform: translateElement(index, selectedReviewIndex) }"
     />
-    <LeaveReview @open-modal-event="emits('open-modal-event')" />
+    <LeaveReview @open-modal-event="emits('open-modal-event')" :user-review="userReview"/>
     <SliderButton class="-left-0" @click="emits('previous-review-event')">
       <template #icon>
         <BaseIcon>
@@ -50,6 +50,10 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  userReview: {
+    type: Object as PropType<ReviewType | undefined>,
+      required:true
+  }
 });
 
 const emits = defineEmits([
