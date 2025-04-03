@@ -4,7 +4,6 @@
     :name="name"
     :user-id="userReview.user.id"
     @close-modal-event="emits('close-modal-event')"
-    @submit.prevent="submitEditReviewHandler"
   >
     <ExistingReview :review="userReview" @delete-event="deleteReviewHandler" />
   </FormReview>
@@ -123,10 +122,6 @@ const submitNewReviewHandler = async () => {
   }
 };
 
-const submitEditReviewHandler = () => {
-  console.log("ovo ide kada se edituje review");
-  console.log(gameReview.value);
-};
 
 const deleteReviewHandler = async (reviewId: number) => {
   try {

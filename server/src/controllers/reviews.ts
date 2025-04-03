@@ -111,4 +111,12 @@ export default {
       errorFactory.internalError(res);
     }
   },
+
+  async editReview(req: Request, res: Response) {
+    try {
+      sucessFactory.ok(res, "mariooo");
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
 };

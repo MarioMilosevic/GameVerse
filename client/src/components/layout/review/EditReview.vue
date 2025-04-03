@@ -9,7 +9,7 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="submitHandler" type="submit" color="green">Save Changes</ActionButton>
+    <ActionButton @click="submitHandler" color="green">Save Changes</ActionButton>
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
   </div>
 </template>
@@ -48,11 +48,12 @@ const emits = defineEmits([
 ]);
 
 const submitHandler = () => {
-  const mario = {
-    firstName: 'mario',
-    age:28
+  console.log('submit handler')
+  const updatedReview = {
+    rating: editRating.value,
+    content:localValue.value
   }
-  emits('submit-event', mario)
+  emits('submit-event', updatedReview)
 }
 
 const mouseEnterEvent = (rating: number) => {
@@ -66,14 +67,4 @@ const clickEvent = (rating: number) => {
   editingStarsArray.value = fillStars(rating);
   editRating.value = rating + 1;
 };
-
-// const mouseEnterEvent = (rating: number) => {
-//   emits("mouse-enter-event", rating);
-// };
-// // const mouseLeaveEvent = (rating: number) => {
-// //   emits("mouse-leave-event", rating);
-// // };
-// const clickEvent = (rating: number) => {
-//   emits("click-event", rating);
-// };
 </script>

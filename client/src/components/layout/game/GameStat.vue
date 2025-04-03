@@ -3,8 +3,9 @@
     <BaseIcon size="medium">
       <slot name="icon" />
     </BaseIcon>
-    <div class="flex items-center gap-4 w-full">
-      <h4 class="font-semibold w-[40%]">
+
+    <div class="flex items-center gap-2 w-full">
+      <h4 class="font-semibold ">
         <slot name="value" />
       </h4>
       <span>

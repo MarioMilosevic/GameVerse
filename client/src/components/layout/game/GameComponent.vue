@@ -6,6 +6,7 @@
     />
     <div class="flex flex-col gap-4">
       <h1 class="text-center text-xl">{{ name }}</h1>
+
       <div class="grid grid-cols-2 gap-2">
         <GameStat>
           <template #icon>
@@ -14,7 +15,6 @@
           <template #value>{{ gameplayHours }}</template>
           <template #name>hours</template>
         </GameStat>
-        
         <GameStat>
           <template #icon>
             <StarIcon />

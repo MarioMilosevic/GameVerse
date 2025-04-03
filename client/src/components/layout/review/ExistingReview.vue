@@ -7,6 +7,7 @@
     @mouse-leave-event="mouseLeaveEvent"
     @click-event="clickEvent"
     @cancel-event="isEditing = false"
+    @submit-event="submitEditHandler"
   />
 
   <PreviewReview
@@ -56,7 +57,7 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
 
-import { ReviewType } from "src/utils/types";
+import { GameReviewType, ReviewType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { fillStars } from "src/utils/helpers";
 
@@ -98,4 +99,9 @@ const deleteReviewHandler = () => {
   emits("delete-event", props.review.id);
   isDeleteOpen.value = false;
 };
+
+const submitEditHandler = (gameReview:GameReviewType) => {
+  console.log("ovo treba da bude taj apdejtovani gejm revju", gameReview)
+
+}
 </script>
