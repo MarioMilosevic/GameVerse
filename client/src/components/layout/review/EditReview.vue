@@ -48,7 +48,6 @@ const emits = defineEmits([
 ]);
 
 const submitHandler = () => {
-  console.log('submit handler')
   const updatedReview = {
     rating: editRating.value,
     content:localValue.value

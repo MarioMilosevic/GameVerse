@@ -114,13 +114,12 @@ export default {
 
   async editReview(req: Request, res: Response) {
     try {
-      const { reviewId, gameId } = req.params;
+      const { reviewId} = req.params;
       const { rating, content } = req.body;
 
       const numberReviewId = Number(reviewId);
-      const numberGameId = Number(gameId);
 
-      if (!reviewId || !gameId) {
+      if (!reviewId) {
         errorFactory.badRequest(res);
         return;
       }

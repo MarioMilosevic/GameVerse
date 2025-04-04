@@ -74,6 +74,7 @@ export default {
               content: true,
               createdAt: true,
               rating: true,
+              gameId:true,
               user: {
                 select: {
                   createdDate: true,

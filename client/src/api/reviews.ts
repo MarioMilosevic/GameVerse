@@ -1,4 +1,4 @@
-import { ReviewType } from "src/utils/types";
+import { GameReviewType, ReviewType } from "src/utils/types";
 import { baseUrl } from "src/utils/constants";
 
 export const createReview = async (review: ReviewType) => {
@@ -29,3 +29,16 @@ export const deleteReview = async (reviewId: number, gameId: number) => {
     console.error(error);
   }
 };
+
+export const editReview = async (reviewId: number, updatedReview:GameReviewType) => {
+  try {
+    const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ updatedReview }),
+    });
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+  }
+}

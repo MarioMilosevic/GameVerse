@@ -5,7 +5,7 @@
     :user-id="userReview.user.id"
     @close-modal-event="emits('close-modal-event')"
   >
-    <ExistingReview :review="userReview" @delete-event="deleteReviewHandler" />
+    <ExistingReview :review="userReview" @delete-event="deleteReviewHandler" @edit-event=""/>
   </FormReview>
 
   <FormReview
@@ -38,7 +38,6 @@ import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
-import { deleteReview } from "src/api/reviews";
 
 const props = defineProps({
   content: {
@@ -60,8 +59,6 @@ const props = defineProps({
 });
 
 const { user } = useGetUserStore();
-
-
 
 const starsArray = ref<string[]>(
   props.userReview?.rating
@@ -125,19 +122,7 @@ const submitNewReviewHandler = async () => {
 };
 
 
-const deleteReviewHandler = async (reviewId: number) => {
-  try {
-    const { data, message } = await deleteReview(reviewId, props.gameId);
-    if (data) {
-      emits("delete-review-event", reviewId, data);
-      showToast("Review deleted");
-    } else {
-      showToast(message, "error");
-      emits("close-modal-event");
-    }
-  } catch (error) {
-    console.error(error);
-    showToast("Unexpected error occured", "error");
-  }
+const deleteReviewHandler = (gameRating: string) => {
+  emits('delete-review-event', props.userReview?.id, gameRating)
 };
 </script>

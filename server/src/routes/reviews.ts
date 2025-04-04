@@ -8,9 +8,8 @@ router
   .get(reviewsController.getAll)
   .post(reviewsController.addReview);
 
-router
-  .route("/:reviewId/:gameId")
-  .delete(reviewsController.deleteReview)
-  .patch(reviewsController.editReview);
+router.route("/:reviewId/:gameId").delete(reviewsController.deleteReview);
+
+router.route("/:reviewId").patch(reviewsController.editReview);
 
 export default router;

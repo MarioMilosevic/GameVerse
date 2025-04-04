@@ -56,6 +56,8 @@ import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
+import { deleteReview } from "src/api/reviews";
+import { showToast } from "src/utils/toast";
 
 import { GameReviewType, ReviewType } from "src/utils/types";
 import { PropType, ref } from "vue";
@@ -72,7 +74,10 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["delete-event"]);
+const {review} = props
+
+
+const emits = defineEmits(["delete-event", 'edit-event']);
 
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
 const editRating = ref<number>(props.review.rating ?? 0);
@@ -95,12 +100,26 @@ const clickEvent = (rating: number) => {
   }
 };
 
-const deleteReviewHandler = () => {
+const deleteReviewHandler = async () => {
+try {
+    const { data, message } = await deleteReview(review.id as number, review.gameId as number);
+  if (data) {
+      emits("delete-event", data);
+      showToast("Review deleted");
+    } else {
+      showToast(message, "error");
+    }
+  } catch (error) {
+    console.error(error);
+    showToast("Unexpected error occured", "error");
+  }
+
   emits("delete-event", props.review.id);
   isDeleteOpen.value = false;
 };
 
-const submitEditHandler = (gameReview:GameReviewType) => {
+const submitEditHandler = (gameReview: GameReviewType) => {
+  emits('edit-event', gameReview)
   console.log("ovo treba da bude taj apdejtovani gejm revju", gameReview)
 
 }

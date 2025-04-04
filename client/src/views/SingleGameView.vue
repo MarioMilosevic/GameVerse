@@ -26,7 +26,6 @@ onBeforeMount(async () => {
     if (message) {
       showToast(message, "error");
     } else {
-      console.log(data)
       singleGame.value = data;
     }
   } catch (error) {
@@ -45,16 +44,16 @@ const singleGame = ref<GameType>({} as GameType);
 
 const createHandler = (response: NewReviewResponseType) => {
   singleGame.value.reviews.push(response.review);
-  singleGame.value.rating = Number(response.avgRating)
+  singleGame.value.rating = Number(response.avgRating);
 };
 
-const deleteHandler = (id: number, avgRating:string) => {
+const deleteHandler = (id: number, avgRating: string) => {
   const index = singleGame.value.reviews.findIndex(
     (review) => review.id === id
   );
   if (index !== -1) {
     singleGame.value.reviews.splice(index, 1);
-    singleGame.value.rating = Number(avgRating)
+    singleGame.value.rating = Number(avgRating);
   }
 };
 </script>
