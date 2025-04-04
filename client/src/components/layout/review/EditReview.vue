@@ -45,9 +45,7 @@ const props = defineProps({
 const { rating, content, reviewId } = props;
 
 const editingStarsArray = ref(fillStars((rating ?? 0) - 1));
-
 const editRating = ref<number>(rating ?? 0);
-
 const localValue = ref<string>(content);
 
 const editHandler =

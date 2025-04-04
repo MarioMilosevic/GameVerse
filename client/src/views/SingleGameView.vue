@@ -4,7 +4,6 @@
     v-else
     :single-game="singleGame"
     @create-review-event="createHandler"
-    @delete-review-event="deleteHandler"
   />
 </template>
 
@@ -75,4 +74,5 @@ const editHandler = (
 };
 
 provide("editReview", editHandler);
+provide("deleteReview", deleteHandler);
 </script>

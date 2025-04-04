@@ -22,7 +22,8 @@
 
   <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
-      <ModalComponent size="small"
+      <ModalComponent
+        size="small"
         class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
       >
         <BaseIcon
@@ -59,8 +60,8 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
 import { deleteReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
-import {  ReviewType } from "src/utils/types";
-import { PropType, ref } from "vue";
+import { ReviewType } from "src/utils/types";
+import { PropType, ref, inject } from "vue";
 import { fillStars } from "src/utils/helpers";
 
 const isEditing = ref<boolean>(false);
@@ -74,10 +75,12 @@ const props = defineProps({
   },
 });
 
-const {review} = props
+const { review } = props;
 
+const emits = defineEmits(["delete-event", "edit-event"]);
 
-const emits = defineEmits(["delete-event", 'edit-event']);
+const deleteReviewUI =
+  inject<(reviewId: number, avgRating: string) => void>("deleteReview");
 
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
 const editRating = ref<number>(props.review.rating ?? 0);
@@ -101,10 +104,15 @@ const clickEvent = (rating: number) => {
 };
 
 const deleteReviewHandler = async () => {
-try {
-    const { data, message } = await deleteReview(review.id as number, review.gameId as number);
-  if (data) {
-      emits("delete-event", data);
+  try {
+    const { data, message } = await deleteReview(
+      review.id as number,
+      review.gameId as number
+    );
+    if (data) {
+      if (deleteReviewUI) {
+        deleteReviewUI(review.id as number, data);
+      }
       showToast("Review deleted");
     } else {
       showToast(message, "error");
@@ -117,5 +125,4 @@ try {
   emits("delete-event", props.review.id);
   isDeleteOpen.value = false;
 };
-
 </script>

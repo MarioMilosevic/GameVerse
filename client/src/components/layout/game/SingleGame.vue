@@ -86,7 +86,7 @@
             @click="openImageModal(index)"
           />
         </fieldset>
-        
+
         <ReviewsSlider
           :reviews="props.singleGame.reviews"
           :selected-review-index="selectedReviewIndex"
@@ -122,7 +122,6 @@
             <ReviewModal
               @close-modal-event="isReviewModalOpen = false"
               @submit-event="submitModalHandler"
-              @delete-review-event="deleteReviewUI"
               :name="name"
               :game-id="singleGame.id"
               :user-review="userReview"
@@ -184,7 +183,7 @@ const isReviewModalOpen = ref<boolean>(false);
 const selectedImageIndex = ref<number>(0);
 const selectedReviewIndex = ref<number>(0);
 
-const emits = defineEmits(["create-review-event", "delete-review-event"]);
+const emits = defineEmits(["create-review-event"]);
 
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
@@ -235,9 +234,4 @@ const submitModalHandler = (response: NewReviewResponseType) => {
   emits("create-review-event", response);
 };
 
-const deleteReviewUI = (id: number, avgRating: string) => {
-  emits("delete-review-event", id, avgRating);
-  isReviewModalOpen.value = false;
-  selectedReviewIndex.value = 0;
-};
 </script>
