@@ -5,7 +5,11 @@
     :user-id="userReview.user.id"
     @close-modal-event="emits('close-modal-event')"
   >
-    <ExistingReview :review="userReview" @delete-event="deleteReviewHandler" @edit-event=""/>
+    <ExistingReview
+      :review="userReview"
+      @delete-event="deleteReviewHandler"
+      @edit-event="emits('close-modal-event')"
+    />
   </FormReview>
 
   <FormReview
@@ -121,8 +125,8 @@ const submitNewReviewHandler = async () => {
   }
 };
 
-
 const deleteReviewHandler = (gameRating: string) => {
-  emits('delete-review-event', props.userReview?.id, gameRating)
+  emits("delete-review-event", props.userReview?.id, gameRating);
 };
+
 </script>

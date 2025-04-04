@@ -4,16 +4,16 @@
   >
     <div class="flex items-end gap-2">
       <fieldset class="h-[50px] w-[50px]">
-        <img :src="image" class="h-full" />
+        <img :src="props.review.user.image" class="h-full" />
       </fieldset>
-      <h2>{{ fullName }}</h2>
-      <p>Joined on {{ formattedDate(createdDate) }}</p>
+      <h2>{{ props.review.user.fullName }}</h2>
+      <p>Joined on {{ formattedDate(props.review.user.createdDate) }}</p>
     </div>
 
     <div class="flex items-center gap-2">
       <div class="flex items-center">
         <v-icon
-          v-for="(star, index) in createStarsArray(rating as number)"
+          v-for="(star, index) in createStarsArray(props.review.rating as number)"
           :key="index"
           animation="pulse"
           :fill="theme === 'light' ? 'blue' : 'red'"
@@ -27,11 +27,11 @@
         />
       </div>
       <p>
-        <span> {{ rating }}/10 </span>
-        - Reviewed on {{ formattedDate(createdAt as string) }}
+        <span> {{ props.review.rating }}/10 </span>
+        - Reviewed on {{ formattedDate(props.review.createdAt as string) }}
       </p>
     </div>
-    <p class="pl-2 w-[90%] text-justify">{{ content }}</p>
+    <p class="pl-2 w-[90%] text-justify">{{ props.review.content }}</p>
   </div>
 </template>
 
@@ -49,13 +49,6 @@ const props = defineProps({
 });
 
 const { theme } = useTheme();
-
-const {
-  content,
-  createdAt,
-  rating,
-  user: { fullName, createdDate, image },
-} = props.review;
 
 const createStarsArray = (rating: number) => {
   const starsArray = [];

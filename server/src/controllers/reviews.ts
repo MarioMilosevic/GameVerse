@@ -114,8 +114,10 @@ export default {
 
   async editReview(req: Request, res: Response) {
     try {
-      const { reviewId} = req.params;
-      const { rating, content } = req.body;
+      const { reviewId } = req.params;
+      const {
+        updatedReview: { content, rating },
+      } = req.body;
 
       const numberReviewId = Number(reviewId);
 
@@ -126,6 +128,9 @@ export default {
 
       const existingReview = await prisma.review.findUnique({
         where: { id: numberReviewId },
+        select: {
+          gameId: true,
+        },
       });
 
       if (!existingReview) {
@@ -138,7 +143,21 @@ export default {
         data: { content, rating },
       });
 
-      sucessFactory.ok(res, editedReview);
+      const ratingAggregation = await prisma.review.aggregate({
+        where: { gameId: Number(existingReview.gameId) },
+        _avg: {
+          rating: true,
+        },
+      });
+
+      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
+
+      const data = {
+        editedReview,
+        avgRating,
+      };
+
+      sucessFactory.ok(res, data);
     } catch (error) {
       errorFactory.internalError(res);
     }

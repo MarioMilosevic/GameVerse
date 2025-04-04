@@ -86,6 +86,7 @@
             @click="openImageModal(index)"
           />
         </fieldset>
+        
         <ReviewsSlider
           :reviews="props.singleGame.reviews"
           :selected-review-index="selectedReviewIndex"

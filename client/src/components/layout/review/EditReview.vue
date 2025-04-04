@@ -9,7 +9,9 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="submitHandler" color="green">Save Changes</ActionButton>
+    <ActionButton @click="editReviewHandler" color="green"
+      >Save Changes</ActionButton
+    >
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
   </div>
 </template>
@@ -20,7 +22,10 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import RatingStars from "src/components/layout/review/RatingStars.vue";
 import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
 import { fillStars } from "src/utils/helpers";
-import { ref } from "vue";
+import { ref, inject } from "vue";
+import { editReview } from "src/api/reviews";
+import { showToast } from "src/utils/toast";
+import { ReviewType } from "src/utils/types";
 
 const props = defineProps({
   content: {
@@ -31,29 +36,57 @@ const props = defineProps({
     type: [Number, null],
     required: true,
   },
+  reviewId: {
+    type: Number,
+    required: false,
+  },
 });
 
-const editingStarsArray = ref(fillStars((props.rating ?? 0) - 1));
+const { rating, content, reviewId } = props;
 
-const editRating = ref<number>(props.rating ?? 0);
+const editingStarsArray = ref(fillStars((rating ?? 0) - 1));
 
-const localValue = ref<string>(props.content);
+const editRating = ref<number>(rating ?? 0);
+
+const localValue = ref<string>(content);
+
+const editHandler =
+  inject<
+    (reviewId: number, updatedReview: ReviewType, avgRating: number) => void
+  >("editReview");
 
 const emits = defineEmits([
   "cancel-event",
   "mouse-enter-event",
   "mouse-leave-event",
   "click-event",
-  'submit-event'
+  "edit-event",
 ]);
 
-const submitHandler = () => {
-  const updatedReview = {
-    rating: editRating.value,
-    content:localValue.value
+const editReviewHandler = async () => {
+  try {
+    if (reviewId) {
+      const updatedReview = {
+        rating: editRating.value,
+        content: localValue.value,
+      };
+
+      const { data, message } = await editReview(reviewId, updatedReview);
+      if (data) {
+        emits("edit-event");
+        const { editedReview, avgRating } = data;
+        if (editHandler) {
+          editHandler(editedReview.id, editedReview, avgRating);
+          showToast("Review updated");
+        }
+      } else {
+        showToast(message, "error");
+      }
+    }
+  } catch (error) {
+    console.error(error);
   }
-  emits('submit-event', updatedReview)
-}
+};
 
 const mouseEnterEvent = (rating: number) => {
   editingStarsArray.value = fillStars(rating);

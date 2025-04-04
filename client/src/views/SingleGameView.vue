@@ -11,8 +11,8 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { getSingleGame } from "src/api/games";
-import { onBeforeMount, ref } from "vue";
-import { GameType, NewReviewResponseType } from "src/utils/types";
+import { onBeforeMount, ref, provide } from "vue";
+import { GameType, NewReviewResponseType, ReviewType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import SingleGame from "src/components/layout/game/SingleGame.vue";
@@ -47,13 +47,32 @@ const createHandler = (response: NewReviewResponseType) => {
   singleGame.value.rating = Number(response.avgRating);
 };
 
-const deleteHandler = (id: number, avgRating: string) => {
+const deleteHandler = (reviewId: number, avgRating: string) => {
   const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === id
+    (review) => review.id === reviewId
   );
   if (index !== -1) {
     singleGame.value.reviews.splice(index, 1);
     singleGame.value.rating = Number(avgRating);
   }
 };
+
+const editHandler = (
+  reviewId: number,
+  updatedReview: ReviewType,
+  avgRating: number
+) => {
+  const index = singleGame.value.reviews.findIndex(
+    (review) => review.id === reviewId
+  );
+  if (index !== -1) {
+    singleGame.value.reviews[index] = {
+      ...singleGame.value.reviews[index],
+      ...updatedReview,
+    };
+    singleGame.value.rating = Number(avgRating);
+  }
+};
+
+provide("editReview", editHandler);
 </script>

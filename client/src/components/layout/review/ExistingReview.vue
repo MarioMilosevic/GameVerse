@@ -3,11 +3,12 @@
     v-if="isEditing"
     :content="review.content"
     :rating="review.rating"
+    :reviewId="review.id"
     @mouse-enter-event="mouseEnterEvent"
     @mouse-leave-event="mouseLeaveEvent"
     @click-event="clickEvent"
     @cancel-event="isEditing = false"
-    @submit-event="submitEditHandler"
+    @edit-event="emits('edit-event')"
   />
 
   <PreviewReview
@@ -58,8 +59,7 @@ import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
 import { deleteReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
-
-import { GameReviewType, ReviewType } from "src/utils/types";
+import {  ReviewType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { fillStars } from "src/utils/helpers";
 
@@ -118,9 +118,4 @@ try {
   isDeleteOpen.value = false;
 };
 
-const submitEditHandler = (gameReview: GameReviewType) => {
-  emits('edit-event', gameReview)
-  console.log("ovo treba da bude taj apdejtovani gejm revju", gameReview)
-
-}
 </script>

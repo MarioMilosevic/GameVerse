@@ -11,7 +11,10 @@
       :review="review"
       :style="{ transform: translateElement(index, selectedReviewIndex) }"
     />
-    <LeaveReview @open-modal-event="emits('open-modal-event')" :user-review="userReview"/>
+    <LeaveReview
+      @open-modal-event="emits('open-modal-event')"
+      :user-review="userReview"
+    />
     <SliderButton class="-left-0" @click="emits('previous-review-event')">
       <template #icon>
         <BaseIcon>
@@ -37,7 +40,7 @@ import RightIcon from "src/icons/RightIcon.vue";
 import SliderButton from "src/components/layout/buttons/SliderButton.vue";
 import ReviewComponent from "src/components/layout/review/ReviewComponent.vue";
 import LeaveReview from "src/components/layout/review/LeaveReview.vue";
-import { PropType } from "vue";
+import { PropType, watch } from "vue";
 import { ReviewType } from "src/utils/types";
 import { translateElement } from "src/utils/helpers";
 
@@ -52,9 +55,15 @@ const props = defineProps({
   },
   userReview: {
     type: Object as PropType<ReviewType | undefined>,
-      required:true
-  }
+    required: true,
+  },
 });
+
+watch(() => props.reviews, (newValue, oldValue) => {
+  console.log("newValue", newValue);
+  console.log("oldValue", oldValue);
+});
+
 
 const emits = defineEmits([
   "open-modal-event",
