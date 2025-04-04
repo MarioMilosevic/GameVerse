@@ -61,6 +61,8 @@ const props = defineProps({
 
 const { user } = useGetUserStore();
 
+
+
 const starsArray = ref<string[]>(
   props.userReview?.rating
     ? fillStars(props.userReview.rating - 1)

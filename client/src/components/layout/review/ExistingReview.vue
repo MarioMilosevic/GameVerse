@@ -21,12 +21,12 @@
 
   <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
-      <ModalComponent
-        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center justify-center rounded-2xl"
+      <ModalComponent size="small"
+        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
       >
         <BaseIcon
-          :style="{ width: '7rem', height: '7rem' }"
-          class="absolute top-[-15%] right-1/2 translate-x-1/2"
+          :style="{ width: '5rem', height: '5rem' }"
+          class="absolute top-[1%] right-1/2 translate-x-1/2"
         >
           <XCircle />
         </BaseIcon>

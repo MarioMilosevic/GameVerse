@@ -171,7 +171,6 @@ const {
   consoles,
 } = props.singleGame;
 
-// const allReviews = ref<ReviewType[]>(reviews);
 
 const userReview = computed(() => {
   return props.singleGame.reviews.find(

@@ -114,7 +114,32 @@ export default {
 
   async editReview(req: Request, res: Response) {
     try {
-      sucessFactory.ok(res, "mariooo");
+      const { reviewId, gameId } = req.params;
+      const { rating, content } = req.body;
+
+      const numberReviewId = Number(reviewId);
+      const numberGameId = Number(gameId);
+
+      if (!reviewId || !gameId) {
+        errorFactory.badRequest(res);
+        return;
+      }
+
+      const existingReview = await prisma.review.findUnique({
+        where: { id: numberReviewId },
+      });
+
+      if (!existingReview) {
+        errorFactory.notFound(res, "Review not found");
+        return;
+      }
+
+      const editedReview = await prisma.review.update({
+        where: { id: numberReviewId },
+        data: { content, rating },
+      });
+
+      sucessFactory.ok(res, editedReview);
     } catch (error) {
       errorFactory.internalError(res);
     }
