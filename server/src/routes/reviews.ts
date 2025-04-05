@@ -10,7 +10,7 @@ router
 
 router
   .route("/:reviewId")
-  .patch(reviewsController.editReview)
-  .delete(reviewsController.deleteReview);
+  .patch(reviewsController.getReviewId, reviewsController.editReview)
+  .delete(reviewsController.getReviewId, reviewsController.deleteReview);
 
 export default router;

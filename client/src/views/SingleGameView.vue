@@ -26,7 +26,6 @@ onBeforeMount(async () => {
       showToast(message, "error");
     } else {
       singleGame.value = data;
-      console.log(singleGame.value.reviews);
     }
   } catch (error) {
     showToast("Unexpected error occured", "error");
@@ -48,18 +47,13 @@ const createHandler = (response: NewReviewResponseType) => {
 };
 
 const deleteHandler = (reviewId: number, avgRating: string) => {
-  console.log(reviewId, avgRating)
-  console.log("prije", singleGame.value.reviews);
   const index = singleGame.value.reviews.findIndex(
     (review) => review.id === reviewId
   );
-  console.log(index)
   if (index !== -1) {
-    console.log('uslo u splice i ostalo')
     singleGame.value.reviews.splice(index, 1);
     singleGame.value.rating = Number(avgRating);
   }
-  console.log("posle", singleGame.value.reviews);
 };
 
 const editHandler = (

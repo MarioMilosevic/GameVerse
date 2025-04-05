@@ -107,7 +107,6 @@ const deleteReviewHandler = async () => {
   try {
     const { data, message } = await deleteReview(review.id as number);
     if (data) {
-      console.log("ovo me zanima", data);
       if (deleteReviewUI) {
         deleteReviewUI(review.id as number, data.avgRating);
       }
