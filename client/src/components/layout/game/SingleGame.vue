@@ -120,7 +120,7 @@
         <ModalComponent size="small">
           <template #default>
             <ReviewModal
-              @close-modal-event="isReviewModalOpen = false"
+              @delete-event="deleteHandler"
               @submit-event="submitModalHandler"
               :name="name"
               :game-id="singleGame.id"
@@ -170,7 +170,6 @@ const {
   genres,
   consoles,
 } = props.singleGame;
-
 
 const userReview = computed(() => {
   return props.singleGame.reviews.find(
@@ -234,4 +233,8 @@ const submitModalHandler = (response: NewReviewResponseType) => {
   emits("create-review-event", response);
 };
 
+const deleteHandler = () => {
+  isReviewModalOpen.value = false;
+  selectedReviewIndex.value = 0;
+};
 </script>

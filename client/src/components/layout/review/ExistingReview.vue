@@ -105,15 +105,15 @@ const clickEvent = (rating: number) => {
 
 const deleteReviewHandler = async () => {
   try {
-    const { data, message } = await deleteReview(
-      review.id as number,
-      review.gameId as number
-    );
+    const { data, message } = await deleteReview(review.id as number);
     if (data) {
+      console.log("ovo me zanima", data);
       if (deleteReviewUI) {
-        deleteReviewUI(review.id as number, data);
+        deleteReviewUI(review.id as number, data.avgRating);
       }
       showToast("Review deleted");
+      emits("delete-event");
+      isDeleteOpen.value = false;
     } else {
       showToast(message, "error");
     }
@@ -122,7 +122,5 @@ const deleteReviewHandler = async () => {
     showToast("Unexpected error occured", "error");
   }
 
-  emits("delete-event", props.review.id);
-  isDeleteOpen.value = false;
 };
 </script>

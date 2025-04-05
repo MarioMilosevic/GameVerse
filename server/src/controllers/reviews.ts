@@ -92,26 +92,62 @@ export default {
 
   async deleteReview(req: Request, res: Response) {
     try {
-      const { reviewId, gameId } = req.params;
+      const { reviewId } = req.params;
+      const numberReviewId = Number(reviewId);
+      console.log("Before deletion, reviewId:", numberReviewId);
+
+      // First, find the review to get its gameId
+      const existingReview = await prisma.review.findUnique({
+        where: { id: numberReviewId },
+        select: { gameId: true },
+      });
+
+      if (!existingReview?.gameId) {
+        errorFactory.notFound(res, "Review not found");
+        return;
+      }
+
       await prisma.review.delete({
-        where: { id: Number(reviewId) },
+        where: { id: numberReviewId },
       });
 
       const ratingAggregation = await prisma.review.aggregate({
-        where: { gameId: Number(gameId) },
-        _avg: {
-          rating: true,
-        },
+        where: { gameId: existingReview.gameId },
+        _avg: { rating: true },
       });
 
       const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
 
-      sucessFactory.ok(res, avgRating);
+      sucessFactory.ok(res, {
+        avgRating,
+      });
     } catch (error) {
       errorFactory.internalError(res);
     }
   },
 
+  async mario(req: Request, res: Response) {
+    try {
+      const { reviewId } = req.params;
+      const numberReviewId = Number(reviewId);
+
+      const existingReview = await prisma.review.findUnique({
+        where: { id: 83 },
+        //  select: {
+        //    gameId: true,
+        //  },
+      });
+
+      if (!existingReview) {
+        errorFactory.notFound(res, "Review not found");
+        return;
+      }
+
+      sucessFactory.ok(res, existingReview);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
   async editReview(req: Request, res: Response) {
     try {
       const { reviewId } = req.params;

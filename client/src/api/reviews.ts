@@ -16,12 +16,11 @@ export const createReview = async (review: ReviewType) => {
   }
 };
 
-export const deleteReview = async (reviewId: number, gameId: number) => {
+export const deleteReview = async (reviewId: number) => {
   try {
-    const response = await fetch(`${baseUrl}/reviews/${reviewId}/${gameId}`, {
+    const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ reviewId, gameId }),
     });
 
     return await response.json();
@@ -30,15 +29,18 @@ export const deleteReview = async (reviewId: number, gameId: number) => {
   }
 };
 
-export const editReview = async (reviewId: number, updatedReview:GameReviewType) => {
+export const editReview = async (
+  reviewId: number,
+  updatedReview: GameReviewType
+) => {
   try {
     const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ updatedReview }),
     });
-    return await response.json()
+    return await response.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};

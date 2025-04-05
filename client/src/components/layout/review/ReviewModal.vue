@@ -8,6 +8,7 @@
     <ExistingReview
       :review="userReview"
       @edit-event="emits('close-modal-event')"
+      @delete-event="emits('delete-event')"
     />
   </FormReview>
 
@@ -81,6 +82,7 @@ const allFieldsCompleted = computed(() => {
 const emits = defineEmits([
   "close-modal-event",
   "submit-event",
+  'delete-event'
 ]);
 
 const ratingClickHandler = (rating: number) => {
