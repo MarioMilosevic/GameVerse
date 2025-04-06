@@ -27,7 +27,10 @@
           <footer class="text-sm">
             Reviewed on {{ formattedDate(review.createdAt) }}
           </footer>
-          <ActionButton class="absolute bottom-0 right-0">
+          <ActionButton
+            @click="seeGameDetails(review.gameId)"
+            class="absolute bottom-0 right-0"
+          >
             Details
           </ActionButton>
         </div>
@@ -42,6 +45,7 @@ import { MyReviewType } from "src/utils/types";
 import { PropType } from "vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { formattedDate } from "src/utils/helpers";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   reviews: {
@@ -49,6 +53,10 @@ const props = defineProps({
     required: true,
   },
 });
-</script>
 
-<style scoped></style>
+const router = useRouter();
+
+const seeGameDetails = (id: number) => {
+  router.push({ name: "GameDetails", params: { id } });
+};
+</script>
