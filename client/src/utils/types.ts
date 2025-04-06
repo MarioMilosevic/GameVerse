@@ -69,3 +69,17 @@ export type NewReviewResponseType = {
   review: ReviewType,
   avgRating: string;
 }
+
+export type MyReviewType = {
+  content: string;
+  createdAt: string;
+  game: {
+    name: string;
+    thumbnail: string;
+    averageRating: string;
+  },
+  gameId: number;
+  id: number;
+  rating: number;
+  userId:number
+}

@@ -56,3 +56,12 @@ export const getUserData = async (token: string) => {
     console.error(error);
   }
 };
+
+export const getUserReviews = async (id: number) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/reviews/${id}`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};

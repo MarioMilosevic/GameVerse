@@ -61,15 +61,7 @@
               :image="obj.console.image"
             />
           </ConsoleWrapper>
-          <div class="flex items-center gap-2">
-            <BaseIcon>
-              <StarIcon />
-            </BaseIcon>
-            <h3>
-              Rated
-              <span class="font-semibold"> {{ singleGame.rating }} </span>/10
-            </h3>
-          </div>
+          <GameRating :rating="singleGame.rating" />
         </div>
       </template>
     </SectionComponent>
@@ -145,9 +137,8 @@ import ReviewModal from "src/components/layout/review/ReviewModal.vue";
 import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
 import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
+import GameRating from "src/components/layout/game/GameRating.vue";
 import YouTube from "vue3-youtube";
-import BaseIcon from "src/icons/BaseIcon.vue";
-import StarIcon from "src/icons/StarIcon.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";
 import { PropType, useTemplateRef, ref, computed } from "vue";
