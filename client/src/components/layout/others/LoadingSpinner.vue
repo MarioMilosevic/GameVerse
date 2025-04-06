@@ -1,29 +1,26 @@
 <template>
-  <div class="loader"></div>
+  <div
+    :class="[
+      'border-4 border-b-4 border-white border-b-red-500 rounded-full inline-block box-border animate-spin absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2',
+      loadingSizeOptions[size],
+    ]"
+  ></div>
 </template>
 
-<style scoped>
-.loader {
-  width: 3rem;
-  height: 3rem;
-  border: 5px solid #fff;
-  border-bottom-color: #ff3d00;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, 50%);
-}
+<script lang="ts" setup>
+import { PropType } from "vue";
 
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-</style>
+type SizeType = keyof typeof loadingSizeOptions;
+
+defineProps({
+  size: {
+    type: String as PropType<SizeType>,
+    default: "big",
+  },
+});
+
+const loadingSizeOptions = {
+  small: "w-8 h-8",
+  big: "w-12 h-12",
+};
+</script>

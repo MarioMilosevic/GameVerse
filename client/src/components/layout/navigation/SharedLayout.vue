@@ -86,7 +86,6 @@ const signOutHandler = () => {
 
 const myReviewsHandler = () => {
   router.push(`/my-reviews/${user.value.id}`)
-  console.log('radi')
 }
 
 const handleTheme = (darkMode: boolean) => {

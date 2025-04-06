@@ -37,12 +37,12 @@
     </template>
     <template #submit>
       <ActionButton
-        size="medium"
         type="submit"
         :disabled="!allFieldsCompleted"
         :style="{ marginTop: '0.5rem' }"
+        :is-loading="isLoading"
       >
-      LOG IN
+        LOG IN
       </ActionButton>
     </template>
   </AuthForm>
@@ -72,9 +72,14 @@ import { loginUser } from "src/api/users";
 import { useRouter } from "vue-router";
 import { showToast } from "src/utils/toast";
 
-const loginCredentials = ref<LoginCredentialsType>({ email: "", password: "" });
+const loginCredentials = ref<LoginCredentialsType>({
+  email: "",
+  password: "",
+});
 const touchedFields = ref<LoginTouchedFields>({});
 const loginFormErrors = ref<LoginFieldErrors>({});
+
+const isLoading = ref<boolean>(false);
 
 const allFieldsCompleted = computed(() => {
   return loginSchema.safeParse(loginCredentials.value).success;
@@ -93,6 +98,7 @@ const blurHandler = (property: LoginFields) => {
 
 const submitHandler = async () => {
   try {
+    isLoading.value = true;
     const { error } = loginSchema.safeParse(loginCredentials.value);
     if (error) {
       Object.entries(getLoginErrors(error)).forEach(([key, value]) => {
@@ -105,6 +111,7 @@ const submitHandler = async () => {
       router.push("/");
     } else {
       showToast(message, "error");
+      isLoading.value = false;
     }
   } catch (error) {
     console.error(error);
