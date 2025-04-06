@@ -13,3 +13,24 @@ export async function getAverageRating(gameId: number) {
     console.error(error);
   }
 }
+
+export async function getExistingReview(gameId: number, userId?: number) {
+  try {
+    if (userId) {
+      return await prisma.review.findUnique({
+        where: {
+          userId_gameId: { userId, gameId },
+        },
+      });
+    } else {
+      return await prisma.review.findUnique({
+        where: { id: gameId },
+        select: {
+          gameId: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}

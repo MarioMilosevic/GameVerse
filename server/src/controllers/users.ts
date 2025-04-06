@@ -6,13 +6,23 @@ import jwt, { decode } from "jsonwebtoken";
 import config from "../config";
 
 export default {
-  async getUserFromToken(req: Request, res: Response, next: NextFunction) {
+  async getUserId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      req.id = id;
+      next();
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+
+  async getUserFromToken(req: Request, res: Response) {
     try {
       const authHeader = req.headers.authorization;
 
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         errorFactory.notAuthorized(res);
-        return
+        return;
       }
 
       const token = authHeader.split(" ")[1];
@@ -22,7 +32,7 @@ export default {
 
         if (!decoded?.id) {
           errorFactory.forbidden(res);
-          return
+          return;
         }
         const user = await prisma.user.findUnique({
           where: { id: Number(decoded.id) },
@@ -34,11 +44,11 @@ export default {
         sucessFactory.ok(res, user);
       } catch (err) {
         errorFactory.notAuthorized(res);
-        return
+        return;
       }
     } catch (error) {
       errorFactory.internalError(res);
-      return
+      return;
     }
   },
   async getUsers(req: Request, res: Response) {
@@ -55,9 +65,8 @@ export default {
   },
   async getUser(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
       const user = await prisma.user.findUnique({
-        where: { id },
+        where: { id: req.id },
         select: {
           id: true,
           role: true,
@@ -80,17 +89,15 @@ export default {
 
   async deleteUser(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
-
       const user = await prisma.user.findUnique({
-        where: { id },
+        where: { id: req.id },
       });
       if (!user) {
         errorFactory.notFound(res, "User has not been found");
         return;
       }
       await prisma.user.delete({
-        where: { id },
+        where: { id: req.id },
       });
 
       sucessFactory.noContent(res);

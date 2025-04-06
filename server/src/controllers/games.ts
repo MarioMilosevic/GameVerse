@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
+import { getAverageRating } from "../utils/helpers";
 
 export default {
   async getAll(req: Request, res: Response) {
@@ -42,14 +43,7 @@ export default {
 
       const gamesWithAvgRating = await Promise.all(
         games.map(async (game) => {
-          const ratingAggregation = await prisma.review.aggregate({
-            where: { gameId: game.id },
-            _avg: {
-              rating: true,
-            },
-          });
-
-          const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
+          const avgRating = await getAverageRating(game.id);
 
           return {
             ...game,
@@ -74,7 +68,7 @@ export default {
               content: true,
               createdAt: true,
               rating: true,
-              gameId:true,
+              gameId: true,
               user: {
                 select: {
                   createdDate: true,
@@ -110,19 +104,12 @@ export default {
         return;
       }
 
-      const ratingAggregation = await prisma.review.aggregate({
-        where: { gameId: singleGame.id },
-        _avg: {
-          rating: true,
-        },
-      });
-
-      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0
+      const avgRating = await getAverageRating(singleGame.id);
 
       const updatedGame = {
         ...singleGame,
-        rating:avgRating
-      }
+        rating: avgRating,
+      };
 
       sucessFactory.ok(res, updatedGame);
     } catch (error) {

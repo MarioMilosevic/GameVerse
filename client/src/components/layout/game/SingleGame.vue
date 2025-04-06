@@ -122,6 +122,7 @@
             <ReviewModal
               @delete-event="deleteHandler"
               @submit-event="submitModalHandler"
+              @close-modal-event="isReviewModalOpen = false"
               :name="name"
               :game-id="singleGame.id"
               :user-review="userReview"

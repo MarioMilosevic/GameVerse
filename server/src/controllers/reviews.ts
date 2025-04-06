@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../../prisma/prismaClient";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
-import { getAverageRating } from "../utils/helpers";
+import { getAverageRating, getExistingReview } from "../utils/helpers";
 
 export default {
   async getAll(req: Request, res: Response) {
@@ -16,7 +16,7 @@ export default {
   getReviewId(req: Request, res: Response, next: NextFunction) {
     const { reviewId } = req.params;
     const reviewIdNumber = Number(reviewId);
-    req.reviewId = reviewIdNumber;
+    req.id = reviewIdNumber;
     next();
   },
 
@@ -44,11 +44,7 @@ export default {
         return;
       }
 
-      const existingReview = await prisma.review.findUnique({
-        where: {
-          userId_gameId: { userId, gameId },
-        },
-      });
+      const existingReview = await getExistingReview(gameId, userId);
 
       if (existingReview) {
         errorFactory.badRequest(res, "You have already reviewed this game");
@@ -93,10 +89,7 @@ export default {
 
   async deleteReview(req: Request, res: Response) {
     try {
-      const existingReview = await prisma.review.findUnique({
-        where: { id: req.reviewId },
-        select: { gameId: true },
-      });
+      const existingReview = await getExistingReview(req.id);
 
       if (!existingReview?.gameId) {
         errorFactory.notFound(res, "Review not found");
@@ -104,7 +97,7 @@ export default {
       }
 
       await prisma.review.delete({
-        where: { id: req.reviewId },
+        where: { id: req.id },
       });
 
       const avgRating = await getAverageRating(existingReview.gameId);
@@ -123,25 +116,20 @@ export default {
         updatedReview: { content, rating },
       } = req.body;
 
-      if (!req.reviewId) {
+      if (!req.id) {
         errorFactory.badRequest(res);
         return;
       }
 
-      const existingReview = await prisma.review.findUnique({
-        where: { id: req.reviewId },
-        select: {
-          gameId: true,
-        },
-      });
+      const existingReview = await getExistingReview(req.id);
 
-      if (!existingReview) {
+      if (!existingReview?.gameId) {
         errorFactory.notFound(res, "Review not found");
         return;
       }
 
       const editedReview = await prisma.review.update({
-        where: { id: req.reviewId },
+        where: { id: req.id },
         data: { content, rating },
       });
 
