@@ -23,6 +23,7 @@
         :theme="theme"
         @sign-out-event="signOutHandler"
         @toggle-theme-event="handleTheme"
+        @my-reviews-event="myReviewsHandler"
       />
     </div>
     <div class="flex gap-4 items-center" v-else>
@@ -82,6 +83,11 @@ const signOutHandler = () => {
   signOut(router, user.value);
   resetUser();
 };
+
+const myReviewsHandler = () => {
+  router.push(`/my-reviews/${user.value.id}`)
+  console.log('radi')
+}
 
 const handleTheme = (darkMode: boolean) => {
   emits("toggle-theme-event", darkMode);

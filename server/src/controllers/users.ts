@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import sucessFactory from "../services/responses/sucessFactory";
+import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
+import { getAverageRating } from "../utils/helpers";
 import prisma from "../../prisma/prismaClient";
-import jwt, { decode } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import config from "../config";
 
 export default {
@@ -41,7 +42,7 @@ export default {
           errorFactory.notFound(res);
           return;
         }
-        sucessFactory.ok(res, user);
+        successFactory.ok(res, user);
       } catch (err) {
         errorFactory.notAuthorized(res);
         return;
@@ -58,7 +59,7 @@ export default {
         errorFactory.badRequest(res);
         return;
       }
-      sucessFactory.ok(res, allUsers);
+      successFactory.ok(res, allUsers);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -81,8 +82,51 @@ export default {
         return;
       }
 
-      sucessFactory.ok(res, user);
+      successFactory.ok(res, user);
     } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+
+  async getUserReviews(req: Request, res: Response) {
+    try {
+      const userWithReviews = await prisma.user.findUnique({
+        where: { id: req.id },
+        select: {
+          reviews: {
+            include: {
+              game: {
+                select: {
+                  name: true,
+                  thumbnail: true,
+                },
+              },
+            },
+          },
+        },
+      });
+
+      if (!userWithReviews) {
+        errorFactory.notFound(res, "User not found");
+        return;
+      }
+
+      const reviewsWithAvgRating = await Promise.all(
+        userWithReviews.reviews.map(async (review) => {
+          const avgRating = await getAverageRating(review.gameId);
+          return {
+            ...review,
+            game: {
+              ...review.game,
+              averageRating: avgRating,
+            },
+          };
+        })
+      );
+
+      successFactory.ok(res, reviewsWithAvgRating);
+    } catch (error) {
+      console.error(error);
       errorFactory.internalError(res);
     }
   },
@@ -100,7 +144,7 @@ export default {
         where: { id: req.id },
       });
 
-      sucessFactory.noContent(res);
+      successFactory.noContent(res);
     } catch (error) {
       errorFactory.internalError(res);
     }

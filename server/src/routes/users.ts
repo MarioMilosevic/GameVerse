@@ -13,6 +13,8 @@ router
   .delete(usersController.getUserId, usersController.deleteUser)
   .get(usersController.getUserId, usersController.getUser);
 
+  router.route("/reviews/:id").get(usersController.getUserId, usersController.getUserReviews)
+
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);
 

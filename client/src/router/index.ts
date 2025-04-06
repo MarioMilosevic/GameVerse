@@ -17,6 +17,11 @@ export const routes = [
     component: () => import("src/views/SingleGameView.vue"),
   },
   {
+    path: "/my-reviews/:id",
+    name: "My Reviews",
+    component: () => import("src/views/MyReviewsView.vue"),
+  },
+  {
     path: "/login",
     name: "Login",
     component: () => import("src/views/LoginView.vue"),
@@ -35,7 +40,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const { user, setUser } = useGetUserStore();
-  const { setLoading} = useGetLoadingStore()
+  const { setLoading } = useGetLoadingStore();
   const userToken = localStorage.getItem(tokenName);
   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
 
@@ -45,17 +50,17 @@ router.beforeEach(async (to) => {
 
   if (userToken && !user.value.id) {
     try {
-      setLoading(true)
-      const { data:userData } = await getUserData(userToken);
+      setLoading(true);
+      const { data: userData } = await getUserData(userToken);
       if (userData.id) {
-        setUser(userData)
+        setUser(userData);
       } else {
-        showToast('Unable to fetch user data', 'error')
+        showToast("Unable to fetch user data", "error");
       }
     } catch (error) {
-      console.error(error)      
+      console.error(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
   // if (user.value.role !== 'ADMIN' && to.name !== "Home") {

@@ -16,7 +16,7 @@
       <template #text> Account </template>
     </NavigationLink>
 
-    <NavigationLink>
+    <NavigationLink @click="emits('my-reviews-event')">
       <template #default>
         <v-icon name="md-ratereview" />
       </template>
@@ -54,7 +54,7 @@ import NavigationLink from "src/components/layout/navigation/NavigationLink.vue"
 import ToggleSwitch from "src/components/layout/others/ToggleSwitch.vue";
 import { ref, PropType } from "vue";
 
-const emits = defineEmits(["sign-out-event", "toggle-theme-event"]);
+const emits = defineEmits(["sign-out-event", "toggle-theme-event", 'my-reviews-event']);
 
 const props = defineProps({
   theme: {

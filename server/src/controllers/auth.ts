@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import errorFactory from "../services/responses/errorFactory";
-import sucessFactory from "../services/responses/sucessFactory";
+import sucessFactory from "../services/responses/successFactory";
 import prisma from "../../prisma/prismaClient";
 import validator from "validator";
 import jwt from "jsonwebtoken";
 import config from "../config";
 
-const signToken = (id: number) =>  jwt.sign({ id }, config.secrets.jwt);
+const signToken = (id: number) => jwt.sign({ id }, config.secrets.jwt);
 
 export default {
   async signUp(req: Request, res: Response) {
@@ -69,7 +69,6 @@ export default {
           password: true,
         },
       });
-
 
       if (!userInfo) {
         errorFactory.notAuthorized(res, "Invalid login credentials");

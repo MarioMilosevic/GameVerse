@@ -17,7 +17,7 @@ const emits = defineEmits(["open-modal-event"]);
 const props = defineProps({
   userReview: {
     type: Object as PropType<ReviewType | undefined>,
-    required: true,
+    required: false,
   },
 });
 

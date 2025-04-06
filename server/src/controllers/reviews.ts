@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import prisma from "../../prisma/prismaClient";
-import sucessFactory from "../services/responses/sucessFactory";
+import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 import { getAverageRating, getExistingReview } from "../utils/helpers";
 
@@ -8,7 +8,7 @@ export default {
   async getAll(req: Request, res: Response) {
     try {
       const allReviews = await prisma.review.findMany();
-      sucessFactory.ok(res, allReviews);
+      successFactory.ok(res, allReviews);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -81,7 +81,7 @@ export default {
         avgRating,
       };
 
-      sucessFactory.created(res, data);
+      successFactory.created(res, data);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -102,7 +102,7 @@ export default {
 
       const avgRating = await getAverageRating(existingReview.gameId);
 
-      sucessFactory.ok(res, {
+      successFactory.ok(res, {
         avgRating,
       });
     } catch (error) {
@@ -140,7 +140,7 @@ export default {
         avgRating,
       };
 
-      sucessFactory.ok(res, data);
+      successFactory.ok(res, data);
     } catch (error) {
       errorFactory.internalError(res);
     }

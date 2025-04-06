@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
-import sucessFactory from "../services/responses/sucessFactory";
+import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 
 export default {
@@ -11,7 +11,7 @@ export default {
         errorFactory.badRequest(res);
         return;
       }
-      sucessFactory.ok(res, all);
+      successFactory.ok(res, all);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -25,7 +25,7 @@ export default {
         errorFactory.badRequest(res);
         return;
       }
-      sucessFactory.created(res, newGenre);
+      successFactory.created(res, newGenre);
     } catch (error) {
       errorFactory.internalError(res);
     }

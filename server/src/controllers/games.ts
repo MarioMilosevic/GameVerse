@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
-import sucessFactory from "../services/responses/sucessFactory";
+import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 import { getAverageRating } from "../utils/helpers";
 
@@ -52,7 +52,7 @@ export default {
         })
       );
 
-      sucessFactory.ok(res, gamesWithAvgRating);
+      successFactory.ok(res, gamesWithAvgRating);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -111,7 +111,7 @@ export default {
         rating: avgRating,
       };
 
-      sucessFactory.ok(res, updatedGame);
+      successFactory.ok(res, updatedGame);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -161,7 +161,7 @@ export default {
         return;
       }
 
-      sucessFactory.created(res, newGame);
+      successFactory.created(res, newGame);
     } catch (error) {
       console.error(error);
       errorFactory.internalError(res);
@@ -176,7 +176,7 @@ export default {
         errorFactory.notFound(res);
         return;
       }
-      sucessFactory.noContent(res);
+      successFactory.noContent(res);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -191,7 +191,7 @@ export default {
           thumbnail,
         },
       });
-      sucessFactory.ok(res, updatedGame);
+      successFactory.ok(res, updatedGame);
     } catch (error) {
       errorFactory.internalError(res);
     }

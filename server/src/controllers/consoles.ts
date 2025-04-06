@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
-import sucessFactory from "../services/responses/sucessFactory";
+import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 
 export default {
   async getAll(req: Request, res: Response) {
     try {
       const consoles = await prisma.console.findMany();
-      sucessFactory.ok(res, consoles);
+      successFactory.ok(res, consoles);
     } catch (error) {
       errorFactory.internalError(res);
     }
@@ -23,10 +23,9 @@ export default {
         return;
       }
 
-      sucessFactory.ok(res, newConsole);
+      successFactory.ok(res, newConsole);
     } catch (error) {
       errorFactory.internalError(res);
     }
-    },
-  
+  },
 };
