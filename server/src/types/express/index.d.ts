@@ -20,8 +20,8 @@ import { Request } from "express";
 declare global {
   namespace Express {
     export interface Request {
-      tenant?: string;
-      reviewId:number
+      reviewId: number;
+      avgRating:number
       // requestPayload: {
       //   reviewId: number;
       //   body: any;

@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../../prisma/prismaClient";
 import sucessFactory from "../services/responses/sucessFactory";
 import errorFactory from "../services/responses/errorFactory";
+import { getAverageRating } from "../utils/helpers";
 
 export default {
   async getAll(req: Request, res: Response) {
@@ -13,33 +14,11 @@ export default {
     }
   },
   getReviewId(req: Request, res: Response, next: NextFunction) {
-    console.log("uslo u getReviewId", req.params);
     const { reviewId } = req.params;
-    console.log("proslo odje", reviewId);
-    const reviewIdNumber = Number(reviewId)
-    console.log('ovo je revju number', reviewIdNumber)
+    const reviewIdNumber = Number(reviewId);
     req.reviewId = reviewIdNumber;
-    console.log(
-      "proslo odje i ovo je request payload revju ID",
-      req.reviewId
-    );
     next();
   },
-
-  // async checkExistingUser(req: Request, res: Response, next: NextFunction) {
-  //   try {
-
-  //      const existingUser = await prisma.user.findUnique({
-  //        where: { id: userId },
-  //        select: {
-  //          fullName: true,
-  //          createdDate: true,
-  //          image: true,
-  //          id: true,
-  //        },
-  //      });
-  //   } catch (error) {}
-  // },
 
   async addReview(req: Request, res: Response) {
     try {
@@ -85,14 +64,7 @@ export default {
         },
       });
 
-      const ratingAggregation = await prisma.review.aggregate({
-        where: { gameId },
-        _avg: {
-          rating: true,
-        },
-      });
-
-      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
+      const avgRating = await getAverageRating(gameId);
 
       const review = {
         id: newReview.id,
@@ -121,11 +93,8 @@ export default {
 
   async deleteReview(req: Request, res: Response) {
     try {
-      const { reviewId } = req.params;
-      const numberReviewId = Number(reviewId);
-
       const existingReview = await prisma.review.findUnique({
-        where: { id: numberReviewId },
+        where: { id: req.reviewId },
         select: { gameId: true },
       });
 
@@ -135,15 +104,10 @@ export default {
       }
 
       await prisma.review.delete({
-        where: { id: numberReviewId },
+        where: { id: req.reviewId },
       });
 
-      const ratingAggregation = await prisma.review.aggregate({
-        where: { gameId: existingReview.gameId },
-        _avg: { rating: true },
-      });
-
-      const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
+      const avgRating = await getAverageRating(existingReview.gameId);
 
       sucessFactory.ok(res, {
         avgRating,
@@ -155,57 +119,40 @@ export default {
 
   async editReview(req: Request, res: Response) {
     try {
-      console.log(
-        "uslo u edit review i ovo bi trebao biti reviewId",
-        req.reviewId
-      );
-      // const { reviewId } = req.params;
-      // const {
-      //   updatedReview: { content, rating },
-      // } = req.body;
+      const {
+        updatedReview: { content, rating },
+      } = req.body;
 
-      // console.log("uslo u edit reviju imam id",req.requestPayload.reviewId)
+      if (!req.reviewId) {
+        errorFactory.badRequest(res);
+        return;
+      }
 
-      // const numberReviewId = Number(reviewId);
+      const existingReview = await prisma.review.findUnique({
+        where: { id: req.reviewId },
+        select: {
+          gameId: true,
+        },
+      });
 
-      // if (!req.requestPayload.reviewId) {
-      //   errorFactory.badRequest(res);
-      //   return;
-      // }
+      if (!existingReview) {
+        errorFactory.notFound(res, "Review not found");
+        return;
+      }
 
-      // const existingReview = await prisma.review.findUnique({
-      //   where: { id: req.requestPayload.reviewId },
-      //   select: {
-      //     gameId: true,
-      //   },
-      // });
+      const editedReview = await prisma.review.update({
+        where: { id: req.reviewId },
+        data: { content, rating },
+      });
 
-      // if (!existingReview) {
-      //   errorFactory.notFound(res, "Review not found");
-      //   return;
-      // }
+      const avgRating = await getAverageRating(existingReview.gameId);
 
-      // const editedReview = await prisma.review.update({
-      //   where: { id: req.requestPayload.reviewId },
-      //   data: { content, rating },
-      // });
+      const data = {
+        editedReview,
+        avgRating,
+      };
 
-      // const ratingAggregation = await prisma.review.aggregate({
-      //   where: { gameId: Number(existingReview.gameId) },
-      //   _avg: {
-      //     rating: true,
-      //   },
-      // });
-
-      // const avgRating = ratingAggregation._avg.rating?.toFixed(1) || 0;
-
-      // const data = {
-      //   editedReview,
-      //   avgRating,
-      // };
-
-      // sucessFactory.ok(res, data);
-      sucessFactory.ok(res, req.reviewId);
+      sucessFactory.ok(res, data);
     } catch (error) {
       errorFactory.internalError(res);
     }
