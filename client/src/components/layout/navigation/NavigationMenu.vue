@@ -9,7 +9,7 @@
       <template #text> Dashboard </template>
     </NavigationLink>
 
-    <NavigationLink>
+    <NavigationLink @click="emits('account-event')">
       <template #default>
         <v-icon name="md-accountbox" />
       </template>
@@ -54,7 +54,7 @@ import NavigationLink from "src/components/layout/navigation/NavigationLink.vue"
 import ToggleSwitch from "src/components/layout/others/ToggleSwitch.vue";
 import { ref, PropType } from "vue";
 
-const emits = defineEmits(["sign-out-event", "toggle-theme-event", 'my-reviews-event']);
+const emits = defineEmits(["sign-out-event", "toggle-theme-event", 'my-reviews-event', 'account-event']);
 
 const props = defineProps({
   theme: {

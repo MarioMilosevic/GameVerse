@@ -22,14 +22,14 @@
           <p class="text-justify">{{ review.content }}</p>
           <div class="flex flex-col gap-2">
             <GameRating :rating="review.game.averageRating" />
-            <h4>Your rating: {{ review.rating.toFixed(1) }}/10</h4>
+            <h4>Your rating: {{ review.rating }}/10</h4>
           </div>
           <footer class="text-sm">
             Reviewed on {{ formattedDate(review.createdAt) }}
           </footer>
           <ActionButton
             @click="seeGameDetails(review.gameId)"
-            class="absolute bottom-0 right-0"
+            position="absolute"
           >
             Details
           </ActionButton>

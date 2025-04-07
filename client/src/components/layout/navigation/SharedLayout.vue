@@ -28,6 +28,7 @@
         @sign-out-event="signOutHandler"
         @toggle-theme-event="handleTheme"
         @my-reviews-event="myReviewsHandler"
+        @account-event="accountHandler"
       />
     </div>
     <div class="flex gap-4 items-center" v-else>
@@ -103,6 +104,10 @@ const selectedPage = computed(() => {
 const pageHandler = (index: number) => {
   router.push(authRoutes[index]);
 };
+
+const accountHandler = () => {
+  router.push('/account')
+}
 
 const signOutHandler = () => {
   signOut(router, user.value);

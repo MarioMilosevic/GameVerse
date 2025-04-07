@@ -31,6 +31,11 @@ export const routes = [
     name: "Sign Up",
     component: () => import("src/views/SignUpView.vue"),
   },
+  {
+    path: "/account",
+    name: "Account",
+    component: () => import("src/views/AccountView.vue"),
+  },
 ];
 
 const router = createRouter({

@@ -7,7 +7,6 @@
     />
     <div class="flex flex-col gap-4">
       <h1 class="text-center text-xl">{{ name }}</h1>
-
       <div class="grid grid-cols-2 gap-2">
         <GameStat>
           <template #icon>
@@ -45,11 +44,7 @@
           :image="obj.console.image"
         />
       </ConsoleWrapper>
-      <ActionButton
-        class="absolute bottom-0 right-0"
-        size="big"
-        @click="seeGameDetails(id)"
-      >
+      <ActionButton position="absolute" size="big" @click="seeGameDetails(id)">
         Details
       </ActionButton>
     </div>
@@ -76,7 +71,16 @@ const props = defineProps({
   },
 });
 
-const { name, releaseYear, price, gameplayHours, id, thumbnail, consoles, rating } = props.game;
+const {
+  name,
+  releaseYear,
+  price,
+  gameplayHours,
+  id,
+  thumbnail,
+  consoles,
+  rating,
+} = props.game;
 const router = useRouter();
 
 const seeGameDetails = (id: number) => {
