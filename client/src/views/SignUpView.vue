@@ -40,6 +40,7 @@
         type="submit"
         :style="{ marginTop: '0.5rem' }"
         :disabled="!allFieldsCompleted"
+        :is-loading="isLoading"
       >
         SIGN UP
       </ActionButton>
@@ -80,6 +81,9 @@ const signUpCredentials = ref<SignUpCredentialsType>({
   passwordConfirm: "",
 });
 
+const isLoading = ref<boolean>(false);
+
+
 const allFieldsCompleted = computed(() => {
   return signUpSchema.safeParse(signUpCredentials.value).success;
 });
@@ -97,6 +101,7 @@ const blurHandler = (property: SignUpFields) => {
 
 const submitHandler = async () => {
   try {
+    isLoading.value = true
     const { error } = signUpSchema.safeParse(signUpCredentials.value);
     if (error) {
       Object.entries(getSignUpErrors(error)).forEach(([key, value]) => {
@@ -115,6 +120,7 @@ const submitHandler = async () => {
           showToast("User Created");
         }, 1000);
       } else {
+        isLoading.value = false
         showToast(message, "error");
       }
     }
