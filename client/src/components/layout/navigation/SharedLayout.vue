@@ -1,6 +1,10 @@
 <template>
   <nav
-    class="flex justify-between items-center px-8 absolute top-0 right-0 w-full bg-slate-300 dark:bg-slate-900"
+    :class="[
+      `flex justify-between items-center px-8 top-0 ${
+        isSticky ? 'fixed z-40' : 'absolute'
+      } top-0 right-0 w-full bg-slate-300 dark:bg-slate-900 transition-all duration-700`,
+    ]"
   >
     <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-4">
       <img src="/game-controller.png" />
@@ -48,9 +52,17 @@ import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
-import { computed, PropType } from "vue";
+import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 
 const { user, resetUser } = useGetUserStore();
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 
 defineProps({
   theme: {
@@ -61,6 +73,8 @@ defineProps({
 
 const emits = defineEmits(["toggle-theme-event"]);
 
+const isSticky = ref<boolean>(false);
+
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];
 });
@@ -69,6 +83,17 @@ const authPages = ["LOG IN", "SIGN UP"];
 const authRoutes = ["/login", "/sign-up"];
 
 const router = useRouter();
+
+const handleScroll = () => {
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+  if (scrollTop >= windowHeight) {
+    console.log("sada");
+    isSticky.value = true;
+  } else {
+    isSticky.value = false;
+  }
+};
 
 const selectedPage = computed(() => {
   if (router.currentRoute.value.fullPath === "/login") return 0;
@@ -85,8 +110,8 @@ const signOutHandler = () => {
 };
 
 const myReviewsHandler = () => {
-  router.push(`/my-reviews/${user.value.id}`)
-}
+  router.push(`/my-reviews/${user.value.id}`);
+};
 
 const handleTheme = (darkMode: boolean) => {
   emits("toggle-theme-event", darkMode);
