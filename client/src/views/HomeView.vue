@@ -26,6 +26,7 @@ onBeforeMount(async () => {
     }
   } catch (error) {
     console.error("Unexpected erorr occured");
+    showToast("Unexpected error occured", "error");
   } finally {
     setLoading(false);
   }
