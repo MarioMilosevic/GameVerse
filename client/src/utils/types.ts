@@ -13,7 +13,7 @@ export type GameType = {
   thumbnail: string;
   trailer: string;
   writers: string[];
-  reviews: ReviewType[]
+  reviews: ReviewType[];
 };
 
 export type ReviewType = {
@@ -22,9 +22,9 @@ export type ReviewType = {
   gameId?: number;
   content: string;
   rating: number | null;
-  userId:number
-  user:UserType
-}
+  userId: number;
+  user: UserType;
+};
 
 export type UserType = {
   id?: number;
@@ -32,7 +32,7 @@ export type UserType = {
   email: string;
   fullName: string;
   image: string;
-  createdDate:string
+  createdDate: string;
 };
 
 export type ConsoleType = {
@@ -60,15 +60,20 @@ export type SignUpCredentialsType = {
   passwordConfirm: string;
 };
 
+export type AccountSettingsType = {
+  fullName: string;
+  email: string;
+};
+
 export type GameReviewType = {
   rating: number | null;
-  content:string
-}
+  content: string;
+};
 
 export type NewReviewResponseType = {
-  review: ReviewType,
+  review: ReviewType;
   avgRating: string;
-}
+};
 
 export type MyReviewType = {
   content: string;
@@ -77,9 +82,9 @@ export type MyReviewType = {
     name: string;
     thumbnail: string;
     averageRating: string;
-  },
+  };
   gameId: number;
   id: number;
   rating: number;
-  userId:number
-}
+  userId: number;
+};

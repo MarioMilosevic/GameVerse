@@ -1,6 +1,7 @@
 export const baseUrl = "http://localhost:3000/api/v1";
-export const tokenName = 'gameVerse-token'
-export const profileImg = "https://social-network-js.vercel.app/img/profile5.png"
+export const tokenName = "gameVerse-token";
+export const profileImg =
+  "https://social-network-js.vercel.app/img/profile5.png";
 
 export const passwordMessage = {
   message: "Password must be at least 8 characters",
@@ -48,6 +49,21 @@ export const signUpInputs = [
   },
 ];
 
+export const accountInputs = [
+  {
+    name: "fullName",
+    placeholder: "John Doe",
+    type: "text",
+    label: "Change Your Name",
+  },
+  {
+    name: "email",
+    placeholder: "you@example.com",
+    type: "email",
+    label: "Email Address",
+  },
+];
+
 export const emptyStarsArray = new Array(10).fill("empty");
 
-export const storageThemeName = 'gameVerse-theme'
+export const storageThemeName = "gameVerse-theme";
