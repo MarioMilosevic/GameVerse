@@ -37,6 +37,14 @@ export default {
         }
         const user = await prisma.user.findUnique({
           where: { id: Number(decoded.id) },
+          select: {
+            id:true,
+            createdDate: true,
+            email: true,
+            fullName: true,
+            image: true,
+            role:true
+          }
         });
         if (!user) {
           errorFactory.notFound(res);
@@ -44,6 +52,7 @@ export default {
         }
         successFactory.ok(res, user);
       } catch (err) {
+        console.log('uslo odje')
         errorFactory.notAuthorized(res);
         return;
       }

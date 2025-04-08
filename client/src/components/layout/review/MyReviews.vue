@@ -1,9 +1,11 @@
 <template>
-  <main class="mx-auto min-h-screen max-w-[1280px]">
+  <main
+    class="mx-auto min-h-screen max-w-[1280px] flex flex-col gap-4 items-center"
+  >
     <h1 class="text-5xl text-center py-8">Your Reviews</h1>
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-4" v-if="reviews.length > 0">
       <li
-        v-for="review in props.reviews"
+        v-for="review in reviews"
         :key="review.id"
         class="flex items-center h-[250px] gap-6"
       >
@@ -36,18 +38,22 @@
         </div>
       </li>
     </ul>
+    <section v-else class="flex flex-col items-center gap-8">
+      <h2 class="text-2xl text-center">You haven't made any reviews yet</h2>
+      <ActionButton @click="router.push('/')">View All Games</ActionButton>
+    </section>
   </main>
 </template>
 
 <script setup lang="ts">
-import GameRating from "src/components/layout/game/GameRating.vue";
 import { MyReviewType } from "src/utils/types";
 import { PropType } from "vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { formattedDate } from "src/utils/helpers";
 import { useRouter } from "vue-router";
+import GameRating from "src/components/layout/game/GameRating.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 
-const props = defineProps({
+defineProps({
   reviews: {
     type: Array as PropType<MyReviewType[]>,
     required: true,
