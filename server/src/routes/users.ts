@@ -11,9 +11,12 @@ router.route("/user").get(usersController.getUserFromToken);
 router
   .route("/:id")
   .delete(usersController.getUserId, usersController.deleteUser)
-  .get(usersController.getUserId, usersController.getUser);
+  .get(usersController.getUserId, usersController.getUser)
+  .patch(usersController.getUserId, usersController.editUserProfile)
 
-  router.route("/reviews/:id").get(usersController.getUserId, usersController.getUserReviews)
+router
+  .route("/reviews/:id")
+  .get(usersController.getUserId, usersController.getUserReviews)
 
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);

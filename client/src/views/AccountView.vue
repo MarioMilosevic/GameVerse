@@ -22,7 +22,7 @@
         Update account settings
       </SubtitleComponent>
 
-      <form class="border flex flex-col gap-4" @submit.prevent="accountHandler">
+      <form class="border flex flex-col gap-6" @submit.prevent="accountHandler">
         <RenderlessComponent>
           <template v-for="input in accountInputs" :key="input.name">
             <FormBlock>
@@ -52,7 +52,7 @@
           </template>
         </RenderlessComponent>
         <div class="flex gap-4">
-          <ActionButton :disabled="!allFieldsCompleted"
+          <ActionButton :disabled="!allFieldsCompleted" type="submit"
             >Change Settings</ActionButton
           >
           <ActionButton>Disable Account</ActionButton>
@@ -69,7 +69,6 @@ import RenderlessComponent from "src/components/layout/others/RenderlessComponen
 import { formattedDate } from "src/utils/helpers";
 import { accountInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
-import { useRouter } from "vue-router";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
@@ -78,16 +77,16 @@ import FormError from "src/components/form/FormError.vue";
 import { AccountSettingsType } from "src/utils/types";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import {
-  AccountSchema,
   accountSchema,
   AccountFieldErrors,
   getAccountFieldError,
-  getAccountErrors,
   AccountFields,
   AccountTouchedFields,
 } from "src/schemas/accountPage";
+import { editUserProfile } from "src/api/users";
+import { showToast } from "src/utils/toast";
 
-const { user } = useGetUserStore();
+const { user, setUser } = useGetUserStore();
 
 const accountSettings = ref<AccountSettingsType>({
   fullName: "",
@@ -100,8 +99,6 @@ const allFieldsCompleted = computed(() => {
   return accountSchema.safeParse(accountSettings.value).success;
 });
 
-const router = useRouter();
-
 const blurHandler = (property: AccountFields) => {
   const message = getAccountFieldError(
     property,
@@ -111,9 +108,21 @@ const blurHandler = (property: AccountFields) => {
   touchedFields.value[property] = true;
 };
 
-
-const accountHandler = () => {
-  console.log('radi')
-}
-
+const accountHandler = async () => {
+  try {
+    if (user.value.id) {
+      const { data, message } = await editUserProfile(
+        user.value.id,
+        accountSettings.value
+      );
+      if (data) {
+        setUser(data);
+      } else {
+        showToast(message, "error");
+      }
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>

@@ -1,4 +1,4 @@
-import z, { ZodError } from "zod";
+import z from "zod";
 
 export const accountSchema = z.object({
   fullName: z
@@ -37,11 +37,3 @@ export function getAccountFieldError<
     ? error.issues.map((issue) => issue.message).join(", ")
     : undefined;
 }
-
-export const getAccountErrors = (error: ZodError) =>
-  error.issues.reduce((all, issue) => {
-    const path = issue.path.join("") as keyof AccountSchema;
-    const message = all[path] ? all[path] + ", " : "";
-    all[path] = message + issue.message;
-    return all;
-  }, {} as AccountFieldErrors);

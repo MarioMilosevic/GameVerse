@@ -1,4 +1,5 @@
 import {
+  AccountSettingsType,
   LoginCredentialsType,
   SignUpCredentialsType,
   UserType,
@@ -60,6 +61,25 @@ export const getUserData = async (token: string) => {
 export const getUserReviews = async (id: number) => {
   try {
     const response = await fetch(`${baseUrl}/users/reviews/${id}`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const editUserProfile = async (
+  id: number,
+  data: AccountSettingsType
+) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
     return await response.json();
   } catch (error) {
     console.error(error);

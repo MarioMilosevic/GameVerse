@@ -38,13 +38,13 @@ export default {
         const user = await prisma.user.findUnique({
           where: { id: Number(decoded.id) },
           select: {
-            id:true,
+            id: true,
             createdDate: true,
             email: true,
             fullName: true,
             image: true,
-            role:true
-          }
+            role: true,
+          },
         });
         if (!user) {
           errorFactory.notFound(res);
@@ -52,7 +52,6 @@ export default {
         }
         successFactory.ok(res, user);
       } catch (err) {
-        console.log('uslo odje')
         errorFactory.notAuthorized(res);
         return;
       }
@@ -154,6 +153,36 @@ export default {
       });
 
       successFactory.noContent(res);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+  async editUserProfile(req: Request, res: Response) {
+    try {
+      const { fullName, email } = req.body;
+      console.log(fullName, email);
+
+      if (!fullName || !email) {
+        errorFactory.badRequest(res);
+        return;
+      }
+
+      const updatedUser = await prisma.user.update({
+        where: { id: req.id },
+        data: {
+          fullName,
+          email,
+        },
+        select: {
+          createdDate: true,
+          email: true,
+          fullName: true,
+          id: true,
+          image: true,
+          role: true,
+        },
+      });
+      successFactory.ok(res, updatedUser);
     } catch (error) {
       errorFactory.internalError(res);
     }
