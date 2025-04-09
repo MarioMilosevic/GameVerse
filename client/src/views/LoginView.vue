@@ -26,9 +26,7 @@
             </template>
             <template #error>
               <FormError>
-                <template #default>{{
-                  loginFormErrors[input.name as LoginFields]
-                }}</template>
+                {{ loginFormErrors[input.name as LoginFields] }}
               </FormError>
             </template>
           </FormBlock>

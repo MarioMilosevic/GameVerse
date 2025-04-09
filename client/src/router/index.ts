@@ -36,6 +36,11 @@ export const routes = [
     name: "Account",
     component: () => import("src/views/AccountView.vue"),
   },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: () => import("src/views/DashboardView.vue"),
+  },
 ];
 
 const router = createRouter({

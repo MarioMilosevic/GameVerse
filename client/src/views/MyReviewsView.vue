@@ -25,7 +25,6 @@ onBeforeMount(async () => {
     if (user.value.id) {
       const { data, message } = await getUserReviews(user.value.id);
       if (data) {
-        console.log(data);
         myReviews.value = data;
       } else {
         showToast(message, "error");

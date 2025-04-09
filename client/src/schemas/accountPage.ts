@@ -37,3 +37,8 @@ export function getAccountFieldError<
     ? error.issues.map((issue) => issue.message).join(", ")
     : undefined;
 }
+
+export const accountPhotoSchema = z.object({
+  image:z.string()
+})
+

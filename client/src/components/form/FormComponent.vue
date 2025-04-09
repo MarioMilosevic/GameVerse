@@ -2,7 +2,7 @@
   <form
     ref="formRef"
     :class="[
-      'rounded-xl px-8 py-6 mx-auto flex flex-col gap-5 transition-all duration-700 origin-top',
+      'rounded-xl px-8 py-6 mx-auto flex flex-col w-full gap-5 transition-all duration-700 origin-top',
       isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12' ,formOptions[props.type],
     ]"
   >
@@ -28,7 +28,7 @@ const props = defineProps({
 });
 
 const formOptions = {
-  auth: "max-w-[400px] w-full bg-slate-400 dark:bg-slate-800 mt-12",
+  auth: "max-w-[400px] bg-slate-400 dark:bg-slate-800 mt-12",
   regular: "bg-slate-200 dark:bg-slate-950",
 };
 

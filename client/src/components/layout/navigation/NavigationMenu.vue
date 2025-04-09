@@ -2,7 +2,7 @@
   <ul
     class="flex flex-col mt-8 gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-md transition-all duration-300"
   >
-    <NavigationLink>
+    <NavigationLink v-if="user.role === 'ADMIN'" @click="emits('dashboard-event')">
       <template #default>
         <v-icon name="md-dashboardcustomize" />
       </template>
@@ -52,9 +52,12 @@
 <script setup lang="ts">
 import NavigationLink from "src/components/layout/navigation/NavigationLink.vue";
 import ToggleSwitch from "src/components/layout/others/ToggleSwitch.vue";
+import useGetUserStore from "src/composables/useGetUserStore";
 import { ref, PropType } from "vue";
 
-const emits = defineEmits(["sign-out-event", "toggle-theme-event", 'my-reviews-event', 'account-event']);
+const emits = defineEmits(["sign-out-event", "toggle-theme-event", 'my-reviews-event', 'account-event', 'dashboard-event']);
+
+const {user} = useGetUserStore()
 
 const props = defineProps({
   theme: {

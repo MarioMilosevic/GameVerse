@@ -25,6 +25,7 @@
       <NavigationMenu
         class="absolute bottom-0 left-0 translate-y-full scale-y-0 opacity-0 origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
         :theme="theme"
+        @dashboard-event="dashboardHandler"
         @sign-out-event="signOutHandler"
         @toggle-theme-event="handleTheme"
         @my-reviews-event="myReviewsHandler"
@@ -106,8 +107,8 @@ const pageHandler = (index: number) => {
 };
 
 const accountHandler = () => {
-  router.push('/account')
-}
+  router.push("/account");
+};
 
 const signOutHandler = () => {
   signOut(router, user.value);
@@ -120,5 +121,9 @@ const myReviewsHandler = () => {
 
 const handleTheme = (darkMode: boolean) => {
   emits("toggle-theme-event", darkMode);
+};
+
+const dashboardHandler = () => {
+  router.push("/dashboard");
 };
 </script>

@@ -1,5 +1,7 @@
 <template>
-  <main class="max-w-[1280px] p-8 mx-auto border mt-8 flex gap-4">
+  <main
+    class="max-w-[1280px] p-8 mx-auto mt-8 flex gap-4 bg-slate-800 rounded-2xl"
+  >
     <section class="w-1/3 flex flex-col gap-8">
       <img :src="user.image" :alt="user.image" class="h-[100px] w-[100px]" />
       <article class="flex flex-col gap-2">
@@ -17,101 +19,82 @@
       </article>
     </section>
 
-    <section class="border w-2/3">
+    <section class="w-2/3 flex flex-col gap-4">
+      <FormComponent class="gap-6" type="regular" @submit.prevent="accountHandler">
+        <template #title>
+          <SubtitleComponent justify="start">
+            Update account settings
+          </SubtitleComponent>
+        </template>
+        <template #inputs>
+          <RenderlessComponent>
+            <template v-for="input in accountInputs" :key="input.name">
+              <FormBlock>
+                <template #label>
+                  <FormLabel :id="input.name">
+                    {{ input.label }}
+                  </FormLabel>
+                </template>
+                <template #input>
+                  <FormInput
+                    @blur-event="blurHandler(input.name as AccountFields)"
+                    v-bind="input"
+                    v-model="accountSettings[input.name as keyof typeof accountSettings]"
+                  />
+                </template>
+                <template #line>
+                  <FormLine />
+                </template>
+                <template #error>
+                  <FormError>
+                    {{ accountFormErrors[input.name as AccountFields] }}
+                  </FormError>
+                </template>
+              </FormBlock>
+            </template>
+          </RenderlessComponent>
+        </template>
+        <template #submit>
+          <div class="flex gap-4">
+            <ActionButton
+              :disabled="!accountSettingsFieldsCompleted"
+              type="submit"
+              >Change Settings</ActionButton
+            >
+            <ActionButton>Disable Account</ActionButton>
+          </div>
+        </template>
+      </FormComponent>
 
+      <FormComponent type="regular" @submit.prevent="imageHandler">
+        <template #title>
+          <SubtitleComponent justify="start"> Update photo </SubtitleComponent>
+        </template>
 
-    <FormComponent class="gap-6" type="regular">
-      <template #title>
-        <SubtitleComponent justify="start">
-          Update account settings
-        </SubtitleComponent>
-      </template>
-      <template #inputs>
-        <RenderlessComponent>
-          <template v-for="input in accountInputs" :key="input.name">
-            <FormBlock>
-              <template #label>
-                <FormLabel :id="input.name">
-                  {{ input.label }}
-                </FormLabel>
-              </template>
-              <template #input>
-                <FormInput
-                  @blur-event="blurHandler(input.name as AccountFields)"
-                  v-bind="input"
-                  v-model="accountSettings[input.name as keyof typeof accountSettings]"
-                />
-              </template>
-              <template #line>
-                <FormLine />
-              </template>
-              <template #error>
-                <FormError>
-                  <template #default>{{
-                    accountFormErrors[input.name as AccountFields]
-                  }}</template>
-                </FormError>
-              </template>
-            </FormBlock>
-          </template>
-        </RenderlessComponent>
-      </template>
-      <template #submit>
-        <div class="flex gap-4">
-          <ActionButton :disabled="!allFieldsCompleted" type="submit"
-            >Change Settings</ActionButton
+        <template #inputs>
+          <!-- <FormFile/> -->
+          <FormBlock class="items-start">
+            <template #label>
+              <FormLabel id="file" class="pl-1"> Upload File </FormLabel>
+            </template>
+            <template #input>
+              <FormFile :file="accountPhoto" @file-event="photoHandler"/>
+              <p class="pl-1 text-sm text-slate-500 dark:text-slate-300">
+                SVG, PNG, JPG or GIF
+              </p>
+            </template>
+            <template #error>
+              <FormError> </FormError>
+            </template>
+          </FormBlock>
+        </template>
+        <template #submit>
+          <ActionButton type="submit" :style="{ alignSelf: 'start', marginTop: '0.5rem' }"
+            >Change Photo</ActionButton
           >
-          <ActionButton>Disable Account</ActionButton>
-        </div>
-      </template>
-    </FormComponent>
-
-    <FormComponent type="regular">
-       <template #title>
-        <SubtitleComponent justify="start">
-          Update photo
-        </SubtitleComponent>
-      </template>
-
- <template #inputs>
-    <FormFile/>
-
-
-        <!-- <RenderlessComponent>
-          <template v-for="input in accountInputs" :key="input.name">
-            <FormBlock>
-              <template #label>
-                <FormLabel :id="input.name">
-                  {{ input.label }}
-                </FormLabel>
-              </template>
-              <template #input>
-                <FormInput
-                  @blur-event="blurHandler(input.name as AccountFields)"
-                  v-bind="input"
-                  v-model="accountSettings[input.name as keyof typeof accountSettings]"
-                />
-              </template>
-              <template #line>
-                <FormLine />
-              </template>
-              <template #error>
-                <FormError>
-                  <template #default>{{
-                    accountFormErrors[input.name as AccountFields]
-                  }}</template>
-                </FormError>
-              </template>
-            </FormBlock>
-          </template>
-        </RenderlessComponent> -->
-      </template>
-
-    </FormComponent>
+        </template>
+      </FormComponent>
     </section>
-
-
-
   </main>
 </template>
 
@@ -147,10 +130,14 @@ const accountSettings = ref<AccountSettingsType>({
   fullName: "",
   email: "",
 });
+
 const touchedFields = ref<AccountTouchedFields>({});
 const accountFormErrors = ref<AccountFieldErrors>({});
 
-const allFieldsCompleted = computed(() => {
+const accountPhoto = ref()
+
+
+const accountSettingsFieldsCompleted = computed(() => {
   return accountSchema.safeParse(accountSettings.value).success;
 });
 
@@ -180,4 +167,13 @@ const accountHandler = async () => {
     console.error(error);
   }
 };
+
+const photoHandler = (e) => {
+  console.log('uslo')
+  console.log(e.target.files[0])
+}
+
+const imageHandler = () => {
+  console.log('image radi')
+}
 </script>
