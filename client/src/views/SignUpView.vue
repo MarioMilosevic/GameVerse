@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @submit.prevent="submitHandler">
+  <FormComponent @submit.prevent="submitHandler">
     <template #title>
       <h1 class="text-2xl text-center uppercase">Create your account</h1>
     </template>
@@ -45,11 +45,11 @@
         SIGN UP
       </ActionButton>
     </template>
-  </AuthForm>
+  </FormComponent>
 </template>
 
 <script setup lang="ts">
-import AuthForm from "src/components/form/AuthForm.vue";
+import FormComponent from "src/components/form/FormComponent.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
@@ -83,7 +83,6 @@ const signUpCredentials = ref<SignUpCredentialsType>({
 
 const isLoading = ref<boolean>(false);
 
-
 const allFieldsCompleted = computed(() => {
   return signUpSchema.safeParse(signUpCredentials.value).success;
 });
@@ -101,7 +100,7 @@ const blurHandler = (property: SignUpFields) => {
 
 const submitHandler = async () => {
   try {
-    isLoading.value = true
+    isLoading.value = true;
     const { error } = signUpSchema.safeParse(signUpCredentials.value);
     if (error) {
       Object.entries(getSignUpErrors(error)).forEach(([key, value]) => {
@@ -120,7 +119,7 @@ const submitHandler = async () => {
           showToast("User Created");
         }, 1000);
       } else {
-        isLoading.value = false
+        isLoading.value = false;
         showToast(message, "error");
       }
     }

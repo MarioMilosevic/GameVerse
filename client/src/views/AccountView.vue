@@ -17,12 +17,16 @@
       </article>
     </section>
 
-    <section class="border w-2/3 flex flex-col gap-4">
-      <SubtitleComponent justify="start">
-        Update account settings
-      </SubtitleComponent>
+    <section class="border w-2/3">
 
-      <form class="border flex flex-col gap-6" @submit.prevent="accountHandler">
+
+    <FormComponent class="gap-6" type="regular">
+      <template #title>
+        <SubtitleComponent justify="start">
+          Update account settings
+        </SubtitleComponent>
+      </template>
+      <template #inputs>
         <RenderlessComponent>
           <template v-for="input in accountInputs" :key="input.name">
             <FormBlock>
@@ -51,14 +55,63 @@
             </FormBlock>
           </template>
         </RenderlessComponent>
+      </template>
+      <template #submit>
         <div class="flex gap-4">
           <ActionButton :disabled="!allFieldsCompleted" type="submit"
             >Change Settings</ActionButton
           >
           <ActionButton>Disable Account</ActionButton>
         </div>
-      </form>
+      </template>
+    </FormComponent>
+
+    <FormComponent type="regular">
+       <template #title>
+        <SubtitleComponent justify="start">
+          Update photo
+        </SubtitleComponent>
+      </template>
+
+ <template #inputs>
+    <FormFile/>
+
+
+        <!-- <RenderlessComponent>
+          <template v-for="input in accountInputs" :key="input.name">
+            <FormBlock>
+              <template #label>
+                <FormLabel :id="input.name">
+                  {{ input.label }}
+                </FormLabel>
+              </template>
+              <template #input>
+                <FormInput
+                  @blur-event="blurHandler(input.name as AccountFields)"
+                  v-bind="input"
+                  v-model="accountSettings[input.name as keyof typeof accountSettings]"
+                />
+              </template>
+              <template #line>
+                <FormLine />
+              </template>
+              <template #error>
+                <FormError>
+                  <template #default>{{
+                    accountFormErrors[input.name as AccountFields]
+                  }}</template>
+                </FormError>
+              </template>
+            </FormBlock>
+          </template>
+        </RenderlessComponent> -->
+      </template>
+
+    </FormComponent>
     </section>
+
+
+
   </main>
 </template>
 
@@ -66,16 +119,18 @@
 import useGetUserStore from "src/composables/useGetUserStore";
 import SubtitleComponent from "src/components/layout/others/SubtitleComponent.vue";
 import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
-import { formattedDate } from "src/utils/helpers";
-import { accountInputs } from "src/utils/constants";
-import { ref, computed } from "vue";
+import FormComponent from "src/components/form/FormComponent.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
+import FormFile from "src/components/form/FormFile.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import FormError from "src/components/form/FormError.vue";
-import { AccountSettingsType } from "src/utils/types";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import { AccountSettingsType } from "src/utils/types";
+import { formattedDate } from "src/utils/helpers";
+import { accountInputs } from "src/utils/constants";
+import { ref, computed } from "vue";
 import {
   accountSchema,
   AccountFieldErrors,

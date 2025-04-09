@@ -2,8 +2,8 @@
   <form
     ref="formRef"
     :class="[
-      'max-w-[400px] w-full bg-slate-400 dark:bg-slate-800 mt-12 rounded-xl px-8 py-6 mx-auto flex flex-col gap-5 transition-all duration-700 origin-top',
-      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
+      'rounded-xl px-8 py-6 mx-auto flex flex-col gap-5 transition-all duration-700 origin-top',
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12' ,formOptions[props.type],
     ]"
   >
     <slot name="title" />
@@ -15,10 +15,24 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
+import { onMounted, PropType, ref } from "vue";
 
 const isVisible = ref(false);
 const formRef = ref<HTMLElement | null>(null);
+
+const props = defineProps({
+  type: {
+    type: String as PropType<FormType>,
+    default: "auth",
+  },
+});
+
+const formOptions = {
+  auth: "max-w-[400px] w-full bg-slate-400 dark:bg-slate-800 mt-12",
+  regular: "bg-slate-200 dark:bg-slate-950",
+};
+
+type FormType = keyof typeof formOptions;
 
 onMounted(() => {
   const observer = new IntersectionObserver(

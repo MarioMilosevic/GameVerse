@@ -1,5 +1,5 @@
 <template>
-  <AuthForm @submit.prevent="submitHandler">
+  <FormComponent @submit.prevent="submitHandler">
     <template #title>
       <h1 class="text-2xl text-center uppercase">Login</h1>
     </template>
@@ -45,11 +45,11 @@
         LOG IN
       </ActionButton>
     </template>
-  </AuthForm>
+  </FormComponent>
 </template>
 
 <script setup lang="ts">
-import AuthForm from "src/components/form/AuthForm.vue";
+import FormComponent from "src/components/form/FormComponent.vue";
 import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
