@@ -2,7 +2,12 @@
   <main class="max-w-[1280px] mx-auto border mt-12">
     <SubtitleComponent> Dashboard </SubtitleComponent>
     <UsersTable>
-      <UserData v-for="user in users" :key="user.id" :user="user"/>  
+      <template #heading>
+        <UserHeading/>
+      </template>
+      <template #content>
+        <UserData v-for="user in users" :key="user.id" :user="user" />
+      </template>
     </UsersTable>
   </main>
 </template>
@@ -11,6 +16,7 @@
 import SubtitleComponent from "src/components/layout/others/SubtitleComponent.vue";
 import UserData from "./UserData.vue";
 import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
+import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import { UserType } from "src/utils/types";
 import { PropType } from "vue";
 

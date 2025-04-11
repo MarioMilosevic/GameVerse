@@ -1,9 +1,7 @@
 <template>
-    <table>
-        <slot/>
-    </table>
+  <table class="border flex flex-col ">
+    <slot name="heading" />
+    <slot name="content" />
+  </table>
 </template>
 
-<script setup lang="ts">
-
-</script>
