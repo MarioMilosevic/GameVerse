@@ -1,7 +1,7 @@
 <template>
-  <table class="border flex flex-col ">
-    <slot name="heading" />
-    <slot name="content" />
+  <table class="border flex flex-col gap-4">
+    <slot name="header" />
+    <slot name="head" />
+    <slot name="data" />
   </table>
 </template>
-

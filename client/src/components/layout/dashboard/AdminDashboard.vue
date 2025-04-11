@@ -1,11 +1,13 @@
 <template>
   <main class="max-w-[1280px] mx-auto border mt-12">
-    <SubtitleComponent> Dashboard </SubtitleComponent>
     <UsersTable>
-      <template #heading>
+      <template #header>
+        <SubtitleComponent> Dashboard </SubtitleComponent>
+      </template>
+      <template #head>
         <UserHeading/>
       </template>
-      <template #content>
+      <template #data>
         <UserData v-for="user in users" :key="user.id" :user="user" />
       </template>
     </UsersTable>

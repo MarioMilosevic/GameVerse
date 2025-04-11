@@ -1,5 +1,5 @@
 <template>
-  <tr class="border grid grid-cols-12 justify-start">
+  <tr class="border grid grid-cols-12 text-left">
     <th class="col-start-1 col-end-3">Name</th>
     <th class="col-start-3 col-end-6">Email</th>
     <th class="col-start-6 col-end-8">Join date</th>
@@ -9,5 +9,3 @@
     <th class="col-start-12 col-end-13">Delete</th>
   </tr>
 </template>
-
-<script setup lang="ts"></script>
