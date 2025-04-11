@@ -85,3 +85,13 @@ export const editUserProfile = async (
     console.error(error);
   }
 };
+
+
+export const getUsers = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/users`)
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+  }
+}
