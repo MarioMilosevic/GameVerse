@@ -1,34 +1,35 @@
 <template>
-  <main class="max-w-[1280px] mx-auto border mt-12">
-    <LoadingSpinner v-if="loading"/>
-    <AdminDashboard v-else/>
-  </main>
+  <LoadingSpinner v-if="loading" />
+  <AdminDashboard v-else :users="users"/>
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { getUsers } from "src/api/users";
 import { showToast } from "src/utils/toast";
+import { UserType } from "src/utils/types";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
 
 const { loading, setLoading } = useGetLoadingStore();
 
+const users = ref<UserType[]>([])
+
 onBeforeMount(async () => {
   try {
-    setLoading(true)
+    setLoading(true);
     const { data, message } = await getUsers();
     if (data) {
+      users.value = data
       console.log(data);
     } else {
       showToast(message, "error");
     }
   } catch (error) {
     console.error(error);
-  }
-  finally {
-    setLoading(false)
+  } finally {
+    setLoading(false);
   }
 });
 </script>

@@ -33,6 +33,7 @@ export type UserType = {
   fullName: string;
   image: string;
   createdDate: string;
+  active: boolean;
 };
 
 export type ConsoleType = {

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
+import { getAverageRating } from "../utils/helpers";
 import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
-import { getAverageRating } from "../utils/helpers";
 import prisma from "../../prisma/prismaClient";
 import jwt from "jsonwebtoken";
 import config from "../config";
@@ -62,7 +62,17 @@ export default {
   },
   async getUsers(req: Request, res: Response) {
     try {
-      const allUsers = await prisma.user.findMany();
+      const allUsers = await prisma.user.findMany({
+        select: {
+          createdDate: true,
+          email: true,
+          fullName: true,
+          id: true,
+          image: true,
+          role: true,
+          active:true
+        }
+      });
       if (!allUsers) {
         errorFactory.badRequest(res);
         return;
