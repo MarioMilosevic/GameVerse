@@ -13,6 +13,8 @@ import {
   MdDashboardcustomize,
   FaRegularTrashAlt,
   FaEdit,
+  IoCloseSharp,
+  FcCheckmark,
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -25,7 +27,9 @@ addIcons(
   MdAccountbox,
   MdDashboardcustomize,
   FaRegularTrashAlt,
-  FaEdit
+  FaEdit,
+  IoCloseSharp,
+  FcCheckmark
 );
 
 import "./style.css";
