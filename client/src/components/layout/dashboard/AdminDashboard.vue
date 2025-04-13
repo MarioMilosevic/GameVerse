@@ -8,7 +8,7 @@
         <UserHeading/>
       </template>
       <template #data>
-        <UserData v-for="user in users" :key="user.id" :user="user" @delete-event="deleteUserHandler"/>
+        <UserData v-for="user in users" :key="user.id" :user="user" @delete-event="deleteUserHandler" @edit-event="editUserHandler"/>
       </template>
     </UsersTable>
   </main>
@@ -31,6 +31,10 @@ defineProps({
 
 const deleteUserHandler = (id:number) => {
   console.log('radi', id)
+}
+
+const editUserHandler = (id: number) => {
+  console.log('radi ' , id)
 }
 
 </script>
