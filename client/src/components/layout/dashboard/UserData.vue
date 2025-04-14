@@ -20,11 +20,12 @@
       v-else
     />
 
-    <v-icon name="fa-edit" fill="green" class="col-start-11 col-end-12" />
+    <v-icon name="fa-edit" fill="green" class="col-start-11 col-end-12 cursor-ponter"/>
     <v-icon
       name="fa-regular-trash-alt"
       fill="red"
-      class="col-start-12 col-end-13"
+      class="col-start-12 col-end-13 cursor-pointer"
+      @click="emits('delete-event', user.id)"
     />
   </tr>
 </template>
@@ -40,4 +41,7 @@ defineProps({
     required: true,
   },
 });
+
+const emits = defineEmits(['delete-event','edit-event'])
+
 </script>
