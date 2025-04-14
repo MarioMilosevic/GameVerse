@@ -91,7 +91,6 @@ const handleScroll = useThrottle(() => {
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
   isSticky.value = scrollTop >= windowHeight;
-  console.log("poziva se");
 }, 200);
 
 const selectedPage = computed(() => {

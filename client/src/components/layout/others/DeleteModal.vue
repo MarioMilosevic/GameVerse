@@ -1,5 +1,5 @@
 <template>
-    <Teleport to="body" v-if="isDeleteOpen">
+  <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
       <ModalComponent
         size="small"
@@ -14,7 +14,7 @@
         <div class="flex flex-col gap-4 items-center w-1/2">
           <h1 class="text-5xl">Are you sure ?</h1>
           <p class="text-lg">
-            Do you really want to delete your review? This action cannot be
+            Do you really want to delete {{ content }}? This action cannot be
             undone
           </p>
           <div class="flex justify-between w-full">
@@ -35,14 +35,22 @@ import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
+import { PropType, computed } from "vue";
 
-defineProps({
+const props = defineProps({
   isDeleteOpen: {
     type: Boolean,
-    required:true
-  }
-})
+    required: true,
+  },
+  type: {
+    type: String as PropType<"review" | "user">,
+    default: "review",
+  },
+});
 
-const emits = defineEmits(['close-modal-event','delete-event'])
+const emits = defineEmits(["close-modal-event", "delete-event"]);
 
+const content = computed(() => {
+  return props.type === "review" ? "your review" : "this user";
+});
 </script>

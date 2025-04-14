@@ -24,34 +24,6 @@
     @delete-event="deleteReviewHandler"
     @close-modal-event="isDeleteOpen = false"
   />
-  <!-- <Teleport to="body" v-if="isDeleteOpen">
-    <OverlayComponent>
-      <ModalComponent
-        size="small"
-        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
-      >
-        <BaseIcon
-          :style="{ width: '5rem', height: '5rem' }"
-          class="absolute top-[1%] right-1/2 translate-x-1/2"
-        >
-          <XCircle />
-        </BaseIcon>
-        <div class="flex flex-col gap-4 items-center w-1/2">
-          <h1 class="text-5xl">Are you sure ?</h1>
-          <p class="text-lg">
-            Do you really want to delete your review? This action cannot be
-            undone
-          </p>
-          <div class="flex justify-between w-full">
-            <ActionButton color="green" @click="isDeleteOpen = false"
-              >Cancel</ActionButton
-            >
-            <ActionButton @click="deleteReviewHandler">Confirm</ActionButton>
-          </div>
-        </div>
-      </ModalComponent>
-    </OverlayComponent>
-  </Teleport> -->
 </template>
 
 <script setup lang="ts">

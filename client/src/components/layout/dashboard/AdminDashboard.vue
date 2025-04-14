@@ -12,7 +12,7 @@
           v-for="user in users"
           :key="user.id"
           :user="user"
-          @delete-event="deleteUserHandler"
+          @delete-event="isDeleteOpen = true"
           @edit-event="editUserHandler"
         />
       </template>
@@ -24,6 +24,13 @@
       @close-modal-event="isUserModalOpen = false"
       @submit-event="submitHandler"
     />
+
+    <DeleteModal
+      :is-delete-open="isDeleteOpen"
+      type="user"
+      @delete-event="deleteUserHandler(user.id as number)"
+      @close-modal-event="isDeleteOpen = false"
+    />
   </main>
 </template>
 
@@ -33,11 +40,13 @@ import UserData from "./UserData.vue";
 import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
 import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import UserModal from "src/components/layout/dashboard/UserModal.vue";
+import DeleteModal from "src/components/layout/others/DeleteModal.vue";
 import { UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "src/utils/constants";
 
 const isUserModalOpen = ref<boolean>(false);
+const isDeleteOpen = ref<boolean>(false);
 const user = ref<UserType>(emptyUser);
 
 defineProps({
@@ -50,7 +59,7 @@ defineProps({
 const emits = defineEmits(["edit-user-event"]);
 
 const deleteUserHandler = (id: number) => {
-  console.log("radi", id);
+  console.log(id);
 };
 
 const editUserHandler = (selectedUser: UserType) => {
