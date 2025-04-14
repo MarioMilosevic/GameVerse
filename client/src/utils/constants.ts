@@ -68,7 +68,7 @@ export const userInputs = [
     name: "fullName",
     placeholder: "John Doe",
     type: "text",
-    label: "Edit user name",
+    label: "User name",
   },
   {
     name: "email",
@@ -82,3 +82,5 @@ export const userInputs = [
 export const emptyStarsArray = new Array(10).fill("empty");
 
 export const storageThemeName = "gameVerse-theme";
+
+export const dashboardOptions = ['ADMIN', 'USER']

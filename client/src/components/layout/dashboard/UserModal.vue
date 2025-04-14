@@ -23,7 +23,14 @@
               </FormBlock>
             </template>
           </RenderlessComponent>
-          
+          <FormBlock>
+            <template #label>
+              <FormLabel id="role">Role</FormLabel>
+            </template>
+            <template #input>
+              <FormSelect :options="dashboardOptions" />
+            </template>
+          </FormBlock>
         </template>
       </FormComponent>
     </ModalComponent>
@@ -36,11 +43,12 @@ import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
+import FormSelect from "src/components/form/FormSelect.vue";
 import FormComponent from "src/components/form/FormComponent.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
-import { userInputs } from "src/utils/constants";
+import { userInputs, dashboardOptions } from "src/utils/constants";
 
 const emits = defineEmits(["close-modal-event"]);
 </script>
