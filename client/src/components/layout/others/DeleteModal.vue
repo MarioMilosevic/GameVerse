@@ -1,0 +1,48 @@
+<template>
+    <Teleport to="body" v-if="isDeleteOpen">
+    <OverlayComponent>
+      <ModalComponent
+        size="small"
+        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
+      >
+        <BaseIcon
+          :style="{ width: '5rem', height: '5rem' }"
+          class="absolute top-[1%] right-1/2 translate-x-1/2"
+        >
+          <XCircle />
+        </BaseIcon>
+        <div class="flex flex-col gap-4 items-center w-1/2">
+          <h1 class="text-5xl">Are you sure ?</h1>
+          <p class="text-lg">
+            Do you really want to delete your review? This action cannot be
+            undone
+          </p>
+          <div class="flex justify-between w-full">
+            <ActionButton color="green" @click="emits('close-modal-event')"
+              >Cancel</ActionButton
+            >
+            <ActionButton @click="emits('delete-event')">Confirm</ActionButton>
+          </div>
+        </div>
+      </ModalComponent>
+    </OverlayComponent>
+  </Teleport>
+</template>
+
+<script setup lang="ts">
+import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
+import ModalComponent from "src/components/layout/others/ModalComponent.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import BaseIcon from "src/icons/BaseIcon.vue";
+import XCircle from "src/icons/XCircle.vue";
+
+defineProps({
+  isDeleteOpen: {
+    type: Boolean,
+    required:true
+  }
+})
+
+const emits = defineEmits(['close-modal-event','delete-event'])
+
+</script>

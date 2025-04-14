@@ -19,8 +19,12 @@
     :content="review.content"
     :created-at="review.createdAt"
   />
-
-  <Teleport to="body" v-if="isDeleteOpen">
+  <DeleteModal
+    :is-delete-open="isDeleteOpen"
+    @delete-event="deleteReviewHandler"
+    @close-modal-event="isDeleteOpen = false"
+  />
+  <!-- <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
       <ModalComponent
         size="small"
@@ -47,17 +51,13 @@
         </div>
       </ModalComponent>
     </OverlayComponent>
-  </Teleport>
+  </Teleport> -->
 </template>
 
 <script setup lang="ts">
 import PreviewReview from "src/components/layout/review/PreviewReview.vue";
 import EditReview from "src/components/layout/review/EditReview.vue";
-import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
-import ModalComponent from "src/components/layout/others/ModalComponent.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import BaseIcon from "src/icons/BaseIcon.vue";
-import XCircle from "src/icons/XCircle.vue";
+import DeleteModal from "src/components/layout/others/DeleteModal.vue";
 import { deleteReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
 import { ReviewType } from "src/utils/types";
@@ -120,6 +120,5 @@ const deleteReviewHandler = async () => {
     console.error(error);
     showToast("Unexpected error occured", "error");
   }
-
 };
 </script>

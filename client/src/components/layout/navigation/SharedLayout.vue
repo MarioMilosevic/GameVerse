@@ -54,6 +54,7 @@ import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
+import { useThrottle } from "src/composables/useThrottle";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 
 const { user, resetUser } = useGetUserStore();
@@ -86,16 +87,12 @@ const authRoutes = ["/login", "/sign-up"];
 
 const router = useRouter();
 
-const handleScroll = () => {
+const handleScroll = useThrottle(() => {
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
-  if (scrollTop >= windowHeight) {
-    console.log("sada");
-    isSticky.value = true;
-  } else {
-    isSticky.value = false;
-  }
-};
+  isSticky.value = scrollTop >= windowHeight;
+  console.log("poziva se");
+}, 200);
 
 const selectedPage = computed(() => {
   if (router.currentRoute.value.fullPath === "/login") return 0;
