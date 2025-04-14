@@ -63,6 +63,21 @@ export const accountInputs = [
     label: "Email Address",
   },
 ];
+export const userInputs = [
+  {
+    name: "fullName",
+    placeholder: "John Doe",
+    type: "text",
+    label: "Edit user name",
+  },
+  {
+    name: "email",
+    placeholder: "you@example.com",
+    type: "email",
+    label: "Email Address",
+  },
+];
+
 
 export const emptyStarsArray = new Array(10).fill("empty");
 
