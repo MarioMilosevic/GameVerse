@@ -1,7 +1,10 @@
 <template>
   <OverlayComponent>
     <ModalComponent size="small">
-      <FormComponent class="bg-slate-200 w-full h-full p-16 relative">
+      <FormComponent
+        class="bg-slate-200 dark:bg-slate-700 w-full h-full p-16 relative"
+        @submit.prevent="submitHandler"
+      >
         <template #title>
           <h1 class="text-2xl text-center uppercase">Edit User</h1>
         </template>
@@ -34,7 +37,11 @@
               <FormLabel id="role">Role</FormLabel>
             </template>
             <template #input>
-              <FormSelect :options="dashboardOptions" :selected="user.role"/>
+              <FormSelect
+                v-model="user.role"
+                :options="dashboardOptions"
+                :selected="user.role"
+              />
             </template>
           </FormBlock>
         </template>
@@ -45,10 +52,10 @@
                 <FormLabel id="checkbox">Active</FormLabel>
               </template>
               <template #label>
-                <input type="checkbox" id="checkbox" :checked="user.active"/>
+                <FormCheckbox id="checkbox" v-model="user.active" />
               </template>
             </FormBlock>
-            <ActionButton>Submit</ActionButton>
+            <ActionButton type="submit">Submit</ActionButton>
           </div>
         </template>
       </FormComponent>
@@ -63,6 +70,7 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormSelect from "src/components/form/FormSelect.vue";
+import FormCheckbox from "src/components/form/FormCheckbox.vue";
 import FormComponent from "src/components/form/FormComponent.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
@@ -82,6 +90,13 @@ const props = defineProps({
 
 const user = ref<UserType>({ ...props.user });
 
-console.log(user.value)
+console.log(user.value);
 
+const submitHandler = async () => {
+  try {
+    console.log("submit", user.value);
+  } catch (error) {
+    console.error(error);
+  }
+};
 </script>

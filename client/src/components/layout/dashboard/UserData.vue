@@ -1,5 +1,5 @@
 <template>
-  <tr class="grid grid-cols-12 text-center items-center">
+  <tr class="grid grid-cols-12 text-center items-center border-b pb-2">
     <td class="col-start-1 col-end-3 flex gap-4 h-[50px] items-center">
       <img :src="user.image" :alt="user.image" class="h-full" />
       <p>{{ user.fullName }}</p>

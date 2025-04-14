@@ -1,5 +1,9 @@
 <template>
-  <select class=" w-full px-3 py-2 rounded-md bg-slate-50 text-slate-950 outline-none" :value="props.selected">
+  <select
+    class="w-full px-3 py-2 rounded-md bg-slate-50 text-slate-950 outline-none"
+    :value="modelValue"
+    @change="(e) => emits('update:modelValue', (e.target as HTMLSelectElement).value)"
+  >
     <option v-for="option in options">{{ option }}</option>
   </select>
 </template>
@@ -7,14 +11,16 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 
-const props = defineProps({
+defineProps({
   options: {
     type: Array as PropType<string[]>,
     required: true,
   },
-  selected: {
+  modelValue: {
     type: String,
-    required:true
-  }
+    required: true,
+  },
 });
+
+const emits = defineEmits(["update:modelValue"]);
 </script>

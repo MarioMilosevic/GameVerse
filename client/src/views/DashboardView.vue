@@ -1,6 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <AdminDashboard v-else :users="users"/>
+  <AdminDashboard v-else :users="users" />
 </template>
 
 <script setup lang="ts">
@@ -14,15 +14,14 @@ import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
 
 const { loading, setLoading } = useGetLoadingStore();
 
-const users = ref<UserType[]>([])
+const users = ref<UserType[]>([]);
 
 onBeforeMount(async () => {
   try {
     setLoading(true);
     const { data, message } = await getUsers();
     if (data) {
-      users.value = data
-      console.log(data);
+      users.value = data;
     } else {
       showToast(message, "error");
     }
