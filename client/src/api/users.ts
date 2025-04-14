@@ -67,7 +67,7 @@ export const getUserReviews = async (id: number) => {
   }
 };
 
-export const editUserProfile = async (
+export const editUserNameAndEmail = async (
   id: number,
   data: AccountSettingsType
 ) => {
@@ -86,12 +86,27 @@ export const editUserProfile = async (
   }
 };
 
-
 export const getUsers = async () => {
   try {
-    const response = await fetch(`${baseUrl}/users`)
-    return await response.json()
+    const response = await fetch(`${baseUrl}/users`);
+    return await response.json();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
+
+export const editUserProfile = async (editedUser: UserType) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/dashboard/${editedUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedUser),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};

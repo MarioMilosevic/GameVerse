@@ -70,8 +70,8 @@ export default {
           id: true,
           image: true,
           role: true,
-          active:true
-        }
+          active: true,
+        },
       });
       if (!allUsers) {
         errorFactory.badRequest(res);
@@ -167,10 +167,9 @@ export default {
       errorFactory.internalError(res);
     }
   },
-  async editUserProfile(req: Request, res: Response) {
+  async editUserNameAndEmail(req: Request, res: Response) {
     try {
       const { fullName, email } = req.body;
-      console.log(fullName, email);
 
       if (!fullName || !email) {
         errorFactory.badRequest(res);
@@ -193,6 +192,40 @@ export default {
         },
       });
       successFactory.ok(res, updatedUser);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+
+  async editUserProfile(req: Request, res: Response) {
+    try {
+      const { active, email, fullName, role } = req.body;
+
+      if (!email || !fullName || !role) {
+        errorFactory.badRequest(res);
+        return;
+      }
+
+      const editedUser = await prisma.user.update({
+        where: { id: req.id },
+        data: {
+          email,
+          fullName,
+          active,
+          role,
+        },
+        select: {
+          active: true,
+          createdDate: true,
+          email: true,
+          fullName: true,
+          id: true,
+          image: true,
+          role: true,
+        },
+      });
+
+      successFactory.ok(res, editedUser);
     } catch (error) {
       errorFactory.internalError(res);
     }

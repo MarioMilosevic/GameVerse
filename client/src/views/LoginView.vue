@@ -1,5 +1,5 @@
 <template>
-  <FormComponent @submit.prevent="submitHandler">
+  <FormComponent @submit.prevent="submitHandler" id="loginForm">
     <template #title>
       <h1 class="text-2xl text-center uppercase">Login</h1>
     </template>

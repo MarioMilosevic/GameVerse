@@ -37,7 +37,7 @@ import { PropType, ref } from "vue";
 import { emptyUser } from "src/utils/constants";
 
 const isUserModalOpen = ref<boolean>(false);
-const user = ref<UserType>(emptyUser)
+const user = ref<UserType>(emptyUser);
 
 defineProps({
   users: {
@@ -51,9 +51,7 @@ const deleteUserHandler = (id: number) => {
 };
 
 const editUserHandler = (selectedUser: UserType) => {
-  console.log(selectedUser)
   isUserModalOpen.value = true;
-  user.value = selectedUser
-  console.log("radi ", selectedUser);
+  user.value = selectedUser;
 };
 </script>

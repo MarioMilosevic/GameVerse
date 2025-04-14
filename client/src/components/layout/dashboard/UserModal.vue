@@ -2,6 +2,7 @@
   <OverlayComponent>
     <ModalComponent size="small">
       <FormComponent
+        id="editUserForm"
         class="bg-slate-200 dark:bg-slate-700 w-full h-full p-16 relative"
         @submit.prevent="submitHandler"
       >
@@ -26,7 +27,7 @@
                 <template #input>
                   <FormInput
                     v-bind="input"
-                    v-model="user[input.name as keyof typeof user]"
+                    v-model="user[input.name as 'email' | 'fullName']"
                   />
                 </template>
               </FormBlock>
@@ -79,6 +80,8 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { userInputs, dashboardOptions } from "src/utils/constants";
 import { PropType, ref } from "vue";
 import { UserType } from "src/utils/types";
+import { editUserProfile } from "src/api/users";
+import { showToast } from "src/utils/toast";
 
 const emits = defineEmits(["close-modal-event"]);
 const props = defineProps({
@@ -95,6 +98,12 @@ console.log(user.value);
 const submitHandler = async () => {
   try {
     console.log("submit", user.value);
+    const { data, message } = await editUserProfile(user.value);
+    if (data) {
+      console.log(data);
+    } else {
+      showToast(message, "error");
+    }
   } catch (error) {
     console.error(error);
   }

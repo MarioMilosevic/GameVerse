@@ -10,13 +10,18 @@ router.route("/user").get(usersController.getUserFromToken);
 
 router
   .route("/:id")
-  .delete(usersController.getUserId, usersController.deleteUser)
+  // .delete(usersController.getUserId, usersController.deleteUser)
   .get(usersController.getUserId, usersController.getUser)
+  .patch(usersController.getUserId, usersController.editUserNameAndEmail);
+
+router
+  .route("/dashboard/:id")
   .patch(usersController.getUserId, usersController.editUserProfile)
+  .delete(usersController.getUserId, usersController.deleteUser);
 
 router
   .route("/reviews/:id")
-  .get(usersController.getUserId, usersController.getUserReviews)
+  .get(usersController.getUserId, usersController.getUserReviews);
 
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);

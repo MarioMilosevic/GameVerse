@@ -1,9 +1,11 @@
 <template>
   <form
+    :id="id"
     ref="formRef"
     :class="[
       'rounded-xl px-8 py-6 mx-auto flex flex-col w-full gap-5 transition-all duration-700 origin-top',
-      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12' ,formOptions[props.type],
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12',
+      formOptions[props.type],
     ]"
   >
     <slot name="title" />
@@ -24,6 +26,10 @@ const props = defineProps({
   type: {
     type: String as PropType<FormType>,
     default: "auth",
+  },
+  id: {
+    type: String,
+    required: true,
   },
 });
 

@@ -20,7 +20,7 @@
     </section>
 
     <section class="w-2/3 flex flex-col gap-4">
-      <FormComponent class="gap-6" type="regular" @submit.prevent="accountHandler">
+      <FormComponent id="editAccountForm" class="gap-6" type="regular" @submit.prevent="accountHandler">
         <template #title>
           <SubtitleComponent justify="start">
             Update account settings
@@ -66,7 +66,7 @@
         </template>
       </FormComponent>
 
-      <FormComponent type="regular" @submit.prevent="imageHandler">
+      <FormComponent type="regular" @submit.prevent="imageHandler" id="photoForm">
         <template #title>
           <SubtitleComponent justify="start"> Update photo </SubtitleComponent>
         </template>
@@ -121,7 +121,7 @@ import {
   AccountFields,
   AccountTouchedFields,
 } from "src/schemas/accountPage";
-import { editUserProfile } from "src/api/users";
+import { editUserNameAndEmail } from "src/api/users";
 import { showToast } from "src/utils/toast";
 
 const { user, setUser } = useGetUserStore();
@@ -153,7 +153,7 @@ const blurHandler = (property: AccountFields) => {
 const accountHandler = async () => {
   try {
     if (user.value.id) {
-      const { data, message } = await editUserProfile(
+      const { data, message } = await editUserNameAndEmail(
         user.value.id,
         accountSettings.value
       );
