@@ -1,5 +1,5 @@
 <template>
-  <tr class="grid grid-cols-12 text-left">
+  <tr class="grid grid-cols-12 text-center">
     <th class="col-start-1 col-end-3">Name</th>
     <th class="col-start-3 col-end-6">Email</th>
     <th class="col-start-6 col-end-8">Join date</th>

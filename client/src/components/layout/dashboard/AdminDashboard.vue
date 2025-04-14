@@ -1,8 +1,8 @@
 <template>
-  <main class="max-w-[1280px] mx-auto border mt-12">
+  <main class="max-w-[1280px] mx-auto mt-12">
     <UsersTable>
       <template #header>
-        <SubtitleComponent> Dashboard </SubtitleComponent>
+        <SubtitleComponent class="mb-12"> Dashboard </SubtitleComponent>
       </template>
       <template #head>
         <UserHeading />
@@ -18,7 +18,11 @@
       </template>
     </UsersTable>
 
-    <UserModal v-if="isUserModalOpen" @close-modal-event="isUserModalOpen = false"/>
+    <UserModal
+      v-if="isUserModalOpen"
+      :user="user"
+      @close-modal-event="isUserModalOpen = false"
+    />
   </main>
 </template>
 
@@ -30,9 +34,10 @@ import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import UserModal from "src/components/layout/dashboard/UserModal.vue";
 import { UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
+import { emptyUser } from "src/utils/constants";
 
-
-const isUserModalOpen = ref<boolean>(false)
+const isUserModalOpen = ref<boolean>(false);
+const user = ref<UserType>(emptyUser)
 
 defineProps({
   users: {
@@ -45,8 +50,10 @@ const deleteUserHandler = (id: number) => {
   console.log("radi", id);
 };
 
-const editUserHandler = (id: number) => {
-  isUserModalOpen.value = true
-  console.log("radi ", id);
+const editUserHandler = (selectedUser: UserType) => {
+  console.log(selectedUser)
+  isUserModalOpen.value = true;
+  user.value = selectedUser
+  console.log("radi ", selectedUser);
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <fieldset
-    class="relative border-none flex flex-col gap-2 items-center justify-between"
+    :class="['relative border-none flex gap-2 items-center justify-between', positionOptions[position]]"
   >
     <slot name="label" />
     <slot name="input" />
@@ -10,3 +10,21 @@
     </span>
   </fieldset>
 </template>
+
+<script setup lang="ts">
+import { PropType } from "vue";
+
+const positionOptions = {
+  column: "flex-col",
+  row: "flex-row",
+};
+
+type PositionType = keyof typeof positionOptions;
+
+defineProps({
+  position: {
+    type: String as PropType<PositionType>,
+    default: "column",
+  },
+});
+</script>

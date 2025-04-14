@@ -1,3 +1,5 @@
+import { UserType } from "./types";
+
 export const baseUrl = "http://localhost:3000/api/v1";
 export const tokenName = "gameVerse-token";
 export const profileImg =
@@ -78,9 +80,18 @@ export const userInputs = [
   },
 ];
 
-
 export const emptyStarsArray = new Array(10).fill("empty");
 
 export const storageThemeName = "gameVerse-theme";
 
-export const dashboardOptions = ['ADMIN', 'USER']
+export const dashboardOptions = ["ADMIN", "USER"];
+
+export const emptyUser: UserType = {
+  id: 0,
+  role: "USER",
+  email: "",
+  fullName: "",
+  image: "",
+  createdDate: "",
+  active: false,
+};

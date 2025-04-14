@@ -2,6 +2,9 @@
   <OverlayComponent>
     <ModalComponent size="small">
       <FormComponent class="bg-slate-200 w-full h-full p-16 relative">
+        <template #title>
+          <h1 class="text-2xl text-center uppercase">Edit User</h1>
+        </template>
         <BaseIcon
           size="very-big"
           class="absolute top-3 right-2 cursor-pointer"
@@ -18,7 +21,10 @@
                   <FormLabel :id="input.name">{{ input.label }}</FormLabel>
                 </template>
                 <template #input>
-                  <FormInput />
+                  <FormInput
+                    v-bind="input"
+                    v-model="user[input.name as keyof typeof user]"
+                  />
                 </template>
               </FormBlock>
             </template>
@@ -28,9 +34,22 @@
               <FormLabel id="role">Role</FormLabel>
             </template>
             <template #input>
-              <FormSelect :options="dashboardOptions" />
+              <FormSelect :options="dashboardOptions" :selected="user.role"/>
             </template>
           </FormBlock>
+        </template>
+        <template #submit>
+          <div class="flex items-center justify-between">
+            <FormBlock position="row">
+              <template #input>
+                <FormLabel id="checkbox">Active</FormLabel>
+              </template>
+              <template #label>
+                <input type="checkbox" id="checkbox" :checked="user.active"/>
+              </template>
+            </FormBlock>
+            <ActionButton>Submit</ActionButton>
+          </div>
         </template>
       </FormComponent>
     </ModalComponent>
@@ -48,7 +67,21 @@ import FormComponent from "src/components/form/FormComponent.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
 import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { userInputs, dashboardOptions } from "src/utils/constants";
+import { PropType, ref } from "vue";
+import { UserType } from "src/utils/types";
 
 const emits = defineEmits(["close-modal-event"]);
+const props = defineProps({
+  user: {
+    type: Object as PropType<UserType>,
+    required: true,
+  },
+});
+
+const user = ref<UserType>({ ...props.user });
+
+console.log(user.value)
+
 </script>
