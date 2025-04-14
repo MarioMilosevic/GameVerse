@@ -78,7 +78,6 @@
             @click="openImageModal(index)"
           />
         </fieldset>
-
         <ReviewsSlider
           :reviews="props.singleGame.reviews"
           :selected-review-index="selectedReviewIndex"
@@ -92,36 +91,28 @@
     </SectionComponent>
 
     <OverlayComponent v-if="isGameImageModalOpen">
-      <template #default>
-        <ModalComponent size="big">
-          <template #default>
-            <GameImageModal
-              :selectedImageIndex="selectedImageIndex"
-              :all-photos="photos"
-              @close-modal-event="isGameImageModalOpen = false"
-              @next-event="nextImage"
-              @prev-event="prevImage"
-            />
-          </template>
-        </ModalComponent>
-      </template>
+      <ModalComponent size="big">
+        <GameImageModal
+          :selectedImageIndex="selectedImageIndex"
+          :all-photos="photos"
+          @close-modal-event="isGameImageModalOpen = false"
+          @next-event="nextImage"
+          @prev-event="prevImage"
+        />
+      </ModalComponent>
     </OverlayComponent>
 
     <OverlayComponent v-if="isReviewModalOpen">
-      <template #default>
-        <ModalComponent size="small">
-          <template #default>
-            <ReviewModal
-              @delete-event="deleteHandler"
-              @submit-event="submitModalHandler"
-              @close-modal-event="isReviewModalOpen = false"
-              :name="name"
-              :game-id="singleGame.id"
-              :user-review="userReview"
-            />
-          </template>
-        </ModalComponent>
-      </template>
+      <ModalComponent size="small">
+        <ReviewModal
+          @delete-event="deleteHandler"
+          @submit-event="submitModalHandler"
+          @close-modal-event="isReviewModalOpen = false"
+          :name="name"
+          :game-id="singleGame.id"
+          :user-review="userReview"
+        />
+      </ModalComponent>
     </OverlayComponent>
   </main>
 </template>
