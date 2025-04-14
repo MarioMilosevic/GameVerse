@@ -170,7 +170,7 @@ const emits = defineEmits(["create-review-event"]);
 const youtubeRef = useTemplateRef("youtube");
 const playVideo = () => {
   if (youtubeRef.value) {
-    // youtubeRef.value.playVideo();
+    youtubeRef.value.playVideo();
   }
 };
 

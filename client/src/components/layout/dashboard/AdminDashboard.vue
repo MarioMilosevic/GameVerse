@@ -22,6 +22,7 @@
       v-if="isUserModalOpen"
       :user="user"
       @close-modal-event="isUserModalOpen = false"
+      @submit-event="submitHandler"
     />
   </main>
 </template>
@@ -46,6 +47,8 @@ defineProps({
   },
 });
 
+const emits = defineEmits(["edit-user-event"]);
+
 const deleteUserHandler = (id: number) => {
   console.log("radi", id);
 };
@@ -53,5 +56,10 @@ const deleteUserHandler = (id: number) => {
 const editUserHandler = (selectedUser: UserType) => {
   isUserModalOpen.value = true;
   user.value = selectedUser;
+};
+
+const submitHandler = (updatedUser: UserType) => {
+  emits("edit-user-event", updatedUser);
+  isUserModalOpen.value = false;
 };
 </script>

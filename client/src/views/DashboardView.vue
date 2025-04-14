@@ -1,6 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <AdminDashboard v-else :users="users" />
+  <AdminDashboard v-else :users="users" @edit-user-event="editUserHandler" />
 </template>
 
 <script setup lang="ts">
@@ -31,4 +31,12 @@ onBeforeMount(async () => {
     setLoading(false);
   }
 });
+
+const editUserHandler = (editedUser: UserType) => {
+  console.log("ovo je krajnje ",editedUser)
+  const index = users.value.findIndex((user) => user.id === editedUser.id);
+  if (index !== -1) {
+    users.value[index] = editedUser;
+  }
+};
 </script>
