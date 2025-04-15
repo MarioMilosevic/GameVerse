@@ -97,15 +97,30 @@ export const getUsers = async () => {
 
 export const editUserProfile = async (editedUser: UserType) => {
   try {
-    const response = await fetch(`${baseUrl}/users/dashboard/${editedUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedUser),
-    });
+    const response = await fetch(
+      `${baseUrl}/users/dashboard/${editedUser.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editedUser),
+      }
+    );
 
     return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteUser = async (id: number) => {
+  try {
+    const response = await fetch(`${baseUrl}/users/dashboard/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    return response;
   } catch (error) {
     console.error(error);
   }

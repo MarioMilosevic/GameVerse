@@ -21,7 +21,7 @@
             <ActionButton color="green" @click="emits('close-modal-event')"
               >Cancel</ActionButton
             >
-            <ActionButton @click="emits('delete-event')">Confirm</ActionButton>
+            <ActionButton @click="emits('delete-event', user?.id)">Confirm</ActionButton>
           </div>
         </div>
       </ModalComponent>
@@ -36,21 +36,23 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
 import { PropType, computed } from "vue";
+import { UserType } from "src/utils/types";
 
 const props = defineProps({
   isDeleteOpen: {
     type: Boolean,
     required: true,
   },
-  type: {
-    type: String as PropType<"review" | "user">,
-    default: "review",
+  user: {
+    type: Object as PropType<UserType | null>,
+    required: false,
+    default: null,
   },
 });
 
 const emits = defineEmits(["close-modal-event", "delete-event"]);
 
 const content = computed(() => {
-  return props.type === "review" ? "your review" : "this user";
+  return props.user?.fullName ?? "your review";
 });
 </script>

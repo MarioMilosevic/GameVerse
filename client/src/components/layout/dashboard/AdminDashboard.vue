@@ -12,7 +12,7 @@
           v-for="user in users"
           :key="user.id"
           :user="user"
-          @delete-event="isDeleteOpen = true"
+          @delete-event="openDeleteModalHandler"
           @edit-event="editUserHandler"
         />
       </template>
@@ -27,8 +27,8 @@
 
     <DeleteModal
       :is-delete-open="isDeleteOpen"
-      type="user"
-      @delete-event="deleteUserHandler(user.id as number)"
+      :user="user"
+      @delete-event="deleteUserHandler"
       @close-modal-event="isDeleteOpen = false"
     />
   </main>
@@ -44,6 +44,8 @@ import DeleteModal from "src/components/layout/others/DeleteModal.vue";
 import { UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "src/utils/constants";
+import { deleteUser } from "src/api/users";
+import { showToast } from "src/utils/toast";
 
 const isUserModalOpen = ref<boolean>(false);
 const isDeleteOpen = ref<boolean>(false);
@@ -58,8 +60,20 @@ defineProps({
 
 const emits = defineEmits(["edit-user-event"]);
 
-const deleteUserHandler = (id: number) => {
-  console.log(id);
+const deleteUserHandler = async (id: number) => {
+  console.log("da brise iz baze", id);
+  const response = await deleteUser(id);
+  if (response?.ok) {
+    console.log("user deleted");
+  } else {
+    const { message } = await response?.json();
+    showToast(message, "error");
+  }
+};
+
+const openDeleteModalHandler = (deleteUser: UserType) => {
+  isDeleteOpen.value = true;
+  user.value = deleteUser;
 };
 
 const editUserHandler = (selectedUser: UserType) => {

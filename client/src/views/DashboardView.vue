@@ -33,7 +33,6 @@ onBeforeMount(async () => {
 });
 
 const editUserHandler = (editedUser: UserType) => {
-  console.log("ovo je krajnje ",editedUser)
   const index = users.value.findIndex((user) => user.id === editedUser.id);
   if (index !== -1) {
     users.value[index] = editedUser;

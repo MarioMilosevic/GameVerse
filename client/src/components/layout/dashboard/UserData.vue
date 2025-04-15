@@ -19,7 +19,6 @@
       class="col-start-10 col-end-11 justify-self-center"
       v-else
     />
-
     <v-icon
       name="fa-edit"
       fill="green"
@@ -30,7 +29,7 @@
       name="fa-regular-trash-alt"
       fill="red"
       class="col-start-12 col-end-13 cursor-pointer justify-self-center"
-      @click="emits('delete-event', user.id)"
+      @click="emits('delete-event', user)"
     />
   </tr>
 </template>

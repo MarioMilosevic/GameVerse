@@ -151,6 +151,8 @@ export default {
 
   async deleteUser(req: Request, res: Response) {
     try {
+      console.log(req.id)
+      console.log('uslo dje treba')
       const user = await prisma.user.findUnique({
         where: { id: req.id },
       });
@@ -158,9 +160,9 @@ export default {
         errorFactory.notFound(res, "User has not been found");
         return;
       }
-      await prisma.user.delete({
-        where: { id: req.id },
-      });
+      // await prisma.user.delete({
+      //   where: { id: req.id },
+      // });
 
       successFactory.noContent(res);
     } catch (error) {
