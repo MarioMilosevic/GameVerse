@@ -58,13 +58,14 @@ defineProps({
   },
 });
 
-const emits = defineEmits(["edit-user-event"]);
+const emits = defineEmits(["edit-user-event", "delete-user-event"]);
 
 const deleteUserHandler = async (id: number) => {
-  console.log("da brise iz baze", id);
   const response = await deleteUser(id);
   if (response?.ok) {
-    console.log("user deleted");
+    emits("delete-user-event", id);
+    showToast("User sucessfully deleted");
+    isDeleteOpen.value = false;
   } else {
     const { message } = await response?.json();
     showToast(message, "error");

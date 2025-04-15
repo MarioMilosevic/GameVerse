@@ -10,7 +10,6 @@ router.route("/user").get(usersController.getUserFromToken);
 
 router
   .route("/:id")
-  // .delete(usersController.getUserId, usersController.deleteUser)
   .get(usersController.getUserId, usersController.getUser)
   .patch(usersController.getUserId, usersController.editUserNameAndEmail);
 

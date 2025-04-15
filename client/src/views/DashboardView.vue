@@ -1,6 +1,11 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <AdminDashboard v-else :users="users" @edit-user-event="editUserHandler" />
+  <AdminDashboard
+    v-else
+    :users="users"
+    @edit-user-event="editUserHandler"
+    @delete-user-event="deleteUserHandler"
+  />
 </template>
 
 <script setup lang="ts">
@@ -36,6 +41,13 @@ const editUserHandler = (editedUser: UserType) => {
   const index = users.value.findIndex((user) => user.id === editedUser.id);
   if (index !== -1) {
     users.value[index] = editedUser;
+  }
+};
+
+const deleteUserHandler = (id: number) => {
+  const index = users.value.findIndex((user) => user.id === id);
+  if (index !== -1) {
+    users.value.splice(index, 1);
   }
 };
 </script>
