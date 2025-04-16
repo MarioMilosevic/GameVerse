@@ -36,6 +36,11 @@ export type UserType = {
   active: boolean;
 };
 
+export type UsersResponseType = {
+  count: number;
+  users:UserType[]
+}
+
 export type ConsoleType = {
   console: {
     image: string;

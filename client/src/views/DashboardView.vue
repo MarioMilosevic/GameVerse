@@ -2,8 +2,7 @@
   <LoadingSpinner v-if="loading" />
   <AdminDashboard
     v-else
-    :users="users"
-    :users-count="usersCount"
+    :users-obj="usersObj"
     @edit-user-event="editUserHandler"
     @delete-user-event="deleteUserHandler"
   />
@@ -13,15 +12,17 @@
 import { onBeforeMount, ref } from "vue";
 import { getUsers } from "src/api/users";
 import { showToast } from "src/utils/toast";
-import { UserType } from "src/utils/types";
+import { UsersResponseType, UserType } from "src/utils/types";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
 
 const { loading, setLoading } = useGetLoadingStore();
 
-const users = ref<UserType[]>([]);
-const usersCount =ref<number>( 0);
+const usersObj = ref<UsersResponseType>({
+  count: 0,
+  users: [],
+});
 
 onBeforeMount(async () => {
   try {
@@ -29,8 +30,8 @@ onBeforeMount(async () => {
     const { data, message } = await getUsers();
     if (data) {
       const { allUsers, count } = data;
-      usersCount.value = count;
-      users.value = allUsers;
+      usersObj.value.users = allUsers;
+      usersObj.value.count = count;
     } else {
       showToast(message, "error");
     }
@@ -42,16 +43,19 @@ onBeforeMount(async () => {
 });
 
 const editUserHandler = (editedUser: UserType) => {
-  const index = users.value.findIndex((user) => user.id === editedUser.id);
+  const index = usersObj.value.users.findIndex(
+    (user) => user.id === editedUser.id
+  );
   if (index !== -1) {
-    users.value[index] = editedUser;
+    usersObj.value.users[index] = editedUser;
   }
 };
 
 const deleteUserHandler = (id: number) => {
-  const index = users.value.findIndex((user) => user.id === id);
+  const index = usersObj.value.users.findIndex((user) => user.id === id);
   if (index !== -1) {
-    users.value.splice(index, 1);
+    usersObj.value.users.splice(index, 1);
+    usersObj.value.count -= 1;
   }
 };
 </script>
