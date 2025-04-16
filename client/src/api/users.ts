@@ -86,9 +86,9 @@ export const editUserNameAndEmail = async (
   }
 };
 
-export const getUsers = async () => {
+export const getUsers = async (page:number, sort:string) => {
   try {
-    const response = await fetch(`${baseUrl}/users`);
+    const response = await fetch(`${baseUrl}/users/${sort}/${page}`);
     return await response.json();
   } catch (error) {
     console.error(error);

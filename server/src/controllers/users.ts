@@ -6,6 +6,8 @@ import prisma from "../../prisma/prismaClient";
 import jwt from "jsonwebtoken";
 import config from "../config";
 
+const limit = 10;
+
 export default {
   async getUserId(req: Request, res: Response, next: NextFunction) {
     try {
@@ -62,42 +64,43 @@ export default {
   },
   async getUsers(req: Request, res: Response) {
     try {
+      const { sort, page } = req.params;
+      
+      const pageNumber = Number(page);
+      const skip = (pageNumber - 1) * limit;
 
-     const [allUsers, count] = await prisma.$transaction([
-       prisma.user.findMany({
-         select: {
-           createdDate: true,
-           email: true,
-           fullName: true,
-           id: true,
-           image: true,
-           role: true,
-           active: true,
+      const orderBy: any = {};
+      if (sort === "A-Z") orderBy.fullName = "asc";
+      if (sort === "Z-A") orderBy.fullName = "desc";
+      if (sort === "Newest") orderBy.createdDate = "desc";
+      if (sort === "Oldest") orderBy.createdDate = "asc";
+
+      const [allUsers, count] = await prisma.$transaction([
+        prisma.user.findMany({
+          orderBy,
+          take: limit,
+          skip,
+          select: {
+            createdDate: true,
+            email: true,
+            fullName: true,
+            id: true,
+            image: true,
+            role: true,
+            active: true,
           },
-        }
-       ),
-       prisma.user.count(),
-     ]);
+        }),
+        prisma.user.count(),
+      ]);
 
-      // const allUsers = await prisma.user.findMany({
-      //   select: {
-      //     createdDate: true,
-      //     email: true,
-      //     fullName: true,
-      //     id: true,
-      //     image: true,
-      //     role: true,
-      //     active: true,
-      //   },
-      // });
       if (!allUsers) {
         errorFactory.badRequest(res);
         return;
       }
       const response = {
         allUsers,
-        count
-      }
+        count,
+      };
 
       successFactory.ok(res, response);
     } catch (error) {

@@ -11,7 +11,7 @@
             :style="{ width: '70%' }"
             placeholder="Search for user..."
           />
-          <FormBlock position="row" :style="{width:'16%'}">
+          <FormBlock position="row" :style="{ width: '16%'}">
             <template #label>
               <FormLabel id="sort">Sort by:</FormLabel>
             </template>
@@ -19,7 +19,8 @@
               <FormSelect
                 id="sort"
                 :options="sortUserOptins"
-                :model-value="sortValue"
+                v-model="sortValue"
+                @update:model-value="sortHandler"
               />
             </template>
           </FormBlock>
@@ -62,29 +63,38 @@ import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
 import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import UserModal from "src/components/layout/dashboard/UserModal.vue";
 import DeleteModal from "src/components/layout/others/DeleteModal.vue";
+import FormInput from "src/components/form/FormInput.vue";
+import FormSelect from "src/components/form/FormSelect.vue";
+import FormBlock from "src/components/form/FormBlock.vue";
+import FormLabel from "src/components/form/FormLabel.vue";
 import { UsersResponseType, UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser, sortUserOptins } from "src/utils/constants";
 import { deleteUser } from "src/api/users";
 import { showToast } from "src/utils/toast";
-import FormInput from "src/components/form/FormInput.vue";
-import FormSelect from "src/components/form/FormSelect.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
+
+const props = defineProps({
+  usersObj: {
+    type: Object as PropType<UsersResponseType>,
+    required: true,
+  },
+  sort: {
+    type: String,
+    required: true,
+  },
+});
 
 const isUserModalOpen = ref<boolean>(false);
 const isDeleteOpen = ref<boolean>(false);
 const user = ref<UserType>(emptyUser);
-const sortValue = ref<string>("A-Z");
+const sortValue = ref<string>(props.sort)
 
-defineProps({
-  usersObj: {
-    type: Object as PropType<UsersResponseType>,
-      required:true
-  },
-});
 
-const emits = defineEmits(["edit-user-event", "delete-user-event"]);
+const emits = defineEmits([
+  "edit-user-event",
+  "delete-user-event",
+  "sort-value-event",
+]);
 
 const deleteUserHandler = async (id: number) => {
   const response = await deleteUser(id);
@@ -112,4 +122,6 @@ const submitHandler = (updatedUser: UserType) => {
   emits("edit-user-event", updatedUser);
   isUserModalOpen.value = false;
 };
+
+const sortHandler = (value: string) => emits("sort-value-event", value);
 </script>

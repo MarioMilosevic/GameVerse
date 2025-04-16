@@ -3,13 +3,15 @@
   <AdminDashboard
     v-else
     :users-obj="usersObj"
+    :sort="paginationOptions.sort"
     @edit-user-event="editUserHandler"
     @delete-user-event="deleteUserHandler"
+    @sort-value-event="sortHandler"
   />
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, watch } from "vue";
 import { getUsers } from "src/api/users";
 import { showToast } from "src/utils/toast";
 import { UsersResponseType, UserType } from "src/utils/types";
@@ -24,10 +26,16 @@ const usersObj = ref<UsersResponseType>({
   users: [],
 });
 
+const paginationOptions = ref({
+  currentPage: 1,
+  sort: "A-Z",
+});
+
 onBeforeMount(async () => {
   try {
     setLoading(true);
-    const { data, message } = await getUsers();
+    const { currentPage, sort } = paginationOptions.value;
+    const { data, message } = await getUsers(currentPage, sort);
     if (data) {
       const { allUsers, count } = data;
       usersObj.value.users = allUsers;
@@ -36,6 +44,7 @@ onBeforeMount(async () => {
       showToast(message, "error");
     }
   } catch (error) {
+    showToast("Unable to fetch data", "error");
     console.error(error);
   } finally {
     setLoading(false);
@@ -58,4 +67,29 @@ const deleteUserHandler = (id: number) => {
     usersObj.value.count -= 1;
   }
 };
+
+const sortHandler = (value: string) => {
+  paginationOptions.value.sort = value;
+};
+
+watch(
+  () => paginationOptions.value.sort,
+  async (newSort) => {
+    try {
+      const { data, message } = await getUsers(
+        paginationOptions.value.currentPage,
+        newSort
+      );
+      if (data) {
+        const { allUsers, count } = data;
+        usersObj.value.users = allUsers;
+        usersObj.value.count = count;
+      } else {
+        showToast(message, "error");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 </script>
