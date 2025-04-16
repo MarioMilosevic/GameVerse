@@ -4,9 +4,11 @@
     v-else
     :users-obj="usersObj"
     :sort="paginationOptions.sort"
+    :search="paginationOptions.search"
     @edit-user-event="editUserHandler"
     @delete-user-event="deleteUserHandler"
     @sort-value-event="sortHandler"
+    @search-event="searchHandler"
   />
 </template>
 
@@ -26,10 +28,17 @@ const usersObj = ref<UsersResponseType>({
   users: [],
 });
 
-const paginationOptions = ref({
+const paginationOptions = ref<{
+  currentPage: number;
+  sort: string;
+  search: string;
+}>({
   currentPage: 1,
   sort: "A-Z",
+  search: "",
 });
+
+const searchTimeout = ref<number | null>(null);
 
 onBeforeMount(async () => {
   try {
@@ -71,6 +80,31 @@ const deleteUserHandler = (id: number) => {
 const sortHandler = (value: string) => {
   paginationOptions.value.sort = value;
 };
+
+const searchHandler = (value: string) => {
+  if (searchTimeout.value) {
+    clearTimeout(searchTimeout.value);
+  }
+  searchTimeout.value = setTimeout(() => {
+    console.log(value);
+    paginationOptions.value.search = value;
+    paginationOptions.value.currentPage = 1
+  }, 500);
+};
+
+// const searchHandler = (searchValue: string) => {
+//   if (searchTimeout.value) {
+//     clearTimeout(searchTimeout.value)
+//   }
+//   searchTimeout.value = setTimeout(() => {
+//     pageStore.setPageStore('page', 1)
+//     sortFilterStore.setSearchValue(searchValue)
+//     const currentQuery = { ...router.currentRoute.value.query }
+//     router.push({
+//       query: { ...currentQuery, searchValue },
+//     })
+//   }, 500) as unknown as number
+// }
 
 watch(
   () => paginationOptions.value.sort,

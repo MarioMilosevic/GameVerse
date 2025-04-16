@@ -10,8 +10,10 @@
           <FormInput
             :style="{ width: '70%' }"
             placeholder="Search for user..."
+            v-model="searchValue"
+            @update:model-value="searchHandler"
           />
-          <FormBlock position="row" :style="{ width: '16%'}">
+          <FormBlock position="row" :style="{ width: '16%' }">
             <template #label>
               <FormLabel id="sort">Sort by:</FormLabel>
             </template>
@@ -82,18 +84,23 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  search: {
+    type: String,
+    required: true,
+  },
 });
 
 const isUserModalOpen = ref<boolean>(false);
 const isDeleteOpen = ref<boolean>(false);
 const user = ref<UserType>(emptyUser);
-const sortValue = ref<string>(props.sort)
-
+const sortValue = ref<string>(props.sort);
+const searchValue = ref<string>(props.search);
 
 const emits = defineEmits([
   "edit-user-event",
   "delete-user-event",
   "sort-value-event",
+  "search-event",
 ]);
 
 const deleteUserHandler = async (id: number) => {
@@ -124,4 +131,6 @@ const submitHandler = (updatedUser: UserType) => {
 };
 
 const sortHandler = (value: string) => emits("sort-value-event", value);
+
+const searchHandler = (value: string) => emits("search-event", value);
 </script>
