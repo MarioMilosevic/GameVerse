@@ -86,6 +86,9 @@ export const storageThemeName = "gameVerse-theme";
 
 export const dashboardOptions = ["ADMIN", "USER"];
 
+export const sortUserOptins = ['A-Z', 'Z-A', 'Newest', 'Oldest']
+
+
 export const emptyUser: UserType = {
   id: 0,
   role: "USER",

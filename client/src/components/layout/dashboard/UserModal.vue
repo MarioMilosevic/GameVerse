@@ -40,6 +40,7 @@
             <template #input>
               <FormSelect
                 v-model="user.role"
+                id="role"
                 :options="dashboardOptions"
                 :selected="user.role"
               />

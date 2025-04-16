@@ -1,8 +1,29 @@
 <template>
   <main class="max-w-[1280px] mx-auto mt-12">
     <UsersTable>
-      <template #header>
+      <template #title>
         <SubtitleComponent class="mb-12"> Dashboard </SubtitleComponent>
+      </template>
+      <template #header>
+        <header class="w-full flex justify-between items-center mb-8">
+          <p class="semibold">37 <span>total users</span></p>
+          <FormInput
+            :style="{ width: '70%' }"
+            placeholder="Search for user..."
+          />
+          <FormBlock position="row" :style="{width:'16%'}">
+            <template #label>
+              <FormLabel id="sort">Sort by:</FormLabel>
+            </template>
+            <template #input>
+              <FormSelect
+                id="sort"
+                :options="sortUserOptins"
+                :model-value="sortValue"
+              />
+            </template>
+          </FormBlock>
+        </header>
       </template>
       <template #head>
         <UserHeading />
@@ -43,13 +64,18 @@ import UserModal from "src/components/layout/dashboard/UserModal.vue";
 import DeleteModal from "src/components/layout/others/DeleteModal.vue";
 import { UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
-import { emptyUser } from "src/utils/constants";
+import { emptyUser, sortUserOptins } from "src/utils/constants";
 import { deleteUser } from "src/api/users";
 import { showToast } from "src/utils/toast";
+import FormInput from "src/components/form/FormInput.vue";
+import FormSelect from "src/components/form/FormSelect.vue";
+import FormBlock from "src/components/form/FormBlock.vue";
+import FormLabel from "src/components/form/FormLabel.vue";
 
 const isUserModalOpen = ref<boolean>(false);
 const isDeleteOpen = ref<boolean>(false);
 const user = ref<UserType>(emptyUser);
+const sortValue = ref<string>("A-Z");
 
 defineProps({
   users: {
