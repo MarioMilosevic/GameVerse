@@ -3,6 +3,7 @@
   <AdminDashboard
     v-else
     :users="users"
+    :users-count="usersCount"
     @edit-user-event="editUserHandler"
     @delete-user-event="deleteUserHandler"
   />
@@ -20,13 +21,16 @@ import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
 const { loading, setLoading } = useGetLoadingStore();
 
 const users = ref<UserType[]>([]);
+const usersCount =ref<number>( 0);
 
 onBeforeMount(async () => {
   try {
     setLoading(true);
     const { data, message } = await getUsers();
     if (data) {
-      users.value = data;
+      const { allUsers, count } = data;
+      usersCount.value = count;
+      users.value = allUsers;
     } else {
       showToast(message, "error");
     }

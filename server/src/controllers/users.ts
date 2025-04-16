@@ -62,22 +62,44 @@ export default {
   },
   async getUsers(req: Request, res: Response) {
     try {
-      const allUsers = await prisma.user.findMany({
-        select: {
-          createdDate: true,
-          email: true,
-          fullName: true,
-          id: true,
-          image: true,
-          role: true,
-          active: true,
-        },
-      });
+
+     const [allUsers, count] = await prisma.$transaction([
+       prisma.user.findMany({
+         select: {
+           createdDate: true,
+           email: true,
+           fullName: true,
+           id: true,
+           image: true,
+           role: true,
+           active: true,
+          },
+        }
+       ),
+       prisma.user.count(),
+     ]);
+
+      // const allUsers = await prisma.user.findMany({
+      //   select: {
+      //     createdDate: true,
+      //     email: true,
+      //     fullName: true,
+      //     id: true,
+      //     image: true,
+      //     role: true,
+      //     active: true,
+      //   },
+      // });
       if (!allUsers) {
         errorFactory.badRequest(res);
         return;
       }
-      successFactory.ok(res, allUsers);
+      const response = {
+        allUsers,
+        count
+      }
+
+      successFactory.ok(res, response);
     } catch (error) {
       errorFactory.internalError(res);
     }

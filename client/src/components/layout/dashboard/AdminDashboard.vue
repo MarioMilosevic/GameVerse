@@ -6,7 +6,7 @@
       </template>
       <template #header>
         <header class="w-full flex justify-between items-center mb-8">
-          <p class="semibold">37 <span>total users</span></p>
+          <p class="semibold">{{ usersCount }} <span>total users</span></p>
           <FormInput
             :style="{ width: '70%' }"
             placeholder="Search for user..."
@@ -82,6 +82,10 @@ defineProps({
     type: Array as PropType<UserType[]>,
     required: true,
   },
+  usersCount: {
+    type: Number,
+    required:true
+  }
 });
 
 const emits = defineEmits(["edit-user-event", "delete-user-event"]);
