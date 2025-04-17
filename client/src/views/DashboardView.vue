@@ -5,6 +5,7 @@
     :users-obj="usersObj"
     :sort="paginationOptions.sort"
     :search="paginationOptions.search"
+    :page="paginationOptions.currentPage"
     @edit-user-event="editUserHandler"
     @delete-user-event="deleteUserHandler"
     @sort-value-event="sortHandler"

@@ -43,6 +43,7 @@
       @delete-event="deleteUserHandler"
       @close-modal-event="isDeleteOpen = false"
     />
+    <PaginationComponent :users="usersObj.count" :current-page="page"/>
   </main>
 </template>
 
@@ -53,13 +54,14 @@ import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
 import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import UserModal from "src/components/layout/dashboard/UserModal.vue";
 import DeleteModal from "src/components/layout/others/DeleteModal.vue";
+import NotFound from "src/components/layout/others/NotFound.vue";
+import SearchHeader from "src/components/layout/dashboard/SearchHeader.vue";
+import PaginationComponent from "src/components/layout/dashboard/PaginationComponent.vue";
 import { UsersResponseType, UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "src/utils/constants";
 import { deleteUser } from "src/api/users";
 import { showToast } from "src/utils/toast";
-import NotFound from "src/components/layout/others/NotFound.vue";
-import SearchHeader from "src/components/layout/dashboard/SearchHeader.vue";
 
 defineProps({
   usersObj: {
@@ -74,6 +76,10 @@ defineProps({
     type: String,
     required: true,
   },
+  page: {
+    type: Number,
+    required:true
+  }
 });
 
 const isUserModalOpen = ref<boolean>(false);

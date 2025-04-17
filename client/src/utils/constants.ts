@@ -88,6 +88,7 @@ export const dashboardOptions = ["ADMIN", "USER"];
 
 export const sortUserOptins = ['A-Z', 'Z-A', 'Newest', 'Oldest']
 
+export const usersPerPage = 10;
 
 export const emptyUser: UserType = {
   id: 0,
