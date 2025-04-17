@@ -2,18 +2,22 @@
   <LoadingSpinner v-if="loading" />
   <SharedLayout v-else :theme="theme" @toggle-theme-event="handleTheme" />
   <RouterView />
+  <FooterComponent v-if="!loading && user.id" />
 </template>
 
 <script lang="ts" setup>
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import SharedLayout from "src/components/layout/navigation/SharedLayout.vue";
+import FooterComponent from "src/components/layout/others/FooterComponent.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import useTheme from "src/composables/useTheme";
 import { storageThemeName } from "src/utils/constants";
 import { onBeforeMount } from "vue";
+import useGetUserStore from "src/composables/useGetUserStore";
 
 const { loading } = useGetLoadingStore();
 const { theme, setTheme } = useTheme();
+const { user } = useGetUserStore();
 
 onBeforeMount(() => {
   const savedTheme = localStorage.getItem(storageThemeName);

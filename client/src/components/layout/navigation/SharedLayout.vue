@@ -10,7 +10,6 @@
       <img src="/game-controller.png" />
       <h1 class="text-2xl">GameVerse</h1>
     </RouterLink>
-
     <div
       v-if="user.id"
       class="relative flex items-center -bottom-4 pb-6 gap-6 group min-w-[195px]"
