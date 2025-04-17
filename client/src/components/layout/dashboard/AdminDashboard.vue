@@ -4,30 +4,14 @@
       <template #title>
         <SubtitleComponent class="mb-12"> Dashboard </SubtitleComponent>
       </template>
-      <!-- da pomjerim u zasebnu komponentu -->
       <template #header>
-        <header class="w-full flex justify-between items-center mb-8">
-          <p class="semibold">{{ usersObj.count }} <span>total users</span></p>
-          <FormInput
-            :style="{ width: '70%' }"
-            placeholder="Search for user..."
-            v-model="searchValue"
-            @update:model-value="searchHandler"
-          />
-          <FormBlock position="row" :style="{ width: '16%' }">
-            <template #label>
-              <FormLabel id="sort">Sort by:</FormLabel>
-            </template>
-            <template #input>
-              <FormSelect
-                id="sort"
-                :options="sortUserOptins"
-                v-model="sortValue"
-                @update:model-value="sortHandler"
-              />
-            </template>
-          </FormBlock>
-        </header>
+        <SearchHeader
+          :sort="sort"
+          :search="search"
+          :users-obj="usersObj"
+          @search-event="searchHandler"
+          @sort-value-event="sortHandler"
+        />
       </template>
       <template #head>
         <UserHeading />
@@ -35,14 +19,14 @@
 
       <template #data>
         <UserData
-        v-if="usersObj.users.length > 0"
+          v-if="usersObj.users.length > 0"
           v-for="user in usersObj.users"
           :key="user.id"
           :user="user"
           @delete-event="openDeleteModalHandler"
           @edit-event="editUserHandler"
         />
-        <NotFound v-else/>
+        <NotFound v-else />
       </template>
     </UsersTable>
 
@@ -69,18 +53,15 @@ import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
 import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
 import UserModal from "src/components/layout/dashboard/UserModal.vue";
 import DeleteModal from "src/components/layout/others/DeleteModal.vue";
-import FormInput from "src/components/form/FormInput.vue";
-import FormSelect from "src/components/form/FormSelect.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
 import { UsersResponseType, UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
-import { emptyUser, sortUserOptins } from "src/utils/constants";
+import { emptyUser } from "src/utils/constants";
 import { deleteUser } from "src/api/users";
 import { showToast } from "src/utils/toast";
-import NotFound from "../others/NotFound.vue";
+import NotFound from "src/components/layout/others/NotFound.vue";
+import SearchHeader from "src/components/layout/dashboard/SearchHeader.vue";
 
-const props = defineProps({
+defineProps({
   usersObj: {
     type: Object as PropType<UsersResponseType>,
     required: true,
@@ -98,8 +79,6 @@ const props = defineProps({
 const isUserModalOpen = ref<boolean>(false);
 const isDeleteOpen = ref<boolean>(false);
 const user = ref<UserType>(emptyUser);
-const sortValue = ref<string>(props.sort);
-const searchValue = ref<string>(props.search);
 
 const emits = defineEmits([
   "edit-user-event",
