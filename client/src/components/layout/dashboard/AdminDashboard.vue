@@ -4,6 +4,7 @@
       <template #title>
         <SubtitleComponent class="mb-12"> Dashboard </SubtitleComponent>
       </template>
+      <!-- da pomjerim u zasebnu komponentu -->
       <template #header>
         <header class="w-full flex justify-between items-center mb-8">
           <p class="semibold">{{ usersObj.count }} <span>total users</span></p>
@@ -31,14 +32,17 @@
       <template #head>
         <UserHeading />
       </template>
+
       <template #data>
         <UserData
+        v-if="usersObj.users.length > 0"
           v-for="user in usersObj.users"
           :key="user.id"
           :user="user"
           @delete-event="openDeleteModalHandler"
           @edit-event="editUserHandler"
         />
+        <NotFound v-else/>
       </template>
     </UsersTable>
 
@@ -74,6 +78,7 @@ import { PropType, ref } from "vue";
 import { emptyUser, sortUserOptins } from "src/utils/constants";
 import { deleteUser } from "src/api/users";
 import { showToast } from "src/utils/toast";
+import NotFound from "../others/NotFound.vue";
 
 const props = defineProps({
   usersObj: {
