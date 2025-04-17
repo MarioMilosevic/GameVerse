@@ -1,14 +1,19 @@
 <template>
-  <div class="flex items-center gap-2 border p-4 mt-4 rounded-xl">
+  <div class="flex items-center justify-between border p-4 mt-12 rounded-xl">
     <p v-if="users > 0" class="text-lg">
       Showing {{ showResultsFrom }} to {{ showResultsTo }} out of
       {{ props.users }}
     </p>
     <p v-else>No users found</p>
+    <div class="flex gap-4">
+      <ActionButton @click="emits('previous-event')">Previous</ActionButton>
+      <ActionButton @click="emits('next-event')">Next</ActionButton>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { computed } from "vue";
 import { usersPerPage } from "src/utils/constants";
 
@@ -31,5 +36,8 @@ const showResultsTo = computed(() => {
   const to = showResultsFrom.value + usersPerPage - 1
   return to > props.users ? props.users : to
 });
+
+
+const emits = defineEmits(['previous-event', 'next-event'])
 
 </script>

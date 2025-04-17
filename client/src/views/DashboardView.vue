@@ -10,6 +10,8 @@
     @delete-user-event="deleteUserHandler"
     @sort-value-event="sortHandler"
     @search-event="searchHandler"
+    @previous-event="previousPage"
+    @next-event="nextPage"
   />
 </template>
 
@@ -22,7 +24,7 @@ import { UsersResponseType, UserType } from "src/utils/types";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
-
+import { usersPerPage } from "src/utils/constants";
 const { loading, setLoading } = useGetLoadingStore();
 
 const { handleSearch } = useDebounce((value: string) => {
@@ -90,15 +92,26 @@ const searchHandler = (value: string) => {
   handleSearch(value);
 };
 
+const previousPage = () => {
+  if (paginationOptions.value.currentPage > 1) {
+    paginationOptions.value.currentPage -= 1;
+  }
+};
+const nextPage = () => {
+  if (
+    paginationOptions.value.currentPage <
+    usersObj.value.count / usersPerPage
+  ) {
+    paginationOptions.value.currentPage += 1;
+  }
+};
+
 watch(
-  [
-    () => paginationOptions.value.sort,
-    () => paginationOptions.value.search,
-  ],
-  async ([newSort, newSearch]) => {
+  [() => paginationOptions.value.sort, () => paginationOptions.value.search, () => paginationOptions.value.currentPage],
+  async ([newSort, newSearch, newPage]) => {
     try {
       const { data, message } = await getUsers(
-        paginationOptions.value.currentPage,
+        newPage,
         newSort,
         newSearch
       );

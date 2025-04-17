@@ -43,7 +43,12 @@
       @delete-event="deleteUserHandler"
       @close-modal-event="isDeleteOpen = false"
     />
-    <PaginationComponent :users="usersObj.count" :current-page="page"/>
+    <PaginationComponent
+      :users="usersObj.count"
+      :current-page="page"
+      @previous-event="emits('previous-event')"
+      @next-event="emits('next-event')"
+    />
   </main>
 </template>
 
@@ -78,8 +83,8 @@ defineProps({
   },
   page: {
     type: Number,
-    required:true
-  }
+    required: true,
+  },
 });
 
 const isUserModalOpen = ref<boolean>(false);
@@ -91,6 +96,8 @@ const emits = defineEmits([
   "delete-user-event",
   "sort-value-event",
   "search-event",
+  'previous-event',
+  'next-event',
 ]);
 
 const deleteUserHandler = async (id: number) => {
@@ -124,4 +131,5 @@ const sortHandler = (value: string) => emits("sort-value-event", value);
 
 const searchHandler = (value: string) =>
   emits("search-event", value.toLowerCase());
+
 </script>
