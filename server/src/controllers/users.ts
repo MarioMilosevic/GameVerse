@@ -64,12 +64,15 @@ export default {
   },
   async getUsers(req: Request, res: Response) {
     try {
-      const { sort, page } = req.params;
+      const { sort, page, search } = req.params;
       
       const pageNumber = Number(page);
       const skip = (pageNumber - 1) * limit;
 
+      const where:any = {}
       const orderBy: any = {};
+
+      if(search) where.fullName = {contains:search, mode:"insensitive"}
       if (sort === "A-Z") orderBy.fullName = "asc";
       if (sort === "Z-A") orderBy.fullName = "desc";
       if (sort === "Newest") orderBy.createdDate = "desc";
@@ -77,6 +80,7 @@ export default {
 
       const [allUsers, count] = await prisma.$transaction([
         prisma.user.findMany({
+          where,
           orderBy,
           take: limit,
           skip,

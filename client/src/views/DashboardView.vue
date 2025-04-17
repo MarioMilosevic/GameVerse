@@ -16,12 +16,18 @@
 import { onBeforeMount, ref, watch } from "vue";
 import { getUsers } from "src/api/users";
 import { showToast } from "src/utils/toast";
+import { useDebounce } from "src/composables/useDebounce";
 import { UsersResponseType, UserType } from "src/utils/types";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
 import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
 
 const { loading, setLoading } = useGetLoadingStore();
+
+const { handleSearch } = useDebounce((value: string) => {
+  paginationOptions.value.search = value;
+  paginationOptions.value.currentPage = 1;
+}, 500);
 
 const usersObj = ref<UsersResponseType>({
   count: 0,
@@ -37,8 +43,6 @@ const paginationOptions = ref<{
   sort: "A-Z",
   search: "",
 });
-
-const searchTimeout = ref<number | null>(null);
 
 onBeforeMount(async () => {
   try {
@@ -82,29 +86,8 @@ const sortHandler = (value: string) => {
 };
 
 const searchHandler = (value: string) => {
-  if (searchTimeout.value) {
-    clearTimeout(searchTimeout.value);
-  }
-  searchTimeout.value = setTimeout(() => {
-    console.log(value);
-    paginationOptions.value.search = value;
-    paginationOptions.value.currentPage = 1
-  }, 500);
+  handleSearch(value);
 };
-
-// const searchHandler = (searchValue: string) => {
-//   if (searchTimeout.value) {
-//     clearTimeout(searchTimeout.value)
-//   }
-//   searchTimeout.value = setTimeout(() => {
-//     pageStore.setPageStore('page', 1)
-//     sortFilterStore.setSearchValue(searchValue)
-//     const currentQuery = { ...router.currentRoute.value.query }
-//     router.push({
-//       query: { ...currentQuery, searchValue },
-//     })
-//   }, 500) as unknown as number
-// }
 
 watch(
   () => paginationOptions.value.sort,

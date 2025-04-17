@@ -132,5 +132,6 @@ const submitHandler = (updatedUser: UserType) => {
 
 const sortHandler = (value: string) => emits("sort-value-event", value);
 
-const searchHandler = (value: string) => emits("search-event", value);
+const searchHandler = (value: string) =>
+  emits("search-event", value.toLowerCase());
 </script>
