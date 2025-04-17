@@ -4,7 +4,7 @@ import authController from "../controllers/auth";
 
 const router = Router();
 
-router.route("/:sort/:page").get(usersController.getUsers);
+router.route("/").get(usersController.getUsers);
 
 router.route("/user").get(usersController.getUserFromToken);
 

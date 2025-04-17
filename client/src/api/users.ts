@@ -86,9 +86,14 @@ export const editUserNameAndEmail = async (
   }
 };
 
-export const getUsers = async (page:number, sort:string) => {
+export const getUsers = async (page:number, sort:string, search:string) => {
   try {
-    const response = await fetch(`${baseUrl}/users/${sort}/${page}`);
+    const params = new URLSearchParams({
+      page: String(page),
+      sort,
+      search,
+    });
+    const response = await fetch(`${baseUrl}/users?${params.toString()}`);
     return await response.json();
   } catch (error) {
     console.error(error);

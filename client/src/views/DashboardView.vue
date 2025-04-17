@@ -47,8 +47,8 @@ const paginationOptions = ref<{
 onBeforeMount(async () => {
   try {
     setLoading(true);
-    const { currentPage, sort } = paginationOptions.value;
-    const { data, message } = await getUsers(currentPage, sort);
+    const { currentPage, sort, search } = paginationOptions.value;
+    const { data, message } = await getUsers(currentPage, sort, search);
     if (data) {
       const { allUsers, count } = data;
       usersObj.value.users = allUsers;
@@ -90,12 +90,16 @@ const searchHandler = (value: string) => {
 };
 
 watch(
-  () => paginationOptions.value.sort,
-  async (newSort) => {
+  [
+    () => paginationOptions.value.sort,
+    () => paginationOptions.value.search,
+  ],
+  async ([newSort, newSearch]) => {
     try {
       const { data, message } = await getUsers(
         paginationOptions.value.currentPage,
-        newSort
+        newSort,
+        newSearch
       );
       if (data) {
         const { allUsers, count } = data;

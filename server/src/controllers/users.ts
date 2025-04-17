@@ -64,15 +64,20 @@ export default {
   },
   async getUsers(req: Request, res: Response) {
     try {
-      const { sort, page, search } = req.params;
-      
+      const { sort, page, search } = req.query;
       const pageNumber = Number(page);
       const skip = (pageNumber - 1) * limit;
 
-      const where:any = {}
+      const where: any = {};
+
+      if (typeof search === "string" && search.trim() !== "") {
+        where.fullName = {
+          contains: search.trim(),
+          mode: "insensitive",
+        };
+      }
       const orderBy: any = {};
 
-      if(search) where.fullName = {contains:search, mode:"insensitive"}
       if (sort === "A-Z") orderBy.fullName = "asc";
       if (sort === "Z-A") orderBy.fullName = "desc";
       if (sort === "Newest") orderBy.createdDate = "desc";
