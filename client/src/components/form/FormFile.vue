@@ -5,17 +5,23 @@
     id="file_input"
     type="file"
     :value="props.file"
-    @change="(e) => emits('file-event', e)"
+    @change="onFileChange"
   />
 </template>
 
 <script setup lang="ts">
 const props = defineProps({
   file: {
-    type: String,
-    required: true,
+    type: [File, null],
+    required: false,
   },
 });
 
 const emits = defineEmits(["file-event"]);
+
+const onFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  const file = target?.files?.[0];
+  if (file) emits("file-event", file);
+};
 </script>

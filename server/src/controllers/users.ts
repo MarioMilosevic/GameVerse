@@ -264,4 +264,27 @@ export default {
       errorFactory.internalError(res);
     }
   },
+  async disableAccount(req: Request, res: Response) {
+    try {
+      const disabledAccount = await prisma.user.update({
+        where: { id: req.id },
+        data: {
+          active: false,
+        },
+      });
+      if (disabledAccount.id) {
+        successFactory.ok(res, "disabled");
+      }
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
+  async updateUserImage(req: Request, res: Response) {
+    try {
+      console.log("uslo");
+      successFactory.ok(res, "proslo");
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
 };

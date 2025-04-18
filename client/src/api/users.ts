@@ -29,12 +29,16 @@ export const createUser = (newUser: SignUpCredentialsType) =>
 export const loginUser = (user: LoginCredentialsType) =>
   fetchAuth("login", user);
 
-export const signOut = (router: Router, user: UserType) => {
+export const signOut = (router: Router, user: UserType, message?:string) => {
   router.push("/login");
   localStorage.removeItem("gameVerse-token");
   const firstName = user.fullName.split(" ")[0];
   setTimeout(() => {
-    showToast(`${firstName} signed out`);
+    if (!message) {
+      showToast(`${firstName} signed out`);
+    } else {
+      showToast(message)
+    }
   }, 500);
   if (user.role === "GUEST" && user.id) {
     try {
@@ -86,7 +90,7 @@ export const editUserNameAndEmail = async (
   }
 };
 
-export const getUsers = async (page:number, sort:string, search:string) => {
+export const getUsers = async (page: number, sort: string, search: string) => {
   try {
     const params = new URLSearchParams({
       page: String(page),
@@ -126,6 +130,37 @@ export const deleteUser = async (id: number) => {
       headers: { "Content-Type": "application/json" },
     });
     return response;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const disableUserAccount = async (id:number) => {
+try {
+  const response = await fetch(`${baseUrl}/users/disable/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json()
+} catch (error) {
+  console.error(error)
+}
+}
+
+export const updateUserImage = async (id: number, image: string) => {
+  try {
+    console.log('id', id)
+    console.log('image', image)
+    const response = await fetch(`${baseUrl}/users/image/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(image),
+    });
+    return await response.json();
   } catch (error) {
     console.error(error);
   }

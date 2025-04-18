@@ -22,6 +22,14 @@ router
   .route("/reviews/:id")
   .get(usersController.getUserId, usersController.getUserReviews);
 
+router
+  .route("/disable/:id")
+  .patch(usersController.getUserId, usersController.disableAccount);
+
+router
+  .route("/image/:id")
+  .patch(usersController.getUserId, usersController.updateUserImage);
+
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);
 
