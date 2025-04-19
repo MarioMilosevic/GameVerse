@@ -32,7 +32,6 @@ export type UserType = {
   email: string;
   fullName: string;
   image: string;
-  imageFallback: string;
   createdDate: string;
   active: boolean;
 };

@@ -20,8 +20,7 @@ model User {
   createdDate     DateTime @default(now())
   active  Boolean @default(true)
   fullName        String
-  image           Bytes?
-  imageFallback String @default("https://social-network-js.vercel.app/img/profile5.png")
+  image String @default("https://social-network-js.vercel.app/img/profile5.png")
   password        String
   passwordConfirm String?
   reviews         Review[]

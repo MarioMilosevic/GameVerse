@@ -4,8 +4,8 @@
   >
     <section class="w-1/3 flex flex-col gap-8">
       <img
-        :src="user.image || user.imageFallback"
-        :alt="user.image || user.imageFallback"
+        :src="user.image"
+        :alt="user.image"
         class="h-[100px] w-[100px]"
       />
       <article class="flex flex-col gap-2">
@@ -216,12 +216,14 @@ const photoHandler = (file: File) => {
 
 const imageHandler = async () => {
   try {
-    if (user.value.id) {
+    if (user.value.id && accountPhoto.value) {
       const response = await updateUserImage(
         user.value.id,
         accountPhoto.value as File
       );
       console.log(response);
+    } else {
+      showToast('Please provide image', 'error')
     }
   } catch (error) {
     console.error(error);

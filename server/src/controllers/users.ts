@@ -45,7 +45,6 @@ export default {
             email: true,
             fullName: true,
             image: true,
-            imageFallback:true,
             role: true,
           },
         });
@@ -96,7 +95,6 @@ export default {
             fullName: true,
             id: true,
             image: true,
-            imageFallback:true,
             role: true,
             active: true,
           },
@@ -128,7 +126,6 @@ export default {
           email: true,
           fullName: true,
           image: true,
-          imageFallback:true
         },
       });
 
@@ -284,8 +281,25 @@ export default {
   },
   async updateUserImage(req: Request, res: Response) {
     try {
-      console.log("uslo");
-      console.log("ovo multer valjda napravi",req.file?.buffer )
+      if (!req.file) {
+        errorFactory.badRequest(res, "No image file provided");
+        return;
+      }
+      console.log(req.file);
+      // const imageBuffer = req.file.buffer;
+
+      // const updatedUser = await prisma.user.update({
+      //   where: { id: req.id },
+      //   data: {
+      //     image: "https://social-network-js.vercel.app/img/profile5.png",
+      //   },
+      //   select: {
+      //     id: true,
+      //     image: true,
+      //   },
+      // });
+      // console.log(updatedUser);
+      // successFactory.ok(res, updatedUser);
       successFactory.ok(res, "proslo");
     } catch (error) {
       errorFactory.internalError(res);
