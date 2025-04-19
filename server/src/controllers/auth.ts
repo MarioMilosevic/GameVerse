@@ -91,8 +91,19 @@ export default {
           id: true,
           fullName: true,
           email: true,
+          active: true,
         },
       });
+
+      if (user && !user.active) {
+        await prisma.user.update({
+          where: { email },
+          data: {
+            active: true,
+          },
+        });
+      }
+
       if (user && user.id) {
         const token = signToken(user.id);
         sucessFactory.ok(res, token);

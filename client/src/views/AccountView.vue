@@ -3,7 +3,11 @@
     class="max-w-[1280px] p-8 mx-auto mt-8 flex gap-4 bg-slate-100 dark:bg-slate-800 rounded-2xl"
   >
     <section class="w-1/3 flex flex-col gap-8">
-      <img :src="user.image" :alt="user.image" class="h-[100px] w-[100px]" />
+      <img
+        :src="user.image || user.imageFallback"
+        :alt="user.image || user.imageFallback"
+        class="h-[100px] w-[100px]"
+      />
       <article class="flex flex-col gap-2">
         <SubtitleComponent justify="start">About You</SubtitleComponent>
         <p class="font-semibold">
@@ -82,13 +86,12 @@
         </template>
 
         <template #inputs>
-          <!-- <FormFile/> -->
           <FormBlock class="items-start">
             <template #label>
               <FormLabel id="file" class="pl-1"> Upload File </FormLabel>
             </template>
             <template #input>
-              <FormFile :file="accountPhoto" @file-event="photoHandler" />
+              <FormFile @file-event="photoHandler" name="image" />
               <p class="pl-1 text-sm text-slate-500 dark:text-slate-300">
                 SVG, PNG, JPG or GIF
               </p>
@@ -143,7 +146,7 @@ import {
 import { showToast } from "src/utils/toast";
 
 const { user, setUser } = useGetUserStore();
-const router = useRouter()
+const router = useRouter();
 
 const accountSettings = ref<AccountSettingsType>({
   fullName: "",
@@ -153,7 +156,7 @@ const accountSettings = ref<AccountSettingsType>({
 const touchedFields = ref<AccountTouchedFields>({});
 const accountFormErrors = ref<AccountFieldErrors>({});
 
-const accountPhoto = ref();
+const accountPhoto = ref<File | null>(null);
 
 const accountSettingsFieldsCompleted = computed(() => {
   return accountSchema.safeParse(accountSettings.value).success;
@@ -189,11 +192,15 @@ const accountHandler = async () => {
 const disableAccount = async () => {
   try {
     if (user.value.id) {
-      const {data, message} = await disableUserAccount(user.value.id);
+      const { data, message } = await disableUserAccount(user.value.id);
       if (data) {
-        signOut(router, user.value, 'Disabled for now — reactivate by signing in.')
+        signOut(
+          router,
+          user.value,
+          "Disabled for now — reactivate by signing in."
+        );
       } else {
-        showToast(message, 'error')
+        showToast(message, "error");
       }
     }
   } catch (error) {
@@ -209,10 +216,16 @@ const photoHandler = (file: File) => {
 
 const imageHandler = async () => {
   try {
-    // const response = await updateUserImage(20, )
+    if (user.value.id) {
+      const response = await updateUserImage(
+        user.value.id,
+        accountPhoto.value as File
+      );
+      console.log(response);
+    }
   } catch (error) {
     console.error(error);
   }
-  console.log("image radi");
+  // valjalo bi da dodam neku validaciju za sliku, da postoji da nije prazno
 };
 </script>

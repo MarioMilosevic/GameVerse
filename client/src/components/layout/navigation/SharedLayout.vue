@@ -18,7 +18,11 @@
         <MoonIcon v-if="theme === 'dark'" />
         <SunIcon v-else />
       </BaseIcon>
-      <img :src="user.image" :alt="user.image" class="h-[50px]" />
+      <img
+        :src="user.image || user.imageFallback"
+        :alt="user.image || user.imageFallback"
+        class="h-[50px]"
+      />
       <h1 class="text-2xl">{{ firstName }}</h1>
 
       <NavigationMenu

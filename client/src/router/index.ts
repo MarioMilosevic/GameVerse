@@ -73,9 +73,9 @@ router.beforeEach(async (to) => {
       setLoading(false);
     }
   }
-  // if (user.value.role !== 'ADMIN' && to.name !== "Home") {
-  //   return {name:"Home"}
-  // }
+  if (user.value.role !== "ADMIN" && to.name === "Dashboard") {
+    return { name: "Home" };
+  }
 });
 
 export default router;

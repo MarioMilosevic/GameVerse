@@ -55,7 +55,7 @@ import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
-import { profileImg, signUpInputs } from "src/utils/constants";
+import { signUpInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {
   getSignUpErrors,
@@ -108,7 +108,6 @@ const submitHandler = async () => {
       const newUser = {
         ...signUpCredentials.value,
         role: "USER",
-        image: profileImg,
       };
       const { data, message } = await createUser(newUser);
       if (data) {

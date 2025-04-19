@@ -1,23 +1,23 @@
 <template>
   <input
-    class="py-1 pl-2 w-full dark:text-slate-900 border border-slate-300 rounded-lg cursor-pointer bg-slate-50 text-slate-500 focus:outline-none dark:bg-slate-200 dark:border-slate-200 dark:placeholder-slate-950"
-    aria-describedby="file_input_help"
+    class="border border-slate-300 rounded-lg py-1 pl-2 cursor-pointer bg-slate-50 text-slate-500 focus:outline-none dark:bg-slate-200 dark:border-slate-200 dark:placeholde:text-slate-950"
     id="file_input"
     type="file"
-    :value="props.file"
+    :name="name"
     @change="onFileChange"
   />
 </template>
 
-<script setup lang="ts">
-const props = defineProps({
-  file: {
-    type: [File, null],
-    required: false,
-  },
-});
 
+<script setup lang="ts">
 const emits = defineEmits(["file-event"]);
+
+defineProps({
+  name: {
+    type: String,
+    required:true
+  }
+})
 
 const onFileChange = (e: Event) => {
   const target = e.target as HTMLInputElement;

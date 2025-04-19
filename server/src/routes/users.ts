@@ -1,8 +1,10 @@
 import { Router } from "express";
 import usersController from "../controllers/users";
 import authController from "../controllers/auth";
+import multer from 'multer';
 
 const router = Router();
+const upload = multer({storage:multer.memoryStorage()})
 
 router.route("/").get(usersController.getUsers);
 
@@ -28,7 +30,7 @@ router
 
 router
   .route("/image/:id")
-  .patch(usersController.getUserId, usersController.updateUserImage);
+  .patch(usersController.getUserId, upload.single('image'), usersController.updateUserImage);
 
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);

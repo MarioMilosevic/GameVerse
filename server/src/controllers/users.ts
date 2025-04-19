@@ -45,6 +45,7 @@ export default {
             email: true,
             fullName: true,
             image: true,
+            imageFallback:true,
             role: true,
           },
         });
@@ -95,6 +96,7 @@ export default {
             fullName: true,
             id: true,
             image: true,
+            imageFallback:true,
             role: true,
             active: true,
           },
@@ -126,6 +128,7 @@ export default {
           email: true,
           fullName: true,
           image: true,
+          imageFallback:true
         },
       });
 
@@ -282,6 +285,7 @@ export default {
   async updateUserImage(req: Request, res: Response) {
     try {
       console.log("uslo");
+      console.log("ovo multer valjda napravi",req.file?.buffer )
       successFactory.ok(res, "proslo");
     } catch (error) {
       errorFactory.internalError(res);

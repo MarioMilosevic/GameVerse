@@ -29,7 +29,7 @@ export const createUser = (newUser: SignUpCredentialsType) =>
 export const loginUser = (user: LoginCredentialsType) =>
   fetchAuth("login", user);
 
-export const signOut = (router: Router, user: UserType, message?:string) => {
+export const signOut = (router: Router, user: UserType, message?: string) => {
   router.push("/login");
   localStorage.removeItem("gameVerse-token");
   const firstName = user.fullName.split(" ")[0];
@@ -37,7 +37,7 @@ export const signOut = (router: Router, user: UserType, message?:string) => {
     if (!message) {
       showToast(`${firstName} signed out`);
     } else {
-      showToast(message)
+      showToast(message);
     }
   }, 500);
   if (user.role === "GUEST" && user.id) {
@@ -135,30 +135,27 @@ export const deleteUser = async (id: number) => {
   }
 };
 
-export const disableUserAccount = async (id:number) => {
-try {
-  const response = await fetch(`${baseUrl}/users/disable/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await response.json()
-} catch (error) {
-  console.error(error)
-}
-}
-
-export const updateUserImage = async (id: number, image: string) => {
+export const disableUserAccount = async (id: number) => {
   try {
-    console.log('id', id)
-    console.log('image', image)
-    const response = await fetch(`${baseUrl}/users/image/${id}`, {
+    const response = await fetch(`${baseUrl}/users/disable/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(image),
+    });
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateUserImage = async (id: number, file: File) => {
+  try {
+    const formData = new FormData()
+    formData.append("image",file)
+    const response = await fetch(`${baseUrl}/users/image/${id}`, {
+      method: "PATCH",
+      body: formData,
     });
     return await response.json();
   } catch (error) {
