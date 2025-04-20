@@ -19,9 +19,9 @@
         <SunIcon v-else />
       </BaseIcon>
       <img
-        :src="user.image"
+        :src="`${apiUrl}/public/${user.image}`"
         :alt="user.image"
-        class="h-[50px]"
+        class="h-[50px] w-[50px] rounded-full object-cover"
       />
       <h1 class="text-2xl">{{ firstName }}</h1>
 
@@ -57,6 +57,7 @@ import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
+import { apiUrl } from "src/utils/constants";
 import { useThrottle } from "src/composables/useThrottle";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 

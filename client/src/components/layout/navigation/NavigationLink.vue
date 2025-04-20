@@ -6,5 +6,3 @@
     <slot name="text"/>
   </li>
 </template>
-
-<script setup lang="ts"></script>

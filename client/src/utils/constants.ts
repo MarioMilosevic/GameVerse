@@ -86,9 +86,11 @@ export const storageThemeName = "gameVerse-theme";
 
 export const dashboardOptions = ["ADMIN", "USER"];
 
-export const sortUserOptins = ['A-Z', 'Z-A', 'Newest', 'Oldest']
+export const sortUserOptins = ["A-Z", "Z-A", "Newest", "Oldest"];
 
 export const usersPerPage = 10;
+
+export const apiUrl = import.meta.env.VITE_API_URL;
 
 export const emptyUser: UserType = {
   id: 0,

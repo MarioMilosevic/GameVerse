@@ -1,13 +1,15 @@
+<!-- :src="`http://localhost:3000/public/${user.image}`" -->
 <template>
   <main
     class="max-w-[1280px] p-8 mx-auto mt-8 flex gap-4 bg-slate-100 dark:bg-slate-800 rounded-2xl"
   >
     <section class="w-1/3 flex flex-col gap-8">
       <img
-        :src="user.image"
+        :src="`${apiUrl}/public/${user.image}`"
         :alt="user.image"
-        class="h-[100px] w-[100px]"
+        class="object-cover rounded-lg"
       />
+
       <article class="flex flex-col gap-2">
         <SubtitleComponent justify="start">About You</SubtitleComponent>
         <p class="font-semibold">
@@ -128,7 +130,7 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
 import { formattedDate } from "src/utils/helpers";
-import { accountInputs } from "src/utils/constants";
+import { accountInputs, apiUrl } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,
@@ -144,6 +146,7 @@ import {
   updateUserImage,
 } from "src/api/users";
 import { showToast } from "src/utils/toast";
+
 
 const { user, setUser } = useGetUserStore();
 const router = useRouter();
@@ -223,7 +226,7 @@ const imageHandler = async () => {
       );
       console.log(response);
     } else {
-      showToast('Please provide image', 'error')
+      showToast("Please provide image", "error");
     }
   } catch (error) {
     console.error(error);

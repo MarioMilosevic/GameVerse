@@ -285,22 +285,20 @@ export default {
         errorFactory.badRequest(res, "No image file provided");
         return;
       }
-      console.log(req.file);
-      // const imageBuffer = req.file.buffer;
+      const imagePath = `images/users/${req.file.filename}`;
 
-      // const updatedUser = await prisma.user.update({
-      //   where: { id: req.id },
-      //   data: {
-      //     image: "https://social-network-js.vercel.app/img/profile5.png",
-      //   },
-      //   select: {
-      //     id: true,
-      //     image: true,
-      //   },
-      // });
-      // console.log(updatedUser);
-      // successFactory.ok(res, updatedUser);
-      successFactory.ok(res, "proslo");
+      const updatedUser = await prisma.user.update({
+        where: { id: req.id },
+        data: {
+          image: imagePath,
+        },
+        select: {
+          id: true,
+          image: true,
+        },
+      });
+
+      successFactory.ok(res, updatedUser);
     } catch (error) {
       errorFactory.internalError(res);
     }

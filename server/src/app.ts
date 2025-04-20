@@ -13,6 +13,7 @@ const app = express();
 const baseUrl = '/api/v1/'
 
 app.use(cors());
+app.use("/public", express.static("src/public"));
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

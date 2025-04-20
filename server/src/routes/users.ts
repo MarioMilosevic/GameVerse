@@ -1,14 +1,40 @@
-import { Router } from "express";
+import { Router, Request } from "express";
 import usersController from "../controllers/users";
 import authController from "../controllers/auth";
 import multer from "multer";
-import path from 'path'
+import path from "path";
 
 const router = Router();
 
-// const upload = multer({ dest: "../../src/public/images/users" });
+const multerStorage = multer.diskStorage({
+  destination: (req: Request, file, cb) => {
+    // const upload = multer({
+    //   dest: path.join(__dirname, "../public/images/users"),
+    // });
+    cb(null, path.join(__dirname, "../public/images/users"));
+    // cb(null, "public/images/users");
+  },
+  filename: (req: Request, file, cb) => {
+    const ext = file.mimetype.split("/")[1];
+    cb(null, `user-${req.id}-${Date.now()}.${ext}`);
+  },
+});
+
+const multerFilter = (
+  req: Request,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback
+) => {
+  if (file.mimetype.startsWith("image")) {
+    cb(null, true);
+  } else {
+    cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE", "Only images allowed"));
+  }
+};
+
 const upload = multer({
-  dest: path.join(__dirname, "../public/images/users"),
+  storage: multerStorage,
+  fileFilter: multerFilter,
 });
 
 router.route("/").get(usersController.getUsers);
