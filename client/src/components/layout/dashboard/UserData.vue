@@ -2,9 +2,9 @@
   <tr class="grid grid-cols-12 text-center items-center border-b pb-2">
     <td class="col-start-1 col-end-3 flex gap-4 h-[50px] items-center">
       <img
-        :src="user.image"
+        :src="renderUserImage(user.image)"
         :alt="user.image"
-        class="h-full"
+        class="h-full w-[50px] rounded-full object-cover"
       />
       <p>{{ user.fullName }}</p>
     </td>
@@ -41,7 +41,7 @@
 <script lang="ts" setup>
 import { UserType } from "src/utils/types";
 import { PropType } from "vue";
-import { formattedDate } from "src/utils/helpers";
+import { formattedDate, renderUserImage } from "src/utils/helpers";
 
 defineProps({
   user: {
