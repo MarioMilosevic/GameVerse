@@ -19,7 +19,7 @@
         <SunIcon v-else />
       </BaseIcon>
       <img
-        :src="`${apiUrl}/public/${user.image}`"
+        :src="renderUserImage(user.image)"
         :alt="user.image"
         class="h-[50px] w-[50px] rounded-full object-cover"
       />
@@ -58,6 +58,7 @@ import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { apiUrl } from "src/utils/constants";
+import { renderUserImage } from "src/utils/helpers";
 import { useThrottle } from "src/composables/useThrottle";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 

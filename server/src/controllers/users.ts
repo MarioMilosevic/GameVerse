@@ -294,7 +294,12 @@ export default {
         },
         select: {
           id: true,
+          fullName: true,
           image: true,
+          active: true,
+          createdDate: true,
+          role: true,
+          email: true,
         },
       });
 

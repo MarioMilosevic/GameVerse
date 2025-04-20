@@ -1,12 +1,11 @@
-<!-- :src="`http://localhost:3000/public/${user.image}`" -->
 <template>
   <main
     class="max-w-[1280px] p-8 mx-auto mt-8 flex gap-4 bg-slate-100 dark:bg-slate-800 rounded-2xl"
   >
     <section class="w-1/3 flex flex-col gap-8">
       <img
-        :src="`${apiUrl}/public/${user.image}`"
-        :alt="user.image"
+        :src="renderUserImage(user.image)"
+        :alt="user.name + 'image'"
         class="object-cover rounded-lg"
       />
 
@@ -129,7 +128,7 @@ import FormError from "src/components/form/FormError.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
-import { formattedDate } from "src/utils/helpers";
+import { formattedDate, renderUserImage } from "src/utils/helpers";
 import { accountInputs, apiUrl } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {
@@ -146,7 +145,6 @@ import {
   updateUserImage,
 } from "src/api/users";
 import { showToast } from "src/utils/toast";
-
 
 const { user, setUser } = useGetUserStore();
 const router = useRouter();
@@ -212,19 +210,22 @@ const disableAccount = async () => {
 };
 
 const photoHandler = (file: File) => {
-  console.log("uslo");
   accountPhoto.value = file;
-  console.log(accountPhoto.value);
 };
 
 const imageHandler = async () => {
   try {
     if (user.value.id && accountPhoto.value) {
-      const response = await updateUserImage(
+      const { data, message } = await updateUserImage(
         user.value.id,
         accountPhoto.value as File
       );
-      console.log(response);
+      if (data) {
+        setUser(data);
+        showToast("Image updated");
+      } else {
+        showToast(message, "error");
+      }
     } else {
       showToast("Please provide image", "error");
     }

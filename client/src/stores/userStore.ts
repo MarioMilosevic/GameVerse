@@ -6,6 +6,7 @@ const emptyUser: UserType = {
   id: 0,
   fullName: "",
   image: "",
+  active:true,
   createdDate:"",
   role: "USER",
   email: "",
