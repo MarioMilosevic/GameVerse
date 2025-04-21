@@ -4,7 +4,7 @@
   >
     <div class="flex items-end gap-2">
       <fieldset class="h-[50px] w-[50px]">
-        <img :src="props.review.user.image" class="h-full" />
+        <img :src="renderUserImage(props.review.user.image)" class="h-full w-full object-cover rounded-full" />
       </fieldset>
       <h2>{{ props.review.user.fullName }}</h2>
       <p>Joined on {{ formattedDate(props.review.user.createdDate) }}</p>
@@ -38,7 +38,7 @@
 <script setup lang="ts">
 import { ReviewType } from "src/utils/types";
 import { PropType } from "vue";
-import { formattedDate } from "src/utils/helpers";
+import { formattedDate, renderUserImage } from "src/utils/helpers";
 import useTheme from "src/composables/useTheme";
 
 const props = defineProps({

@@ -57,7 +57,6 @@ import SunIcon from "src/icons/SunIcon.vue";
 import MoonIcon from "src/icons/MoonIcon.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
-import { apiUrl } from "src/utils/constants";
 import { renderUserImage } from "src/utils/helpers";
 import { useThrottle } from "src/composables/useThrottle";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
