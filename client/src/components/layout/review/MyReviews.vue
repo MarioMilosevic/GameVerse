@@ -1,6 +1,6 @@
 <template>
   <main
-    class="mx-auto min-h-screen max-w-[1280px] flex flex-col gap-4 items-center"
+    class="mx-auto min-h-screen max-w-[1280px] flex flex-col gap-4 py-4 items-center"
   >
     <h1 class="text-5xl text-center py-8">Your Reviews</h1>
     <ul class="flex flex-col gap-4" v-if="reviews.length > 0">
@@ -13,9 +13,9 @@
           :src="review.game.thumbnail"
           :alt="review.game.thumbnail"
           loading="lazy"
-          class="h-full object-cover rounded-2xl"
+          class="h-full w-1/3 object-cover rounded-2xl"
         />
-        <div class="flex flex-col justify-between relative h-full w-full">
+        <div class="flex flex-col justify-between relative h-full w-2/3">
           <h2
             class="text-3xl font-semibold italic dark:text-red-500 text-sky-500"
           >

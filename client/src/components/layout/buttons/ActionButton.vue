@@ -24,7 +24,7 @@ const colorOptions = {
     "bg-sky-400 hover:bg-sky-500 dark:bg-red-700 dark:hover:bg-dark-dark-red",
   red: "dark:bg-dark-deep-red dark:hover:bg-dark-dark-red",
   darkRed: "dark:bg-dark-dark-red",
-  green: "bg-green-700",
+  green: "bg-green-400 dark:bg-green-700",
 };
 
 const positionOptions = {

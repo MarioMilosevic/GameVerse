@@ -1,13 +1,5 @@
 <template>
-  <button
-    class="absolute -top-11 right-0 border bg-sky-500 hover:bg-sky-600 dark:bg-transparent hover:scale-105 dark:border-transparent flex items-center gap-2 px-3 py-1 rounded-2xl cursor-pointer transition-all duration-300 dark:hover:border-slate-50 hover:border dark:hover:bg-slate-950"
-    @click="emits('close-modal-event')"
-  >
-    <p>Close</p>
-    <BaseIcon>
-      <XIcon />
-    </BaseIcon>
-  </button>
+  <GameImageCloseButton @close-event="emits('close-modal-event')"/>
   <SliderButton class="-left-16" @click="emits('prev-event')">
     <template #icon>
       <BaseIcon size="big">
@@ -36,8 +28,8 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { translateElement } from "src/utils/helpers";
+import GameImageCloseButton from "src/components/layout/game/GameImageCloseButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
-import XIcon from "src/icons/XIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
 import SliderButton from "src/components/layout/buttons/SliderButton.vue";

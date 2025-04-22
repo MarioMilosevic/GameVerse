@@ -2,7 +2,7 @@
   <nav
     :class="[
       `flex justify-between items-center px-8 top-0 ${
-        isSticky ? 'fixed z-40' : 'absolute'
+        isSticky ? 'fixed z-10' : 'absolute'
       } top-0 right-0 w-full bg-slate-300 dark:bg-slate-900 transition-all duration-700`,
     ]"
   >
@@ -24,7 +24,6 @@
         class="h-[50px] w-[50px] rounded-full object-cover"
       />
       <h1 class="text-2xl">{{ firstName }}</h1>
-
       <NavigationMenu
         class="absolute bottom-0 left-0 translate-y-full scale-y-0 opacity-0 origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
         :theme="theme"
@@ -64,10 +63,12 @@ import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 const { user, resetUser } = useGetUserStore();
 
 onMounted(() => {
+  console.log('mounted')
   window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
+  console.log('unmounted')
   window.removeEventListener("scroll", handleScroll);
 });
 
@@ -93,8 +94,9 @@ const router = useRouter();
 
 const handleScroll = useThrottle(() => {
   const scrollTop = window.scrollY;
+
   const windowHeight = window.innerHeight;
-  isSticky.value = scrollTop >= windowHeight;
+  isSticky.value = scrollTop >= (windowHeight / 2);
 }, 200);
 
 const selectedPage = computed(() => {
