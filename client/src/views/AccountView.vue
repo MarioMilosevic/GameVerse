@@ -5,8 +5,8 @@
     <section class="w-1/3 flex flex-col gap-8">
       <img
         :src="renderUserImage(user.image)"
-        :alt="user.name + 'image'"
-        class="object-cover rounded-lg"
+        :alt="user.fullName + 'image'"
+        class="object-cover rounded-lg h-full"
       />
 
       <article class="flex flex-col gap-2">
@@ -129,7 +129,7 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
 import { formattedDate, renderUserImage } from "src/utils/helpers";
-import { accountInputs, apiUrl } from "src/utils/constants";
+import { accountInputs, emptyAccountSettings } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,
@@ -146,13 +146,12 @@ import {
 } from "src/api/users";
 import { showToast } from "src/utils/toast";
 
-const { user, setUser } = useGetUserStore();
+const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();
 
-const accountSettings = ref<AccountSettingsType>({
-  fullName: "",
-  email: "",
-});
+
+
+const accountSettings = ref<AccountSettingsType>(emptyAccountSettings);
 
 const touchedFields = ref<AccountTouchedFields>({});
 const accountFormErrors = ref<AccountFieldErrors>({});
@@ -181,6 +180,11 @@ const accountHandler = async () => {
       );
       if (data) {
         setUser(data);
+        showToast("Settings updated sucessfully");
+        accountSettings.value = {
+          fullName: "",
+          email:""
+        };
       } else {
         showToast(message, "error");
       }
@@ -200,6 +204,7 @@ const disableAccount = async () => {
           user.value,
           "Disabled for now — reactivate by signing in."
         );
+        resetUser()
       } else {
         showToast(message, "error");
       }
@@ -223,6 +228,7 @@ const imageHandler = async () => {
       if (data) {
         setUser(data);
         showToast("Image updated");
+        accountPhoto.value = null
       } else {
         showToast(message, "error");
       }
@@ -232,6 +238,5 @@ const imageHandler = async () => {
   } catch (error) {
     console.error(error);
   }
-  // valjalo bi da dodam neku validaciju za sliku, da postoji da nije prazno
 };
 </script>

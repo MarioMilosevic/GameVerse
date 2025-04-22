@@ -2,7 +2,7 @@
   <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
       <ModalComponent
-        size="small"
+        size="medium"
         class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
       >
         <BaseIcon

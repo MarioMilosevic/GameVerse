@@ -40,13 +40,6 @@ export const signOut = (router: Router, user: UserType, message?: string) => {
       showToast(message);
     }
   }, 500);
-  if (user.role === "GUEST" && user.id) {
-    try {
-      // da se izbrise guest user iz baze
-    } catch (error) {
-      console.error(error);
-    }
-  }
 };
 
 export const getUserData = async (token: string) => {

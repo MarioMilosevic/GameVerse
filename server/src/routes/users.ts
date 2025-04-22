@@ -48,7 +48,7 @@ router
 
 router
   .route("/dashboard/:id")
-  .patch(usersController.getUserId, usersController.editUserProfile)
+  .patch(usersController.getUserId, usersController.editUserProfileFromDashboard)
   .delete(usersController.getUserId, usersController.deleteUser);
 
 router

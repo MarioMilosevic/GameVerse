@@ -92,6 +92,11 @@ export const usersPerPage = 10;
 
 export const apiUrl = import.meta.env.VITE_API_URL;
 
+export const emptyAccountSettings = {
+  fullName: "",
+  email:""
+}
+
 export const emptyUser: UserType = {
   id: 0,
   role: "USER",

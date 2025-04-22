@@ -203,10 +203,20 @@ export default {
   },
   async editUserNameAndEmail(req: Request, res: Response) {
     try {
+
       const { fullName, email } = req.body;
 
       if (!fullName || !email) {
         errorFactory.badRequest(res);
+        return;
+      }
+
+      const userExists = await prisma.user.findUnique({
+        where: { email },
+      });
+
+      if (userExists?.id) {
+        errorFactory.badRequest(res, "User with this email already exists");
         return;
       }
 
@@ -231,7 +241,7 @@ export default {
     }
   },
 
-  async editUserProfile(req: Request, res: Response) {
+  async editUserProfileFromDashboard(req: Request, res: Response) {
     try {
       const { active, email, fullName, role } = req.body;
 
