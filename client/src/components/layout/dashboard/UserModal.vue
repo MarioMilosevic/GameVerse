@@ -96,10 +96,8 @@ const user = ref<UserType>({ ...props.user });
 
 const submitHandler = async () => {
   try {
-    console.log("submit", user.value);
     const { data, message } = await editUserProfile(user.value);
     if (data) {
-      console.log(data);
       emits('submit-event', data)
     } else {
       showToast(message, "error");

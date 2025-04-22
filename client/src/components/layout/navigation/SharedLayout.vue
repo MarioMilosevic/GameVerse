@@ -1,18 +1,22 @@
 <template>
   <nav
     :class="[
-      `flex justify-between items-center px-8 top-0 ${
+      `flex justify-between items-center sm:px-8 sm:py-4 top-0 px-2 py-2 ${
         isSticky ? 'fixed z-10' : 'absolute'
       } top-0 right-0 w-full bg-slate-300 dark:bg-slate-900 transition-all duration-700`,
     ]"
   >
     <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-4">
-      <img src="/game-controller.png" />
-      <h1 class="text-2xl">GameVerse</h1>
+      <img src="/game-controller.png" class="max-h-[50px] sm:max-h-[75px]" />
+      <h1 class="sm:text-2xl text-lg">GameVerse</h1>
     </RouterLink>
+
     <div
       v-if="user.id"
-      class="relative flex items-center -bottom-4 pb-6 gap-6 group min-w-[195px]"
+      class="relative flex items-center -bottom-4 pb-6 justify-between group gap-2 sm:gap-0 sm:min-w-[195px]"
+      @click="toggleMenu"
+      @blur="closeNavigationMenu"
+      tabindex="0"
     >
       <BaseIcon size="big">
         <MoonIcon v-if="theme === 'dark'" />
@@ -21,11 +25,17 @@
       <img
         :src="renderUserImage(user.image)"
         :alt="user.image"
-        class="h-[50px] w-[50px] rounded-full object-cover"
+        class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] rounded-full object-cover"
       />
-      <h1 class="text-2xl">{{ firstName }}</h1>
+      <h1 class="text-lg sm:text-2xl">{{ firstName }}</h1>
       <NavigationMenu
-        class="absolute bottom-0 left-0 translate-y-full scale-y-0 opacity-0 origin-top transition-all duration-500 ease-out group-hover:opacity-100 group-hover:scale-y-100"
+        :class="[
+          'absolute bottom-0 left-0 translate-y-full origin-top transition-all duration-500 ease-out z-10',
+          navigationMenuOpen
+            ? 'scale-y-100 opacity-100'
+            : 'scale-y-0 opacity-0',
+          'group-hover:opacity-100 group-hover:scale-y-100',
+        ]"
         :theme="theme"
         @dashboard-event="dashboardHandler"
         @sign-out-event="signOutHandler"
@@ -34,7 +44,8 @@
         @account-event="accountHandler"
       />
     </div>
-    <div class="flex gap-4 items-center" v-else>
+
+    <div class="flex sm:gap-4 gap-2 items-center" v-else>
       <ActionButton
         v-for="(page, index) in authPages"
         :color="selectedPage === index ? 'primary' : 'transparent'"
@@ -63,12 +74,10 @@ import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 const { user, resetUser } = useGetUserStore();
 
 onMounted(() => {
-  console.log('mounted')
   window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
-  console.log('unmounted')
   window.removeEventListener("scroll", handleScroll);
 });
 
@@ -82,6 +91,7 @@ defineProps({
 const emits = defineEmits(["toggle-theme-event"]);
 
 const isSticky = ref<boolean>(false);
+const navigationMenuOpen = ref<boolean>(false);
 
 const firstName = computed(() => {
   return user.value.fullName.split(" ")[0];
@@ -92,11 +102,21 @@ const authRoutes = ["/login", "/sign-up"];
 
 const router = useRouter();
 
+const toggleMenu = () => {
+  if (!window.matchMedia("(hover:hover)").matches) {
+    navigationMenuOpen.value = !navigationMenuOpen.value;
+  }
+};
+
+const closeNavigationMenu = () => {
+  navigationMenuOpen.value = false;
+};
+
 const handleScroll = useThrottle(() => {
   const scrollTop = window.scrollY;
 
   const windowHeight = window.innerHeight;
-  isSticky.value = scrollTop >= (windowHeight / 2);
+  isSticky.value = scrollTop >= windowHeight / 2;
 }, 200);
 
 const selectedPage = computed(() => {

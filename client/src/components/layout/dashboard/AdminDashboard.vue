@@ -96,8 +96,8 @@ const emits = defineEmits([
   "delete-user-event",
   "sort-value-event",
   "search-event",
-  'previous-event',
-  'next-event',
+  "previous-event",
+  "next-event",
 ]);
 
 const deleteUserHandler = async (id: number) => {
@@ -131,5 +131,4 @@ const sortHandler = (value: string) => emits("sort-value-event", value);
 
 const searchHandler = (value: string) =>
   emits("search-event", value.toLowerCase());
-
 </script>

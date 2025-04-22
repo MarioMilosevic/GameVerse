@@ -33,9 +33,9 @@ const positionOptions = {
 };
 
 const buttonSize = {
-  small: "px-2 py-1 text-small",
-  medium: "px-6 py-3 text-base",
-  big: "px-8 py-4 text-lg",
+  small: "sm:px-2 sm:py-1 text-small",
+  medium: "px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base",
+  big: "sm:px-8 sm:py-4 text-lg",
 };
 
 type SizeType = keyof typeof buttonSize;
