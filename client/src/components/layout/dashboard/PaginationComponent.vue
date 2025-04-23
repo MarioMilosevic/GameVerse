@@ -1,6 +1,6 @@
 <template>
-  <div class="flex items-center justify-between mt-4 rounded-xl">
-    <p v-if="users > 0" class="text-lg">
+  <div class="flex items-center justify-between mt-4 rounded-xl sm:w-full w-[90%] mx-auto">
+    <p v-if="users > 0" class="text-sm sm:text-lg">
       Showing {{ showResultsFrom }} to {{ showResultsTo }} out of
       {{ props.users }}
     </p>

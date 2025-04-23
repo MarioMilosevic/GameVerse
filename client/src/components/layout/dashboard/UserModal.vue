@@ -3,7 +3,7 @@
     <ModalComponent size="small">
       <FormComponent
         id="editUserForm"
-        class="bg-slate-200 dark:bg-slate-700 w-full h-full p-16 relative"
+        class="bg-slate-200 dark:bg-slate-700 w-full h-full sm:p-16 relative"
         @submit.prevent="submitHandler"
       >
         <template #title>
