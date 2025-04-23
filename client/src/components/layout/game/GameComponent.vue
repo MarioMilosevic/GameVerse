@@ -1,12 +1,13 @@
 <template>
-  <section class="max-w-[300px] flex flex-col gap-2 relative">
+  <section class="sm:max-w-[300px] flex flex-col gap-2 relative">
     <img
       :src="thumbnail"
       loading="lazy"
-      class="w-full h-[300px] object-cover rounded-xl"
+      class="w-full sm:h-[300px] object-cover rounded-xl"
     />
-    <div class="flex flex-col gap-4">
-      <h1 class="text-center text-xl">{{ name }}</h1>
+    <div class="flex flex-col gap-4 ">
+      <h1 class="text-center text-lg sm:text-xl">{{ name }}</h1>
+
       <div class="grid grid-cols-2 gap-2">
         <GameStat>
           <template #icon>
