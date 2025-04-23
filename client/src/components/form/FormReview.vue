@@ -1,6 +1,6 @@
 <template>
   <form
-    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl"
+    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-2xl"
   >
     <BaseIcon
       class="absolute top-2 right-2 cursor-pointer"
@@ -9,7 +9,7 @@
     >
       <XIcon />
     </BaseIcon>
-    <div class="flex flex-col gap-4 items-center w-[500px] px-20 mx-auto">
+    <div class="flex flex-col gap-4 items-center sm:w-[500px] sm:px-20 mx-auto">
       <p v-if="!props.userId" class="text-sky-500 dark:text-red-500">
         RATE THIS
       </p>
