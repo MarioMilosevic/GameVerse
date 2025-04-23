@@ -1,8 +1,8 @@
 <template>
   <div
-    class="border border-sky-500 dark:border-dark-dark-red flex items-center justify-between px-5 py-3 w-[90%] mx-auto rounded-2xl"
+    class="border border-sky-500 dark:border-dark-dark-red flex gap-2 sm:gap-0 items-center justify-between px-2 py-2 sm:px-5 sm:py-3 sm:w-[90%] mx-auto rounded-2xl"
   >
-    <p class="text-lg">Want to {{ hasReview }} review ?</p>
+    <p class="text-sm sm:text-lg">Want to {{ hasReview }} review ?</p>
     <ActionButton @click="emits('open-modal-event')"> Click here </ActionButton>
   </div>
 </template>

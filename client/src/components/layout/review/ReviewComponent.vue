@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex flex-col pl-12 gap-2 absolute top-10 right-1/2 translate-x-1/2 w-full overflow-y-auto transition-all duration-300"
+    class="flex flex-col sm:pl-12 pl-6 gap-2  absolute top-10 right-1/2 translate-x-1/2 w-full h-full overflow-y-auto transition-all duration-300"
   >
     <div class="flex items-end gap-2">
-      <fieldset class="h-[50px] w-[50px]">
+      <fieldset class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]">
         <img :src="renderUserImage(props.review.user.image)" class="h-full w-full object-cover rounded-full" />
       </fieldset>
       <h2>{{ props.review.user.fullName }}</h2>
-      <p>Joined on {{ formattedDate(props.review.user.createdDate) }}</p>
+      <p class="text-sm sm:text-base">Joined on {{ formattedDate(props.review.user.createdDate) }}</p>
     </div>
 
     <div class="flex items-center gap-2">
@@ -26,12 +26,12 @@
           "
         />
       </div>
-      <p>
-        <span> {{ props.review.rating }}/10 </span>
+      <p class="text-sm sm:text-base">
+        <span class="font-semibold"> {{ props.review.rating }}/10 </span>
         - Reviewed on {{ formattedDate(props.review.createdAt as string) }}
       </p>
     </div>
-    <p class="pl-2 w-[90%] text-justify">{{ props.review.content }}</p>
+    <p class="pl-2 w-[90%] text-justify text-sm sm:text-base">{{ props.review.content }}</p>
   </div>
 </template>
 

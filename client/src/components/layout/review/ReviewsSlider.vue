@@ -1,6 +1,6 @@
 <template>
   <article
-    class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[330px]"
+    class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[330px] sm:h-[330px]"
   >
     <SubtitleComponent> Reviews </SubtitleComponent>
     <ReviewComponent
@@ -13,7 +13,7 @@
       @open-modal-event="emits('open-modal-event')"
       :user-review="userReview"
     />
-    <SliderButton class="-left-0" @click="emits('previous-review-event')">
+    <SliderButton class="-left-3 sm:-left-0" @click="emits('previous-review-event')">
       <template #icon>
         <BaseIcon>
           <LeftIcon />
@@ -21,7 +21,7 @@
       </template>
     </SliderButton>
 
-    <SliderButton class="right-0" @click="emits('next-review-event')">
+    <SliderButton class="-right-3 sm:right-0" @click="emits('next-review-event')">
       <template #icon>
         <BaseIcon>
           <RightIcon />
