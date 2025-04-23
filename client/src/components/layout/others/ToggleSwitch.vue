@@ -1,5 +1,5 @@
 <template>
-  <label class="relative cursor-pointer inline-block w-15 h-8">
+  <label class="relative cursor-pointer w-6 h-4 sm:w-15 sm:h-8">
     <input
       type="checkbox"
       :checked="modelValue"
@@ -10,13 +10,12 @@
       class="absolute top-0 left-0 w-full h-full bg-gray-400 rounded-full transition-colors duration-300 peer-checked:bg-blue-500"
     ></span>
     <span
-      class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 peer-checked:translate-x-7"
+      class="absolute left-[1px] top-1 sm:left-1 sm:top-1 w-[9px] h-[9px] sm:w-6 sm:h-6 bg-white rounded-full shadow-md transition-transform duration-300 peer-checked:translate-x-3 sm:peer-checked:translate-x-7"
     ></span>
   </label>
 </template>
 
 <script setup lang="ts">
-
 defineProps({
   modelValue: {
     type: Boolean,

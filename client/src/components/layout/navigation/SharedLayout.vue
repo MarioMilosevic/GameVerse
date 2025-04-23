@@ -13,7 +13,7 @@
 
     <div
       v-if="user.id"
-      class="relative flex items-center -bottom-4 pb-6 justify-between group gap-2 sm:gap-0 sm:min-w-[195px]"
+      class="relative flex items-center -bottom-3 pb-3 sm:-bottom-4 sm:pb-6 justify-between group gap-2 sm:gap-0 sm:min-w-[195px]"
       @click="toggleMenu"
       @blur="closeNavigationMenu"
       tabindex="0"
@@ -30,7 +30,7 @@
       <h1 class="text-lg sm:text-2xl">{{ firstName }}</h1>
       <NavigationMenu
         :class="[
-          'absolute bottom-0 left-0 translate-y-full origin-top transition-all duration-500 ease-out z-10',
+          'absolute bottom-0 left-0 translate-y-full origin-top transition-all duration-500 ease-out',
           navigationMenuOpen
             ? 'scale-y-100 opacity-100'
             : 'scale-y-0 opacity-0',
