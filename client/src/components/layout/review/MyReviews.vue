@@ -2,12 +2,12 @@
   <main
     class="mx-auto min-h-screen max-w-[1280px] flex flex-col gap-4 py-4 items-center"
   >
-    <h1 class="text-5xl text-center py-8">Your Reviews</h1>
-    <ul class="flex flex-col gap-4" v-if="reviews.length > 0">
+    <h1 class="text-2xl sm:text-5xl text-center py-4 sm:py-8">Your Reviews</h1>
+    <ul class="flex flex-col sm:gap-4 gap-8 sm:px-0 px-2" v-if="reviews.length > 0">
       <li
         v-for="review in reviews"
         :key="review.id"
-        class="flex items-center h-[250px] gap-6"
+        class="flex items-center h-[250px] sm:gap-6 gap-2"
       >
         <img
           :src="review.game.thumbnail"
@@ -17,16 +17,16 @@
         />
         <div class="flex flex-col justify-between relative h-full w-2/3">
           <h2
-            class="text-3xl font-semibold italic dark:text-red-500 text-sky-500"
+            class="text-lg sm:text-3xl font-semibold italic dark:text-red-500 text-sky-500"
           >
             {{ review.game.name }}
           </h2>
-          <p class="text-justify">{{ review.content }}</p>
-          <div class="flex flex-col gap-2">
+          <p class="text-justify text-sm sm:text-base">{{ review.content }}</p>
+          <div class="flex flex-col gap-1 sm:gap-2">
             <GameRating :rating="review.game.averageRating" />
             <h4>Your rating: {{ review.rating }}/10</h4>
           </div>
-          <footer class="text-sm">
+          <footer class="text-xs sm:text-sm">
             Reviewed on {{ formattedDate(review.createdAt) }}
           </footer>
           <ActionButton
