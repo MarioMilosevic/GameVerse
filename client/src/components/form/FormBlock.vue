@@ -1,6 +1,6 @@
 <template>
   <fieldset
-    :class="['relative border-none flex gap-2 items-center justify-between', positionOptions[position]]"
+    :class="['relative border-none flex sm:gap-2 items-center justify-between', positionOptions[position]]"
   >
     <slot name="label" />
     <slot name="input" />

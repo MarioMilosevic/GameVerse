@@ -1,15 +1,18 @@
 <template>
-  <header class="w-full flex justify-between items-center mb-8">
-    <p class="semibold">{{ usersObj.count }} <span>total users</span></p>
-    <FormInput
-      :style="{ width: '70%' }"
-      placeholder="Search for user..."
-      v-model="searchValue"
-      @update:model-value="searchHandler"
-    />
-    <FormBlock position="row" :style="{ width: '16%' }">
+  <header class="w-full flex justify-between items-center mb-8 relative">
+    <p class="sm:text-base text-sm semibold sm:static absolute -top-6 left-0">
+      {{ usersObj.count }} <span>total users</span>
+    </p>
+    <div class="w-[50%] sm:w-[70%]">
+      <FormInput
+        placeholder="Search for user..."
+        v-model="searchValue"
+        @update:model-value="searchHandler"
+      />
+    </div>
+    <FormBlock position="row">
       <template #label>
-        <FormLabel id="sort">Sort by:</FormLabel>
+        <FormLabel id="sort" class="sm:block hidden">Sort by:</FormLabel>
       </template>
       <template #input>
         <FormSelect

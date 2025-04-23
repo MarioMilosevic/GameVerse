@@ -1,8 +1,8 @@
 <template>
-  <main class="max-w-[1280px] mx-auto mt-12">
+  <main class="max-w-[1280px] mx-auto mt-8 sm:mt-12">
     <UsersTable>
       <template #title>
-        <SubtitleComponent class="mb-12"> Dashboard </SubtitleComponent>
+        <SubtitleComponent class="mb-8 sm:mb-12"> Dashboard </SubtitleComponent>
       </template>
       <template #header>
         <SearchHeader

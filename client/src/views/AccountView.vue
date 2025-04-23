@@ -1,8 +1,8 @@
 <template>
   <main
-    class="max-w-[1280px] p-8 mx-auto mt-8 flex gap-4 bg-slate-100 dark:bg-slate-800 rounded-2xl"
+    class="max-w-[1280px] py-8 sm:px-8 sm:py-8 mx-auto sm:mt-8 flex sm:flex-row flex-col sm:gap-4 gap-8 bg-slate-100 dark:bg-slate-800 rounded-2xl"
   >
-    <section class="w-1/3 flex flex-col gap-8">
+    <section class="sm:w-1/3 flex flex-col gap-4 px-4 sm:px-0 sm:gap-8">
       <img
         :src="renderUserImage(user.image)"
         :alt="user.fullName + 'image'"
@@ -11,20 +11,20 @@
 
       <article class="flex flex-col gap-2">
         <SubtitleComponent justify="start">About You</SubtitleComponent>
-        <p class="font-semibold">
+        <p class="sm:text-base text-sm font-semibold">
           Full Name: <span class="font-normal">{{ user.fullName }}</span>
         </p>
-        <p class="font-semibold">
+        <p class="sm:text-base text-sm font-semibold">
           Email: <span class="font-normal">{{ user.email }}</span>
         </p>
-        <p class="font-semibold">
+        <p class="sm:text-base text-sm font-semibold">
           Member since:
           <span class="font-normal">{{ formattedDate(user.createdDate) }}</span>
         </p>
       </article>
     </section>
 
-    <section class="w-2/3 flex flex-col gap-4">
+    <section class="sm:w-2/3 flex flex-col gap-4 w-full">
       <FormComponent
         id="editAccountForm"
         class="gap-6"
@@ -149,8 +149,6 @@ import { showToast } from "src/utils/toast";
 const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();
 
-
-
 const accountSettings = ref<AccountSettingsType>(emptyAccountSettings);
 
 const touchedFields = ref<AccountTouchedFields>({});
@@ -183,7 +181,7 @@ const accountHandler = async () => {
         showToast("Settings updated sucessfully");
         accountSettings.value = {
           fullName: "",
-          email:""
+          email: "",
         };
       } else {
         showToast(message, "error");
@@ -204,7 +202,7 @@ const disableAccount = async () => {
           user.value,
           "Disabled for now — reactivate by signing in."
         );
-        resetUser()
+        resetUser();
       } else {
         showToast(message, "error");
       }
@@ -228,7 +226,7 @@ const imageHandler = async () => {
       if (data) {
         setUser(data);
         showToast("Image updated");
-        accountPhoto.value = null
+        accountPhoto.value = null;
       } else {
         showToast(message, "error");
       }
