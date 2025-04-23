@@ -93,7 +93,6 @@
         />
       </ModalComponent>
     </OverlayComponent>
-
     <OverlayComponent v-if="isReviewModalOpen">
       <ModalComponent size="small">
         <ReviewModal

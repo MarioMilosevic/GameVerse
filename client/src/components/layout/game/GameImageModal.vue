@@ -1,6 +1,6 @@
 <template>
   <GameImageCloseButton @close-event="emits('close-modal-event')"/>
-  <SliderButton class="-left-16" @click="emits('prev-event')">
+  <SliderButton class="-left-11 sm:-left-16" @click="emits('prev-event')">
     <template #icon>
       <BaseIcon size="big">
         <LeftIcon />
@@ -12,11 +12,11 @@
       v-for="(photo, index) in allPhotos"
       :src="photo"
       :alt="photo"
-      class="rounded-xl w-full h-full absolute top-0 left-0 transition-all duration-500"
+      class="rounded-xl h-full w-full absolute top-0 left-0 transition-all object-cover duration-500"
       :style="{ transform: translateElement(index, selectedImageIndex) }"
     />
   </fieldset>
-  <SliderButton class="-right-16" @click="emits('next-event')">
+  <SliderButton class="-right-11 sm:-right-16" @click="emits('next-event')">
     <template #icon>
       <BaseIcon size="big">
         <RightIcon />
