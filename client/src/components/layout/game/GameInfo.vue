@@ -3,6 +3,8 @@
     <h3 class="w-full max-w-[75px]">
       <slot name="title" />
     </h3>
-    <slot name="content" />
+    <p class="text-sm sm:text-base">
+      <slot name="content" />
+    </p>
   </div>
 </template>

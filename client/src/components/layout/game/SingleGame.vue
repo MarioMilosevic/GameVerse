@@ -3,56 +3,48 @@
     <img
       :src="singleGame.thumbnail"
       :alt="singleGame.thumbnail"
-      class="w-full max-h-screen object-cover opacity-90 dark:opacity-50"
+      class="w-full sm:max-h-screen object-cover opacity-90 dark:opacity-50"
     />
     <SectionComponent>
       <template #title>
         {{ name }}
       </template>
       <template #main>
-        <YouTube
-          :src="singleGame.trailer"
-          ref="youtube"
-          @ready="playVideo"
-          class="col-start-1 col-end-2"
-        />
-        <div class="col-start-2 col-end-3 flex flex-col justify-between">
-          <p class="text-justify">{{ description }}</p>
-          <div class="flex flex-col gap-2 text-justify">
+        <iframe class="aspect-video w-full h-full" :src="embedTrailerUrl">
+        </iframe>
+        <div class="col-start-2 col-end-3 flex flex-col gap-4 justify-between">
+          <p class="text-justify text-sm sm:text-base">{{ description }}</p>
+          <div class="flex flex-col justify-center gap-2 text-justify">
             <GameInfo
               class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1"
             >
               <template #title> Writers: </template>
               <template #content>
-                <p>
-                  {{ writers.join(" • ") }}
-                </p>
+                {{ writers.join(" • ") }}
               </template>
             </GameInfo>
             <GameInfo>
               <template #title> Stars: </template>
               <template #content>
-                <p>
-                  {{ stars.join(" • ") }}
-                </p>
+                {{ stars.join(" • ") }}
               </template>
             </GameInfo>
             <GameInfo>
               <template #title> Duration: </template>
               <template #content>
-                <p>Main story is {{ gameplayHours }} hours long</p>
+                Main story is {{ gameplayHours }} hours long
               </template>
             </GameInfo>
           </div>
         </div>
       </template>
       <template #submain>
-        <div class="flex gap-4 col-start-1 col-end-3">
+        <div class="grid grid-cols-2 sm:flex gap-4 sm:col-start-1 sm:col-end-3">
           <GenreComponent v-for="{ genre } in genres" :key="genre.name">
             <template #default>{{ genre.name }} </template>
           </GenreComponent>
         </div>
-        <div class="flex items-center gap-6">
+        <div class="flex items-center justify-between sm:gap-6 sm:justify-start">
           <h3>Available on:</h3>
           <ConsoleWrapper>
             <ConsoleComponent
@@ -129,10 +121,9 @@ import OverlayComponent from "src/components/layout/others/OverlayComponent.vue"
 import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 import GameRating from "src/components/layout/game/GameRating.vue";
-import YouTube from "vue3-youtube";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";
-import { PropType, useTemplateRef, ref, computed } from "vue";
+import { PropType,  ref, computed } from "vue";
 
 const props = defineProps({
   singleGame: {
@@ -167,12 +158,14 @@ const selectedReviewIndex = ref<number>(0);
 
 const emits = defineEmits(["create-review-event"]);
 
-const youtubeRef = useTemplateRef("youtube");
-const playVideo = () => {
-  if (youtubeRef.value) {
-    youtubeRef.value.playVideo();
-  }
-};
+const embedTrailerUrl = computed(() => {
+  if (!props.singleGame.trailer) return "";
+  const videoIdMatch = props.singleGame.trailer.match(
+    /(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/
+  );
+  const videoId = videoIdMatch ? videoIdMatch[1] : "";
+  return `https://www.youtube.com/embed/${videoId}`;
+});
 
 const openImageModal = (imageIndex: number) => {
   isGameImageModalOpen.value = true;
