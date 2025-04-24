@@ -69,5 +69,6 @@ router
 
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);
+router.post("/guest", authController.guestLogin);
 
 export default router;

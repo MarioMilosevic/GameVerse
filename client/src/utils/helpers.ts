@@ -18,13 +18,7 @@ export const fillStars = (index: number, length: number = 10) => {
   return newStarsArr;
 };
 
-export const renderUserImage = (image: string) => image.startsWith("images")
+export const renderUserImage = (image: string) =>
+  image.startsWith("images")
     ? `${apiUrl}/public/${image}`
     : "https://social-network-js.vercel.app/img/profile5.png";
-// const userImage = computed(() => {
-//   if (!user.value.image) return "";
-
-//   return user.value.image.startsWith("images")
-//     ? `${apiUrl}/public/${user.value.image}`
-//     : "https://social-network-js.vercel.app/img/profile5.png";
-// });

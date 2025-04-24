@@ -117,6 +117,7 @@ const submitHandler = async () => {
     }
   } catch (error) {
     console.error(error);
+    showToast('Unexpected error occured', 'error')
   }
 };
 </script>

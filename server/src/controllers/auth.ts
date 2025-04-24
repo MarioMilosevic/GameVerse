@@ -114,4 +114,24 @@ export default {
       errorFactory.internalError(res);
     }
   },
+
+  async guestLogin(req: Request, res: Response) {
+    try {
+      const user = await prisma.user.create({
+        data: {
+          role: "GUEST",
+          fullName: "Guest user",
+          email: `guest_${Math.random()
+            .toString(36)
+            .substring(2, 10)}@example.com`,
+          password: "12345678",
+          image: "https://social-network-js.vercel.app/img/profile5.png",
+        },
+        omit: { password: true, passwordConfirm: true },
+      });
+      sucessFactory.ok(res, user);
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
 };
