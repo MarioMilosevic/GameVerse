@@ -8,11 +8,7 @@ const router = Router();
 
 const multerStorage = multer.diskStorage({
   destination: (req: Request, file, cb) => {
-    // const upload = multer({
-    //   dest: path.join(__dirname, "../public/images/users"),
-    // });
     cb(null, path.join(__dirname, "../public/images/users"));
-    // cb(null, "public/images/users");
   },
   filename: (req: Request, file, cb) => {
     const ext = file.mimetype.split("/")[1];
@@ -69,6 +65,6 @@ router
 
 router.post("/sign-up", authController.signUp);
 router.post("/login", authController.login);
-router.post("/guest", authController.guestLogin);
+router.get("/login/guest", authController.guestLogin);
 
 export default router;

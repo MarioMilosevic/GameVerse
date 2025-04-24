@@ -29,6 +29,15 @@ export const createUser = (newUser: SignUpCredentialsType) =>
 export const loginUser = (user: LoginCredentialsType) =>
   fetchAuth("login", user);
 
+export const loginAnonymously = async () => {
+  try {
+    const response = await fetch(`${baseUrl}/users/login/guest`);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const signOut = (router: Router, user: UserType, message?: string) => {
   router.push("/login");
   localStorage.removeItem("gameVerse-token");
@@ -144,8 +153,8 @@ export const disableUserAccount = async (id: number) => {
 
 export const updateUserImage = async (id: number, file: File) => {
   try {
-    const formData = new FormData()
-    formData.append("image",file)
+    const formData = new FormData();
+    formData.append("image", file);
     const response = await fetch(`${baseUrl}/users/image/${id}`, {
       method: "PATCH",
       body: formData,

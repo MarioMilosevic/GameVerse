@@ -44,7 +44,7 @@
       </ActionButton>
     </template>
     <template #text>
-      <FormGuest text="Sign Up" @guest-event=""/>
+      <FormGuest text="Sign Up" @guest-event="guestSignIn" />
     </template>
   </FormComponent>
 </template>
@@ -62,6 +62,7 @@ import FormGuest from "src/components/form/FormGuest.vue";
 import { loginInputs, tokenName } from "src/utils/constants";
 import { ref, computed } from "vue";
 import { LoginCredentialsType } from "src/utils/types";
+import useGetUserStore from "src/composables/useGetUserStore";
 import {
   getLoginFieldError,
   loginSchema,
@@ -70,9 +71,11 @@ import {
   LoginTouchedFields,
   getLoginErrors,
 } from "src/schemas/loginPage";
-import { loginUser } from "src/api/users";
+import { loginAnonymously, loginUser } from "src/api/users";
 import { useRouter } from "vue-router";
 import { showToast } from "src/utils/toast";
+
+const {setUser} = useGetUserStore()
 
 const loginCredentials = ref<LoginCredentialsType>({
   email: "",
@@ -98,6 +101,17 @@ const blurHandler = (property: LoginFields) => {
   touchedFields.value[property] = true;
 };
 
+const guestSignIn = async () => {
+  const {data, message} = await loginAnonymously();
+  if (data) {
+    console.log(data)
+    setUser(data)
+    router.push('/')
+  } else {
+    showToast(message, 'error')
+  }
+};
+
 const submitHandler = async () => {
   try {
     isLoading.value = true;
@@ -117,7 +131,7 @@ const submitHandler = async () => {
     }
   } catch (error) {
     console.error(error);
-    showToast('Unexpected error occured', 'error')
+    showToast("Unexpected error occured", "error");
   }
 };
 </script>
