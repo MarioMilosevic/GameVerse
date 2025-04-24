@@ -11,8 +11,8 @@
         >
           <XCircle />
         </BaseIcon>
-        <div class="flex flex-col gap-4 items-center w-1/2">
-          <h1 class="text-2xl sm:text-5xl">Are you sure ?</h1>
+        <div class="flex flex-col gap-4 sm:gap-8 items-center w-1/2">
+          <h1 class="text-2xl sm:text-4xl text-justify">Are you sure ?</h1>
           <p class="text-base sm:text-lg">
             Do you really want to delete {{ content }}? This action cannot be
             undone

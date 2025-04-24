@@ -4,7 +4,7 @@
       Showing {{ showResultsFrom }} to {{ showResultsTo }} out of
       {{ props.users }}
     </p>
-    <p v-else>No users found</p>
+    <p v-else class="text-xs sm:text-base">No users found</p>
     <div class="flex gap-4">
       <ActionButton
         :disabled="props.currentPage === 1"

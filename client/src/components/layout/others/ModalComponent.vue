@@ -14,8 +14,8 @@
 import { PropType } from "vue";
 
 const modalSize = {
-  small: "w-[90%] sm:min-w-1/3 sm:min-h-1/3",
-  medium: "w-[90%] h-[40%] sm:w-1/2 sm:h-1/2",
+  small: "w-[90%] sm:min-w-1/3 sm:min-h-1/3 sm:w-auto",
+  medium: "w-[90%] h-[40%] sm:w-auto sm:h-[55%]",
   big: "w-[80%]  h-1/2 sm:w-2/3 sm:h-2/3",
 };
 

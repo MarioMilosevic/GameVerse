@@ -129,7 +129,11 @@ import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
 import { formattedDate, renderUserImage } from "src/utils/helpers";
-import { accountInputs, emptyAccountSettings } from "src/utils/constants";
+import {
+  accountInputs,
+  emptyAccountSettings,
+  guestMessage,
+} from "src/utils/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,
@@ -171,6 +175,10 @@ const blurHandler = (property: AccountFields) => {
 
 const accountHandler = async () => {
   try {
+    if (user.value.role === "GUEST") {
+      showToast(guestMessage, "error");
+      return;
+    }
     if (user.value.id) {
       const { data, message } = await editUserNameAndEmail(
         user.value.id,
@@ -194,6 +202,10 @@ const accountHandler = async () => {
 
 const disableAccount = async () => {
   try {
+    if (user.value.role === "GUEST") {
+      showToast(guestMessage, "error");
+      return;
+    }
     if (user.value.id) {
       const { data, message } = await disableUserAccount(user.value.id);
       if (data) {
@@ -218,6 +230,10 @@ const photoHandler = (file: File) => {
 
 const imageHandler = async () => {
   try {
+    if (user.value.role === "GUEST") {
+      showToast(guestMessage, "error");
+      return;
+    }
     if (user.value.id && accountPhoto.value) {
       const { data, message } = await updateUserImage(
         user.value.id,
