@@ -129,7 +129,13 @@ export default {
         },
         omit: { password: true, passwordConfirm: true },
       });
-      sucessFactory.ok(res, user);
+
+       if (user && user.id) {
+         const token = signToken(user.id);
+         sucessFactory.ok(res, token);
+       } else {
+         errorFactory.badRequest(res);
+       }
     } catch (error) {
       errorFactory.internalError(res);
     }

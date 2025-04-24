@@ -62,7 +62,6 @@ import FormGuest from "src/components/form/FormGuest.vue";
 import { loginInputs, tokenName } from "src/utils/constants";
 import { ref, computed } from "vue";
 import { LoginCredentialsType } from "src/utils/types";
-import useGetUserStore from "src/composables/useGetUserStore";
 import {
   getLoginFieldError,
   loginSchema,
@@ -74,8 +73,6 @@ import {
 import { loginAnonymously, loginUser } from "src/api/users";
 import { useRouter } from "vue-router";
 import { showToast } from "src/utils/toast";
-
-const {setUser} = useGetUserStore()
 
 const loginCredentials = ref<LoginCredentialsType>({
   email: "",
@@ -104,8 +101,7 @@ const blurHandler = (property: LoginFields) => {
 const guestSignIn = async () => {
   const {data, message} = await loginAnonymously();
   if (data) {
-    console.log(data)
-    setUser(data)
+    localStorage.setItem(tokenName, data)
     router.push('/')
   } else {
     showToast(message, 'error')

@@ -36,7 +36,7 @@ import ExistingReview from "src/components/layout/review/ExistingReview.vue";
 import CreateReview from "src/components/layout/review/CreateReview.vue";
 import FormReview from "src/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
-import { emptyStarsArray } from "src/utils/constants";
+import { emptyStarsArray, guestMessage } from "src/utils/constants";
 import { fillStars } from "src/utils/helpers";
 import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
@@ -82,7 +82,7 @@ const allFieldsCompleted = computed(() => {
 const emits = defineEmits([
   "close-modal-event",
   "submit-event",
-  'delete-event'
+  "delete-event",
 ]);
 
 const ratingClickHandler = (rating: number) => {
@@ -104,6 +104,11 @@ const mouseLeaveHandler = () => {
 
 const submitNewReviewHandler = async () => {
   try {
+    if (user.value.role === "GUEST") {
+      showToast(guestMessage, "error");
+      return;
+    }
+
     if (user.value.id) {
       const review = {
         userId: user.value.id,
@@ -124,5 +129,4 @@ const submitNewReviewHandler = async () => {
     console.error(error);
   }
 };
-
 </script>
