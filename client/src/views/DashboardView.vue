@@ -86,6 +86,7 @@ const deleteUserHandler = (id: number) => {
 
 const sortHandler = (value: string) => {
   paginationOptions.value.sort = value;
+  paginationOptions.value.currentPage = 1
 };
 
 const searchHandler = (value: string) => {

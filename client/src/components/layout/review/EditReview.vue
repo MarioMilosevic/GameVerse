@@ -9,7 +9,7 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="editReviewHandler" color="green"
+    <ActionButton @click="editReviewHandler" color="green" :disabled="localValue.length === 0"
       >Save Changes</ActionButton
     >
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>

@@ -153,7 +153,7 @@ import { showToast } from "src/utils/toast";
 const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();
 
-const accountSettings = ref<AccountSettingsType>(emptyAccountSettings);
+const accountSettings = ref<AccountSettingsType>({ ...emptyAccountSettings } );
 
 const touchedFields = ref<AccountTouchedFields>({});
 const accountFormErrors = ref<AccountFieldErrors>({});
@@ -212,7 +212,7 @@ const disableAccount = async () => {
         signOut(
           router,
           user.value,
-          "Disabled for now — reactivate by signing in."
+          "See you soon! Login in anytime."
         );
         resetUser();
       } else {
