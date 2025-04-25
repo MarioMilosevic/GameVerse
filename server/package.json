@@ -4,8 +4,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --build",
-    "dev": "node ./dist/server.js",
+    "build": "tsc -p tsconfig.json",
+    "dev": "node ./dist/src/server.js",
     "start": "nodemon ./src/server.ts"
   },
   "keywords": [],

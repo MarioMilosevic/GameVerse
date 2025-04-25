@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
 import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
-import { getAverageRating } from "../utils/helpers";
+import helpers from "../utils/helpers";
 
 export default {
   async getAll(req: Request, res: Response) {
@@ -43,7 +43,7 @@ export default {
 
       const gamesWithAvgRating = await Promise.all(
         games.map(async (game) => {
-          const avgRating = await getAverageRating(game.id);
+          const avgRating = await helpers.getAverageRating(game.id);
 
           return {
             ...game,
@@ -104,7 +104,7 @@ export default {
         return;
       }
 
-      const avgRating = await getAverageRating(singleGame.id);
+      const avgRating = await helpers.getAverageRating(singleGame.id);
 
       const updatedGame = {
         ...singleGame,

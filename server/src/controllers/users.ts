@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { getAverageRating } from "../utils/helpers";
+import helpers from "../utils/helpers";
 import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 import prisma from "../../prisma/prismaClient";
@@ -165,7 +165,7 @@ export default {
 
       const reviewsWithAvgRating = await Promise.all(
         userWithReviews.reviews.map(async (review) => {
-          const avgRating = await getAverageRating(review.gameId);
+          const avgRating = await helpers.getAverageRating(review.gameId);
           return {
             ...review,
             game: {

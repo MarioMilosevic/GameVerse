@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import prisma from "../../prisma/prismaClient";
 import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
-import { getAverageRating, getExistingReview } from "../utils/helpers";
+import helpers from "../utils/helpers";
 
 export default {
   async getAll(req: Request, res: Response) {
@@ -44,7 +44,7 @@ export default {
         return;
       }
 
-      const existingReview = await getExistingReview(gameId, userId);
+      const existingReview = await helpers.getExistingReview(gameId, userId);
 
       if (existingReview) {
         errorFactory.badRequest(res, "You have already reviewed this game");
@@ -60,7 +60,7 @@ export default {
         },
       });
 
-      const avgRating = await getAverageRating(gameId);
+      const avgRating = await helpers.getAverageRating(gameId);
 
       const review = {
         id: newReview.id,
@@ -89,7 +89,7 @@ export default {
 
   async deleteReview(req: Request, res: Response) {
     try {
-      const existingReview = await getExistingReview(req.id);
+      const existingReview = await helpers.getExistingReview(req.id);
 
       if (!existingReview?.gameId) {
         errorFactory.notFound(res, "Review not found");
@@ -100,7 +100,7 @@ export default {
         where: { id: req.id },
       });
 
-      const avgRating = await getAverageRating(existingReview.gameId);
+      const avgRating = await helpers.getAverageRating(existingReview.gameId);
 
       successFactory.ok(res, {
         avgRating,
@@ -121,7 +121,7 @@ export default {
         return;
       }
 
-      const existingReview = await getExistingReview(req.id);
+      const existingReview = await helpers.getExistingReview(req.id);
 
       if (!existingReview?.gameId) {
         errorFactory.notFound(res, "Review not found");
@@ -133,7 +133,7 @@ export default {
         data: { content, rating },
       });
 
-      const avgRating = await getAverageRating(existingReview.gameId);
+      const avgRating = await helpers.getAverageRating(existingReview.gameId);
 
       const data = {
         editedReview,
