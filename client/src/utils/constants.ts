@@ -1,6 +1,8 @@
 import { UserType } from "./types";
 
-export const baseUrl = "http://localhost:3000/api/v1";
+export const baseUrl =
+  import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+  
 export const tokenName = "gameVerse-token";
 export const profileImg =
   "https://social-network-js.vercel.app/img/profile5.png";
@@ -90,12 +92,11 @@ export const sortUserOptins = ["A-Z", "Z-A", "Newest", "Oldest"];
 
 export const usersPerPage = 10;
 
-export const apiUrl = import.meta.env.VITE_API_URL;
 
 export const emptyAccountSettings = {
   fullName: "",
-  email:""
-}
+  email: "",
+};
 
 export const emptyUser: UserType = {
   id: 0,
@@ -107,4 +108,4 @@ export const emptyUser: UserType = {
   active: false,
 };
 
-export const guestMessage = 'You must create an account first'
+export const guestMessage = "You must create an account first";
