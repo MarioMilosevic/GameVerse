@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col sm:pl-12 pl-6 gap-2  absolute top-10 right-1/2 translate-x-1/2 w-full h-full overflow-y-auto transition-all duration-300"
+    class="flex flex-col sm:pl-12 pl-6 gap-2 absolute top-10 right-1/2 translate-x-1/2 w-full transition-all duration-300"
   >
     <div class="flex items-end gap-2">
       <fieldset class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]">
@@ -31,7 +31,7 @@
         - Reviewed on {{ formattedDate(props.review.createdAt as string) }}
       </p>
     </div>
-    <p class="pl-2 w-[90%] text-justify text-sm sm:text-base">{{ props.review.content }}</p>
+    <p class="pl-3 pr-3 sm:pr-0 sm:pl-2 w-[90%] text-justify text-sm sm:text-base">{{ props.review.content }}</p>
   </div>
 </template>
 
