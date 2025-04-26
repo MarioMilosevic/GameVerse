@@ -9,7 +9,7 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="editReviewHandler" color="green" :disabled="localValue.length === 0"
+    <ActionButton @click="editReviewHandler" color="green" :disabled="localValue.length === 0 || disabledButton"
       >Save Changes</ActionButton
     >
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
@@ -47,6 +47,8 @@ const { rating, content, reviewId } = props;
 const editingStarsArray = ref(fillStars((rating ?? 0) - 1));
 const editRating = ref<number>(rating ?? 0);
 const localValue = ref<string>(content);
+const disabledButton = ref<boolean>(false)
+
 
 const editHandler =
   inject<
@@ -64,6 +66,7 @@ const emits = defineEmits([
 const editReviewHandler = async () => {
   try {
     if (reviewId) {
+      disabledButton.value = true
       const updatedReview = {
         rating: editRating.value,
         content: localValue.value,
@@ -79,6 +82,7 @@ const editReviewHandler = async () => {
         }
       } else {
         showToast(message, "error");
+        disabledButton.value = false
       }
     }
   } catch (error) {

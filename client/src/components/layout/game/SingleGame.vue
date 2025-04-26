@@ -66,7 +66,7 @@
             :key="img"
             :src="img"
             :alt="img"
-            class="cursor-pointer rounded-xl w-full h-full object-cover"
+            class="cursor-pointer rounded-xl w-full h-full max-h-[200px] object-cover"
             @click="openImageModal(index)"
           />
         </fieldset>
