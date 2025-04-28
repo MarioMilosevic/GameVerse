@@ -11,7 +11,7 @@ import SharedLayout from "src/components/layout/navigation/SharedLayout.vue";
 // import FooterComponent from "src/components/layout/others/FooterComponent.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import useTheme from "src/composables/useTheme";
-import useGetUserStore from "src/composables/useGetUserStore";
+// import useGetUserStore from "src/composables/useGetUserStore";
 import { storageThemeName } from "src/utils/constants";
 import { onBeforeMount } from "vue";
 

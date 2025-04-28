@@ -1,10 +1,19 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import prisma from "../../prisma/prismaClient";
 import successFactory from "../services/responses/successFactory";
 import errorFactory from "../services/responses/errorFactory";
 import helpers from "../utils/helpers";
 
 export default {
+  async getGameId(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      req.id = id;
+      next();
+    } catch (error) {
+      errorFactory.internalError(res);
+    }
+  },
   async getAll(req: Request, res: Response) {
     try {
       const games = await prisma.game.findMany({
@@ -60,7 +69,7 @@ export default {
   async getSingleGame(req: Request, res: Response) {
     try {
       const singleGame = await prisma.game.findUnique({
-        where: { id: Number(req.params.id) },
+        where: { id: req.id },
         include: {
           reviews: {
             select: {
@@ -170,7 +179,7 @@ export default {
   async deleteGame(req: Request, res: Response) {
     try {
       const deleted = await prisma.game.delete({
-        where: { id: Number(req.params.id) },
+        where: { id: req.id },
       });
       if (!deleted) {
         errorFactory.notFound(res);
@@ -184,11 +193,11 @@ export default {
 
   async editGame(req: Request, res: Response) {
     try {
-      const { thumbnail } = req.body;
+      const { banner } = req.body;
       const updatedGame = await prisma.game.update({
-        where: { id: Number(req.params.id) },
+        where: { id: req.id },
         data: {
-          thumbnail,
+          banner,
         },
       });
       successFactory.ok(res, updatedGame);

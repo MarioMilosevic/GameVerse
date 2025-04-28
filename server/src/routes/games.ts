@@ -7,8 +7,8 @@ router.route("/").get(gamesController.getAll).post(gamesController.createGame);
 
 router
   .route("/:id")
-  .get(gamesController.getSingleGame)
-  .delete(gamesController.deleteGame)
-  .patch(gamesController.editGame)
+  .get(gamesController.getGameId, gamesController.getSingleGame)
+  .delete(gamesController.getGameId, gamesController.deleteGame)
+  .patch(gamesController.getGameId, gamesController.editGame);
 
 export default router;

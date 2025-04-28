@@ -46,6 +46,7 @@ model Game {
   gameplayHours String
   trailer       String
   thumbnail     String
+  banner        String @default("")
   rating        Int @default(0)
   reviews        Review[]
   consoles      GameConsole[]  
