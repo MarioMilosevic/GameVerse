@@ -5,7 +5,6 @@ import {
   UserType,
 } from "src/utils/types";
 import { baseUrl } from "src/utils/constants";
-import { Router } from "vue-router";
 import { showToast } from "src/utils/toast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
@@ -29,17 +28,8 @@ export const createUser = (newUser: SignUpCredentialsType) =>
 export const loginUser = (user: LoginCredentialsType) =>
   fetchAuth("login", user);
 
-export const loginAnonymously = async () => {
-  try {
-    const response = await fetch(`${baseUrl}/users/login/guest`);
-    return await response.json();
-  } catch (error) {
-    console.error(error);
-  }
-};
 
-export const signOut = (router: Router, user: UserType, message?: string) => {
-  router.push("/login");
+export const signOut = (user: UserType, message?: string) => {
   localStorage.removeItem("gameVerse-token");
   const firstName = user.fullName.split(" ")[0];
   setTimeout(() => {

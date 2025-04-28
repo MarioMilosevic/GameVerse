@@ -133,7 +133,7 @@ const accountHandler = () => {
 };
 
 const signOutHandler = () => {
-  signOut(router, user.value);
+  signOut(user.value);
   resetUser();
 };
 

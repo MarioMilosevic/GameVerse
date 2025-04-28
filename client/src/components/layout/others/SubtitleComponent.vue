@@ -1,7 +1,7 @@
 <template>
   <h2
     :class="[
-      'uppercase text-sky-500 dark:text-red-600 text-lg sm:text-3xl',
+      'uppercase text-sky-500 dark:text-white text-lg sm:text-3xl text-left',
       justifyOptions[props.justify],
     ]"
   >

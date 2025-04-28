@@ -104,11 +104,6 @@ const mouseLeaveHandler = () => {
 
 const submitNewReviewHandler = async () => {
   try {
-    if (user.value.role === "GUEST") {
-      showToast(guestMessage, "error");
-      return;
-    }
-
     if (user.value.id) {
       const review = {
         userId: user.value.id,
@@ -124,6 +119,8 @@ const submitNewReviewHandler = async () => {
         showToast(message, "error");
         emits("close-modal-event");
       }
+    } else {
+      showToast(guestMessage, "error");
     }
   } catch (error) {
     console.error(error);

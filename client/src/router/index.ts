@@ -54,8 +54,6 @@ router.beforeEach(async (to) => {
   const userToken = localStorage.getItem(tokenName);
   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
 
-  if (!userToken && !isAuthRoute) return { name: "Login" };
-
   if (userToken && isAuthRoute) return { name: "Home" };
 
   if (userToken && !user.value.id) {

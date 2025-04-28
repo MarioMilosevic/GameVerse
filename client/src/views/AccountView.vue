@@ -153,7 +153,7 @@ import { showToast } from "src/utils/toast";
 const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();
 
-const accountSettings = ref<AccountSettingsType>({ ...emptyAccountSettings } );
+const accountSettings = ref<AccountSettingsType>({ ...emptyAccountSettings });
 
 const touchedFields = ref<AccountTouchedFields>({});
 const accountFormErrors = ref<AccountFieldErrors>({});
@@ -175,10 +175,6 @@ const blurHandler = (property: AccountFields) => {
 
 const accountHandler = async () => {
   try {
-    if (user.value.role === "GUEST") {
-      showToast(guestMessage, "error");
-      return;
-    }
     if (user.value.id) {
       const { data, message } = await editUserNameAndEmail(
         user.value.id,
@@ -194,6 +190,8 @@ const accountHandler = async () => {
       } else {
         showToast(message, "error");
       }
+    } else {
+      showToast(guestMessage, "error");
     }
   } catch (error) {
     console.error(error);
@@ -209,11 +207,8 @@ const disableAccount = async () => {
     if (user.value.id) {
       const { data, message } = await disableUserAccount(user.value.id);
       if (data) {
-        signOut(
-          router,
-          user.value,
-          "See you soon! Login in anytime."
-        );
+        signOut(user.value, "See you soon! Login in anytime.");
+        router.push("/");
         resetUser();
       } else {
         showToast(message, "error");

@@ -42,10 +42,9 @@
       </li>
     </ul>
     <section v-else class="flex flex-col items-center gap-8">
-      <h2 class="text-2xl text-center" v-if="user.role !== 'GUEST'">
+      <h2 class="text-2xl text-center">
         You haven't made any reviews yet
       </h2>
-      <h2 class="text-2xl text-center" v-else>{{ guestMessage }}</h2>
       <ActionButton @click="router.push('/')">View All Games</ActionButton>
     </section>
   </main>
@@ -56,8 +55,6 @@ import { MyReviewType } from "src/utils/types";
 import { PropType } from "vue";
 import { formattedDate } from "src/utils/helpers";
 import { useRouter } from "vue-router";
-import { guestMessage } from "src/utils/constants";
-import useGetUserStore from "src/composables/useGetUserStore";
 import GameRating from "src/components/layout/game/GameRating.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 
@@ -69,8 +66,6 @@ defineProps({
 });
 
 const router = useRouter();
-
-const {user} = useGetUserStore()
 
 const seeGameDetails = (id: number) => {
   router.push({ name: "GameDetails", params: { id } });

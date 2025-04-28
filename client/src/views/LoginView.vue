@@ -37,14 +37,11 @@
       <ActionButton
         type="submit"
         :disabled="!allFieldsCompleted"
+        :is-loading="isSubmiting"
         :style="{ marginTop: '0.5rem' }"
-        :is-loading="isLoading"
       >
         LOG IN
       </ActionButton>
-    </template>
-    <template #text>
-      <FormGuest text="Sign Up" @guest-event="guestSignIn" />
     </template>
   </FormComponent>
 </template>
@@ -58,7 +55,6 @@ import FormBlock from "src/components/form/FormBlock.vue";
 import FormError from "src/components/form/FormError.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import FormLine from "src/components/form/FormLine.vue";
-import FormGuest from "src/components/form/FormGuest.vue";
 import { loginInputs, tokenName } from "src/utils/constants";
 import { ref, computed } from "vue";
 import { LoginCredentialsType } from "src/utils/types";
@@ -70,7 +66,7 @@ import {
   LoginTouchedFields,
   getLoginErrors,
 } from "src/schemas/loginPage";
-import { loginAnonymously, loginUser } from "src/api/users";
+import { loginUser } from "src/api/users";
 import { useRouter } from "vue-router";
 import { showToast } from "src/utils/toast";
 
@@ -80,8 +76,8 @@ const loginCredentials = ref<LoginCredentialsType>({
 });
 const touchedFields = ref<LoginTouchedFields>({});
 const loginFormErrors = ref<LoginFieldErrors>({});
+const isSubmiting = ref<boolean>(false);
 
-const isLoading = ref<boolean>(false);
 
 const allFieldsCompleted = computed(() => {
   return loginSchema.safeParse(loginCredentials.value).success;
@@ -98,19 +94,9 @@ const blurHandler = (property: LoginFields) => {
   touchedFields.value[property] = true;
 };
 
-const guestSignIn = async () => {
-  const {data, message} = await loginAnonymously();
-  if (data) {
-    localStorage.setItem(tokenName, data)
-    router.push('/')
-  } else {
-    showToast(message, 'error')
-  }
-};
-
 const submitHandler = async () => {
+  isSubmiting.value = true;
   try {
-    isLoading.value = true;
     const { error } = loginSchema.safeParse(loginCredentials.value);
     if (error) {
       Object.entries(getLoginErrors(error)).forEach(([key, value]) => {
@@ -123,7 +109,7 @@ const submitHandler = async () => {
       router.push("/");
     } else {
       showToast(message, "error");
-      isLoading.value = false;
+      isSubmiting.value = false;
     }
   } catch (error) {
     console.error(error);

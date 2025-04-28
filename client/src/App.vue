@@ -1,8 +1,8 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SharedLayout v-else :theme="theme" @toggle-theme-event="handleTheme" />
+  <SharedLayout :theme="theme" @toggle-theme-event="handleTheme" />
   <RouterView />
-  <FooterComponent v-if="!loading && user.id" />
+  <FooterComponent v-if="user.id" />
 </template>
 
 <script lang="ts" setup>

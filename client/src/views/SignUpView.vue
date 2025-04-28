@@ -43,9 +43,6 @@
         SIGN UP
       </ActionButton>
     </template>
-    <template #text>
-      <FormGuest text="Login"/>
-    </template>
   </FormComponent>
 </template>
 
@@ -54,7 +51,6 @@ import FormComponent from "src/components/form/FormComponent.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
-import FormGuest from "src/components/form/FormGuest.vue";
 import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
