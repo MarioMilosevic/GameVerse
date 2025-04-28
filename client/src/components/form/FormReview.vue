@@ -1,6 +1,6 @@
 <template>
   <form
-    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-2xl"
+    class="bg-slate-200 dark:bg-slate-900 relative h-full pt-16 pb-10 px-8 rounded-xl"
   >
     <BaseIcon
       class="absolute top-2 right-2 cursor-pointer"

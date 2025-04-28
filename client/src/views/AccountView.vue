@@ -1,12 +1,12 @@
 <template>
   <main
-    class="max-w-[1280px] py-8 sm:px-8 sm:py-8 mx-auto sm:mt-8 flex sm:flex-row flex-col sm:gap-4 gap-8 bg-slate-100 dark:bg-slate-800 rounded-2xl"
+    class="max-w-[1280px] py-8 sm:px-8 sm:py-8 mx-auto sm:mt-8 flex sm:flex-row flex-col sm:gap-4 gap-8 bg-slate-100 dark:bg-slate-800 rounded-xl"
   >
     <section class="sm:w-1/3 flex flex-col gap-4 px-4 sm:px-0 sm:gap-8">
       <img
         :src="renderUserImage(user.image)"
         :alt="user.fullName + 'image'"
-        class="object-cover rounded-lg h-full"
+        class="object-cover rounded-xl h-full"
       />
 
       <article class="flex flex-col gap-2">
@@ -200,10 +200,6 @@ const accountHandler = async () => {
 
 const disableAccount = async () => {
   try {
-    if (user.value.role === "GUEST") {
-      showToast(guestMessage, "error");
-      return;
-    }
     if (user.value.id) {
       const { data, message } = await disableUserAccount(user.value.id);
       if (data) {
@@ -213,6 +209,9 @@ const disableAccount = async () => {
       } else {
         showToast(message, "error");
       }
+    } else {
+      showToast(guestMessage, "error");
+      return;
     }
   } catch (error) {
     console.error(error);
@@ -225,11 +224,12 @@ const photoHandler = (file: File) => {
 
 const imageHandler = async () => {
   try {
-    if (user.value.role === "GUEST") {
+    if (!user.value.id) {
       showToast(guestMessage, "error");
       return;
     }
-    if (user.value.id && accountPhoto.value) {
+
+    if (accountPhoto.value) {
       const { data, message } = await updateUserImage(
         user.value.id,
         accountPhoto.value as File

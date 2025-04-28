@@ -25,7 +25,7 @@
       <img
         :src="renderUserImage(user.image)"
         :alt="user.image"
-        class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] rounded-full object-cover"
+        class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] rounded-xl object-cover"
       />
       <h1 class="text-lg sm:text-2xl">{{ firstName }}</h1>
       <NavigationMenu

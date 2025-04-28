@@ -1,6 +1,6 @@
 <template>
   <input
-    class="border border-slate-300 rounded-lg py-1 pl-2 cursor-pointer bg-slate-50 text-slate-500 focus:outline-none dark:bg-slate-200 dark:border-slate-200 dark:placeholde:text-slate-950"
+    class="border border-slate-300 rounded-xl py-1 pl-2 cursor-pointer bg-slate-50 text-slate-500 focus:outline-none dark:bg-slate-200 dark:border-slate-200 dark:placeholde:text-slate-950"
     id="file_input"
     type="file"
     :name="name"

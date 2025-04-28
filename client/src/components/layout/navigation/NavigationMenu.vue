@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-md text-xs sm:text-base"
+    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-xl text-xs sm:text-base"
   >
     <NavigationLink
       v-if="user.role === 'ADMIN'"

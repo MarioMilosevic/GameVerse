@@ -1,7 +1,7 @@
 <template>
   <MainRatingStar :rating="props.rating" />
   <RatingStars :stars-array="starsArray" :cursor-pointer="false" />
-  <p class="text-justify border p-4 rounded-2xl w-full">{{ content }}</p>
+  <p class="text-justify border p-4 rounded-xl w-full">{{ content }}</p>
   <p class="pl-4 self-start text-sm ">
     Reviewed on {{ formattedDate(createdAt as string) }}
   </p>

@@ -16,7 +16,7 @@
           :src="review.game.thumbnail"
           :alt="review.game.thumbnail"
           loading="lazy"
-          class="h-full w-1/3 object-cover rounded-2xl"
+          class="h-full w-1/3 object-cover rounded-xl"
         />
         <div class="flex flex-col justify-between relative h-full w-2/3">
           <h2

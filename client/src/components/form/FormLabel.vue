@@ -1,5 +1,5 @@
 <template>
-  <label :for="id" class="relative w-full h-full rounded-md">
+  <label :for="id" class="relative w-full h-full rounded-xl">
     <slot />
   </label>
 </template>

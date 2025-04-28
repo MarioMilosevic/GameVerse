@@ -3,7 +3,7 @@
     <OverlayComponent>
       <ModalComponent
         size="medium"
-        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-2xl"
+        class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-xl"
       >
         <BaseIcon
           :style="{ width: '5rem', height: '5rem' }"

@@ -3,7 +3,7 @@
     :type="type"
     :disabled="disabled"
     :class="[
-      'rounded-3xl cursor-pointer transition-all min-h-12 duration-300 hover:transform hover:-translate-y-1 dark:disabled:bg-gray-500 disabled:bg-gray-600 disabled:text-gray-100 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
+      'rounded-xl cursor-pointer transition-all min-h-12 duration-300 hover:transform hover:-translate-y-1 dark:disabled:bg-gray-500 disabled:bg-gray-600 disabled:text-gray-100 disabled:cursor-not-allowed disabled:transform-none disabled:translate-y-0',
       colorOptions[color],
       buttonSize[size],
       positionOptions[position],

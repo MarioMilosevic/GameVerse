@@ -4,7 +4,7 @@
   >
     <div class="flex items-end gap-2">
       <fieldset class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]">
-        <img :src="renderUserImage(props.review.user.image)" class="h-full w-full object-cover rounded-full" />
+        <img :src="renderUserImage(props.review.user.image)" class="h-full w-full object-cover rounded-xl" />
       </fieldset>
       <h2>{{ props.review.user.fullName }}</h2>
       <p class="text-sm sm:text-base">Joined on {{ formattedDate(props.review.user.createdDate) }}</p>

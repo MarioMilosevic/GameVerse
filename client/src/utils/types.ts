@@ -28,7 +28,7 @@ export type ReviewType = {
 
 export type UserType = {
   id?: number;
-  role: "USER" | "ADMIN" | "GUEST";
+  role: "USER" | "ADMIN";
   email: string;
   fullName: string;
   image: string;

@@ -10,7 +10,7 @@ Full stack applicaton with express backend, PostgreSQL database and Vue 3 fronte
 ## State Management: Pinia stores are to be found in stores folder.
 
 ## Features:
-  - Sign up / Login / Guest login
+  - Sign up / Login
   - Overview of the games on the homepage (GET request),
   - CRUD operations per review per game (POST, PUT and DELETE requests, real time updates on the client),
   - Upload image, change name and email information for your account,

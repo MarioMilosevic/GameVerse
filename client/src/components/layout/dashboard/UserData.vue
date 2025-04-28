@@ -9,7 +9,7 @@
       <img
         :src="renderUserImage(user.image)"
         :alt="user.image"
-        class="sm:h-full w-[50px] rounded-full object-cover sm:static absolute top-0 right-0 h-[50px]"
+        class="sm:h-full w-[50px] rounded-xl object-cover sm:static absolute top-0 right-0 h-[50px]"
       />
       <p>{{ user.fullName }}</p>
     </td>
