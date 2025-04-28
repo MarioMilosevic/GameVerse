@@ -1,14 +1,17 @@
 <template>
-  <section class="sm:max-w-[300px] flex flex-col align-center gap-2 p-4 relative bg-slate-300">
+  <section
+    class="sm:max-w-[300px] flex flex-col align-center gap-2 rounded-xl relative bg-slate-50 dark:bg-slate-700 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+    @click="seeGameDetails(id)"
+  >
     <img
       :src="thumbnail"
       loading="lazy"
       class="w-full sm:h-[300px] object-cover rounded-xl"
     />
-    <div class="flex flex-col gap-4 ">
-      <h1 class="text-center text-lg sm:text-xl">{{ name }}</h1>
+    <div class="flex flex-col gap-4 p-4">
+      <h1 class="text-justify text-lg sm:text-xl">{{ name }}</h1>
 
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 gap-4">
         <GameStat>
           <template #icon>
             <ClockIcon />
@@ -36,18 +39,15 @@
           <template #value>{{ price }}</template>
           <template #name>price</template>
         </GameStat>
+        <p>Available on:</p>
+        <ConsoleWrapper>
+          <ConsoleComponent
+            v-for="obj in consoles"
+            :key="obj.console.id"
+            :image="obj.console.image"
+          />
+        </ConsoleWrapper>
       </div>
-      <p>Available on:</p>
-      <ConsoleWrapper>
-        <ConsoleComponent
-          v-for="obj in consoles"
-          :key="obj.console.id"
-          :image="obj.console.image"
-        />
-      </ConsoleWrapper>
-      <ActionButton position="absolute" size="big" @click="seeGameDetails(id)">
-        Details
-      </ActionButton>
     </div>
   </section>
 </template>
@@ -62,7 +62,6 @@ import DollarIcon from "src/icons/DollarIcon.vue";
 import CalendarIcon from "src/icons/CalendarIcon.vue";
 import GameStat from "src/components/layout/game/GameStat.vue";
 import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 
 const props = defineProps({
