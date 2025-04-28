@@ -1,10 +1,5 @@
 <template>
   <main class="min-h-screen">
-    <img
-      :src="singleGame.thumbnail"
-      :alt="singleGame.thumbnail"
-      class="w-full sm:max-h-screen object-cover opacity-90 dark:opacity-50"
-    />
     <SectionComponent>
       <template #title>
         {{ name }}

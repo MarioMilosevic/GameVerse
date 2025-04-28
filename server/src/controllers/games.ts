@@ -193,11 +193,11 @@ export default {
 
   async editGame(req: Request, res: Response) {
     try {
-      const { banner } = req.body;
+      const { thumbnail } = req.body;
       const updatedGame = await prisma.game.update({
         where: { id: req.id },
         data: {
-          banner,
+          thumbnail,
         },
       });
       successFactory.ok(res, updatedGame);
