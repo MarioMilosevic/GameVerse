@@ -7,7 +7,7 @@
     ]"
   >
     <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-4">
-      <img src="/game-controller.png" class="max-h-[50px] sm:max-h-[75px]" />
+      <img src="/controller.png" class="max-h-[20px] sm:max-h-[35px]" />
       <h1 class="sm:text-2xl text-lg">GameVerse</h1>
     </RouterLink>
 
@@ -18,7 +18,7 @@
       @blur="closeNavigationMenu"
       tabindex="0"
     >
-      <BaseIcon size="big">
+      <BaseIcon size="big" @click="handleTheme" class="cursor-pointer">
         <MoonIcon v-if="theme === 'dark'" />
         <SunIcon v-else />
       </BaseIcon>
@@ -81,7 +81,7 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
-defineProps({
+const props = defineProps({
   theme: {
     type: String as PropType<"light" | "dark">,
     required: true,
@@ -141,8 +141,9 @@ const myReviewsHandler = () => {
   router.push(`/my-reviews/${user.value.id}`);
 };
 
-const handleTheme = (darkMode: boolean) => {
-  emits("toggle-theme-event", darkMode);
+const handleTheme = () => {
+  const value = props.theme === "dark" ? false : true;
+  emits("toggle-theme-event", value);
 };
 
 const dashboardHandler = () => {

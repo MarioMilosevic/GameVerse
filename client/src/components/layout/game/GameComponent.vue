@@ -1,5 +1,5 @@
 <template>
-  <section class="sm:max-w-[300px] flex flex-col gap-2 relative">
+  <section class="sm:max-w-[300px] flex flex-col align-center gap-2 p-4 relative bg-slate-300">
     <img
       :src="thumbnail"
       loading="lazy"
