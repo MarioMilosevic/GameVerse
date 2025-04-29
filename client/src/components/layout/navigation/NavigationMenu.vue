@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-700 z-20 w-full rounded-xl text-xs sm:text-base"
+    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-b-xl text-xs sm:text-base first:rounded-t-none first:rounded-b-xl"
   >
     <NavigationLink
       v-if="user.role === 'ADMIN'"
@@ -26,7 +26,7 @@
       <template #text> My reviews </template>
     </NavigationLink>
 
-    <NavigationLink @click="emits('sign-out-event')">
+    <NavigationLink @click="emits('sign-out-event')" class="hover:rounded-b-xl">
       <template #default>
         <v-icon name="gi-exit-door" />
       </template>
@@ -49,5 +49,4 @@ const emits = defineEmits([
 ]);
 
 const { user } = useGetUserStore();
-
 </script>
