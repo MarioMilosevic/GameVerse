@@ -102,6 +102,7 @@
       </ModalComponent>
     </OverlayComponent>
   </main>
+  <FooterComponent/>
 </template>
 
 <script setup lang="ts">
@@ -115,6 +116,7 @@ import ReviewModal from "src/components/layout/review/ReviewModal.vue";
 import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
 import ModalComponent from "src/components/layout/others/ModalComponent.vue";
 import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
+import FooterComponent from "src/components/layout/others/FooterComponent.vue";
 import GameRating from "src/components/layout/game/GameRating.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";

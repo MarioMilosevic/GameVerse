@@ -113,6 +113,7 @@
       </FormComponent>
     </section>
   </main>
+  <FooterComponent/>
 </template>
 
 <script setup lang="ts">
@@ -126,6 +127,7 @@ import FormFile from "src/components/form/FormFile.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import FormError from "src/components/form/FormError.vue";
+import FooterComponent from "src/components/layout/others/FooterComponent.vue";
 import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
