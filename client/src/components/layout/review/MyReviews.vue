@@ -5,12 +5,12 @@
     <h1 class="text-2xl sm:text-5xl text-center py-4 sm:py-8">Your Reviews</h1>
     <ul
       class="flex flex-col sm:gap-4 gap-8 sm:px-0 px-2"
-      v-if="reviews.length > 0"
     >
       <li
         v-for="review in reviews"
         :key="review.id"
-        class="flex items-center h-[250px] sm:gap-6 gap-2"
+        class="flex items-center h-[250px] sm:gap-6 gap-2 cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105"
+        @click="seeGameDetails(review.gameId)"
       >
         <img
           :src="review.game.thumbnail"
@@ -32,21 +32,9 @@
           <footer class="text-xs sm:text-sm">
             Reviewed on {{ formattedDate(review.createdAt) }}
           </footer>
-          <ActionButton
-            @click="seeGameDetails(review.gameId)"
-            position="absolute"
-          >
-            Details
-          </ActionButton>
         </div>
       </li>
     </ul>
-    <section v-else class="flex flex-col items-center gap-8">
-      <h2 class="text-2xl text-center">
-        You haven't made any reviews yet
-      </h2>
-      <ActionButton @click="router.push('/')">View All Games</ActionButton>
-    </section>
   </main>
 </template>
 
@@ -56,7 +44,6 @@ import { PropType } from "vue";
 import { formattedDate } from "src/utils/helpers";
 import { useRouter } from "vue-router";
 import GameRating from "src/components/layout/game/GameRating.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
 
 defineProps({
   reviews: {
