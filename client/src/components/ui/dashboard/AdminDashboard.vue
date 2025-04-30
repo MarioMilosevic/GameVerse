@@ -53,15 +53,15 @@
 </template>
 
 <script setup lang="ts">
-import SubtitleComponent from "src/components/layout/others/SubtitleComponent.vue";
+import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
 import UserData from "./UserData.vue";
-import UsersTable from "src/components/layout/dashboard/UsersTable.vue";
-import UserHeading from "src/components/layout/dashboard/UserHeading.vue";
-import UserModal from "src/components/layout/dashboard/UserModal.vue";
-import DeleteModal from "src/components/layout/others/DeleteModal.vue";
-import NotFound from "src/components/layout/others/NotFound.vue";
-import SearchHeader from "src/components/layout/dashboard/SearchHeader.vue";
-import PaginationComponent from "src/components/layout/dashboard/PaginationComponent.vue";
+import UsersTable from "src/components/ui/dashboard/UsersTable.vue";
+import UserHeading from "src/components/ui/dashboard/UserHeading.vue";
+import UserModal from "src/components/ui/dashboard/UserModal.vue";
+import DeleteModal from "src/components/ui/others/DeleteModal.vue";
+import NotFound from "src/components/ui/others/NotFound.vue";
+import SearchHeader from "src/components/ui/dashboard/SearchHeader.vue";
+import PaginationComponent from "src/components/ui/dashboard/PaginationComponent.vue";
 import { UsersResponseType, UserType } from "src/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "src/utils/constants";

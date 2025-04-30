@@ -57,8 +57,8 @@ import FormLabel from "src/components/form/FormLabel.vue";
 import FormError from "src/components/form/FormError.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import FormGuest from "src/components/form/FormGuest.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
+import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
 import { signUpInputs } from "src/utils/constants";
 import { ref, computed } from "vue";
 import {

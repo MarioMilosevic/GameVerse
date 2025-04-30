@@ -51,12 +51,12 @@
 
 <script setup lang="ts">
 import FormComponent from "src/components/form/FormComponent.vue";
-import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
+import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormError from "src/components/form/FormError.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import FormGuest from "src/components/form/FormGuest.vue";
 import { loginInputs, tokenName } from "src/utils/constants";

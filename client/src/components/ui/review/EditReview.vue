@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import RatingStars from "src/components/layout/review/RatingStars.vue";
-import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
+import RatingStars from "src/components/ui/review/RatingStars.vue";
+import MainRatingStar from "src/components/ui/review/MainRatingStar.vue";
 import { fillStars } from "src/utils/helpers";
 import { ref, inject } from "vue";
 import { editReview } from "src/api/reviews";

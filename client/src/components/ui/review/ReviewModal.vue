@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
 import useGetUserStore from "src/composables/useGetUserStore";
-import ExistingReview from "src/components/layout/review/ExistingReview.vue";
-import CreateReview from "src/components/layout/review/CreateReview.vue";
+import ExistingReview from "src/components/ui/review/ExistingReview.vue";
+import CreateReview from "src/components/ui/review/CreateReview.vue";
 import FormReview from "src/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray, guestMessage } from "src/utils/constants";

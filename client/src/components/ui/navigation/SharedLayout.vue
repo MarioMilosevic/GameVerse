@@ -58,9 +58,9 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
-import NavigationMenu from "src/components/layout/navigation/NavigationMenu.vue";
+import NavigationMenu from "src/components/ui/navigation/NavigationMenu.vue";
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { renderUserImage } from "src/utils/helpers";

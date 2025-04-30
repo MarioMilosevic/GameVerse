@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import RatingStars from "src/components/layout/review/RatingStars.vue";
+import RatingStars from "src/components/ui/review/RatingStars.vue";
 import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
-import MainRatingStar from "src/components/layout/review/MainRatingStar.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
+import MainRatingStar from "src/components/ui/review/MainRatingStar.vue";
 import { PropType, computed } from "vue";
 
 const props = defineProps({

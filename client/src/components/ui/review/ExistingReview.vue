@@ -27,9 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import PreviewReview from "src/components/layout/review/PreviewReview.vue";
-import EditReview from "src/components/layout/review/EditReview.vue";
-import DeleteModal from "src/components/layout/others/DeleteModal.vue";
+import PreviewReview from "src/components/ui/review/PreviewReview.vue";
+import EditReview from "src/components/ui/review/EditReview.vue";
+import DeleteModal from "src/components/ui/others/DeleteModal.vue";
 import { deleteReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
 import { ReviewType } from "src/utils/types";

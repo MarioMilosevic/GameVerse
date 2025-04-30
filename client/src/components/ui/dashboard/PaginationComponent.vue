@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import { computed } from "vue";
 import { usersPerPage } from "src/utils/constants";
 

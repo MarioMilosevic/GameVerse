@@ -32,11 +32,11 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { translateElement } from "src/utils/helpers";
-import GameImageCloseButton from "src/components/layout/game/GameImageCloseButton.vue";
+import GameImageCloseButton from "src/components/ui/game/GameImageCloseButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
-import SliderButton from "src/components/layout/buttons/SliderButton.vue";
+import SliderButton from "src/components/ui/buttons/SliderButton.vue";
 
 defineProps({
   selectedImageIndex: {

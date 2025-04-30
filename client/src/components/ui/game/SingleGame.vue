@@ -106,18 +106,18 @@
 </template>
 
 <script setup lang="ts">
-import ReviewsSlider from "src/components/layout/review/ReviewsSlider.vue";
-import GameInfo from "src/components/layout/game/GameInfo.vue";
-import ConsoleComponent from "src/components/layout/game/ConsoleComponent.vue";
-import SectionComponent from "src/components/layout/others/SectionComponent.vue";
-import GenreComponent from "src/components/layout/game/GenreComponent.vue";
-import GameImageModal from "src/components/layout/game/GameImageModal.vue";
-import ReviewModal from "src/components/layout/review/ReviewModal.vue";
-import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
-import ModalComponent from "src/components/layout/others/ModalComponent.vue";
-import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
-import FooterComponent from "src/components/layout/others/FooterComponent.vue";
-import GameRating from "src/components/layout/game/GameRating.vue";
+import ReviewsSlider from "src/components/ui/review/ReviewsSlider.vue";
+import GameInfo from "src/components/ui/game/GameInfo.vue";
+import ConsoleComponent from "src/components/ui/game/ConsoleComponent.vue";
+import SectionComponent from "src/components/ui/others/SectionComponent.vue";
+import GenreComponent from "src/components/ui/game/GenreComponent.vue";
+import GameImageModal from "src/components/ui/game/GameImageModal.vue";
+import ReviewModal from "src/components/ui/review/ReviewModal.vue";
+import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "src/components/ui/others/ModalComponent.vue";
+import ConsoleWrapper from "src/components/ui/game/ConsoleWrapper.vue";
+import FooterComponent from "src/components/ui/others/FooterComponent.vue";
+import GameRating from "src/components/ui/game/GameRating.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";
 import { PropType, ref, computed } from "vue";

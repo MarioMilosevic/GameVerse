@@ -22,8 +22,8 @@ import { showToast } from "src/utils/toast";
 import { useDebounce } from "src/composables/useDebounce";
 import { UsersResponseType, UserType } from "src/utils/types";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
-import AdminDashboard from "src/components/layout/dashboard/AdminDashboard.vue";
+import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
+import AdminDashboard from "src/components/ui/dashboard/AdminDashboard.vue";
 import { usersPerPage } from "src/utils/constants";
 const { loading, setLoading } = useGetLoadingStore();
 

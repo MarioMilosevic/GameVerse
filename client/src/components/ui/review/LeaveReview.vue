@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import { ReviewType } from "src/utils/types";
 import { PropType, computed } from "vue";
 

@@ -4,9 +4,9 @@
 </template>
 
 <script setup lang="ts">
-import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
+import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import MyReviews from "src/components/layout/review/MyReviews.vue";
+import MyReviews from "src/components/ui/review/MyReviews.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { getUserReviews } from "src/api/users";
 

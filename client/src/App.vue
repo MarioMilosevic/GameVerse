@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
-import SharedLayout from "src/components/layout/navigation/SharedLayout.vue";
+import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
+import SharedLayout from "src/components/ui/navigation/SharedLayout.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import useTheme from "src/composables/useTheme";
 import { storageThemeName } from "src/utils/constants";

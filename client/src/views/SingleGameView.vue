@@ -14,8 +14,8 @@ import { onBeforeMount, ref, provide } from "vue";
 import { GameType, NewReviewResponseType, ReviewType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import SingleGame from "src/components/layout/game/SingleGame.vue";
-import LoadingSpinner from "src/components/layout/others/LoadingSpinner.vue";
+import SingleGame from "src/components/ui/game/SingleGame.vue";
+import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
 
 onBeforeMount(async () => {
   try {

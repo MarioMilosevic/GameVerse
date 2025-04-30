@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import NavigationLink from "src/components/layout/navigation/NavigationLink.vue";
+import NavigationLink from "src/components/ui/navigation/NavigationLink.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 
 const emits = defineEmits([

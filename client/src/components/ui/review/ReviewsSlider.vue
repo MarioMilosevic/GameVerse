@@ -35,10 +35,10 @@
 import BaseIcon from "src/icons/BaseIcon.vue";
 import LeftIcon from "src/icons/LeftIcon.vue";
 import RightIcon from "src/icons/RightIcon.vue";
-import SliderButton from "src/components/layout/buttons/SliderButton.vue";
-import ReviewComponent from "src/components/layout/review/ReviewComponent.vue";
-import LeaveReview from "src/components/layout/review/LeaveReview.vue";
-import SubtitleComponent from "src/components/layout/others/SubtitleComponent.vue";
+import SliderButton from "src/components/ui/buttons/SliderButton.vue";
+import ReviewComponent from "src/components/ui/review/ReviewComponent.vue";
+import LeaveReview from "src/components/ui/review/LeaveReview.vue";
+import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
 import { PropType } from "vue";
 import { ReviewType } from "src/utils/types";
 import { translateElement } from "src/utils/helpers";

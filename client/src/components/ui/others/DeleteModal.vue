@@ -33,9 +33,9 @@
 </template>
 
 <script setup lang="ts">
-import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
-import ModalComponent from "src/components/layout/others/ModalComponent.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "src/components/ui/others/ModalComponent.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XCircle from "src/icons/XCircle.vue";
 import { PropType, computed } from "vue";

@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import GameComponent from "src/components/layout/game/GameComponent.vue";
-import FooterComponent from "src/components/layout/others/FooterComponent.vue";
+import GameComponent from "src/components/ui/game/GameComponent.vue";
+import FooterComponent from "src/components/ui/others/FooterComponent.vue";
 import { GameType } from "src/utils/types";
 import { PropType } from "vue";
 

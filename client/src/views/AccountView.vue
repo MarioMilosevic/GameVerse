@@ -118,8 +118,8 @@
 
 <script setup lang="ts">
 import useGetUserStore from "src/composables/useGetUserStore";
-import SubtitleComponent from "src/components/layout/others/SubtitleComponent.vue";
-import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
+import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
+import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
 import FormComponent from "src/components/form/FormComponent.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
@@ -127,8 +127,8 @@ import FormFile from "src/components/form/FormFile.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
 import FormLine from "src/components/form/FormLine.vue";
 import FormError from "src/components/form/FormError.vue";
-import FooterComponent from "src/components/layout/others/FooterComponent.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import FooterComponent from "src/components/ui/others/FooterComponent.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "src/utils/types";
 import { formattedDate, renderUserImage } from "src/utils/helpers";

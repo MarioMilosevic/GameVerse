@@ -66,8 +66,8 @@
 </template>
 
 <script setup lang="ts">
-import OverlayComponent from "src/components/layout/others/OverlayComponent.vue";
-import ModalComponent from "src/components/layout/others/ModalComponent.vue";
+import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "src/components/ui/others/ModalComponent.vue";
 import FormLabel from "src/components/form/FormLabel.vue";
 import FormInput from "src/components/form/FormInput.vue";
 import FormBlock from "src/components/form/FormBlock.vue";
@@ -76,8 +76,8 @@ import FormCheckbox from "src/components/form/FormCheckbox.vue";
 import FormComponent from "src/components/form/FormComponent.vue";
 import BaseIcon from "src/icons/BaseIcon.vue";
 import XIcon from "src/icons/XIcon.vue";
-import RenderlessComponent from "src/components/layout/others/RenderlessComponent.vue";
-import ActionButton from "src/components/layout/buttons/ActionButton.vue";
+import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
+import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import { userInputs, dashboardOptions } from "src/utils/constants";
 import { PropType, ref } from "vue";
 import { UserType } from "src/utils/types";
