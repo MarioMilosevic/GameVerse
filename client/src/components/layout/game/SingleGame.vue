@@ -158,8 +158,9 @@ const embedTrailerUrl = computed(() => {
     /(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/
   );
   const videoId = videoIdMatch ? videoIdMatch[1] : "";
-  return `https://www.youtube.com/embed/${videoId}`;
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
 });
+
 
 const openImageModal = (imageIndex: number) => {
   isGameImageModalOpen.value = true;

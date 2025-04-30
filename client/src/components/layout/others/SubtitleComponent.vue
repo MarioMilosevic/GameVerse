@@ -1,7 +1,7 @@
 <template>
   <h2
     :class="[
-      'uppercase text-sky-500 dark:text-white text-lg sm:text-3xl text-left',
+      'uppercase text-sky-500 dark:text-white text-lg sm:text-3xl',
       justifyOptions[props.justify],
     ]"
   >
@@ -22,7 +22,7 @@ const justifyOptions = {
 const props = defineProps({
   justify: {
     type: String as PropType<justifyType>,
-    default: "center",
+    default: "start",
   },
 });
 

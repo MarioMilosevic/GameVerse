@@ -2,7 +2,7 @@
   <article
     class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[320px] sm:h-[330px]"
   >
-    <SubtitleComponent> Reviews </SubtitleComponent>
+    <SubtitleComponent justify="center"> Reviews </SubtitleComponent>
     <ReviewComponent
       v-for="(review, index) in props.reviews"
       :key="review.id"
