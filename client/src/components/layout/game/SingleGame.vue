@@ -39,7 +39,9 @@
             <template #default>{{ genre.name }} </template>
           </GenreComponent>
         </div>
-        <div class="flex items-center justify-between sm:gap-6 sm:justify-start">
+        <div
+          class="flex items-center justify-between sm:gap-6 sm:justify-start"
+        >
           <h3>Available on:</h3>
           <ConsoleWrapper>
             <ConsoleComponent
@@ -78,15 +80,13 @@
     </SectionComponent>
 
     <OverlayComponent v-if="isGameImageModalOpen">
-      <ModalComponent>
-        <GameImageModal
-          :selectedImageIndex="selectedImageIndex"
-          :all-photos="photos"
-          @close-modal-event="isGameImageModalOpen = false"
-          @next-event="nextImage"
-          @prev-event="prevImage"
-        />
-      </ModalComponent>
+      <GameImageModal
+        :selectedImageIndex="selectedImageIndex"
+        :all-photos="photos"
+        @close-modal-event="isGameImageModalOpen = false"
+        @next-event="nextImage"
+        @prev-event="prevImage"
+      />
     </OverlayComponent>
     <OverlayComponent v-if="isReviewModalOpen">
       <ModalComponent size="small">
@@ -117,7 +117,7 @@ import ConsoleWrapper from "src/components/layout/game/ConsoleWrapper.vue";
 import GameRating from "src/components/layout/game/GameRating.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";
-import { PropType,  ref, computed } from "vue";
+import { PropType, ref, computed } from "vue";
 
 const props = defineProps({
   singleGame: {
@@ -160,7 +160,6 @@ const embedTrailerUrl = computed(() => {
   const videoId = videoIdMatch ? videoIdMatch[1] : "";
   return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
 });
-
 
 const openImageModal = (imageIndex: number) => {
   isGameImageModalOpen.value = true;
