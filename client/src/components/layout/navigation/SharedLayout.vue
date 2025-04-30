@@ -1,5 +1,3 @@
-<!-- class="flex items-center -bottom-3 pb-3 sm:-bottom-4 sm:pb-6 group gap-2 sm:gap-8" -->
-
 <template>
   <nav
     :class="[
@@ -15,7 +13,7 @@
 
     <div
       v-if="user.id"
-      class="flex items-center justify-between sm:min-w-[130px] relative group gap-2"
+      class="flex items-center justify-between sm:min-w-[130px] relative group sm:gap-2 gap-4"
       @click="toggleMenu"
       @blur="closeNavigationMenu"
       tabindex="0"

@@ -108,4 +108,4 @@ export const emptyUser: UserType = {
   active: false,
 };
 
-export const guestMessage = "You must create an account first";
+export const guestMessage = "You must be logged in";

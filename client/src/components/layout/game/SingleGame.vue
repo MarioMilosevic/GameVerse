@@ -78,7 +78,7 @@
     </SectionComponent>
 
     <OverlayComponent v-if="isGameImageModalOpen">
-      <ModalComponent size="big">
+      <ModalComponent>
         <GameImageModal
           :selectedImageIndex="selectedImageIndex"
           :all-photos="photos"

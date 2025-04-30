@@ -27,7 +27,7 @@
     <section class="sm:w-2/3 flex flex-col gap-4 w-full">
       <FormComponent
         id="editAccountForm"
-        class="gap-6"
+        class="gap-6 px-4"
         type="regular"
         @submit.prevent="accountHandler"
       >
@@ -80,6 +80,7 @@
         type="regular"
         @submit.prevent="imageHandler"
         id="photoForm"
+        class="px-4"
         enctype="multipart/form-data"
       >
         <template #title>
@@ -191,7 +192,10 @@ const accountHandler = async () => {
         showToast(message, "error");
       }
     } else {
-      showToast(guestMessage, "error");
+      router.push("/login");
+      setTimeout(() => {
+        showToast(guestMessage, "error");
+      }, 500);
     }
   } catch (error) {
     console.error(error);
@@ -210,7 +214,10 @@ const disableAccount = async () => {
         showToast(message, "error");
       }
     } else {
-      showToast(guestMessage, "error");
+      router.push("/login");
+      setTimeout(() => {
+        showToast(guestMessage, "error");
+      }, 500);
       return;
     }
   } catch (error) {
@@ -225,7 +232,10 @@ const photoHandler = (file: File) => {
 const imageHandler = async () => {
   try {
     if (!user.value.id) {
-      showToast(guestMessage, "error");
+      router.push("/login");
+      setTimeout(() => {
+        showToast(guestMessage, "error");
+      }, 500);
       return;
     }
 

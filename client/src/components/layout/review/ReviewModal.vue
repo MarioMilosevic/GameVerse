@@ -42,6 +42,7 @@ import { GameReviewType, ReviewType } from "src/utils/types";
 import { gameReviewSchema } from "src/schemas/gameReview";
 import { createReview } from "src/api/reviews";
 import { showToast } from "src/utils/toast";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   content: {
@@ -61,6 +62,7 @@ const props = defineProps({
     required: true,
   },
 });
+const router = useRouter()
 
 const { user } = useGetUserStore();
 
@@ -120,7 +122,10 @@ const submitNewReviewHandler = async () => {
         emits("close-modal-event");
       }
     } else {
-      showToast(guestMessage, "error");
+      router.push('/login')
+      setTimeout(() => {
+        showToast(guestMessage, "error");
+      }, 500);
     }
   } catch (error) {
     console.error(error);
