@@ -2,7 +2,6 @@
   <Teleport to="body" v-if="isDeleteOpen">
     <OverlayComponent>
       <ModalComponent
-        size="medium"
         class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-xl"
       >
         <BaseIcon
@@ -11,7 +10,9 @@
         >
           <XCircle />
         </BaseIcon>
-        <div class="flex flex-col gap-4 sm:gap-8 items-center w-1/2">
+        <div
+          class="flex flex-col gap-4 sm:gap-8 items-center pt-24 px-8 w-[350px]"
+        >
           <h1 class="text-2xl sm:text-4xl text-justify">Are you sure ?</h1>
           <p class="text-base sm:text-lg">
             Do you really want to delete {{ content }}? This action cannot be
@@ -21,7 +22,9 @@
             <ActionButton color="green" @click="emits('close-modal-event')"
               >Cancel</ActionButton
             >
-            <ActionButton @click="emits('delete-event', user?.id)">Confirm</ActionButton>
+            <ActionButton @click="emits('delete-event', user?.id)"
+              >Confirm</ActionButton
+            >
           </div>
         </div>
       </ModalComponent>
