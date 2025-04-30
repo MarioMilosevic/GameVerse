@@ -64,7 +64,6 @@ import NavigationMenu from "src/components/layout/navigation/NavigationMenu.vue"
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { renderUserImage } from "src/utils/helpers";
-import { useThrottle } from "src/composables/useThrottle";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 import DarkMode from "./DarkMode.vue";
 
@@ -105,12 +104,12 @@ const closeNavigationMenu = () => {
   navigationMenuOpen.value = false;
 };
 
-const handleScroll = useThrottle(() => {
+const handleScroll = () => {
   const scrollTop = window.scrollY;
-
   const windowHeight = window.innerHeight;
-  isSticky.value = scrollTop >= windowHeight / 2;
-}, 200);
+  isSticky.value = scrollTop >= windowHeight / 2
+}
+
 
 const selectedPage = computed(() => {
   if (router.currentRoute.value.fullPath === "/login") return 0;

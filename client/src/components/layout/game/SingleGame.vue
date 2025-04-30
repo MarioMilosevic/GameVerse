@@ -1,5 +1,6 @@
 <template>
   <main class="min-h-screen">
+    <img :src="singleGame.thumbnail" :alt="singleGame.thumbnail" class="sm:h-[150px] h-[75px] w-full object-cover">
     <SectionComponent>
       <template #title>
         {{ name }}
