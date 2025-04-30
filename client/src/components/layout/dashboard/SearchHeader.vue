@@ -1,6 +1,6 @@
 <template>
   <header class="w-full flex justify-between items-center mb-8 relative">
-    <p class="sm:text-base text-sm semibold sm:static absolute -top-6 left-0">
+    <p class="sm:text-base text-sm semibold sm:static absolute -bottom-7 left-0">
       {{ usersObj.count }} <span>total users</span>
     </p>
     <div class="w-[50%] sm:w-[70%]">

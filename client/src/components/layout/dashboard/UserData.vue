@@ -52,7 +52,7 @@
     <v-icon
       name="fa-regular-trash-alt"
       fill="red"
-      class="absolute bottom-4 right-4 sm:col-start-12 sm:col-end-13 cursor-pointer sm:justify-self-center"
+      class="absolute bottom-4 right-4 sm:static sm:col-start-12 sm:col-end-13 cursor-pointer sm:justify-self-center"
       @click="emits('delete-event', user)"
     />
   </tr>
