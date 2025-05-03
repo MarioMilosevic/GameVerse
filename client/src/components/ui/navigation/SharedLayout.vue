@@ -1,10 +1,12 @@
 <template>
+  <LoadingSpinner v-if="loading" />
   <nav
     :class="[
       `flex justify-between items-center sm:px-8 sm:py-4 top-0 px-2 py-2 ${
         isSticky ? 'fixed z-10' : 'absolute'
       } top-0 right-0 w-full bg-slate-300 dark:bg-slate-900 transition-all duration-700`,
     ]"
+    v-else
   >
     <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-4">
       <img src="/controller.png" class="max-h-[20px] sm:max-h-[35px]" />
@@ -60,7 +62,10 @@
 <script setup lang="ts">
 import ActionButton from "src/components/ui/buttons/ActionButton.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
+import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import NavigationMenu from "src/components/ui/navigation/NavigationMenu.vue";
+import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
+
 import { signOut } from "src/api/users";
 import { useRouter } from "vue-router";
 import { renderUserImage } from "src/utils/helpers";
@@ -68,6 +73,7 @@ import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 import DarkMode from "./DarkMode.vue";
 
 const { user, resetUser } = useGetUserStore();
+const { loading } = useGetLoadingStore();
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
@@ -107,9 +113,8 @@ const closeNavigationMenu = () => {
 const handleScroll = () => {
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
-  isSticky.value = scrollTop >= windowHeight / 2
-}
-
+  isSticky.value = scrollTop >= windowHeight / 2;
+};
 
 const selectedPage = computed(() => {
   if (router.currentRoute.value.fullPath === "/login") return 0;
@@ -127,6 +132,7 @@ const accountHandler = () => {
 const signOutHandler = () => {
   signOut(user.value);
   resetUser();
+  router.push("/");
 };
 
 const myReviewsHandler = () => {

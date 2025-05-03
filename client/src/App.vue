@@ -1,18 +1,14 @@
 <template>
-  <LoadingSpinner v-if="loading" />
   <SharedLayout :theme="theme" @toggle-theme-event="handleTheme" />
   <RouterView />
 </template>
 
 <script lang="ts" setup>
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
 import SharedLayout from "src/components/ui/navigation/SharedLayout.vue";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
 import useTheme from "src/composables/useTheme";
 import { storageThemeName } from "src/utils/constants";
 import { onBeforeMount } from "vue";
 
-const { loading } = useGetLoadingStore();
 const { theme, setTheme } = useTheme();
 
 onBeforeMount(() => {
