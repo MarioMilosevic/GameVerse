@@ -193,15 +193,30 @@ export default {
 
   async editGame(req: Request, res: Response) {
     try {
-      const { thumbnail } = req.body;
+      const { photo } = req.body;
+      console.log(photo);
+      const game = await prisma.game.findUnique({
+        where: { id: req.id },
+        select: { photos: true },
+      });
+
+      if (!game) {
+        errorFactory.notFound(res, "Game not found");
+        return;
+      }
+
+      const updatedPhotos = [...game.photos, photo];
+
       const updatedGame = await prisma.game.update({
         where: { id: req.id },
         data: {
-          thumbnail,
+          photos: updatedPhotos,
         },
       });
+
       successFactory.ok(res, updatedGame);
     } catch (error) {
+      console.error(error);
       errorFactory.internalError(res);
     }
   },
