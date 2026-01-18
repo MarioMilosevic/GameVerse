@@ -8,6 +8,7 @@ import { onBeforeMount, ref } from "vue";
 import { getAllGames } from "src/api/games";
 import { GameType } from "src/utils/types";
 import { showToast } from "src/utils/toast";
+import { UNEXPECTED_ERROR_OCCURED, ERROR } from "src/constants/errors";
 import AllGames from "src/components/ui/game/AllGames.vue";
 import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
 import useGetLoadingStore from "src/composables/useGetLoadingStore";
@@ -20,13 +21,13 @@ onBeforeMount(async () => {
     setLoading(true);
     const { data, message } = await getAllGames();
     if (message) {
-      showToast(message, "error");
+      showToast(message, ERROR);
     } else {
       games.value = data;
     }
   } catch (error) {
-    console.error("Unexpected erorr occured");
-    showToast("Unexpected error occured", "error");
+    console.error(UNEXPECTED_ERROR_OCCURED);
+    showToast(UNEXPECTED_ERROR_OCCURED, ERROR);
   } finally {
     setLoading(false);
   }

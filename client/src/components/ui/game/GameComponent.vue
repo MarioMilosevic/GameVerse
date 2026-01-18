@@ -1,5 +1,5 @@
 <template>
-  <section
+  <article
     class="sm:max-w-[300px] flex flex-col align-center gap-2 rounded-xl relative bg-slate-50 dark:bg-slate-700 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
     @click="seeGameDetails(id)"
   >
@@ -49,7 +49,7 @@
         </ConsoleWrapper>
       </div>
     </div>
-  </section>
+  </article>
 </template>
 
 <script setup lang="ts">
