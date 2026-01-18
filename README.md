@@ -37,3 +37,5 @@ JWT workflow. Token is saved in local storage, sent from the client and then dec
 - git clone this repository
 - install dependencies for both client and server using `npm install`
 - cd into server and run `npx prisma generate`to generate Prisma client
+- in server run ``npm start`` to start the the backend server
+- in client open new terminal and run ``npm run dev`` to run client server
