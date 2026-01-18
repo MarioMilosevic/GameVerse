@@ -1,7 +1,11 @@
-1. fix navigation for Responsive
-2. refactor code
-3. unit tests
-4. change password
-5. forgot password 
-6. integration tests
-7. end to end tests
+- fix navigation for Responsive, and check for other screen sizes
+- refactor client code
+- unit tests
+- change password
+- forgot password send code to email
+- login with google, and/or some social medias
+- caching when fetching data
+- refactor server code
+- see if i can write my own sql database
+- integration tests
+- end to end tests
