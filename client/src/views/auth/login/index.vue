@@ -18,7 +18,9 @@
               <FormInput
                 @blur-event="blurHandler(input.name as LoginFields)"
                 v-bind="input"
-                v-model="loginCredentials[input.name as keyof typeof loginCredentials]"
+                v-model="
+                  loginCredentials[input.name as keyof typeof loginCredentials]
+                "
               />
             </template>
             <template #line>
@@ -44,7 +46,7 @@
       </ActionButton>
     </template>
     <template #text>
-      <FormGuest text="Sign Up"/>
+      <FormGuest text="Sign Up" />
     </template>
   </FormComponent>
 </template>
@@ -82,7 +84,6 @@ const touchedFields = ref<LoginTouchedFields>({});
 const loginFormErrors = ref<LoginFieldErrors>({});
 const isSubmiting = ref<boolean>(false);
 
-
 const allFieldsCompleted = computed(() => {
   return loginSchema.safeParse(loginCredentials.value).success;
 });
@@ -92,7 +93,7 @@ const router = useRouter();
 const blurHandler = (property: LoginFields) => {
   const message = getLoginFieldError(
     property,
-    loginCredentials.value[property]
+    loginCredentials.value[property],
   );
   loginFormErrors.value[property] = message;
   touchedFields.value[property] = true;

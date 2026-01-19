@@ -1,6 +1,10 @@
 <template>
   <main class="min-h-screen">
-    <img :src="singleGame.thumbnail" :alt="singleGame.thumbnail" class="sm:h-[150px] h-[75px] w-full object-cover">
+    <img
+      :src="singleGame.thumbnail"
+      :alt="singleGame.thumbnail"
+      class="sm:h-[150px] h-[75px] w-full object-cover"
+    />
     <SectionComponent>
       <template #title>
         {{ name }}
@@ -45,10 +49,12 @@
         >
           <h3>Available on:</h3>
           <ConsoleWrapper>
-            <ConsoleComponent
+            <img
               v-for="obj in consoles"
               :key="obj.console.id"
-              :image="obj.console.image"
+              :src="obj.console.image"
+              :alt="obj.console.image"
+              class="console-image"
             />
           </ConsoleWrapper>
           <GameRating :rating="singleGame.rating" />
@@ -102,13 +108,12 @@
       </ModalComponent>
     </OverlayComponent>
   </main>
-  <FooterComponent/>
+  <FooterComponent />
 </template>
 
 <script setup lang="ts">
 import ReviewsSlider from "src/components/ui/review/ReviewsSlider.vue";
 import GameInfo from "src/components/ui/game/GameInfo.vue";
-import ConsoleComponent from "src/components/ui/game/ConsoleComponent.vue";
 import SectionComponent from "src/components/ui/others/SectionComponent.vue";
 import GenreComponent from "src/components/ui/game/GenreComponent.vue";
 import GameImageModal from "src/components/ui/game/GameImageModal.vue";
@@ -120,6 +125,7 @@ import FooterComponent from "src/components/ui/others/FooterComponent.vue";
 import GameRating from "src/components/ui/game/GameRating.vue";
 import useGetUserStore from "src/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "src/utils/types";
+import { createVideoUrl } from "src/utils/helpers";
 import { PropType, ref, computed } from "vue";
 
 const props = defineProps({
@@ -144,7 +150,7 @@ const {
 
 const userReview = computed(() => {
   return props.singleGame.reviews.find(
-    (review) => review.user.id === user.value.id
+    (review) => review.user.id === user.value.id,
   );
 });
 
@@ -158,10 +164,10 @@ const emits = defineEmits(["create-review-event"]);
 const embedTrailerUrl = computed(() => {
   if (!props.singleGame.trailer) return "";
   const videoIdMatch = props.singleGame.trailer.match(
-    /(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/
+    /(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/,
   );
   const videoId = videoIdMatch ? videoIdMatch[1] : "";
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
+  return createVideoUrl(videoId);
 });
 
 const openImageModal = (imageIndex: number) => {

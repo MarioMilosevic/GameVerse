@@ -49,7 +49,11 @@
                   <FormInput
                     @blur-event="blurHandler(input.name as AccountFields)"
                     v-bind="input"
-                    v-model="accountSettings[input.name as keyof typeof accountSettings]"
+                    v-model="
+                      accountSettings[
+                        input.name as keyof typeof accountSettings
+                      ]
+                    "
                   />
                 </template>
                 <template #line>
@@ -113,7 +117,7 @@
       </FormComponent>
     </section>
   </main>
-  <FooterComponent/>
+  <FooterComponent />
 </template>
 
 <script setup lang="ts">
@@ -170,7 +174,7 @@ const accountSettingsFieldsCompleted = computed(() => {
 const blurHandler = (property: AccountFields) => {
   const message = getAccountFieldError(
     property,
-    accountSettings.value[property]
+    accountSettings.value[property],
   );
   accountFormErrors.value[property] = message;
   touchedFields.value[property] = true;
@@ -181,7 +185,7 @@ const accountHandler = async () => {
     if (user.value.id) {
       const { data, message } = await editUserNameAndEmail(
         user.value.id,
-        accountSettings.value
+        accountSettings.value,
       );
       if (data) {
         setUser(data);
@@ -244,7 +248,7 @@ const imageHandler = async () => {
     if (accountPhoto.value) {
       const { data, message } = await updateUserImage(
         user.value.id,
-        accountPhoto.value as File
+        accountPhoto.value as File,
       );
       if (data) {
         setUser(data);

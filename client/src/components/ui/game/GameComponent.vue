@@ -10,7 +10,6 @@
     />
     <div class="flex flex-col gap-4 p-4">
       <h1 class="text-justify text-lg sm:text-xl">{{ name }}</h1>
-
       <div class="grid grid-cols-2 gap-4">
         <GameStat>
           <template #icon>
@@ -41,10 +40,12 @@
         </GameStat>
         <p>Available on:</p>
         <ConsoleWrapper>
-          <ConsoleComponent
+          <img
             v-for="obj in consoles"
             :key="obj.console.id"
-            :image="obj.console.image"
+            :src="obj.console.image"
+            :alt="obj.console.image"
+            class="console-image"
           />
         </ConsoleWrapper>
       </div>
@@ -61,7 +62,6 @@ import StarIcon from "src/icons/StarIcon.vue";
 import DollarIcon from "src/icons/DollarIcon.vue";
 import CalendarIcon from "src/icons/CalendarIcon.vue";
 import GameStat from "src/components/ui/game/GameStat.vue";
-import ConsoleComponent from "src/components/ui/game/ConsoleComponent.vue";
 import ConsoleWrapper from "src/components/ui/game/ConsoleWrapper.vue";
 
 const props = defineProps({

@@ -48,7 +48,7 @@ const createHandler = (response: NewReviewResponseType) => {
 
 const deleteHandler = (reviewId: number, avgRating: string) => {
   const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId
+    (review) => review.id === reviewId,
   );
   if (index !== -1) {
     singleGame.value.reviews.splice(index, 1);
@@ -59,10 +59,10 @@ const deleteHandler = (reviewId: number, avgRating: string) => {
 const editHandler = (
   reviewId: number,
   updatedReview: ReviewType,
-  avgRating: number
+  avgRating: number,
 ) => {
   const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId
+    (review) => review.id === reviewId,
   );
   if (index !== -1) {
     singleGame.value.reviews[index] = {

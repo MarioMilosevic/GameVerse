@@ -22,3 +22,6 @@ export const renderUserImage = (image: string) =>
   image.startsWith("images")
     ? `${baseUrl.replace("/api/v1", "")}/public/${image}`
     : "https://social-network-js.vercel.app/img/profile5.png";
+
+export const createVideoUrl = (videoId: string) =>
+  `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;

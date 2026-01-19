@@ -84,7 +84,7 @@ import { UserType } from "src/utils/types";
 import { editUserProfile } from "src/api/users";
 import { showToast } from "src/utils/toast";
 
-const emits = defineEmits(["close-modal-event", 'submit-event']);
+const emits = defineEmits(["close-modal-event", "submit-event"]);
 const props = defineProps({
   user: {
     type: Object as PropType<UserType>,
@@ -98,7 +98,7 @@ const submitHandler = async () => {
   try {
     const { data, message } = await editUserProfile(user.value);
     if (data) {
-      emits('submit-event', data)
+      emits("submit-event", data);
     } else {
       showToast(message, "error");
     }

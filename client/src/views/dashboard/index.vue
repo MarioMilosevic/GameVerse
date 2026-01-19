@@ -69,7 +69,7 @@ onBeforeMount(async () => {
 
 const editUserHandler = (editedUser: UserType) => {
   const index = usersObj.value.users.findIndex(
-    (user) => user.id === editedUser.id
+    (user) => user.id === editedUser.id,
   );
   if (index !== -1) {
     usersObj.value.users[index] = editedUser;
@@ -86,7 +86,7 @@ const deleteUserHandler = (id: number) => {
 
 const sortHandler = (value: string) => {
   paginationOptions.value.sort = value;
-  paginationOptions.value.currentPage = 1
+  paginationOptions.value.currentPage = 1;
 };
 
 const searchHandler = (value: string) => {
@@ -108,14 +108,14 @@ const nextPage = () => {
 };
 
 watch(
-  [() => paginationOptions.value.sort, () => paginationOptions.value.search, () => paginationOptions.value.currentPage],
+  [
+    () => paginationOptions.value.sort,
+    () => paginationOptions.value.search,
+    () => paginationOptions.value.currentPage,
+  ],
   async ([newSort, newSearch, newPage]) => {
     try {
-      const { data, message } = await getUsers(
-        newPage,
-        newSort,
-        newSearch
-      );
+      const { data, message } = await getUsers(newPage, newSort, newSearch);
       if (data) {
         const { allUsers, count } = data;
         usersObj.value.users = allUsers;
@@ -126,6 +126,6 @@ watch(
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 );
 </script>

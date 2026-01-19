@@ -62,14 +62,14 @@ const props = defineProps({
     required: true,
   },
 });
-const router = useRouter()
+const router = useRouter();
 
 const { user } = useGetUserStore();
 
 const starsArray = ref<string[]>(
   props.userReview?.rating
     ? fillStars(props.userReview.rating - 1)
-    : [...emptyStarsArray]
+    : [...emptyStarsArray],
 );
 
 const gameReview = ref<GameReviewType>({
@@ -122,7 +122,7 @@ const submitNewReviewHandler = async () => {
         emits("close-modal-event");
       }
     } else {
-      router.push('/login')
+      router.push("/login");
       setTimeout(() => {
         showToast(guestMessage, "error");
       }, 500);
