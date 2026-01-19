@@ -20,15 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import RatingStars from "src/components/ui/review/RatingStars.vue";
-import MainRatingStar from "src/components/ui/review/MainRatingStar.vue";
-import { fillStars } from "src/utils/helpers";
+import FormTextarea from "@/components/form/FormTextarea.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import RatingStars from "@/components/ui/review/RatingStars.vue";
+import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
+import { fillStars } from "@/utils/helpers";
 import { ref, inject } from "vue";
-import { editReview } from "src/api/reviews";
-import { showToast } from "src/utils/toast";
-import { ReviewType } from "src/utils/types";
+import { editReview } from "@/api/reviews";
+import { showToast } from "@/utils/toast";
+import { ReviewType } from "@/utils/types";
 
 const props = defineProps({
   content: {

@@ -1,5 +1,5 @@
-import { GameReviewType, ReviewType } from "src/utils/types";
-import { baseUrl } from "src/utils/constants";
+import { GameReviewType, ReviewType } from "@/utils/types";
+import { baseUrl } from "@/utils/constants";
 
 export const createReview = async (review: ReviewType) => {
   try {
@@ -31,7 +31,7 @@ export const deleteReview = async (reviewId: number) => {
 
 export const editReview = async (
   reviewId: number,
-  updatedReview: GameReviewType
+  updatedReview: GameReviewType,
 ) => {
   try {
     const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {

@@ -1,5 +1,5 @@
 import z, { ZodError } from "zod";
-import { passwordMessage } from "src/utils/constants";
+import { passwordMessage } from "@/utils/constants";
 
 export const loginSchema = z
   .object({
@@ -19,7 +19,7 @@ export type LoginTouchedFields = {
 
 export function getLoginFieldError<
   T extends LoginFields,
-  K extends LoginSchema[T]
+  K extends LoginSchema[T],
 >(property: T, value: K) {
   const { error } = loginSchema.shape[property].safeParse(value);
   return error

@@ -55,14 +55,14 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
-import { GameType } from "src/utils/types";
+import { GameType } from "@/utils/types";
 import { useRouter } from "vue-router";
-import ClockIcon from "src/icons/ClockIcon.vue";
-import StarIcon from "src/icons/StarIcon.vue";
-import DollarIcon from "src/icons/DollarIcon.vue";
-import CalendarIcon from "src/icons/CalendarIcon.vue";
-import GameStat from "src/components/ui/game/GameStat.vue";
-import ConsoleWrapper from "src/components/ui/game/ConsoleWrapper.vue";
+import ClockIcon from "@/icons/ClockIcon.vue";
+import StarIcon from "@/icons/StarIcon.vue";
+import DollarIcon from "@/icons/DollarIcon.vue";
+import CalendarIcon from "@/icons/CalendarIcon.vue";
+import GameStat from "@/components/ui/game/GameStat.vue";
+import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
 
 const props = defineProps({
   game: {

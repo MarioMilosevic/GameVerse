@@ -66,23 +66,23 @@
 </template>
 
 <script setup lang="ts">
-import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
-import ModalComponent from "src/components/ui/others/ModalComponent.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
-import FormInput from "src/components/form/FormInput.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormSelect from "src/components/form/FormSelect.vue";
-import FormCheckbox from "src/components/form/FormCheckbox.vue";
-import FormComponent from "src/components/form/FormComponent.vue";
-import BaseIcon from "src/icons/BaseIcon.vue";
-import XIcon from "src/icons/XIcon.vue";
-import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import { userInputs, dashboardOptions } from "src/utils/constants";
+import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "@/components/ui/others/ModalComponent.vue";
+import FormLabel from "@/components/form/FormLabel.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormBlock from "@/components/form/FormBlock.vue";
+import FormSelect from "@/components/form/FormSelect.vue";
+import FormCheckbox from "@/components/form/FormCheckbox.vue";
+import FormComponent from "@/components/form/FormComponent.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import XIcon from "@/icons/XIcon.vue";
+import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import { userInputs, dashboardOptions } from "@/utils/constants";
 import { PropType, ref } from "vue";
-import { UserType } from "src/utils/types";
-import { editUserProfile } from "src/api/users";
-import { showToast } from "src/utils/toast";
+import { UserType } from "@/utils/types";
+import { editUserProfile } from "@/api/users";
+import { showToast } from "@/utils/toast";
 
 const emits = defineEmits(["close-modal-event", "submit-event"]);
 const props = defineProps({

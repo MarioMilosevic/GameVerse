@@ -31,17 +31,17 @@
 </template>
 
 <script setup lang="ts">
-import useGetUserStore from "src/composables/useGetUserStore";
-import ExistingReview from "src/components/ui/review/ExistingReview.vue";
-import CreateReview from "src/components/ui/review/CreateReview.vue";
-import FormReview from "src/components/form/FormReview.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
+import ExistingReview from "@/components/ui/review/ExistingReview.vue";
+import CreateReview from "@/components/ui/review/CreateReview.vue";
+import FormReview from "@/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
-import { emptyStarsArray, guestMessage } from "src/utils/constants";
-import { fillStars } from "src/utils/helpers";
-import { GameReviewType, ReviewType } from "src/utils/types";
-import { gameReviewSchema } from "src/schemas/gameReview";
-import { createReview } from "src/api/reviews";
-import { showToast } from "src/utils/toast";
+import { emptyStarsArray, guestMessage } from "@/utils/constants";
+import { fillStars } from "@/utils/helpers";
+import { GameReviewType, ReviewType } from "@/utils/types";
+import { gameReviewSchema } from "@/schemas/gameReview";
+import { createReview } from "@/api/reviews";
+import { showToast } from "@/utils/toast";
 import { useRouter } from "vue-router";
 
 const props = defineProps({

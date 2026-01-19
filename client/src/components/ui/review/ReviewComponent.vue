@@ -4,16 +4,23 @@
   >
     <div class="flex items-end gap-2">
       <fieldset class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]">
-        <img :src="renderUserImage(props.review.user.image)" class="h-full w-full object-cover rounded-xl" />
+        <img
+          :src="renderUserImage(props.review.user.image)"
+          class="h-full w-full object-cover rounded-xl"
+        />
       </fieldset>
       <h2>{{ props.review.user.fullName }}</h2>
-      <p class="text-sm sm:text-base">Joined on {{ formattedDate(props.review.user.createdDate) }}</p>
+      <p class="text-sm sm:text-base">
+        Joined on {{ formattedDate(props.review.user.createdDate) }}
+      </p>
     </div>
 
     <div class="flex items-center gap-2">
       <div class="flex items-center">
         <v-icon
-          v-for="(star, index) in createStarsArray(props.review.rating as number)"
+          v-for="(star, index) in createStarsArray(
+            props.review.rating as number,
+          )"
           :key="index"
           animation="pulse"
           :fill="theme === 'light' ? 'blue' : 'red'"
@@ -21,8 +28,8 @@
             star === 'full'
               ? 'bi-star-fill'
               : star === 'half'
-              ? 'bi-star-half'
-              : 'bi-star'
+                ? 'bi-star-half'
+                : 'bi-star'
           "
         />
       </div>
@@ -31,15 +38,19 @@
         - Reviewed on {{ formattedDate(props.review.createdAt as string) }}
       </p>
     </div>
-    <p class="pl-3 pr-3 sm:pr-0 sm:pl-2 w-[90%] text-justify text-sm sm:text-base">{{ props.review.content }}</p>
+    <p
+      class="pl-3 pr-3 sm:pr-0 sm:pl-2 w-[90%] text-justify text-sm sm:text-base"
+    >
+      {{ props.review.content }}
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ReviewType } from "src/utils/types";
+import { ReviewType } from "@/utils/types";
 import { PropType } from "vue";
-import { formattedDate, renderUserImage } from "src/utils/helpers";
-import useTheme from "src/composables/useTheme";
+import { formattedDate, renderUserImage } from "@/utils/helpers";
+import useTheme from "@/composables/useTheme";
 
 const props = defineProps({
   review: {

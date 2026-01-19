@@ -27,14 +27,14 @@
 </template>
 
 <script setup lang="ts">
-import PreviewReview from "src/components/ui/review/PreviewReview.vue";
-import EditReview from "src/components/ui/review/EditReview.vue";
-import DeleteModal from "src/components/ui/others/DeleteModal.vue";
-import { deleteReview } from "src/api/reviews";
-import { showToast } from "src/utils/toast";
-import { ReviewType } from "src/utils/types";
+import PreviewReview from "@/components/ui/review/PreviewReview.vue";
+import EditReview from "@/components/ui/review/EditReview.vue";
+import DeleteModal from "@/components/ui/others/DeleteModal.vue";
+import { deleteReview } from "@/api/reviews";
+import { showToast } from "@/utils/toast";
+import { ReviewType } from "@/utils/types";
 import { PropType, ref, inject } from "vue";
-import { fillStars } from "src/utils/helpers";
+import { fillStars } from "@/utils/helpers";
 
 const isEditing = ref<boolean>(false);
 

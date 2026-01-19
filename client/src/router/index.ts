@@ -1,45 +1,45 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { getUserData } from "src/api/users";
-import { tokenName } from "src/utils/constants";
-import { showToast } from "src/utils/toast";
-import useGetUserStore from "src/composables/useGetUserStore";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
+import { getUserData } from "@/api/users";
+import { tokenName } from "@/utils/constants";
+import { showToast } from "@/utils/toast";
+import useGetUserStore from "@/composables/useGetUserStore";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
 
 export const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("src/views/HomeView.vue"),
+    component: () => import("@/views/home/index.vue"),
   },
   {
     path: "/details/:id",
     name: "GameDetails",
-    component: () => import("src/views/SingleGameView.vue"),
+    component: () => import("@/views/game/index.vue"),
   },
   {
     path: "/my-reviews/:id",
     name: "My Reviews",
-    component: () => import("src/views/MyReviewsView.vue"),
+    component: () => import("@/views/reviews/index.vue"),
   },
   {
     path: "/login",
     name: "Login",
-    component: () => import("src/views/LoginView.vue"),
+    component: () => import("@/views/auth/login/index.vue"),
   },
   {
     path: "/sign-up",
     name: "Sign Up",
-    component: () => import("src/views/SignUpView.vue"),
+    component: () => import("@/views/auth/sign-up/index.vue"),
   },
   {
     path: "/account",
     name: "Account",
-    component: () => import("src/views/AccountView.vue"),
+    component: () => import("@/views/account/index.vue"),
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: () => import("src/views/DashboardView.vue"),
+    component: () => import("@/views/dashboard/index.vue"),
   },
 ];
 

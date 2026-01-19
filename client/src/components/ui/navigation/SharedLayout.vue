@@ -60,15 +60,15 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import useGetUserStore from "src/composables/useGetUserStore";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import NavigationMenu from "src/components/ui/navigation/NavigationMenu.vue";
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
+import NavigationMenu from "@/components/ui/navigation/NavigationMenu.vue";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
 
-import { signOut } from "src/api/users";
+import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
-import { renderUserImage } from "src/utils/helpers";
+import { renderUserImage } from "@/utils/helpers";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
 import DarkMode from "./DarkMode.vue";
 

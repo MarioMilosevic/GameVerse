@@ -5,13 +5,13 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
-import { getAllGames } from "src/api/games";
-import { GameType } from "src/utils/types";
-import { showToast } from "src/utils/toast";
-import { UNEXPECTED_ERROR_OCCURED, ERROR } from "src/constants/errors";
-import AllGames from "src/components/ui/game/AllGames.vue";
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
+import { getAllGames } from "@/api/games";
+import { GameType } from "@/utils/types";
+import { showToast } from "@/utils/toast";
+import { UNEXPECTED_ERROR_OCCURED, ERROR } from "@/constants/errors";
+import AllGames from "@/components/ui/game/AllGames.vue";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
 
 const games = ref<GameType[]>([]);
 const { loading, setLoading } = useGetLoadingStore();

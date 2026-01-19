@@ -1,5 +1,5 @@
 import z, { ZodError } from "zod";
-import { passwordMessage } from "src/utils/constants";
+import { passwordMessage } from "@/utils/constants";
 
 export const signUpSchema = z
   .object({
@@ -15,7 +15,7 @@ export const signUpSchema = z
         },
         {
           message: "Last name must have at least 2 characters",
-        }
+        },
       ),
     email: z.string().email(),
   })
@@ -29,7 +29,7 @@ export const ConfirmSchema = signUpSchema.refine(
   {
     message: "Passwords don't match",
     path: ["confirm"],
-  }
+  },
 );
 
 export type SignUpSchema = z.infer<typeof signUpSchema>;
@@ -43,7 +43,7 @@ export type SignUpTouchedFields = {
 
 export function getSignUpFieldError<
   T extends SignUpFields,
-  K extends SignUpSchema[T]
+  K extends SignUpSchema[T],
 >(property: T, value: K) {
   const { error } = signUpSchema.shape[property].safeParse(value);
   if (!error) return;

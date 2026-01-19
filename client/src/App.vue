@@ -4,11 +4,11 @@
 </template>
 
 <script lang="ts" setup>
-import SharedLayout from "src/components/ui/navigation/SharedLayout.vue";
-import useTheme from "src/composables/useTheme";
-import { storageThemeName } from "src/utils/constants";
-import { THEME_OPTIONS } from "src/constants/theme";
-import { DATA_THEME } from "src/constants/theme";
+import SharedLayout from "@/components/ui/navigation/SharedLayout.vue";
+import useTheme from "@/composables/useTheme";
+import { storageThemeName } from "@/utils/constants";
+import { THEME_OPTIONS } from "@/constants/theme";
+import { DATA_THEME } from "@/constants/theme";
 import { onBeforeMount } from "vue";
 
 const { theme, setTheme } = useTheme();

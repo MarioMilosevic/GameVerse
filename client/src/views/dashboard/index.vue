@@ -17,14 +17,14 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref, watch } from "vue";
-import { getUsers } from "src/api/users";
-import { showToast } from "src/utils/toast";
-import { useDebounce } from "src/composables/useDebounce";
-import { UsersResponseType, UserType } from "src/utils/types";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
-import AdminDashboard from "src/components/ui/dashboard/AdminDashboard.vue";
-import { usersPerPage } from "src/utils/constants";
+import { getUsers } from "@/api/users";
+import { showToast } from "@/utils/toast";
+import { useDebounce } from "@/composables/useDebounce";
+import { UsersResponseType, UserType } from "@/utils/types";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import AdminDashboard from "@/components/ui/dashboard/AdminDashboard.vue";
+import { usersPerPage } from "@/utils/constants";
 const { loading, setLoading } = useGetLoadingStore();
 
 const { handleSearch } = useDebounce((value: string) => {

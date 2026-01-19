@@ -52,18 +52,18 @@
 </template>
 
 <script setup lang="ts">
-import FormComponent from "src/components/form/FormComponent.vue";
-import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
-import FormInput from "src/components/form/FormInput.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormError from "src/components/form/FormError.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import FormLine from "src/components/form/FormLine.vue";
-import FormGuest from "src/components/form/FormGuest.vue";
-import { loginInputs, tokenName } from "src/utils/constants";
+import FormComponent from "@/components/form/FormComponent.vue";
+import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormLabel from "@/components/form/FormLabel.vue";
+import FormBlock from "@/components/form/FormBlock.vue";
+import FormError from "@/components/form/FormError.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import FormLine from "@/components/form/FormLine.vue";
+import FormGuest from "@/components/form/FormGuest.vue";
+import { loginInputs, tokenName } from "@/utils/constants";
 import { ref, computed } from "vue";
-import { LoginCredentialsType } from "src/utils/types";
+import { LoginCredentialsType } from "@/utils/types";
 import {
   getLoginFieldError,
   loginSchema,
@@ -71,10 +71,10 @@ import {
   LoginFields,
   LoginTouchedFields,
   getLoginErrors,
-} from "src/schemas/loginPage";
-import { loginUser } from "src/api/users";
+} from "@/schemas/loginPage";
+import { loginUser } from "@/api/users";
 import { useRouter } from "vue-router";
-import { showToast } from "src/utils/toast";
+import { showToast } from "@/utils/toast";
 
 const loginCredentials = ref<LoginCredentialsType>({
   email: "",

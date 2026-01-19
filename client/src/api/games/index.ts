@@ -1,4 +1,4 @@
-import { baseUrl } from "src/utils/constants";
+import { baseUrl } from "@/utils/constants";
 
 export const getAllGames = async () => {
   try {

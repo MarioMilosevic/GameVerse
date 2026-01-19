@@ -112,20 +112,20 @@
 </template>
 
 <script setup lang="ts">
-import ReviewsSlider from "src/components/ui/review/ReviewsSlider.vue";
-import GameInfo from "src/components/ui/game/GameInfo.vue";
-import SectionComponent from "src/components/ui/others/SectionComponent.vue";
-import GenreComponent from "src/components/ui/game/GenreComponent.vue";
-import GameImageModal from "src/components/ui/game/GameImageModal.vue";
-import ReviewModal from "src/components/ui/review/ReviewModal.vue";
-import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
-import ModalComponent from "src/components/ui/others/ModalComponent.vue";
-import ConsoleWrapper from "src/components/ui/game/ConsoleWrapper.vue";
-import FooterComponent from "src/components/ui/others/FooterComponent.vue";
-import GameRating from "src/components/ui/game/GameRating.vue";
-import useGetUserStore from "src/composables/useGetUserStore";
-import { GameType, NewReviewResponseType } from "src/utils/types";
-import { createVideoUrl } from "src/utils/helpers";
+import ReviewsSlider from "@/components/ui/review/ReviewsSlider.vue";
+import GameInfo from "@/components/ui/game/GameInfo.vue";
+import SectionComponent from "@/components/ui/others/SectionComponent.vue";
+import GenreComponent from "@/components/ui/game/GenreComponent.vue";
+import GameImageModal from "@/components/ui/game/GameImageModal.vue";
+import ReviewModal from "@/components/ui/review/ReviewModal.vue";
+import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "@/components/ui/others/ModalComponent.vue";
+import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
+import FooterComponent from "@/components/ui/others/FooterComponent.vue";
+import GameRating from "@/components/ui/game/GameRating.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
+import { GameType, NewReviewResponseType } from "@/utils/types";
+import { createVideoUrl } from "@/utils/helpers";
 import { PropType, ref, computed } from "vue";
 
 const props = defineProps({

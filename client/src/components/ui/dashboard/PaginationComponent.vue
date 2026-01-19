@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center justify-between mt-4 rounded-xl sm:w-full w-[90%] mx-auto">
+  <div
+    class="flex items-center justify-between mt-4 rounded-xl sm:w-full w-[90%] mx-auto"
+  >
     <p v-if="users > 0" class="text-sm sm:text-lg">
       Showing {{ showResultsFrom }} to {{ showResultsTo }} out of
       {{ props.users }}
@@ -21,9 +23,9 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
 import { computed } from "vue";
-import { usersPerPage } from "src/utils/constants";
+import { usersPerPage } from "@/utils/constants";
 
 const props = defineProps({
   users: {

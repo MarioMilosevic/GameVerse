@@ -1,6 +1,8 @@
 <template>
   <header class="w-full flex justify-between items-center mb-8 relative">
-    <p class="sm:text-base text-sm semibold sm:static absolute -bottom-7 left-0">
+    <p
+      class="sm:text-base text-sm semibold sm:static absolute -bottom-7 left-0"
+    >
       {{ usersObj.count }} <span>total users</span>
     </p>
     <div class="w-[50%] sm:w-[70%]">
@@ -27,13 +29,13 @@
 </template>
 
 <script setup lang="ts">
-import FormInput from "src/components/form/FormInput.vue";
-import FormSelect from "src/components/form/FormSelect.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormSelect from "@/components/form/FormSelect.vue";
+import FormBlock from "@/components/form/FormBlock.vue";
+import FormLabel from "@/components/form/FormLabel.vue";
 import { PropType, ref } from "vue";
-import { UsersResponseType } from "src/utils/types";
-import { sortUserOptins } from "src/utils/constants";
+import { UsersResponseType } from "@/utils/types";
+import { sortUserOptins } from "@/utils/constants";
 
 const props = defineProps({
   usersObj: {

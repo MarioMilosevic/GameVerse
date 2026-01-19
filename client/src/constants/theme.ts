@@ -1,4 +1,4 @@
-import { ThemeType } from "src/stores/themeStore";
+import { ThemeType } from "@/stores/themeStore";
 
 type ThemeOptionsType = {
   dark: ThemeType;

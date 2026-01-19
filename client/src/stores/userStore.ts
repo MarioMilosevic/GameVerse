@@ -1,17 +1,16 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import { UserType } from "src/utils/types";
+import { UserType } from "@/utils/types";
 
 const emptyUser: UserType = {
   id: 0,
   fullName: "",
   image: "",
-  active:true,
-  createdDate:"",
+  active: true,
+  createdDate: "",
   role: "USER",
   email: "",
 };
-
 
 export const useUserStore = defineStore("userStore", () => {
   const user = ref<UserType>({ ...emptyUser });
@@ -21,12 +20,12 @@ export const useUserStore = defineStore("userStore", () => {
   }
 
   function resetUser() {
-    user.value = emptyUser
+    user.value = emptyUser;
   }
 
   return {
     user,
     setUser,
-    resetUser
+    resetUser,
   };
 });
