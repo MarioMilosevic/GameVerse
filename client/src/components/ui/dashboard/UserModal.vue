@@ -57,7 +57,7 @@
                 <FormCheckbox id="checkbox" v-model="user.active" />
               </template>
             </FormBlock>
-            <ActionButton type="submit">Submit</ActionButton>
+            <Button type="submit">Submit</Button>
           </div>
         </template>
       </FormComponent>
@@ -77,7 +77,7 @@ import FormComponent from "@/components/form/FormComponent.vue";
 import BaseIcon from "@/icons/BaseIcon.vue";
 import XIcon from "@/icons/XIcon.vue";
 import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import { userInputs, dashboardOptions } from "@/utils/constants";
 import { PropType, ref } from "vue";
 import { UserType } from "@/utils/types";

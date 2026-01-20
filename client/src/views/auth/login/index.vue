@@ -36,14 +36,14 @@
       </RenderlessComponent>
     </template>
     <template #submit>
-      <ActionButton
+      <Button
         type="submit"
         :disabled="!allFieldsCompleted"
         :is-loading="isSubmiting"
         :style="{ marginTop: '0.5rem' }"
       >
         LOG IN
-      </ActionButton>
+      </Button>
     </template>
     <template #text>
       <FormGuest text="Sign Up" />
@@ -58,7 +58,7 @@ import FormInput from "@/components/form/FormInput.vue";
 import FormLabel from "@/components/form/FormLabel.vue";
 import FormBlock from "@/components/form/FormBlock.vue";
 import FormError from "@/components/form/FormError.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import FormLine from "@/components/form/FormLine.vue";
 import FormGuest from "@/components/form/FormGuest.vue";
 import { loginInputs, tokenName } from "@/utils/constants";

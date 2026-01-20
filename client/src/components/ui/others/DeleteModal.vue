@@ -19,12 +19,10 @@
             undone
           </p>
           <div class="flex justify-between w-full">
-            <ActionButton color="green" @click="emits('close-modal-event')"
-              >Cancel</ActionButton
+            <Button color="green" @click="emits('close-modal-event')"
+              >Cancel</Button
             >
-            <ActionButton @click="emits('delete-event', user?.id)"
-              >Confirm</ActionButton
-            >
+            <Button @click="emits('delete-event', user?.id)">Confirm</Button>
           </div>
         </div>
       </ModalComponent>
@@ -35,7 +33,7 @@
 <script setup lang="ts">
 import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
 import ModalComponent from "@/components/ui/others/ModalComponent.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import BaseIcon from "@/icons/BaseIcon.vue";
 import XCircle from "@/icons/XCircle.vue";
 import { PropType, computed } from "vue";

@@ -7,17 +7,15 @@
   </p>
 
   <div class="flex w-full justify-between">
-    <ActionButton color="green" @click="emits('edit-event')"
-      >Edit Review</ActionButton
-    >
-    <ActionButton @click="emits('delete-event')">Delete Review</ActionButton>
+    <Button color="green" @click="emits('edit-event')">Edit Review</Button>
+    <Button @click="emits('delete-event')">Delete Review</Button>
   </div>
 </template>
 
 <script setup lang="ts">
 import RatingStars from "@/components/ui/review/RatingStars.vue";
 import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import { fillStars, formattedDate } from "@/utils/helpers";
 import { computed } from "vue";
 

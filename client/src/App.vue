@@ -1,10 +1,10 @@
 <template>
-  <SharedLayout :theme="theme" @toggle-theme-event="handleTheme" />
+  <Layout :theme="theme" @toggle-theme-event="handleTheme" />
   <RouterView />
 </template>
 
 <script lang="ts" setup>
-import SharedLayout from "@/components/ui/navigation/SharedLayout.vue";
+import Layout from "@/components/ui/navigation/Layout.vue";
 import useTheme from "@/composables/useTheme";
 import { storageThemeName } from "@/utils/constants";
 import { THEME_OPTIONS } from "@/constants/theme";

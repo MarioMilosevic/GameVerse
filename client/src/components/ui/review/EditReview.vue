@@ -9,19 +9,19 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton
+    <Button
       @click="editReviewHandler"
       color="green"
       :disabled="localValue.length === 0 || disabledButton"
-      >Save Changes</ActionButton
+      >Save Changes</Button
     >
-    <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
+    <Button @click="emits('cancel-event')">Cancel</Button>
   </div>
 </template>
 
 <script setup lang="ts">
 import FormTextarea from "@/components/form/FormTextarea.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import RatingStars from "@/components/ui/review/RatingStars.vue";
 import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
 import { fillStars } from "@/utils/helpers";

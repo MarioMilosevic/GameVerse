@@ -1,7 +1,19 @@
 <template>
   <ul
-    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-b-xl text-xs sm:text-base first:rounded-t-none first:rounded-b-xl"
+    class="flex sm:gap-2 bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-xl text-xs sm:text-base"
   >
+    <!-- <ul
+    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-b-xl text-xs sm:text-base first:rounded-t-none first:rounded-b-xl"
+  > -->
+    <!-- TODO: make v-for over array for these elements -->
+
+    <NavigationLink @click="emits('toggle-theme-event')">
+      <template #default>
+        <ThemeIcon :theme="theme" />
+      </template>
+      <template #text>{{ text }}</template>
+    </NavigationLink>
+
     <NavigationLink
       v-if="user.role === 'ADMIN'"
       @click="emits('dashboard-event')"
@@ -38,7 +50,11 @@
 
 <script setup lang="ts">
 import NavigationLink from "@/components/ui/navigation/NavigationLink.vue";
+import ThemeIcon from "@/icons/ThemeIcon.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
+import type { ThemeType } from "@/stores/themeStore";
+import { THEME_OPTIONS } from "@/constants/theme";
+import { computed } from "vue";
 
 const emits = defineEmits([
   "sign-out-event",
@@ -48,5 +64,12 @@ const emits = defineEmits([
   "dashboard-event",
 ]);
 
+const props = defineProps<{
+  theme: ThemeType;
+}>();
+
 const { user } = useGetUserStore();
+
+const isDark = computed(() => props.theme === THEME_OPTIONS.dark);
+const text = computed(() => (isDark.value ? "Dark mode" : "Light mode"));
 </script>

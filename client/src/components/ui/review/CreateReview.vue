@@ -7,15 +7,15 @@
     @click-event="clickEvent"
   />
   <FormTextarea v-model="content" />
-  <ActionButton type="submit" class="self-end" :disabled="!allFieldsCompleted">
+  <Button type="submit" class="self-end" :disabled="!allFieldsCompleted">
     SEND REVIEW
-  </ActionButton>
+  </Button>
 </template>
 
 <script setup lang="ts">
 import RatingStars from "@/components/ui/review/RatingStars.vue";
 import FormTextarea from "@/components/form/FormTextarea.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
 import { PropType, computed } from "vue";
 

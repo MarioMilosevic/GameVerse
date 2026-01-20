@@ -70,12 +70,10 @@
         </template>
         <template #submit>
           <div class="flex gap-4">
-            <ActionButton
-              :disabled="!accountSettingsFieldsCompleted"
-              type="submit"
-              >Change Settings</ActionButton
+            <Button :disabled="!accountSettingsFieldsCompleted" type="submit"
+              >Change Settings</Button
             >
-            <ActionButton @click="disableAccount">Disable Account</ActionButton>
+            <Button @click="disableAccount">Disable Account</Button>
           </div>
         </template>
       </FormComponent>
@@ -108,10 +106,10 @@
           </FormBlock>
         </template>
         <template #submit>
-          <ActionButton
+          <Button
             type="submit"
             :style="{ alignSelf: 'start', marginTop: '0.5rem' }"
-            >Change Photo</ActionButton
+            >Change Photo</Button
           >
         </template>
       </FormComponent>
@@ -132,7 +130,7 @@ import FormBlock from "@/components/form/FormBlock.vue";
 import FormLine from "@/components/form/FormLine.vue";
 import FormError from "@/components/form/FormError.vue";
 import FooterComponent from "@/components/ui/others/FooterComponent.vue";
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "@/utils/types";
 import { formattedDate, renderUserImage } from "@/utils/helpers";

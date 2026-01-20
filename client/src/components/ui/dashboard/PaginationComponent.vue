@@ -8,22 +8,22 @@
     </p>
     <p v-else class="text-xs sm:text-base">No users found</p>
     <div class="flex gap-4">
-      <ActionButton
+      <Button
         :disabled="props.currentPage === 1"
         @click="emits('previous-event')"
-        >Previous</ActionButton
+        >Previous</Button
       >
-      <ActionButton
+      <Button
         :disabled="!(props.currentPage < users / usersPerPage)"
         @click="emits('next-event')"
-        >Next</ActionButton
+        >Next</Button
       >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import { computed } from "vue";
 import { usersPerPage } from "@/utils/constants";
 

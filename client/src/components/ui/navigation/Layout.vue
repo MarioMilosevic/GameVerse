@@ -15,18 +15,33 @@
 
     <div
       v-if="user.id"
-      class="flex items-center justify-between sm:min-w-[130px] relative group sm:gap-2 gap-4"
+      class="flex items-center justify-between sm:min-w-[130px] rounded-xl relative group sm:gap-2 gap-4"
       @click="toggleMenu"
       @blur="closeNavigationMenu"
       tabindex="0"
     >
-      <DarkMode :theme="theme" @dark-mode-event="handleTheme" />
-      <img
+      <!-- <ThemeIcon :theme="theme" @dark-mode-event="handleTheme" /> -->
+      <!-- <img
         :src="renderUserImage(user.image)"
         :alt="user.image"
         class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] rounded-xl object-cover"
-      />
+      /> -->
       <NavigationMenu
+        :class="[
+          '',
+          navigationMenuOpen
+            ? 'scale-y-100 opacity-100'
+            : 'scale-y-100 opacity-100',
+          'group-hover:opacity-100 group-hover:scale-y-100',
+        ]"
+        :theme="theme"
+        @dashboard-event="dashboardHandler"
+        @sign-out-event="signOutHandler"
+        @toggle-theme-event="handleTheme"
+        @my-reviews-event="myReviewsHandler"
+        @account-event="accountHandler"
+      />
+      <!-- <NavigationMenu
         :class="[
           'absolute -bottom-4 left-0 translate-y-full origin-top transition-all duration-500 ease-out',
           navigationMenuOpen
@@ -40,13 +55,13 @@
         @toggle-theme-event="handleTheme"
         @my-reviews-event="myReviewsHandler"
         @account-event="accountHandler"
-      />
+      /> -->
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
-      <DarkMode :theme="theme" @dark-mode-event="handleTheme" />
+      <ThemeIcon :theme="theme" @dark-mode-event="handleTheme" />
 
-      <ActionButton
+      <Button
         v-for="(page, index) in authPages"
         :color="selectedPage === index ? 'primary' : 'transparent'"
         :key="page"
@@ -54,23 +69,21 @@
         @click="pageHandler(index)"
       >
         {{ page }}
-      </ActionButton>
+      </Button>
     </div>
   </nav>
 </template>
 
 <script setup lang="ts">
-import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import Button from "@/shared/components/Button.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 import NavigationMenu from "@/components/ui/navigation/NavigationMenu.vue";
 import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
-
 import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
-import { renderUserImage } from "@/utils/helpers";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
-import DarkMode from "./DarkMode.vue";
+import ThemeIcon from "@/icons/ThemeIcon.vue";
 
 const { user, resetUser } = useGetUserStore();
 const { loading } = useGetLoadingStore();
@@ -140,6 +153,7 @@ const myReviewsHandler = () => {
 };
 
 const handleTheme = () => {
+  console.log("desio se event");
   const value = props.theme === "dark" ? false : true;
   emits("toggle-theme-event", value);
 };
