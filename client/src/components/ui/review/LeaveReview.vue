@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import { ReviewType } from "src/utils/types";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import { ReviewType } from "@/utils/types";
 import { PropType, computed } from "vue";
 
 const emits = defineEmits(["open-modal-event"]);

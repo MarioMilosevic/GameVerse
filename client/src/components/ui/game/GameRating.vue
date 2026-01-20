@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
-import StarIcon from "src/icons/StarIcon.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import StarIcon from "@/icons/StarIcon.vue";
 
 defineProps({
   rating: {

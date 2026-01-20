@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { useLoadingStore } from "src/stores/loadingStore";
+import { useLoadingStore } from "@/stores/loadingStore";
 
 export default function useGetLoadingStore() {
   const loadingStore = useLoadingStore();

@@ -9,7 +9,9 @@
     >
       <XIcon />
     </BaseIcon>
-    <div class="flex flex-col gap-4 items-center px-8 sm:w-[500px] sm:px-20 mx-auto">
+    <div
+      class="flex flex-col gap-4 items-center px-8 sm:w-[500px] sm:px-20 mx-auto"
+    >
       <p v-if="!props.userId" class="text-sky-500 dark:text-red-500">
         RATE THIS
       </p>
@@ -20,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
-import XIcon from "src/icons/XIcon.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import XIcon from "@/icons/XIcon.vue";
 
 const emits = defineEmits(["close-modal-event"]);
 

@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import GameComponent from "src/components/ui/game/GameComponent.vue";
-import FooterComponent from "src/components/ui/others/FooterComponent.vue";
-import { GameType } from "src/utils/types";
+import GameComponent from "@/components/ui/game/GameComponent.vue";
+import FooterComponent from "@/components/ui/others/FooterComponent.vue";
+import { GameType } from "@/utils/types";
 import { PropType } from "vue";
 
 defineProps({

@@ -37,8 +37,8 @@
 </template>
 
 <script setup lang="ts">
-import NavigationLink from "src/components/ui/navigation/NavigationLink.vue";
-import useGetUserStore from "src/composables/useGetUserStore";
+import NavigationLink from "@/components/ui/navigation/NavigationLink.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
 
 const emits = defineEmits([
   "sign-out-event",

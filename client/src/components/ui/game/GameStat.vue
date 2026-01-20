@@ -5,7 +5,7 @@
     </BaseIcon>
 
     <div class="flex items-center gap-2 w-full">
-      <h4 class="font-semibold ">
+      <h4 class="font-semibold">
         <slot name="value" />
       </h4>
       <span>
@@ -16,5 +16,5 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
 </script>

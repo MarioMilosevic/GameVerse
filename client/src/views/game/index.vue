@@ -9,13 +9,13 @@
 
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import { getSingleGame } from "src/api/games";
+import { getSingleGame } from "@/api/games";
 import { onBeforeMount, ref, provide } from "vue";
-import { GameType, NewReviewResponseType, ReviewType } from "src/utils/types";
-import { showToast } from "src/utils/toast";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import SingleGame from "src/components/ui/game/SingleGame.vue";
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
+import { GameType, NewReviewResponseType, ReviewType } from "@/utils/types";
+import { showToast } from "@/utils/toast";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
+import SingleGame from "@/components/ui/game/SingleGame.vue";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
 
 onBeforeMount(async () => {
   try {
@@ -48,7 +48,7 @@ const createHandler = (response: NewReviewResponseType) => {
 
 const deleteHandler = (reviewId: number, avgRating: string) => {
   const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId
+    (review) => review.id === reviewId,
   );
   if (index !== -1) {
     singleGame.value.reviews.splice(index, 1);
@@ -59,10 +59,10 @@ const deleteHandler = (reviewId: number, avgRating: string) => {
 const editHandler = (
   reviewId: number,
   updatedReview: ReviewType,
-  avgRating: number
+  avgRating: number,
 ) => {
   const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId
+    (review) => review.id === reviewId,
   );
   if (index !== -1) {
     singleGame.value.reviews[index] = {

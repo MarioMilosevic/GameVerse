@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import router from "src/router";
+import router from "@/router";
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import {
   BiStarHalf,
@@ -29,7 +29,7 @@ addIcons(
   FaRegularTrashAlt,
   FaEdit,
   IoCloseSharp,
-  FcCheckmark
+  FcCheckmark,
 );
 
 import "./style.css";

@@ -13,7 +13,10 @@
       @open-modal-event="emits('open-modal-event')"
       :user-review="userReview"
     />
-    <SliderButton class="-left-0 sm:-left-0" @click="emits('previous-review-event')">
+    <SliderButton
+      class="-left-0 sm:-left-0"
+      @click="emits('previous-review-event')"
+    >
       <template #icon>
         <BaseIcon>
           <LeftIcon />
@@ -21,7 +24,10 @@
       </template>
     </SliderButton>
 
-    <SliderButton class="-right-0 sm:right-0" @click="emits('next-review-event')">
+    <SliderButton
+      class="-right-0 sm:right-0"
+      @click="emits('next-review-event')"
+    >
       <template #icon>
         <BaseIcon>
           <RightIcon />
@@ -32,16 +38,16 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
-import LeftIcon from "src/icons/LeftIcon.vue";
-import RightIcon from "src/icons/RightIcon.vue";
-import SliderButton from "src/components/ui/buttons/SliderButton.vue";
-import ReviewComponent from "src/components/ui/review/ReviewComponent.vue";
-import LeaveReview from "src/components/ui/review/LeaveReview.vue";
-import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import LeftIcon from "@/icons/LeftIcon.vue";
+import RightIcon from "@/icons/RightIcon.vue";
+import SliderButton from "@/components/ui/buttons/SliderButton.vue";
+import ReviewComponent from "@/components/ui/review/ReviewComponent.vue";
+import LeaveReview from "@/components/ui/review/LeaveReview.vue";
+import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
 import { PropType } from "vue";
-import { ReviewType } from "src/utils/types";
-import { translateElement } from "src/utils/helpers";
+import { ReviewType } from "@/utils/types";
+import { translateElement } from "@/utils/helpers";
 
 const props = defineProps({
   reviews: {

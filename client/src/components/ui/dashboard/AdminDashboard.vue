@@ -53,20 +53,21 @@
 </template>
 
 <script setup lang="ts">
-import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
+import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
+// TODO da vidim sta je s ovim importom nakon sto organizujem foldere
 import UserData from "./UserData.vue";
-import UsersTable from "src/components/ui/dashboard/UsersTable.vue";
-import UserHeading from "src/components/ui/dashboard/UserHeading.vue";
-import UserModal from "src/components/ui/dashboard/UserModal.vue";
-import DeleteModal from "src/components/ui/others/DeleteModal.vue";
-import NotFound from "src/components/ui/others/NotFound.vue";
-import SearchHeader from "src/components/ui/dashboard/SearchHeader.vue";
-import PaginationComponent from "src/components/ui/dashboard/PaginationComponent.vue";
-import { UsersResponseType, UserType } from "src/utils/types";
+import UsersTable from "@/components/ui/dashboard/UsersTable.vue";
+import UserHeading from "@/components/ui/dashboard/UserHeading.vue";
+import UserModal from "@/components/ui/dashboard/UserModal.vue";
+import DeleteModal from "@/components/ui/others/DeleteModal.vue";
+import NotFound from "@/components/ui/others/NotFound.vue";
+import SearchHeader from "@/components/ui/dashboard/SearchHeader.vue";
+import PaginationComponent from "@/components/ui/dashboard/PaginationComponent.vue";
+import { UsersResponseType, UserType } from "@/utils/types";
 import { PropType, ref } from "vue";
-import { emptyUser } from "src/utils/constants";
-import { deleteUser } from "src/api/users";
-import { showToast } from "src/utils/toast";
+import { emptyUser } from "@/utils/constants";
+import { deleteUser } from "@/api/users";
+import { showToast } from "@/utils/toast";
 
 defineProps({
   usersObj: {

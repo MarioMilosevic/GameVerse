@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "src/icons/BaseIcon.vue";
-import InspectorIcon from "src/icons/InspectorIcon.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import InspectorIcon from "@/icons/InspectorIcon.vue";
 
 const size = 8.5;
 </script>

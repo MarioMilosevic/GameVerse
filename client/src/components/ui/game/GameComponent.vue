@@ -1,5 +1,5 @@
 <template>
-  <section
+  <article
     class="sm:max-w-[300px] flex flex-col align-center gap-2 rounded-xl relative bg-slate-50 dark:bg-slate-700 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
     @click="seeGameDetails(id)"
   >
@@ -10,7 +10,6 @@
     />
     <div class="flex flex-col gap-4 p-4">
       <h1 class="text-justify text-lg sm:text-xl">{{ name }}</h1>
-
       <div class="grid grid-cols-2 gap-4">
         <GameStat>
           <template #icon>
@@ -41,28 +40,29 @@
         </GameStat>
         <p>Available on:</p>
         <ConsoleWrapper>
-          <ConsoleComponent
+          <img
             v-for="obj in consoles"
             :key="obj.console.id"
-            :image="obj.console.image"
+            :src="obj.console.image"
+            :alt="obj.console.image"
+            class="console-image"
           />
         </ConsoleWrapper>
       </div>
     </div>
-  </section>
+  </article>
 </template>
 
 <script setup lang="ts">
 import { PropType } from "vue";
-import { GameType } from "src/utils/types";
+import { GameType } from "@/utils/types";
 import { useRouter } from "vue-router";
-import ClockIcon from "src/icons/ClockIcon.vue";
-import StarIcon from "src/icons/StarIcon.vue";
-import DollarIcon from "src/icons/DollarIcon.vue";
-import CalendarIcon from "src/icons/CalendarIcon.vue";
-import GameStat from "src/components/ui/game/GameStat.vue";
-import ConsoleComponent from "src/components/ui/game/ConsoleComponent.vue";
-import ConsoleWrapper from "src/components/ui/game/ConsoleWrapper.vue";
+import ClockIcon from "@/icons/ClockIcon.vue";
+import StarIcon from "@/icons/StarIcon.vue";
+import DollarIcon from "@/icons/DollarIcon.vue";
+import CalendarIcon from "@/icons/CalendarIcon.vue";
+import GameStat from "@/components/ui/game/GameStat.vue";
+import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
 
 const props = defineProps({
   game: {

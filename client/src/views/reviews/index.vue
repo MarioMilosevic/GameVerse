@@ -4,15 +4,15 @@
 </template>
 
 <script setup lang="ts">
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import MyReviews from "src/components/ui/review/MyReviews.vue";
-import useGetUserStore from "src/composables/useGetUserStore";
-import { getUserReviews } from "src/api/users";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
+import MyReviews from "@/components/ui/review/MyReviews.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
+import { getUserReviews } from "@/api/users";
 
 import { onBeforeMount, ref } from "vue";
-import { MyReviewType } from "src/utils/types";
-import { showToast } from "src/utils/toast";
+import { MyReviewType } from "@/utils/types";
+import { showToast } from "@/utils/toast";
 
 const myReviews = ref<MyReviewType[]>([]);
 

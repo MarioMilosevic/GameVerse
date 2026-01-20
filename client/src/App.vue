@@ -4,35 +4,38 @@
 </template>
 
 <script lang="ts" setup>
-import SharedLayout from "src/components/ui/navigation/SharedLayout.vue";
-import useTheme from "src/composables/useTheme";
-import { storageThemeName } from "src/utils/constants";
+import SharedLayout from "@/components/ui/navigation/SharedLayout.vue";
+import useTheme from "@/composables/useTheme";
+import { storageThemeName } from "@/utils/constants";
+import { THEME_OPTIONS } from "@/constants/theme";
+import { DATA_THEME } from "@/constants/theme";
 import { onBeforeMount } from "vue";
 
 const { theme, setTheme } = useTheme();
+const { dark, light } = THEME_OPTIONS;
 
 onBeforeMount(() => {
   const savedTheme = localStorage.getItem(storageThemeName);
   if (savedTheme) {
-    setTheme(savedTheme === "dark" ? "dark" : "light");
+    setTheme(savedTheme === dark ? dark : light);
   } else {
     localStorage.setItem(storageThemeName, theme.value);
   }
-  if (theme.value === "dark" && savedTheme) {
-    document.documentElement.setAttribute("data-theme", savedTheme);
+  if (theme.value === dark && savedTheme) {
+    document.documentElement.setAttribute(DATA_THEME, savedTheme);
   } else {
-    document.documentElement.removeAttribute("data-theme");
+    document.documentElement.removeAttribute(DATA_THEME);
   }
 });
 
 const handleTheme = (darkMode: boolean) => {
-  const newTheme = darkMode ? "dark" : "light";
+  const newTheme = darkMode ? dark : light;
   setTheme(newTheme);
   localStorage.setItem(storageThemeName, theme.value);
   if (darkMode) {
-    document.documentElement.setAttribute("data-theme", "dark");
+    document.documentElement.setAttribute(DATA_THEME, dark);
   } else {
-    document.documentElement.removeAttribute("data-theme");
+    document.documentElement.removeAttribute(DATA_THEME);
   }
 };
 </script>

@@ -1,5 +1,8 @@
+- refactor client code (constants, slots/props)
+- FooterComponent should be at 1 place not 3
 - fix navigation for Responsive, and check for other screen sizes
-- refactor client code
+- npm to pnpm ?
+- Vitest (same as your React setup) @testing-library/user-event
 - unit tests
 - change password
 - forgot password send code to email
@@ -9,3 +12,5 @@
 - see if i can write my own sql database
 - integration tests
 - end to end tests
+- setup client tsconfig to have @ instead of src
+- setup server tsconfig to have absolute imports

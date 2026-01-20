@@ -17,14 +17,14 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref, watch } from "vue";
-import { getUsers } from "src/api/users";
-import { showToast } from "src/utils/toast";
-import { useDebounce } from "src/composables/useDebounce";
-import { UsersResponseType, UserType } from "src/utils/types";
-import useGetLoadingStore from "src/composables/useGetLoadingStore";
-import LoadingSpinner from "src/components/ui/others/LoadingSpinner.vue";
-import AdminDashboard from "src/components/ui/dashboard/AdminDashboard.vue";
-import { usersPerPage } from "src/utils/constants";
+import { getUsers } from "@/api/users";
+import { showToast } from "@/utils/toast";
+import { useDebounce } from "@/composables/useDebounce";
+import { UsersResponseType, UserType } from "@/utils/types";
+import useGetLoadingStore from "@/composables/useGetLoadingStore";
+import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import AdminDashboard from "@/components/ui/dashboard/AdminDashboard.vue";
+import { usersPerPage } from "@/utils/constants";
 const { loading, setLoading } = useGetLoadingStore();
 
 const { handleSearch } = useDebounce((value: string) => {
@@ -69,7 +69,7 @@ onBeforeMount(async () => {
 
 const editUserHandler = (editedUser: UserType) => {
   const index = usersObj.value.users.findIndex(
-    (user) => user.id === editedUser.id
+    (user) => user.id === editedUser.id,
   );
   if (index !== -1) {
     usersObj.value.users[index] = editedUser;
@@ -86,7 +86,7 @@ const deleteUserHandler = (id: number) => {
 
 const sortHandler = (value: string) => {
   paginationOptions.value.sort = value;
-  paginationOptions.value.currentPage = 1
+  paginationOptions.value.currentPage = 1;
 };
 
 const searchHandler = (value: string) => {
@@ -108,14 +108,14 @@ const nextPage = () => {
 };
 
 watch(
-  [() => paginationOptions.value.sort, () => paginationOptions.value.search, () => paginationOptions.value.currentPage],
+  [
+    () => paginationOptions.value.sort,
+    () => paginationOptions.value.search,
+    () => paginationOptions.value.currentPage,
+  ],
   async ([newSort, newSearch, newPage]) => {
     try {
-      const { data, message } = await getUsers(
-        newPage,
-        newSort,
-        newSearch
-      );
+      const { data, message } = await getUsers(newPage, newSort, newSearch);
       if (data) {
         const { allUsers, count } = data;
         usersObj.value.users = allUsers;
@@ -126,6 +126,6 @@ watch(
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 );
 </script>

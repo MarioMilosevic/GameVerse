@@ -9,7 +9,10 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <ActionButton @click="editReviewHandler" color="green" :disabled="localValue.length === 0 || disabledButton"
+    <ActionButton
+      @click="editReviewHandler"
+      color="green"
+      :disabled="localValue.length === 0 || disabledButton"
       >Save Changes</ActionButton
     >
     <ActionButton @click="emits('cancel-event')">Cancel</ActionButton>
@@ -17,15 +20,15 @@
 </template>
 
 <script setup lang="ts">
-import FormTextarea from "src/components/form/FormTextarea.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import RatingStars from "src/components/ui/review/RatingStars.vue";
-import MainRatingStar from "src/components/ui/review/MainRatingStar.vue";
-import { fillStars } from "src/utils/helpers";
+import FormTextarea from "@/components/form/FormTextarea.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import RatingStars from "@/components/ui/review/RatingStars.vue";
+import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
+import { fillStars } from "@/utils/helpers";
 import { ref, inject } from "vue";
-import { editReview } from "src/api/reviews";
-import { showToast } from "src/utils/toast";
-import { ReviewType } from "src/utils/types";
+import { editReview } from "@/api/reviews";
+import { showToast } from "@/utils/toast";
+import { ReviewType } from "@/utils/types";
 
 const props = defineProps({
   content: {
@@ -47,8 +50,7 @@ const { rating, content, reviewId } = props;
 const editingStarsArray = ref(fillStars((rating ?? 0) - 1));
 const editRating = ref<number>(rating ?? 0);
 const localValue = ref<string>(content);
-const disabledButton = ref<boolean>(false)
-
+const disabledButton = ref<boolean>(false);
 
 const editHandler =
   inject<
@@ -66,7 +68,7 @@ const emits = defineEmits([
 const editReviewHandler = async () => {
   try {
     if (reviewId) {
-      disabledButton.value = true
+      disabledButton.value = true;
       const updatedReview = {
         rating: editRating.value,
         content: localValue.value,
@@ -82,7 +84,7 @@ const editReviewHandler = async () => {
         }
       } else {
         showToast(message, "error");
-        disabledButton.value = false
+        disabledButton.value = false;
       }
     }
   } catch (error) {

@@ -2,7 +2,7 @@
   <MainRatingStar :rating="props.rating" />
   <RatingStars :stars-array="starsArray" :cursor-pointer="false" />
   <p class="text-justify border p-4 rounded-xl w-full">{{ content }}</p>
-  <p class="pl-4 self-start text-sm ">
+  <p class="pl-4 self-start text-sm">
     Reviewed on {{ formattedDate(createdAt as string) }}
   </p>
 
@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import RatingStars from "src/components/ui/review/RatingStars.vue";
-import MainRatingStar from "src/components/ui/review/MainRatingStar.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import { fillStars, formattedDate } from "src/utils/helpers";
+import RatingStars from "@/components/ui/review/RatingStars.vue";
+import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import { fillStars, formattedDate } from "@/utils/helpers";
 import { computed } from "vue";
 
 const props = defineProps({

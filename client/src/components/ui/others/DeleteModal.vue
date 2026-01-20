@@ -33,13 +33,13 @@
 </template>
 
 <script setup lang="ts">
-import OverlayComponent from "src/components/ui/others/OverlayComponent.vue";
-import ModalComponent from "src/components/ui/others/ModalComponent.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
-import BaseIcon from "src/icons/BaseIcon.vue";
-import XCircle from "src/icons/XCircle.vue";
+import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
+import ModalComponent from "@/components/ui/others/ModalComponent.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
+import BaseIcon from "@/icons/BaseIcon.vue";
+import XCircle from "@/icons/XCircle.vue";
 import { PropType, computed } from "vue";
-import { UserType } from "src/utils/types";
+import { UserType } from "@/utils/types";
 
 const props = defineProps({
   isDeleteOpen: {

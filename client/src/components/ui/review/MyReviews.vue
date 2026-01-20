@@ -3,9 +3,7 @@
     class="mx-auto min-h-screen max-w-[1280px] flex flex-col gap-4 py-4 items-center"
   >
     <h1 class="text-2xl sm:text-5xl text-center py-4 sm:py-8">Your Reviews</h1>
-    <ul
-      class="flex flex-col sm:gap-4 gap-8 sm:px-0 px-2"
-    >
+    <ul class="flex flex-col sm:gap-4 gap-8 sm:px-0 px-2">
       <li
         v-for="review in reviews"
         :key="review.id"
@@ -39,11 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import { MyReviewType } from "src/utils/types";
+import { MyReviewType } from "@/utils/types";
 import { PropType } from "vue";
-import { formattedDate } from "src/utils/helpers";
+import { formattedDate } from "@/utils/helpers";
 import { useRouter } from "vue-router";
-import GameRating from "src/components/ui/game/GameRating.vue";
+import GameRating from "@/components/ui/game/GameRating.vue";
 
 defineProps({
   reviews: {

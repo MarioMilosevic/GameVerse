@@ -3,9 +3,9 @@ import {
   LoginCredentialsType,
   SignUpCredentialsType,
   UserType,
-} from "src/utils/types";
-import { baseUrl } from "src/utils/constants";
-import { showToast } from "src/utils/toast";
+} from "@/utils/types";
+import { baseUrl } from "@/utils/constants";
+import { showToast } from "@/utils/toast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
   try {
@@ -27,7 +27,6 @@ export const createUser = (newUser: SignUpCredentialsType) =>
 
 export const loginUser = (user: LoginCredentialsType) =>
   fetchAuth("login", user);
-
 
 export const signOut = (user: UserType, message?: string) => {
   localStorage.removeItem("gameVerse-token");
@@ -65,7 +64,7 @@ export const getUserReviews = async (id: number) => {
 
 export const editUserNameAndEmail = async (
   id: number,
-  data: AccountSettingsType
+  data: AccountSettingsType,
 ) => {
   try {
     const response = await fetch(`${baseUrl}/users/${id}`, {
@@ -106,7 +105,7 @@ export const editUserProfile = async (editedUser: UserType) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(editedUser),
-      }
+      },
     );
 
     return await response.json();

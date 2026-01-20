@@ -59,9 +59,9 @@
 </template>
 
 <script lang="ts" setup>
-import { UserType } from "src/utils/types";
+import { UserType } from "@/utils/types";
 import { PropType } from "vue";
-import { formattedDate, renderUserImage } from "src/utils/helpers";
+import { formattedDate, renderUserImage } from "@/utils/helpers";
 
 defineProps({
   user: {

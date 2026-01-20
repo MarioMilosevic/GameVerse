@@ -49,7 +49,11 @@
                   <FormInput
                     @blur-event="blurHandler(input.name as AccountFields)"
                     v-bind="input"
-                    v-model="accountSettings[input.name as keyof typeof accountSettings]"
+                    v-model="
+                      accountSettings[
+                        input.name as keyof typeof accountSettings
+                      ]
+                    "
                   />
                 </template>
                 <template #line>
@@ -113,30 +117,30 @@
       </FormComponent>
     </section>
   </main>
-  <FooterComponent/>
+  <FooterComponent />
 </template>
 
 <script setup lang="ts">
-import useGetUserStore from "src/composables/useGetUserStore";
-import SubtitleComponent from "src/components/ui/others/SubtitleComponent.vue";
-import RenderlessComponent from "src/components/ui/others/RenderlessComponent.vue";
-import FormComponent from "src/components/form/FormComponent.vue";
-import FormLabel from "src/components/form/FormLabel.vue";
-import FormInput from "src/components/form/FormInput.vue";
-import FormFile from "src/components/form/FormFile.vue";
-import FormBlock from "src/components/form/FormBlock.vue";
-import FormLine from "src/components/form/FormLine.vue";
-import FormError from "src/components/form/FormError.vue";
-import FooterComponent from "src/components/ui/others/FooterComponent.vue";
-import ActionButton from "src/components/ui/buttons/ActionButton.vue";
+import useGetUserStore from "@/composables/useGetUserStore";
+import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
+import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
+import FormComponent from "@/components/form/FormComponent.vue";
+import FormLabel from "@/components/form/FormLabel.vue";
+import FormInput from "@/components/form/FormInput.vue";
+import FormFile from "@/components/form/FormFile.vue";
+import FormBlock from "@/components/form/FormBlock.vue";
+import FormLine from "@/components/form/FormLine.vue";
+import FormError from "@/components/form/FormError.vue";
+import FooterComponent from "@/components/ui/others/FooterComponent.vue";
+import ActionButton from "@/components/ui/buttons/ActionButton.vue";
 import { useRouter } from "vue-router";
-import { AccountSettingsType } from "src/utils/types";
-import { formattedDate, renderUserImage } from "src/utils/helpers";
+import { AccountSettingsType } from "@/utils/types";
+import { formattedDate, renderUserImage } from "@/utils/helpers";
 import {
   accountInputs,
   emptyAccountSettings,
   guestMessage,
-} from "src/utils/constants";
+} from "@/utils/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,
@@ -144,14 +148,14 @@ import {
   getAccountFieldError,
   AccountFields,
   AccountTouchedFields,
-} from "src/schemas/accountPage";
+} from "@/schemas/accountPage";
 import {
   disableUserAccount,
   editUserNameAndEmail,
   signOut,
   updateUserImage,
-} from "src/api/users";
-import { showToast } from "src/utils/toast";
+} from "@/api/users";
+import { showToast } from "@/utils/toast";
 
 const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();
@@ -170,7 +174,7 @@ const accountSettingsFieldsCompleted = computed(() => {
 const blurHandler = (property: AccountFields) => {
   const message = getAccountFieldError(
     property,
-    accountSettings.value[property]
+    accountSettings.value[property],
   );
   accountFormErrors.value[property] = message;
   touchedFields.value[property] = true;
@@ -181,7 +185,7 @@ const accountHandler = async () => {
     if (user.value.id) {
       const { data, message } = await editUserNameAndEmail(
         user.value.id,
-        accountSettings.value
+        accountSettings.value,
       );
       if (data) {
         setUser(data);
@@ -244,7 +248,7 @@ const imageHandler = async () => {
     if (accountPhoto.value) {
       const { data, message } = await updateUserImage(
         user.value.id,
-        accountPhoto.value as File
+        accountPhoto.value as File,
       );
       if (data) {
         setUser(data);
