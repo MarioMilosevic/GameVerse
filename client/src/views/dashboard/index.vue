@@ -22,7 +22,7 @@ import { showToast } from "@/utils/toast";
 import { useDebounce } from "@/composables/useDebounce";
 import { UsersResponseType, UserType } from "@/utils/types";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
-import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import AdminDashboard from "@/components/ui/dashboard/AdminDashboard.vue";
 import { usersPerPage } from "@/utils/constants";
 const { loading, setLoading } = useGetLoadingStore();

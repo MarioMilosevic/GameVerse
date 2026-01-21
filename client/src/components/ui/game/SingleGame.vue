@@ -5,7 +5,7 @@
       :alt="singleGame.thumbnail"
       class="sm:h-[150px] h-[75px] w-full object-cover"
     />
-    <SectionComponent>
+    <ContentSection>
       <template #title>
         {{ name }}
       </template>
@@ -40,9 +40,9 @@
       </template>
       <template #submain>
         <div class="grid grid-cols-2 sm:flex gap-4 sm:col-start-1 sm:col-end-3">
-          <GenreComponent v-for="{ genre } in genres" :key="genre.name">
+          <GenreTag v-for="{ genre } in genres" :key="genre.name">
             <template #default>{{ genre.name }} </template>
-          </GenreComponent>
+          </GenreTag>
         </div>
         <div
           class="flex items-center justify-between sm:gap-6 sm:justify-start"
@@ -60,9 +60,9 @@
           <GameRating :rating="singleGame.rating" />
         </div>
       </template>
-    </SectionComponent>
+    </ContentSection>
 
-    <SectionComponent>
+    <ContentSection>
       <template #main>
         <fieldset class="grid grid-cols-3 col-start-1 col-end-2 gap-4">
           <img
@@ -84,9 +84,9 @@
           @previous-review-event="previousReview"
         />
       </template>
-    </SectionComponent>
+    </ContentSection>
 
-    <OverlayComponent v-if="isGameImageModalOpen">
+    <BaseOverlay v-if="isGameImageModalOpen">
       <GameImageModal
         :selectedImageIndex="selectedImageIndex"
         :all-photos="photos"
@@ -94,9 +94,9 @@
         @next-event="nextImage"
         @prev-event="prevImage"
       />
-    </OverlayComponent>
-    <OverlayComponent v-if="isReviewModalOpen">
-      <ModalComponent size="small">
+    </BaseOverlay>
+    <BaseOverlay v-if="isReviewModalOpen">
+      <BaseModal size="small">
         <ReviewModal
           @delete-event="deleteHandler"
           @submit-event="submitModalHandler"
@@ -105,23 +105,23 @@
           :game-id="singleGame.id"
           :user-review="userReview"
         />
-      </ModalComponent>
-    </OverlayComponent>
+      </BaseModal>
+    </BaseOverlay>
   </main>
-  <FooterComponent />
+  <AppFooter />
 </template>
 
 <script setup lang="ts">
 import ReviewsSlider from "@/components/ui/review/ReviewsSlider.vue";
 import GameInfo from "@/components/ui/game/GameInfo.vue";
-import SectionComponent from "@/components/ui/others/SectionComponent.vue";
-import GenreComponent from "@/components/ui/game/GenreComponent.vue";
+import ContentSection from "@/components/ui/others/ContentSection.vue";
+import GenreTag from "@/components/ui/game/GenreTag.vue";
 import GameImageModal from "@/components/ui/game/GameImageModal.vue";
 import ReviewModal from "@/components/ui/review/ReviewModal.vue";
-import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
-import ModalComponent from "@/components/ui/others/ModalComponent.vue";
+import BaseOverlay from "@/shared/components/BaseOverlay.vue";
+import BaseModal from "@/shared/components/BaseModal.vue";
 import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
-import FooterComponent from "@/components/ui/others/FooterComponent.vue";
+import AppFooter from "@/shared/components/AppFooter.vue";
 import GameRating from "@/components/ui/game/GameRating.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "@/utils/types";

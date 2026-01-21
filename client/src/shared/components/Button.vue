@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
-import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 
 const colorOptions = {
   transparent: "bg-transparent ring-1 ring-slate-100",

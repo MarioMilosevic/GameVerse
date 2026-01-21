@@ -2,8 +2,8 @@
   <article
     class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[320px] sm:h-[330px]"
   >
-    <SubtitleComponent justify="center"> Reviews </SubtitleComponent>
-    <ReviewComponent
+    <PageSubtitle justify="center"> Reviews </PageSubtitle>
+    <ReviewCard
       v-for="(review, index) in props.reviews"
       :key="review.id"
       :review="review"
@@ -41,10 +41,10 @@
 import BaseIcon from "@/icons/BaseIcon.vue";
 import LeftIcon from "@/icons/LeftIcon.vue";
 import RightIcon from "@/icons/RightIcon.vue";
-import SliderButton from "@/components/ui/buttons/SliderButton.vue";
-import ReviewComponent from "@/components/ui/review/ReviewComponent.vue";
+import SliderButton from "@/shared/components/SliderButton.vue";
+import ReviewCard from "@/components/ui/review/ReviewCard.vue";
 import LeaveReview from "@/components/ui/review/LeaveReview.vue";
-import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
+import PageSubtitle from "@/shared/components/PageSubtitle.vue";
 import { PropType } from "vue";
 import { ReviewType } from "@/utils/types";
 import { translateElement } from "@/utils/helpers";

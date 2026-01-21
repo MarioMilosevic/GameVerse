@@ -36,7 +36,7 @@ import GameImageCloseButton from "@/components/ui/game/GameImageCloseButton.vue"
 import BaseIcon from "@/icons/BaseIcon.vue";
 import LeftIcon from "@/icons/LeftIcon.vue";
 import RightIcon from "@/icons/RightIcon.vue";
-import SliderButton from "@/components/ui/buttons/SliderButton.vue";
+import SliderButton from "@/shared/components/SliderButton.vue";
 
 defineProps({
   selectedImageIndex: {

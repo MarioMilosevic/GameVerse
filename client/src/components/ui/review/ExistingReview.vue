@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import PreviewReview from "@/components/ui/review/PreviewReview.vue";
 import EditReview from "@/components/ui/review/EditReview.vue";
-import DeleteModal from "@/components/ui/others/DeleteModal.vue";
+import DeleteModal from "@/shared/components/DeleteModal.vue";
 import { deleteReview } from "@/api/reviews";
 import { showToast } from "@/utils/toast";
 import { ReviewType } from "@/utils/types";

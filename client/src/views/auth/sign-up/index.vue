@@ -1,10 +1,10 @@
 <template>
-  <FormComponent @submit.prevent="submitHandler" id="signUpForm" class="px-6">
+  <FormWrapper @submit.prevent="submitHandler" id="signUpForm" class="px-6">
     <template #title>
       <h1 class="text-2xl text-center uppercase">Create your account</h1>
     </template>
     <template #inputs>
-      <RenderlessComponent>
+      <SlotProvider>
         <template v-for="input in signUpInputs" :key="input.name">
           <FormBlock>
             <template #label>
@@ -35,7 +35,7 @@
             </template>
           </FormBlock>
         </template>
-      </RenderlessComponent>
+      </SlotProvider>
     </template>
     <template #submit>
       <Button
@@ -50,19 +50,19 @@
     <template #text>
       <FormGuest text="Login" />
     </template>
-  </FormComponent>
+  </FormWrapper>
 </template>
 
 <script setup lang="ts">
-import FormComponent from "@/components/form/FormComponent.vue";
-import FormBlock from "@/components/form/FormBlock.vue";
-import FormInput from "@/components/form/FormInput.vue";
-import FormLabel from "@/components/form/FormLabel.vue";
-import FormError from "@/components/form/FormError.vue";
-import FormLine from "@/components/form/FormLine.vue";
-import FormGuest from "@/components/form/FormGuest.vue";
+import FormWrapper from "@/shared/components/form/FormWrapper.vue";
+import FormBlock from "@/shared/components/form/FormBlock.vue";
+import FormInput from "@/shared/components/form/FormInput.vue";
+import FormLabel from "@/shared/components/form/FormLabel.vue";
+import FormError from "@/shared/components/form/FormError.vue";
+import FormLine from "@/shared/components/form/FormLine.vue";
+import FormGuest from "@/shared/components/form/FormGuest.vue";
 import Button from "@/shared/components/Button.vue";
-import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
+import SlotProvider from "@/shared/components/SlotProvider.vue";
 import { signUpInputs } from "@/utils/constants";
 import { ref, computed } from "vue";
 import {

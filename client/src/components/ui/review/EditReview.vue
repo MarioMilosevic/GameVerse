@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import FormTextarea from "@/components/form/FormTextarea.vue";
+import FormTextarea from "@/shared/components/form/FormTextarea.vue";
 import Button from "@/shared/components/Button.vue";
 import RatingStars from "@/components/ui/review/RatingStars.vue";
 import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";

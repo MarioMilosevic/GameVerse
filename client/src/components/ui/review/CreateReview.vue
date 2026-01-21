@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import RatingStars from "@/components/ui/review/RatingStars.vue";
-import FormTextarea from "@/components/form/FormTextarea.vue";
+import FormTextarea from "@/shared/components/form/FormTextarea.vue";
 import Button from "@/shared/components/Button.vue";
 import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
 import { PropType, computed } from "vue";

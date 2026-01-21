@@ -10,7 +10,7 @@
       />
 
       <article class="flex flex-col gap-2">
-        <SubtitleComponent justify="start">About You</SubtitleComponent>
+        <PageSubtitle justify="start">About You</PageSubtitle>
         <p class="sm:text-base text-sm font-semibold">
           Full Name: <span class="font-normal">{{ user.fullName }}</span>
         </p>
@@ -25,19 +25,19 @@
     </section>
 
     <section class="sm:w-2/3 flex flex-col gap-4 w-full">
-      <FormComponent
+      <FormWrapper
         id="editAccountForm"
         class="gap-6 px-4"
         type="regular"
         @submit.prevent="accountHandler"
       >
         <template #title>
-          <SubtitleComponent justify="start">
+          <PageSubtitle justify="start">
             Update account settings
-          </SubtitleComponent>
+          </PageSubtitle>
         </template>
         <template #inputs>
-          <RenderlessComponent>
+          <SlotProvider>
             <template v-for="input in accountInputs" :key="input.name">
               <FormBlock>
                 <template #label>
@@ -66,7 +66,7 @@
                 </template>
               </FormBlock>
             </template>
-          </RenderlessComponent>
+          </SlotProvider>
         </template>
         <template #submit>
           <div class="flex gap-4">
@@ -76,9 +76,9 @@
             <Button @click="disableAccount">Disable Account</Button>
           </div>
         </template>
-      </FormComponent>
+      </FormWrapper>
 
-      <FormComponent
+      <FormWrapper
         type="regular"
         @submit.prevent="imageHandler"
         id="photoForm"
@@ -86,7 +86,7 @@
         enctype="multipart/form-data"
       >
         <template #title>
-          <SubtitleComponent justify="start"> Update photo </SubtitleComponent>
+          <PageSubtitle justify="start"> Update photo </PageSubtitle>
         </template>
 
         <template #inputs>
@@ -112,24 +112,24 @@
             >Change Photo</Button
           >
         </template>
-      </FormComponent>
+      </FormWrapper>
     </section>
   </main>
-  <FooterComponent />
+  <AppFooter />
 </template>
 
 <script setup lang="ts">
 import useGetUserStore from "@/composables/useGetUserStore";
-import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
-import RenderlessComponent from "@/components/ui/others/RenderlessComponent.vue";
-import FormComponent from "@/components/form/FormComponent.vue";
-import FormLabel from "@/components/form/FormLabel.vue";
-import FormInput from "@/components/form/FormInput.vue";
-import FormFile from "@/components/form/FormFile.vue";
-import FormBlock from "@/components/form/FormBlock.vue";
-import FormLine from "@/components/form/FormLine.vue";
-import FormError from "@/components/form/FormError.vue";
-import FooterComponent from "@/components/ui/others/FooterComponent.vue";
+import PageSubtitle from "@/shared/components/PageSubtitle.vue";
+import SlotProvider from "@/shared/components/SlotProvider.vue";
+import FormWrapper from "@/shared/components/form/FormWrapper.vue";
+import FormLabel from "@/shared/components/form/FormLabel.vue";
+import FormInput from "@/shared/components/form/FormInput.vue";
+import FormFile from "@/shared/components/form/FormFile.vue";
+import FormBlock from "@/shared/components/form/FormBlock.vue";
+import FormLine from "@/shared/components/form/FormLine.vue";
+import FormError from "@/shared/components/form/FormError.vue";
+import AppFooter from "@/shared/components/AppFooter.vue";
 import Button from "@/shared/components/Button.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "@/utils/types";

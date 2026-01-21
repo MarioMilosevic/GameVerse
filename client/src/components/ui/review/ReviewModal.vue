@@ -34,7 +34,7 @@
 import useGetUserStore from "@/composables/useGetUserStore";
 import ExistingReview from "@/components/ui/review/ExistingReview.vue";
 import CreateReview from "@/components/ui/review/CreateReview.vue";
-import FormReview from "@/components/form/FormReview.vue";
+import FormReview from "@/shared/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray, guestMessage } from "@/utils/constants";
 import { fillStars } from "@/utils/helpers";

@@ -2,7 +2,7 @@
   <main class="max-w-[1280px] mx-auto mt-8 sm:mt-12">
     <UsersTable>
       <template #title>
-        <SubtitleComponent> Dashboard </SubtitleComponent>
+        <PageSubtitle> Dashboard </PageSubtitle>
       </template>
       <template #header>
         <SearchHeader
@@ -43,7 +43,7 @@
       @delete-event="deleteUserHandler"
       @close-modal-event="isDeleteOpen = false"
     />
-    <PaginationComponent
+    <TablePagination
       :users="usersObj.count"
       :current-page="page"
       @previous-event="emits('previous-event')"
@@ -53,16 +53,15 @@
 </template>
 
 <script setup lang="ts">
-import SubtitleComponent from "@/components/ui/others/SubtitleComponent.vue";
-// TODO da vidim sta je s ovim importom nakon sto organizujem foldere
+import PageSubtitle from "@/shared/components/PageSubtitle.vue";
 import UserData from "./UserData.vue";
 import UsersTable from "@/components/ui/dashboard/UsersTable.vue";
 import UserHeading from "@/components/ui/dashboard/UserHeading.vue";
 import UserModal from "@/components/ui/dashboard/UserModal.vue";
-import DeleteModal from "@/components/ui/others/DeleteModal.vue";
+import DeleteModal from "@/shared/components/DeleteModal.vue";
 import NotFound from "@/components/ui/others/NotFound.vue";
 import SearchHeader from "@/components/ui/dashboard/SearchHeader.vue";
-import PaginationComponent from "@/components/ui/dashboard/PaginationComponent.vue";
+import TablePagination from "@/components/ui/dashboard/TablePagination.vue";
 import { UsersResponseType, UserType } from "@/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "@/utils/constants";

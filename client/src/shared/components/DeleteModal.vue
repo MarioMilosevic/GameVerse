@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body" v-if="isDeleteOpen">
-    <OverlayComponent>
-      <ModalComponent
+    <BaseOverlay>
+      <BaseModal
         class="bg-slate-200 dark:bg-slate-900 flex flex-col items-center pb-10 justify-end rounded-xl"
       >
         <BaseIcon
@@ -25,14 +25,14 @@
             <Button @click="emits('delete-event', user?.id)">Confirm</Button>
           </div>
         </div>
-      </ModalComponent>
-    </OverlayComponent>
+      </BaseModal>
+    </BaseOverlay>
   </Teleport>
 </template>
 
 <script setup lang="ts">
-import OverlayComponent from "@/components/ui/others/OverlayComponent.vue";
-import ModalComponent from "@/components/ui/others/ModalComponent.vue";
+import BaseOverlay from "@/shared/components/BaseOverlay.vue";
+import BaseModal from "@/shared/components/BaseModal.vue";
 import Button from "@/shared/components/Button.vue";
 import BaseIcon from "@/icons/BaseIcon.vue";
 import XCircle from "@/icons/XCircle.vue";

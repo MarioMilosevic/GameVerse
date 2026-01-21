@@ -29,10 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import FormInput from "@/components/form/FormInput.vue";
-import FormSelect from "@/components/form/FormSelect.vue";
-import FormBlock from "@/components/form/FormBlock.vue";
-import FormLabel from "@/components/form/FormLabel.vue";
+import FormInput from "@/shared/components/form/FormInput.vue";
+import FormSelect from "@/shared/components/form/FormSelect.vue";
+import FormBlock from "@/shared/components/form/FormBlock.vue";
+import FormLabel from "@/shared/components/form/FormLabel.vue";
 import { PropType, ref } from "vue";
 import { UsersResponseType } from "@/utils/types";
 import { sortUserOptins } from "@/utils/constants";

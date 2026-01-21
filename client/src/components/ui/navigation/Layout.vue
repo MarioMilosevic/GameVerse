@@ -79,7 +79,7 @@ import Button from "@/shared/components/Button.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 import NavigationMenu from "@/components/ui/navigation/NavigationMenu.vue";
-import LoadingSpinner from "@/components/ui/others/LoadingSpinner.vue";
+import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
