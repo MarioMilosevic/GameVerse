@@ -61,8 +61,8 @@ import ClockIcon from "@/icons/ClockIcon.vue";
 import StarIcon from "@/icons/StarIcon.vue";
 import DollarIcon from "@/icons/DollarIcon.vue";
 import CalendarIcon from "@/icons/CalendarIcon.vue";
-import GameStat from "@/components/ui/game/GameStat.vue";
-import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
+import GameStat from "@/views/game/components/GameStat.vue";
+import ConsoleWrapper from "@/views/game/components/ConsoleWrapper.vue";
 
 const props = defineProps({
   game: {

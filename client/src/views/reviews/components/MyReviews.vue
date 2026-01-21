@@ -41,7 +41,7 @@ import { MyReviewType } from "@/utils/types";
 import { PropType } from "vue";
 import { formattedDate } from "@/utils/helpers";
 import { useRouter } from "vue-router";
-import GameRating from "@/components/ui/game/GameRating.vue";
+import GameRating from "@/views/game/components/GameRating.vue";
 
 defineProps({
   reviews: {

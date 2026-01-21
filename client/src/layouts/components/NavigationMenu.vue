@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import NavigationLink from "@/components/ui/navigation/NavigationLink.vue";
+import NavigationLink from "@/layouts/components/NavigationLink.vue";
 import ThemeIcon from "@/icons/ThemeIcon.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import type { ThemeType } from "@/stores/themeStore";

@@ -22,8 +22,8 @@
 <script setup lang="ts">
 import FormTextarea from "@/shared/components/form/FormTextarea.vue";
 import Button from "@/shared/components/Button.vue";
-import RatingStars from "@/components/ui/review/RatingStars.vue";
-import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
+import RatingStars from "@/views/game/components/RatingStars.vue";
+import MainRatingStar from "@/views/game/components/MainRatingStar.vue";
 import { fillStars } from "@/utils/helpers";
 import { ref, inject } from "vue";
 import { editReview } from "@/api/reviews";

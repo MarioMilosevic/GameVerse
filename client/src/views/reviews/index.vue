@@ -6,7 +6,7 @@
 <script setup lang="ts">
 import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
-import MyReviews from "@/components/ui/review/MyReviews.vue";
+import MyReviews from "@/views/reviews/components/MyReviews.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import { getUserReviews } from "@/api/users";
 

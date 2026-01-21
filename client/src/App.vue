@@ -1,10 +1,10 @@
 <template>
-  <Layout :theme="theme" @toggle-theme-event="handleTheme" />
+  <DefaultLayout :theme="theme" @toggle-theme-event="handleTheme" />
   <RouterView />
 </template>
 
 <script lang="ts" setup>
-import Layout from "@/components/ui/navigation/Layout.vue";
+import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import useTheme from "@/composables/useTheme";
 import { storageThemeName } from "@/utils/constants";
 import { THEME_OPTIONS } from "@/constants/theme";

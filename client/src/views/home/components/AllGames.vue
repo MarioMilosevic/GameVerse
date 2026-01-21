@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import GameCard from "@/components/ui/game/GameCard.vue";
+import GameCard from "@/views/home/components/GameCard.vue";
 import AppFooter from "@/shared/components/AppFooter.vue";
 import { GameType } from "@/utils/types";
 import { PropType } from "vue";

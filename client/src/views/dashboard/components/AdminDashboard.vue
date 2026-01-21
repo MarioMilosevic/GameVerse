@@ -55,13 +55,13 @@
 <script setup lang="ts">
 import PageSubtitle from "@/shared/components/PageSubtitle.vue";
 import UserData from "./UserData.vue";
-import UsersTable from "@/components/ui/dashboard/UsersTable.vue";
-import UserHeading from "@/components/ui/dashboard/UserHeading.vue";
-import UserModal from "@/components/ui/dashboard/UserModal.vue";
+import UsersTable from "@/views/dashboard/components/UsersTable.vue";
+import UserHeading from "@/views/dashboard/components/UserHeading.vue";
+import UserModal from "@/views/dashboard/components/UserModal.vue";
 import DeleteModal from "@/shared/components/DeleteModal.vue";
-import NotFound from "@/components/ui/others/NotFound.vue";
-import SearchHeader from "@/components/ui/dashboard/SearchHeader.vue";
-import TablePagination from "@/components/ui/dashboard/TablePagination.vue";
+import NotFound from "@/views/dashboard/components/NotFound.vue";
+import SearchHeader from "@/views/dashboard/components/SearchHeader.vue";
+import TablePagination from "@/views/dashboard/components/TablePagination.vue";
 import { UsersResponseType, UserType } from "@/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "@/utils/constants";

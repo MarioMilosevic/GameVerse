@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import RatingStars from "@/components/ui/review/RatingStars.vue";
-import MainRatingStar from "@/components/ui/review/MainRatingStar.vue";
+import RatingStars from "@/views/game/components/RatingStars.vue";
+import MainRatingStar from "@/views/game/components/MainRatingStar.vue";
 import Button from "@/shared/components/Button.vue";
 import { fillStars, formattedDate } from "@/utils/helpers";
 import { computed } from "vue";

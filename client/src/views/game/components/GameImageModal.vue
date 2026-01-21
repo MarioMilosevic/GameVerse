@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { PropType } from "vue";
 import { translateElement } from "@/utils/helpers";
-import GameImageCloseButton from "@/components/ui/game/GameImageCloseButton.vue";
+import GameImageCloseButton from "@/views/game/components/GameImageCloseButton.vue";
 import BaseIcon from "@/icons/BaseIcon.vue";
 import LeftIcon from "@/icons/LeftIcon.vue";
 import RightIcon from "@/icons/RightIcon.vue";

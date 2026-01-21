@@ -9,7 +9,7 @@ import { getAllGames } from "@/api/games";
 import { GameType } from "@/utils/types";
 import { showToast } from "@/utils/toast";
 import { UNEXPECTED_ERROR_OCCURED, ERROR } from "@/constants/errors";
-import AllGames from "@/components/ui/game/AllGames.vue";
+import AllGames from "@/views/home/components/AllGames.vue";
 import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 

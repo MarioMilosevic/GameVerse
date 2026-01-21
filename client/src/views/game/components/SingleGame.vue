@@ -112,17 +112,17 @@
 </template>
 
 <script setup lang="ts">
-import ReviewsSlider from "@/components/ui/review/ReviewsSlider.vue";
-import GameInfo from "@/components/ui/game/GameInfo.vue";
-import ContentSection from "@/components/ui/others/ContentSection.vue";
-import GenreTag from "@/components/ui/game/GenreTag.vue";
-import GameImageModal from "@/components/ui/game/GameImageModal.vue";
-import ReviewModal from "@/components/ui/review/ReviewModal.vue";
+import ReviewsSlider from "@/views/game/components/ReviewsSlider.vue";
+import GameInfo from "@/views/game/components/GameInfo.vue";
+import ContentSection from "@/views/game/components/ContentSection.vue";
+import GenreTag from "@/views/game/components/GenreTag.vue";
+import GameImageModal from "@/views/game/components/GameImageModal.vue";
+import ReviewModal from "@/views/game/components/ReviewModal.vue";
 import BaseOverlay from "@/shared/components/BaseOverlay.vue";
 import BaseModal from "@/shared/components/BaseModal.vue";
-import ConsoleWrapper from "@/components/ui/game/ConsoleWrapper.vue";
+import ConsoleWrapper from "@/views/game/components/ConsoleWrapper.vue";
 import AppFooter from "@/shared/components/AppFooter.vue";
-import GameRating from "@/components/ui/game/GameRating.vue";
+import GameRating from "@/views/game/components/GameRating.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "@/utils/types";
 import { createVideoUrl } from "@/utils/helpers";
