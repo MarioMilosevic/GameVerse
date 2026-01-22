@@ -15,6 +15,7 @@ import {
   FaEdit,
   IoCloseSharp,
   FcCheckmark,
+  CoHamburgerMenu,
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -30,6 +31,7 @@ addIcons(
   FaEdit,
   IoCloseSharp,
   FcCheckmark,
+  CoHamburgerMenu,
 );
 
 import "./style.css";

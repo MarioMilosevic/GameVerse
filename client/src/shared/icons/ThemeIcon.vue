@@ -6,9 +6,9 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "@/icons/BaseIcon.vue";
-import MoonIcon from "@/icons/MoonIcon.vue";
-import SunIcon from "@/icons/SunIcon.vue";
+import BaseIcon from "@/shared/icons/BaseIcon.vue";
+import MoonIcon from "@/shared/icons/MoonIcon.vue";
+import SunIcon from "@/shared/icons/SunIcon.vue";
 import { THEME_OPTIONS } from "@/constants/theme";
 import type { ThemeType } from "@/stores/themeStore";
 import { computed } from "vue";

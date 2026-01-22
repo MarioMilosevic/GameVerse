@@ -16,5 +16,5 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "@/icons/BaseIcon.vue";
+import BaseIcon from "@/shared/icons/BaseIcon.vue";
 </script>

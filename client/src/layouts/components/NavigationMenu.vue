@@ -1,11 +1,7 @@
 <template>
-  <ul
-    class="flex sm:gap-2 bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-xl text-xs sm:text-base"
-  >
-    <!-- <ul
-    class="flex flex-col sm:gap-2 list-none bg-slate-300 dark:bg-slate-900 z-20 w-full rounded-b-xl text-xs sm:text-base first:rounded-t-none first:rounded-b-xl"
-  > -->
+  <ul class="flex sm:gap-2 z-20 w-full rounded-xl text-xs sm:text-base">
     <!-- TODO: make v-for over array for these elements -->
+    <!-- Make function that will populate array and then render with v-for -->
 
     <NavigationLink @click="emits('toggle-theme-event')">
       <template #default>
@@ -50,7 +46,7 @@
 
 <script setup lang="ts">
 import NavigationLink from "@/layouts/components/NavigationLink.vue";
-import ThemeIcon from "@/icons/ThemeIcon.vue";
+import ThemeIcon from "@/shared/icons/ThemeIcon.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import type { ThemeType } from "@/stores/themeStore";
 import { THEME_OPTIONS } from "@/constants/theme";

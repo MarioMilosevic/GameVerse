@@ -57,10 +57,10 @@
 import { PropType } from "vue";
 import { GameType } from "@/utils/types";
 import { useRouter } from "vue-router";
-import ClockIcon from "@/icons/ClockIcon.vue";
-import StarIcon from "@/icons/StarIcon.vue";
-import DollarIcon from "@/icons/DollarIcon.vue";
-import CalendarIcon from "@/icons/CalendarIcon.vue";
+import ClockIcon from "@/shared/icons/ClockIcon.vue";
+import StarIcon from "@/shared/icons/StarIcon.vue";
+import DollarIcon from "@/shared/icons/DollarIcon.vue";
+import CalendarIcon from "@/shared/icons/CalendarIcon.vue";
 import GameStat from "@/views/game/components/GameStat.vue";
 import ConsoleWrapper from "@/views/game/components/ConsoleWrapper.vue";
 

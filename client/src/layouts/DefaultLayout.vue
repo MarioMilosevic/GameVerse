@@ -60,7 +60,7 @@
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
       <ThemeIcon :theme="theme" @dark-mode-event="handleTheme" />
-
+      <!-- Todo add primary and transparent into constants maybe ? -->
       <Button
         v-for="(page, index) in authPages"
         :color="selectedPage === index ? 'primary' : 'transparent'"
@@ -83,7 +83,7 @@ import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
 import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
-import ThemeIcon from "@/icons/ThemeIcon.vue";
+import ThemeIcon from "@/shared/icons/ThemeIcon.vue";
 
 const { user, resetUser } = useGetUserStore();
 const { loading } = useGetLoadingStore();
@@ -98,6 +98,7 @@ onUnmounted(() => {
 
 const props = defineProps({
   theme: {
+    // TODO: light and ddark from constants same bellow reogranise constants
     type: String as PropType<"light" | "dark">,
     required: true,
   },
@@ -114,6 +115,7 @@ const authRoutes = ["/login", "/sign-up"];
 const router = useRouter();
 
 const toggleMenu = () => {
+  // Todo: check if this function is neccessary ?
   if (!window.matchMedia("(hover:hover)").matches) {
     navigationMenuOpen.value = !navigationMenuOpen.value;
   }
