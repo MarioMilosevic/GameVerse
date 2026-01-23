@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { useThemeStore } from "@/stores/themeStore";
+import { useThemeStore } from "@/stores/theme";
 
 export default function useTheme() {
   const themeStore = useThemeStore();

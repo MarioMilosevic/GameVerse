@@ -7,21 +7,20 @@
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import useTheme from "@/composables/useTheme";
 import { storageThemeName } from "@/utils/constants";
-import { THEME_OPTIONS } from "@/constants/theme";
-import { DATA_THEME } from "@/constants/theme";
+import { THEME_OPTIONS, DATA_THEME } from "@/stores/theme/constants";
 import { onBeforeMount } from "vue";
 
 const { theme, setTheme } = useTheme();
-const { dark, light } = THEME_OPTIONS;
+const { DARK, LIGHT } = THEME_OPTIONS;
 
 onBeforeMount(() => {
   const savedTheme = localStorage.getItem(storageThemeName);
   if (savedTheme) {
-    setTheme(savedTheme === dark ? dark : light);
+    setTheme(savedTheme === DARK ? DARK : LIGHT);
   } else {
     localStorage.setItem(storageThemeName, theme.value);
   }
-  if (theme.value === dark && savedTheme) {
+  if (theme.value === DARK && savedTheme) {
     document.documentElement.setAttribute(DATA_THEME, savedTheme);
   } else {
     document.documentElement.removeAttribute(DATA_THEME);
@@ -29,11 +28,11 @@ onBeforeMount(() => {
 });
 
 const handleTheme = (darkMode: boolean) => {
-  const newTheme = darkMode ? dark : light;
+  const newTheme = darkMode ? DARK : LIGHT;
   setTheme(newTheme);
   localStorage.setItem(storageThemeName, theme.value);
   if (darkMode) {
-    document.documentElement.setAttribute(DATA_THEME, dark);
+    document.documentElement.setAttribute(DATA_THEME, DARK);
   } else {
     document.documentElement.removeAttribute(DATA_THEME);
   }

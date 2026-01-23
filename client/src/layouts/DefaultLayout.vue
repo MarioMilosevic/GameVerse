@@ -20,12 +20,6 @@
       @blur="closeNavigationMenu"
       tabindex="0"
     >
-      <!-- <ThemeIcon :theme="theme" @dark-mode-event="handleTheme" /> -->
-      <!-- <img
-        :src="renderUserImage(user.image)"
-        :alt="user.image"
-        class="h-[40px] w-[40px] sm:h-[50px] sm:w-[50px] rounded-xl object-cover"
-      /> -->
       <NavigationMenu
         :class="[
           '',
@@ -41,21 +35,6 @@
         @my-reviews-event="myReviewsHandler"
         @account-event="accountHandler"
       />
-      <!-- <NavigationMenu
-        :class="[
-          'absolute -bottom-4 left-0 translate-y-full origin-top transition-all duration-500 ease-out',
-          navigationMenuOpen
-            ? 'scale-y-100 opacity-100'
-            : 'scale-y-0 opacity-0',
-          'group-hover:opacity-100 group-hover:scale-y-100',
-        ]"
-        :theme="theme"
-        @dashboard-event="dashboardHandler"
-        @sign-out-event="signOutHandler"
-        @toggle-theme-event="handleTheme"
-        @my-reviews-event="myReviewsHandler"
-        @account-event="accountHandler"
-      /> -->
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>

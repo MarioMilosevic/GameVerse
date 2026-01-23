@@ -1,56 +1,25 @@
 <template>
-  <ul class="flex sm:gap-2 z-20 w-full rounded-xl text-xs sm:text-base">
-    <!-- TODO: make v-for over array for these elements -->
-    <!-- Make function that will populate array and then render with v-for -->
+  <ul
+    class="hidden lg:flex sm:gap-2 z-20 w-full rounded-xl text-xs sm:text-base"
+  >
+    <!-- TODO: have only 1 event for NavigationMenu, and in parent control according what is parameter what will be called -->
 
-    <NavigationLink @click="emits('toggle-theme-event')">
+    <NavigationLink v-for="(link, index) in navLinks" :key="index">
       <template #default>
-        <ThemeIcon :theme="theme" />
+        <v-icon :name="link.icon" />
       </template>
-      <template #text>{{ text }}</template>
-    </NavigationLink>
-
-    <NavigationLink
-      v-if="user.role === 'ADMIN'"
-      @click="emits('dashboard-event')"
-    >
-      <template #default>
-        <v-icon name="md-dashboardcustomize" />
-      </template>
-      <template #text> Dashboard </template>
-    </NavigationLink>
-
-    <NavigationLink @click="emits('account-event')">
-      <template #default>
-        <v-icon name="md-accountbox" />
-      </template>
-      <template #text> Account </template>
-    </NavigationLink>
-
-    <NavigationLink @click="emits('my-reviews-event')">
-      <template #default>
-        <v-icon name="md-ratereview" />
-      </template>
-      <template #text> My reviews </template>
-    </NavigationLink>
-
-    <NavigationLink @click="emits('sign-out-event')" class="hover:rounded-b-xl">
-      <template #default>
-        <v-icon name="gi-exit-door" />
-      </template>
-
-      <template #text> Log out </template>
+      <template #text>{{ link.text }}</template>
     </NavigationLink>
   </ul>
 </template>
 
 <script setup lang="ts">
 import NavigationLink from "@/layouts/components/NavigationLink.vue";
-import ThemeIcon from "@/shared/icons/ThemeIcon.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
-import type { ThemeType } from "@/stores/themeStore";
-import { THEME_OPTIONS } from "@/constants/theme";
-import { computed } from "vue";
+import { createNavLinks } from "@/layouts/constants/navigation";
+import { ref } from "vue";
+import type { ThemeType } from "@/stores/theme/types";
+import type { navLinkType } from "@/layouts/types/index";
 
 const emits = defineEmits([
   "sign-out-event",
@@ -66,6 +35,5 @@ const props = defineProps<{
 
 const { user } = useGetUserStore();
 
-const isDark = computed(() => props.theme === THEME_OPTIONS.dark);
-const text = computed(() => (isDark.value ? "Dark mode" : "Light mode"));
+const navLinks = ref<navLinkType[]>(createNavLinks(props.theme, user.value));
 </script>
