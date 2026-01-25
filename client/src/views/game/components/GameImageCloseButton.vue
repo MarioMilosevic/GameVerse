@@ -4,15 +4,10 @@
     @click="emits('close-event')"
   >
     <p>Close</p>
-    <BaseIcon>
-      <XIcon />
-    </BaseIcon>
+    <v-icon name="ri-close-circle-fill" />
   </button>
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "@/shared/icons/BaseIcon.vue";
-import XIcon from "@/shared/icons/XIcon.vue";
-
 const emits = defineEmits(["close-event"]);
 </script>

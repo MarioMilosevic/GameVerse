@@ -9,14 +9,7 @@
         <template #title>
           <h1 class="text-2xl text-center uppercase">Edit User</h1>
         </template>
-        <BaseIcon
-          size="very-big"
-          class="absolute top-3 right-2 cursor-pointer"
-          @click="emits('close-modal-event')"
-        >
-          <XIcon />
-        </BaseIcon>
-
+        <v-icon name="ri-close-circle-fill" class="absolute top-3 right-2 cursor-pointer" />
         <template #inputs>
           <SlotProvider>
             <template v-for="input in userInputs">
@@ -25,10 +18,7 @@
                   <FormLabel :id="input.name">{{ input.label }}</FormLabel>
                 </template>
                 <template #input>
-                  <FormInput
-                    v-bind="input"
-                    v-model="user[input.name as 'email' | 'fullName']"
-                  />
+                  <FormInput v-bind="input" v-model="user[input.name as 'email' | 'fullName']" />
                 </template>
               </FormBlock>
             </template>
@@ -38,12 +28,7 @@
               <FormLabel id="role">Role</FormLabel>
             </template>
             <template #input>
-              <FormSelect
-                v-model="user.role"
-                id="role"
-                :options="dashboardOptions"
-                :selected="user.role"
-              />
+              <FormSelect v-model="user.role" id="role" :options="dashboardOptions" :selected="user.role" />
             </template>
           </FormBlock>
         </template>
@@ -74,8 +59,6 @@ import FormBlock from "@/shared/components/form/FormBlock.vue";
 import FormSelect from "@/shared/components/form/FormSelect.vue";
 import FormCheckbox from "@/shared/components/form/FormCheckbox.vue";
 import FormWrapper from "@/shared/components/form/FormWrapper.vue";
-import BaseIcon from "@/icons/BaseIcon.vue";
-import XIcon from "@/icons/XIcon.vue";
 import SlotProvider from "@/shared/components/SlotProvider.vue";
 import Button from "@/shared/components/Button.vue";
 import { userInputs, dashboardOptions } from "@/utils/constants";

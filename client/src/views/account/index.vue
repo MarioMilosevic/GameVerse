@@ -3,11 +3,7 @@
     class="max-w-[1280px] py-8 sm:px-8 sm:py-8 mx-auto sm:mt-8 flex sm:flex-row flex-col sm:gap-4 gap-8 bg-slate-100 dark:bg-slate-800 rounded-xl"
   >
     <section class="sm:w-1/3 flex flex-col gap-4 px-4 sm:px-0 sm:gap-8">
-      <img
-        :src="renderUserImage(user.image)"
-        :alt="user.fullName + 'image'"
-        class="object-cover rounded-xl h-full"
-      />
+      <img :src="renderUserImage(user.image)" :alt="user.fullName + 'image'" class="object-cover rounded-xl h-full" />
 
       <article class="flex flex-col gap-2">
         <PageSubtitle justify="start">About You</PageSubtitle>
@@ -25,16 +21,9 @@
     </section>
 
     <section class="sm:w-2/3 flex flex-col gap-4 w-full">
-      <FormWrapper
-        id="editAccountForm"
-        class="gap-6 px-4"
-        type="regular"
-        @submit.prevent="accountHandler"
-      >
+      <FormWrapper id="editAccountForm" class="gap-6 px-4" type="regular" @submit.prevent="accountHandler">
         <template #title>
-          <PageSubtitle justify="start">
-            Update account settings
-          </PageSubtitle>
+          <PageSubtitle justify="start"> Update account settings </PageSubtitle>
         </template>
         <template #inputs>
           <SlotProvider>
@@ -49,11 +38,7 @@
                   <FormInput
                     @blur-event="blurHandler(input.name as AccountFields)"
                     v-bind="input"
-                    v-model="
-                      accountSettings[
-                        input.name as keyof typeof accountSettings
-                      ]
-                    "
+                    v-model="accountSettings[input.name as keyof typeof accountSettings]"
                   />
                 </template>
                 <template #line>
@@ -70,9 +55,7 @@
         </template>
         <template #submit>
           <div class="flex gap-4">
-            <Button :disabled="!accountSettingsFieldsCompleted" type="submit"
-              >Change Settings</Button
-            >
+            <Button :disabled="!accountSettingsFieldsCompleted" type="submit">Change Settings</Button>
             <Button @click="disableAccount">Disable Account</Button>
           </div>
         </template>
@@ -96,9 +79,7 @@
             </template>
             <template #input>
               <FormFile @file-event="photoHandler" name="image" />
-              <p class="pl-1 text-sm text-slate-500 dark:text-slate-300">
-                SVG, PNG, JPG or GIF
-              </p>
+              <p class="pl-1 text-sm text-slate-500 dark:text-slate-300">SVG, PNG, JPG or GIF</p>
             </template>
             <template #error>
               <FormError> </FormError>
@@ -106,11 +87,7 @@
           </FormBlock>
         </template>
         <template #submit>
-          <Button
-            type="submit"
-            :style="{ alignSelf: 'start', marginTop: '0.5rem' }"
-            >Change Photo</Button
-          >
+          <Button type="submit" :style="{ alignSelf: 'start', marginTop: '0.5rem' }">Change Photo</Button>
         </template>
       </FormWrapper>
     </section>
@@ -134,11 +111,7 @@ import Button from "@/shared/components/Button.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "@/utils/types";
 import { formattedDate, renderUserImage } from "@/utils/helpers";
-import {
-  accountInputs,
-  emptyAccountSettings,
-  guestMessage,
-} from "@/utils/constants";
+import { accountInputs, emptyAccountSettings, guestMessage } from "@/utils/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,
@@ -147,12 +120,7 @@ import {
   AccountFields,
   AccountTouchedFields,
 } from "@/schemas/accountPage";
-import {
-  disableUserAccount,
-  editUserNameAndEmail,
-  signOut,
-  updateUserImage,
-} from "@/api/users";
+import { disableUserAccount, editUserNameAndEmail, signOut, updateUserImage } from "@/api/users";
 import { showToast } from "@/utils/toast";
 
 const { user, setUser, resetUser } = useGetUserStore();
@@ -170,10 +138,7 @@ const accountSettingsFieldsCompleted = computed(() => {
 });
 
 const blurHandler = (property: AccountFields) => {
-  const message = getAccountFieldError(
-    property,
-    accountSettings.value[property],
-  );
+  const message = getAccountFieldError(property, accountSettings.value[property]);
   accountFormErrors.value[property] = message;
   touchedFields.value[property] = true;
 };
@@ -181,10 +146,7 @@ const blurHandler = (property: AccountFields) => {
 const accountHandler = async () => {
   try {
     if (user.value.id) {
-      const { data, message } = await editUserNameAndEmail(
-        user.value.id,
-        accountSettings.value,
-      );
+      const { data, message } = await editUserNameAndEmail(user.value.id, accountSettings.value);
       if (data) {
         setUser(data);
         showToast("Settings updated sucessfully");
@@ -244,10 +206,7 @@ const imageHandler = async () => {
     }
 
     if (accountPhoto.value) {
-      const { data, message } = await updateUserImage(
-        user.value.id,
-        accountPhoto.value as File,
-      );
+      const { data, message } = await updateUserImage(user.value.id, accountPhoto.value as File);
       if (data) {
         setUser(data);
         showToast("Image updated");

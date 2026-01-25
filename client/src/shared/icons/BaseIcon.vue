@@ -1,13 +1,5 @@
 <template>
-  <svg
-    :xmlns="xmlns"
-    :fill="fill"
-    :viewBox="viewBox"
-    :stroke-width="strokeWidth"
-    :stroke="stroke"
-    :class="[`icon-${size}`]"
-    :size="size"
-  >
+  <svg :xmlns="xmlns" :fill="fill" :viewBox="viewBox" :stroke-width="strokeWidth" :stroke="stroke" :class="[`icon-${size}`]" :size="size">
     <slot />
   </svg>
 </template>

@@ -1,7 +1,5 @@
 <template>
-  <article
-    class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[320px] sm:h-[330px]"
-  >
+  <article class="relative px-4 flex flex-col justify-between overflow-x-hidden h-[320px] sm:h-[330px]">
     <PageSubtitle justify="center"> Reviews </PageSubtitle>
     <ReviewCard
       v-for="(review, index) in props.reviews"
@@ -9,23 +7,14 @@
       :review="review"
       :style="{ transform: translateElement(index, selectedReviewIndex) }"
     />
-    <LeaveReview
-      @open-modal-event="emits('open-modal-event')"
-      :user-review="userReview"
-    />
-    <SliderButton
-      class="-left-0 sm:-left-0"
-      @click="emits('previous-review-event')"
-    >
+    <LeaveReview @open-modal-event="emits('open-modal-event')" :user-review="userReview" />
+    <SliderButton class="-left-0 sm:-left-0" @click="emits('previous-review-event')">
       <template #icon>
         <v-icon name="co-arrow-circle-left" />
       </template>
     </SliderButton>
 
-    <SliderButton
-      class="-right-0 sm:right-0"
-      @click="emits('next-review-event')"
-    >
+    <SliderButton class="-right-0 sm:right-0" @click="emits('next-review-event')">
       <template #icon>
         <v-icon name="co-arrow-circle-right" />
       </template>
@@ -57,9 +46,5 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits([
-  "open-modal-event",
-  "next-review-event",
-  "previous-review-event",
-]);
+const emits = defineEmits(["open-modal-event", "next-review-event", "previous-review-event"]);
 </script>

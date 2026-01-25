@@ -3,11 +3,7 @@
     class="sm:max-w-[300px] flex flex-col align-center gap-2 rounded-xl relative bg-slate-50 dark:bg-slate-700 cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl"
     @click="seeGameDetails(id)"
   >
-    <img
-      :src="thumbnail"
-      loading="lazy"
-      class="w-full sm:h-[300px] object-cover rounded-xl"
-    />
+    <img :src="thumbnail" loading="lazy" class="w-full sm:h-[300px] object-cover rounded-xl" />
     <div class="flex flex-col gap-4 p-4">
       <h1 class="text-justify text-lg sm:text-xl">{{ name }}</h1>
       <div class="grid grid-cols-2 gap-4">
@@ -40,13 +36,7 @@
         </GameStat>
         <p>Available on:</p>
         <ConsoleWrapper>
-          <img
-            v-for="obj in consoles"
-            :key="obj.console.id"
-            :src="obj.console.image"
-            :alt="obj.console.image"
-            class="console-image"
-          />
+          <img v-for="obj in consoles" :key="obj.console.id" :src="obj.console.image" :alt="obj.console.image" class="console-image" />
         </ConsoleWrapper>
       </div>
     </div>
@@ -67,16 +57,7 @@ const props = defineProps({
   },
 });
 
-const {
-  name,
-  releaseYear,
-  price,
-  gameplayHours,
-  id,
-  thumbnail,
-  consoles,
-  rating,
-} = props.game;
+const { name, releaseYear, price, gameplayHours, id, thumbnail, consoles, rating } = props.game;
 const router = useRouter();
 
 const seeGameDetails = (id: number) => {
