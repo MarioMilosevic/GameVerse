@@ -29,16 +29,22 @@
           'group-hover:opacity-100 group-hover:scale-y-100',
         ]"
         :theme="theme"
-        @dashboard-event="dashboardHandler"
-        @sign-out-event="signOutHandler"
+        @navigation="handleNavigation"
         @toggle-theme-event="handleTheme"
-        @my-reviews-event="myReviewsHandler"
-        @account-event="accountHandler"
       />
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
-      <ThemeIcon :theme="theme" @dark-mode-event="handleTheme" />
+      <v-icon
+        v-if="theme === THEME_OPTIONS.DARK"
+        name="md-darkmode"
+        @toggle-theme-event="handleTheme"
+      />
+      <v-icon
+        v-if="theme === THEME_OPTIONS.LIGHT"
+        name="md-lightmode"
+        @toggle-theme-event="handleTheme"
+      />
       <!-- Todo add primary and transparent into constants maybe ? -->
       <Button
         v-for="(page, index) in authPages"
@@ -59,10 +65,12 @@ import useGetUserStore from "@/composables/useGetUserStore";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 import NavigationMenu from "@/layouts/components/NavigationMenu.vue";
 import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
+import { THEME_OPTIONS } from "@/stores/theme/constants";
+import type { ThemeType } from "@/stores/theme/types";
 import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
-import { computed, PropType, onMounted, onUnmounted, ref } from "vue";
-import ThemeIcon from "@/shared/icons/ThemeIcon.vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
+import { navLinkType } from "./types";
 
 const { user, resetUser } = useGetUserStore();
 const { loading } = useGetLoadingStore();
@@ -75,15 +83,13 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
-const props = defineProps({
-  theme: {
-    // TODO: light and ddark from constants same bellow reogranise constants
-    type: String as PropType<"light" | "dark">,
-    required: true,
-  },
-});
+const props = defineProps<{
+  theme: ThemeType;
+}>();
 
-const emits = defineEmits(["toggle-theme-event"]);
+const emits = defineEmits<{
+  (e: "toggle-theme-event", value: ThemeType): void;
+}>();
 
 const isSticky = ref<boolean>(false);
 const navigationMenuOpen = ref<boolean>(false);
@@ -119,27 +125,50 @@ const pageHandler = (index: number) => {
   router.push(authRoutes[index]);
 };
 
-const accountHandler = () => {
+const handleAccount = () => {
   router.push("/account");
 };
 
-const signOutHandler = () => {
+const handleSignOut = () => {
   signOut(user.value);
   resetUser();
   router.push("/");
 };
 
-const myReviewsHandler = () => {
+const handleMyReviews = () => {
   router.push(`/my-reviews/${user.value.id}`);
 };
 
 const handleTheme = () => {
-  console.log("desio se event");
-  const value = props.theme === "dark" ? false : true;
-  emits("toggle-theme-event", value);
+  const updatedTheme: ThemeType =
+    props.theme === THEME_OPTIONS.DARK
+      ? THEME_OPTIONS.LIGHT
+      : THEME_OPTIONS.DARK;
+  emits("toggle-theme-event", updatedTheme);
 };
 
-const dashboardHandler = () => {
+const handleDashboard = () => {
   router.push("/dashboard");
+};
+
+const handleNavigation = (link: navLinkType) => {
+  switch (link.text) {
+    case THEME_OPTIONS.DARK:
+    case THEME_OPTIONS.LIGHT:
+      handleTheme();
+      break;
+    case "Dashboard":
+      handleDashboard();
+      break;
+    case "Account":
+      handleAccount();
+      break;
+    case "My Reviews":
+      handleMyReviews();
+      break;
+    case "Log Out":
+      handleSignOut();
+      break;
+  }
 };
 </script>

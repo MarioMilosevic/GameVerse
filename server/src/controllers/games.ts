@@ -58,7 +58,7 @@ export default {
             ...game,
             rating: avgRating,
           };
-        })
+        }),
       );
 
       successFactory.ok(res, gamesWithAvgRating);
@@ -194,7 +194,6 @@ export default {
   async editGame(req: Request, res: Response) {
     try {
       const { photo } = req.body;
-      console.log(photo);
       const game = await prisma.game.findUnique({
         where: { id: req.id },
         select: { photos: true },

@@ -9,6 +9,7 @@ import useTheme from "@/composables/useTheme";
 import { storageThemeName } from "@/utils/constants";
 import { THEME_OPTIONS, DATA_THEME } from "@/stores/theme/constants";
 import { onBeforeMount } from "vue";
+import { ThemeType } from "@/stores/theme/types";
 
 const { theme, setTheme } = useTheme();
 const { DARK, LIGHT } = THEME_OPTIONS;
@@ -27,11 +28,10 @@ onBeforeMount(() => {
   }
 });
 
-const handleTheme = (darkMode: boolean) => {
-  const newTheme = darkMode ? DARK : LIGHT;
+const handleTheme = (newTheme: ThemeType) => {
   setTheme(newTheme);
   localStorage.setItem(storageThemeName, theme.value);
-  if (darkMode) {
+  if (newTheme === THEME_OPTIONS.DARK) {
     document.documentElement.setAttribute(DATA_THEME, DARK);
   } else {
     document.documentElement.removeAttribute(DATA_THEME);
