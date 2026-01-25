@@ -13,27 +13,27 @@
       <div class="grid grid-cols-2 gap-4">
         <GameStat>
           <template #icon>
-            <ClockIcon />
+            <v-icon name="co-clock" />
           </template>
           <template #value>{{ gameplayHours }}</template>
           <template #name>hours</template>
         </GameStat>
         <GameStat>
           <template #icon>
-            <StarIcon />
+            <v-icon name="co-star" />
           </template>
           <template #value>{{ rating }}</template>
           <template #name>rating</template>
         </GameStat>
         <GameStat>
           <template #icon>
-            <CalendarIcon />
+            <v-icon name="co-calendar" />
           </template>
           <template #value>{{ releaseYear }}</template>
         </GameStat>
         <GameStat>
           <template #icon>
-            <DollarIcon />
+            <v-icon name="co-dollar" />
           </template>
           <template #value>{{ price }}</template>
           <template #name>price</template>
@@ -57,10 +57,6 @@
 import { PropType } from "vue";
 import { GameType } from "@/utils/types";
 import { useRouter } from "vue-router";
-import ClockIcon from "@/shared/icons/ClockIcon.vue";
-import StarIcon from "@/shared/icons/StarIcon.vue";
-import DollarIcon from "@/shared/icons/DollarIcon.vue";
-import CalendarIcon from "@/shared/icons/CalendarIcon.vue";
 import GameStat from "@/views/game/components/GameStat.vue";
 import ConsoleWrapper from "@/views/game/components/ConsoleWrapper.vue";
 

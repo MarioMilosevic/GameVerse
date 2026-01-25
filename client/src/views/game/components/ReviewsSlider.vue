@@ -18,9 +18,7 @@
       @click="emits('previous-review-event')"
     >
       <template #icon>
-        <BaseIcon>
-          <LeftIcon />
-        </BaseIcon>
+        <v-icon name="co-arrow-circle-left" />
       </template>
     </SliderButton>
 
@@ -29,18 +27,13 @@
       @click="emits('next-review-event')"
     >
       <template #icon>
-        <BaseIcon>
-          <RightIcon />
-        </BaseIcon>
+        <v-icon name="co-arrow-circle-right" />
       </template>
     </SliderButton>
   </article>
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "@/icons/BaseIcon.vue";
-import LeftIcon from "@/icons/LeftIcon.vue";
-import RightIcon from "@/icons/RightIcon.vue";
 import SliderButton from "@/shared/components/SliderButton.vue";
 import ReviewCard from "@/views/game/components/ReviewCard.vue";
 import LeaveReview from "@/views/game/components/LeaveReview.vue";

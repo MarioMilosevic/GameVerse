@@ -6,7 +6,7 @@
     <SliderButton class="-left-11 sm:-left-16" @click="emits('prev-event')">
       <template #icon>
         <BaseIcon size="big">
-          <LeftIcon />
+          <v-icon name="co-arrow-circle-left" />
         </BaseIcon>
       </template>
     </SliderButton>
@@ -22,7 +22,7 @@
     <SliderButton class="-right-11 sm:-right-16" @click="emits('next-event')">
       <template #icon>
         <BaseIcon size="big">
-          <RightIcon />
+          <v-icon name="co-arrow-circle-right" />
         </BaseIcon>
       </template>
     </SliderButton>
@@ -33,9 +33,7 @@
 import { PropType } from "vue";
 import { translateElement } from "@/utils/helpers";
 import GameImageCloseButton from "@/views/game/components/GameImageCloseButton.vue";
-import BaseIcon from "@/icons/BaseIcon.vue";
-import LeftIcon from "@/icons/LeftIcon.vue";
-import RightIcon from "@/icons/RightIcon.vue";
+import BaseIcon from "@/shared/icons/BaseIcon.vue";
 import SliderButton from "@/shared/components/SliderButton.vue";
 
 defineProps({

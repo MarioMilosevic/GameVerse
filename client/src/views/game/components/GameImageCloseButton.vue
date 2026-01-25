@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import BaseIcon from "@/icons/BaseIcon.vue";
-import XIcon from "@/icons/XIcon.vue";
+import BaseIcon from "@/shared/icons/BaseIcon.vue";
+import XIcon from "@/shared/icons/XIcon.vue";
 
 const emits = defineEmits(["close-event"]);
 </script>

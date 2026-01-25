@@ -17,6 +17,13 @@ import {
   IoCloseSharp,
   FcCheckmark,
   CoHamburgerMenu,
+  CoCalendar,
+  CoClock,
+  CoStar,
+  CoDollar,
+  CoArrowCircleLeft,
+  CoArrowCircleRight,
+  RiCloseCircleFill,
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -34,6 +41,13 @@ addIcons(
   IoCloseSharp,
   FcCheckmark,
   CoHamburgerMenu,
+  CoCalendar,
+  CoClock,
+  CoStar,
+  CoDollar,
+  CoArrowCircleLeft,
+  CoArrowCircleRight,
+  RiCloseCircleFill,
 );
 
 import "./style.css";

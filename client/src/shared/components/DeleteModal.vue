@@ -34,8 +34,8 @@
 import BaseOverlay from "@/shared/components/BaseOverlay.vue";
 import BaseModal from "@/shared/components/BaseModal.vue";
 import Button from "@/shared/components/Button.vue";
-import BaseIcon from "@/icons/BaseIcon.vue";
-import XCircle from "@/icons/XCircle.vue";
+import BaseIcon from "@/shared/icons/BaseIcon.vue";
+import XCircle from "@/shared/icons/XCircle.vue";
 import { PropType, computed } from "vue";
 import { UserType } from "@/utils/types";
 
