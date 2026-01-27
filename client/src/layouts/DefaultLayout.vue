@@ -8,14 +8,11 @@
     ]"
     v-else
   >
-    <RouterLink :to="{ name: 'Home' }" class="flex items-center gap-4">
-      <img src="/controller.png" class="max-h-[20px] sm:max-h-[35px]" />
-      <h1 class="sm:text-2xl text-lg">GameVerse</h1>
-    </RouterLink>
+    <Logo />
 
     <div
       v-if="user.id"
-      class="flex items-center justify-between sm:min-w-[130px] rounded-xl relative group sm:gap-2 gap-4"
+      class="flex items-center lg:justify-between rounded-xl relative sm:gap-2 gap-4"
       @click="toggleMenu"
       @blur="closeNavigationMenu"
       tabindex="0"
@@ -23,9 +20,7 @@
       <NavigationMenu
         :class="[
           '',
-          navigationMenuOpen
-            ? 'scale-y-100 opacity-100'
-            : 'scale-y-100 opacity-100',
+          navigationMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-100 opacity-100',
           'group-hover:opacity-100 group-hover:scale-y-100',
         ]"
         :theme="theme"
@@ -35,16 +30,8 @@
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
-      <v-icon
-        v-if="theme === THEME_OPTIONS.DARK"
-        name="md-darkmode"
-        @toggle-theme-event="handleTheme"
-      />
-      <v-icon
-        v-if="theme === THEME_OPTIONS.LIGHT"
-        name="md-lightmode"
-        @toggle-theme-event="handleTheme"
-      />
+      <v-icon v-if="theme === THEME_OPTIONS.DARK" name="md-darkmode" @toggle-theme-event="handleTheme" />
+      <v-icon v-if="theme === THEME_OPTIONS.LIGHT" name="md-lightmode" @toggle-theme-event="handleTheme" />
       <!-- Todo add primary and transparent into constants maybe ? -->
       <Button
         v-for="(page, index) in authPages"
@@ -71,6 +58,7 @@ import { signOut } from "@/api/users";
 import { useRouter } from "vue-router";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { navLinkType } from "./types";
+import Logo from "@/shared/components/Logo.vue";
 
 const { user, resetUser } = useGetUserStore();
 const { loading } = useGetLoadingStore();
@@ -140,10 +128,7 @@ const handleMyReviews = () => {
 };
 
 const handleTheme = () => {
-  const updatedTheme: ThemeType =
-    props.theme === THEME_OPTIONS.DARK
-      ? THEME_OPTIONS.LIGHT
-      : THEME_OPTIONS.DARK;
+  const updatedTheme: ThemeType = props.theme === THEME_OPTIONS.DARK ? THEME_OPTIONS.LIGHT : THEME_OPTIONS.DARK;
   emits("toggle-theme-event", updatedTheme);
 };
 
