@@ -1,10 +1,6 @@
-import {
-  AccountSettingsType,
-  LoginCredentialsType,
-  SignUpCredentialsType,
-  UserType,
-} from "@/utils/types";
-import { baseUrl } from "@/utils/constants";
+import { AccountSettingsType, LoginCredentialsType, SignUpCredentialsType, UserType } from "@/utils/types";
+import { gameVerseToken, baseUrl } from "@/shared/constants";
+
 import { showToast } from "@/utils/toast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
@@ -22,14 +18,12 @@ const fetchAuth = async <T>(endpoint: string, data: T) => {
   }
 };
 
-export const createUser = (newUser: SignUpCredentialsType) =>
-  fetchAuth("sign-up", newUser);
+export const createUser = (newUser: SignUpCredentialsType) => fetchAuth("sign-up", newUser);
 
-export const loginUser = (user: LoginCredentialsType) =>
-  fetchAuth("login", user);
+export const loginUser = (user: LoginCredentialsType) => fetchAuth("login", user);
 
 export const signOut = (user: UserType, message?: string) => {
-  localStorage.removeItem("gameVerse-token");
+  localStorage.removeItem(gameVerseToken);
   const firstName = user.fullName.split(" ")[0];
   setTimeout(() => {
     if (!message) {
@@ -62,10 +56,7 @@ export const getUserReviews = async (id: number) => {
   }
 };
 
-export const editUserNameAndEmail = async (
-  id: number,
-  data: AccountSettingsType,
-) => {
+export const editUserNameAndEmail = async (id: number, data: AccountSettingsType) => {
   try {
     const response = await fetch(`${baseUrl}/users/${id}`, {
       method: "PATCH",
@@ -97,16 +88,13 @@ export const getUsers = async (page: number, sort: string, search: string) => {
 
 export const editUserProfile = async (editedUser: UserType) => {
   try {
-    const response = await fetch(
-      `${baseUrl}/users/dashboard/${editedUser.id}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editedUser),
+    const response = await fetch(`${baseUrl}/users/dashboard/${editedUser.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(editedUser),
+    });
 
     return await response.json();
   } catch (error) {

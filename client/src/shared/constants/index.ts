@@ -1,11 +1,10 @@
-import { UserType } from "./types";
+import { UserType } from "@/utils/types";
 
-export const baseUrl =
-  import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
-  
-export const tokenName = "gameVerse-token";
-export const profileImg =
-  "https://social-network-js.vercel.app/img/profile5.png";
+export const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/api/v1";
+
+export const gameVerseToken = "gameVerse-token";
+
+export const profileImg = "https://social-network-js.vercel.app/img/profile5.png";
 
 export const passwordMessage = {
   message: "Password must be at least 8 characters",
@@ -91,7 +90,6 @@ export const dashboardOptions = ["ADMIN", "USER"];
 export const sortUserOptins = ["A-Z", "Z-A", "Newest", "Oldest"];
 
 export const usersPerPage = 10;
-
 
 export const emptyAccountSettings = {
   fullName: "",
