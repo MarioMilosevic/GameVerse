@@ -4,6 +4,18 @@ export const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:3000/ap
 
 export const gameVerseToken = "gameVerse-token";
 
+export const contentTypeJson = { "Content-Type": "application/json" };
+export const httpMethods = {
+  POST: "POST",
+  PATCH: "PATCH",
+  DELETE: "DELETE",
+} as const;
+
+export const userRoles = {
+  ADMIN: "ADMIN",
+  USER: "USER",
+} as const;
+
 export const profileImg = "https://social-network-js.vercel.app/img/profile5.png";
 
 export const passwordMessage = {
@@ -85,7 +97,7 @@ export const emptyStarsArray = new Array(10).fill("empty");
 
 export const storageThemeName = "gameVerse-theme";
 
-export const dashboardOptions = ["ADMIN", "USER"];
+export const dashboardOptions = [userRoles.ADMIN, userRoles.USER];
 
 export const sortUserOptins = ["A-Z", "Z-A", "Newest", "Oldest"];
 
@@ -98,7 +110,7 @@ export const emptyAccountSettings = {
 
 export const emptyUser: UserType = {
   id: 0,
-  role: "USER",
+  role: userRoles.USER,
   email: "",
   fullName: "",
   image: "",

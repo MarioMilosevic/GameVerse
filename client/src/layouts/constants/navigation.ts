@@ -2,6 +2,7 @@ import type { navLinkType } from "@/layouts/types/index";
 import type { ThemeType } from "@/stores/theme/types";
 import type { UserType } from "@/utils/types";
 import { THEME_OPTIONS } from "@/stores/theme/constants";
+import { userRoles } from "@/shared/constants";
 
 const BASE_LINKS: navLinkType[] = [
   {
@@ -30,7 +31,7 @@ export const createNavLinks = (
   };
 
   const adminLinks: navLinkType[] =
-    user?.role === "ADMIN"
+    user?.role === userRoles.ADMIN
       ? [
           {
             icon: "md-dashboardcustomize",

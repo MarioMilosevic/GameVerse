@@ -1,5 +1,5 @@
 import z, { ZodError } from "zod";
-import { passwordMessage } from "@/utils/constants";
+import { passwordMessage } from "@/shared/constants";
 
 export const signUpSchema = z
   .object({

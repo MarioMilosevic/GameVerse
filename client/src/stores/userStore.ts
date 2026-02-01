@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { UserType } from "@/utils/types";
+import { userRoles } from "@/shared/constants";
 
 const emptyUser: UserType = {
   id: 0,
@@ -8,7 +9,7 @@ const emptyUser: UserType = {
   image: "",
   active: true,
   createdDate: "",
-  role: "USER",
+  role: userRoles.USER,
   email: "",
 };
 

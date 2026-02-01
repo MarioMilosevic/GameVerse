@@ -1,13 +1,11 @@
 import { GameReviewType, ReviewType } from "@/utils/types";
-import { baseUrl } from "@/shared/constants";
+import { baseUrl, contentTypeJson, httpMethods } from "@/shared/constants";
 
 export const createReview = async (review: ReviewType) => {
   try {
     const response = await fetch(`${baseUrl}/reviews`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: httpMethods.POST,
+      headers: contentTypeJson,
       body: JSON.stringify(review),
     });
     return await response.json();
@@ -19,8 +17,8 @@ export const createReview = async (review: ReviewType) => {
 export const deleteReview = async (reviewId: number) => {
   try {
     const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      method: httpMethods.DELETE,
+      headers: contentTypeJson,
     });
 
     return await response.json();
@@ -32,8 +30,8 @@ export const deleteReview = async (reviewId: number) => {
 export const editReview = async (reviewId: number, updatedReview: GameReviewType) => {
   try {
     const response = await fetch(`${baseUrl}/reviews/${reviewId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      method: httpMethods.PATCH,
+      headers: contentTypeJson,
       body: JSON.stringify({ updatedReview }),
     });
     return await response.json();

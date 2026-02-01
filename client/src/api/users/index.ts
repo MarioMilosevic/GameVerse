@@ -1,15 +1,13 @@
 import { AccountSettingsType, LoginCredentialsType, SignUpCredentialsType, UserType } from "@/utils/types";
-import { gameVerseToken, baseUrl } from "@/shared/constants";
+import { gameVerseToken, baseUrl, contentTypeJson, httpMethods } from "@/shared/constants";
 
 import { showToast } from "@/utils/toast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
   try {
     const response = await fetch(`${baseUrl}/users/${endpoint}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: httpMethods.POST,
+      headers: contentTypeJson,
       body: JSON.stringify(data),
     });
     return await response.json();
@@ -59,10 +57,8 @@ export const getUserReviews = async (id: number) => {
 export const editUserNameAndEmail = async (id: number, data: AccountSettingsType) => {
   try {
     const response = await fetch(`${baseUrl}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: httpMethods.PATCH,
+      headers: contentTypeJson,
       body: JSON.stringify(data),
     });
 
@@ -89,10 +85,8 @@ export const getUsers = async (page: number, sort: string, search: string) => {
 export const editUserProfile = async (editedUser: UserType) => {
   try {
     const response = await fetch(`${baseUrl}/users/dashboard/${editedUser.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: httpMethods.PATCH,
+      headers: contentTypeJson,
       body: JSON.stringify(editedUser),
     });
 
@@ -105,8 +99,8 @@ export const editUserProfile = async (editedUser: UserType) => {
 export const deleteUser = async (id: number) => {
   try {
     const response = await fetch(`${baseUrl}/users/dashboard/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      method: httpMethods.DELETE,
+      headers: contentTypeJson,
     });
     return response;
   } catch (error) {
@@ -117,10 +111,8 @@ export const deleteUser = async (id: number) => {
 export const disableUserAccount = async (id: number) => {
   try {
     const response = await fetch(`${baseUrl}/users/disable/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: httpMethods.PATCH,
+      headers: contentTypeJson,
     });
     return await response.json();
   } catch (error) {
@@ -133,7 +125,7 @@ export const updateUserImage = async (id: number, file: File) => {
     const formData = new FormData();
     formData.append("image", file);
     const response = await fetch(`${baseUrl}/users/image/${id}`, {
-      method: "PATCH",
+      method: httpMethods.PATCH,
       body: formData,
     });
     return await response.json();

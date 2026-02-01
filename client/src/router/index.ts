@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getUserData } from "@/api/users";
-import { tokenName } from "@/utils/constants";
+import { gameVerseToken, userRoles } from "@/shared/constants";
 import { showToast } from "@/utils/toast";
 import useGetUserStore from "@/composables/useGetUserStore";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
@@ -51,7 +51,7 @@ const router = createRouter({
 router.beforeEach(async (to) => {
   const { user, setUser } = useGetUserStore();
   const { setLoading } = useGetLoadingStore();
-  const userToken = localStorage.getItem(tokenName);
+  const userToken = localStorage.getItem(gameVerseToken);
   const isAuthRoute = to.name === "Login" || to.name === "Sign Up";
 
   if (userToken && isAuthRoute) return { name: "Home" };
@@ -71,7 +71,7 @@ router.beforeEach(async (to) => {
       setLoading(false);
     }
   }
-  if (user.value.role !== "ADMIN" && to.name === "Dashboard") {
+  if (user.value.role !== userRoles.ADMIN && to.name === "Dashboard") {
     return { name: "Home" };
   }
 });

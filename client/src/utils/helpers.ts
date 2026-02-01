@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { baseUrl } from "./constants";
+import { baseUrl, profileImg } from "@/shared/constants";
 
 export const translateElement = (index: number, selectedIndex: number) => {
   const calculation = 100 * (index - selectedIndex);
@@ -21,7 +21,7 @@ export const fillStars = (index: number, length: number = 10) => {
 export const renderUserImage = (image: string) =>
   image.startsWith("images")
     ? `${baseUrl.replace("/api/v1", "")}/public/${image}`
-    : "https://social-network-js.vercel.app/img/profile5.png";
+    : profileImg;
 
 export const createVideoUrl = (videoId: string) =>
   `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1`;
