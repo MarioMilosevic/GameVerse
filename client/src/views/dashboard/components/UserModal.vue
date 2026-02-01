@@ -61,7 +61,7 @@ import FormCheckbox from "@/shared/components/form/FormCheckbox.vue";
 import FormWrapper from "@/shared/components/form/FormWrapper.vue";
 import SlotProvider from "@/shared/components/SlotProvider.vue";
 import Button from "@/shared/components/Button.vue";
-import { userInputs, dashboardOptions } from "@/utils/constants";
+import { userInputs, dashboardOptions } from "@/shared/constants";
 import { PropType, ref } from "vue";
 import { UserType } from "@/utils/types";
 import { editUserProfile } from "@/api/users";

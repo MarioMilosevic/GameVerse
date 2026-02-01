@@ -24,7 +24,7 @@ import { UsersResponseType, UserType } from "@/utils/types";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
 import AdminDashboard from "@/views/dashboard/components/AdminDashboard.vue";
-import { usersPerPage } from "@/utils/constants";
+import { usersPerPage } from "@/shared/constants";
 const { loading, setLoading } = useGetLoadingStore();
 
 const { handleSearch } = useDebounce((value: string) => {

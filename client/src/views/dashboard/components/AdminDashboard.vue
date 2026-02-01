@@ -64,7 +64,7 @@ import SearchHeader from "@/views/dashboard/components/SearchHeader.vue";
 import TablePagination from "@/views/dashboard/components/TablePagination.vue";
 import { UsersResponseType, UserType } from "@/utils/types";
 import { PropType, ref } from "vue";
-import { emptyUser } from "@/utils/constants";
+import { emptyUser } from "@/shared/constants";
 import { deleteUser } from "@/api/users";
 import { showToast } from "@/utils/toast";
 

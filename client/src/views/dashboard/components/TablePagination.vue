@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import Button from "@/shared/components/Button.vue";
 import { computed } from "vue";
-import { usersPerPage } from "@/utils/constants";
+import { usersPerPage } from "@/shared/constants";
 
 const props = defineProps({
   users: {

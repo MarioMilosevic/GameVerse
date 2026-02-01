@@ -35,7 +35,7 @@ import FormBlock from "@/shared/components/form/FormBlock.vue";
 import FormLabel from "@/shared/components/form/FormLabel.vue";
 import { PropType, ref } from "vue";
 import { UsersResponseType } from "@/utils/types";
-import { sortUserOptins } from "@/utils/constants";
+import { sortUserOptins } from "@/shared/constants";
 
 const props = defineProps({
   usersObj: {

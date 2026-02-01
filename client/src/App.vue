@@ -6,7 +6,7 @@
 <script lang="ts" setup>
 import DefaultLayout from "@/layouts/DefaultLayout.vue";
 import useTheme from "@/composables/useTheme";
-import { storageThemeName } from "@/utils/constants";
+import { storageThemeName } from "@/shared/constants";
 import { THEME_OPTIONS, DATA_THEME } from "@/stores/theme/constants";
 import { onBeforeMount } from "vue";
 import { ThemeType } from "@/stores/theme/types";

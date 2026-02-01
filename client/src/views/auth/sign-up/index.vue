@@ -63,7 +63,7 @@ import FormLine from "@/shared/components/form/FormLine.vue";
 import FormGuest from "@/shared/components/form/FormGuest.vue";
 import Button from "@/shared/components/Button.vue";
 import SlotProvider from "@/shared/components/SlotProvider.vue";
-import { signUpInputs } from "@/utils/constants";
+import { signUpInputs, userRoles } from "@/shared/constants";
 import { ref, computed } from "vue";
 import {
   getSignUpErrors,
@@ -115,7 +115,7 @@ const submitHandler = async () => {
     } else {
       const newUser = {
         ...signUpCredentials.value,
-        role: "USER",
+        role: userRoles.USER,
       };
       const { data, message } = await createUser(newUser);
       if (data) {

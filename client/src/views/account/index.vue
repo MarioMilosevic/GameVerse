@@ -111,7 +111,7 @@ import Button from "@/shared/components/Button.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "@/utils/types";
 import { formattedDate, renderUserImage } from "@/utils/helpers";
-import { accountInputs, emptyAccountSettings, guestMessage } from "@/utils/constants";
+import { accountInputs, emptyAccountSettings, guestMessage } from "@/shared/constants";
 import { ref, computed } from "vue";
 import {
   accountSchema,

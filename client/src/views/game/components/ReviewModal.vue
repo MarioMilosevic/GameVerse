@@ -36,7 +36,7 @@ import ExistingReview from "@/views/game/components/ExistingReview.vue";
 import CreateReview from "@/views/game/components/CreateReview.vue";
 import FormReview from "@/shared/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
-import { emptyStarsArray, guestMessage } from "@/utils/constants";
+import { emptyStarsArray, guestMessage } from "@/shared/constants";
 import { fillStars } from "@/utils/helpers";
 import { GameReviewType, ReviewType } from "@/utils/types";
 import { gameReviewSchema } from "@/schemas/gameReview";

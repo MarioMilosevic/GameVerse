@@ -61,7 +61,7 @@ import FormError from "@/shared/components/form/FormError.vue";
 import Button from "@/shared/components/Button.vue";
 import FormLine from "@/shared/components/form/FormLine.vue";
 import FormGuest from "@/shared/components/form/FormGuest.vue";
-import { loginInputs, tokenName } from "@/utils/constants";
+import { loginInputs, gameVerseToken } from "@/shared/constants";
 import { ref, computed } from "vue";
 import { LoginCredentialsType } from "@/utils/types";
 import {
@@ -110,7 +110,7 @@ const submitHandler = async () => {
     }
     const { data, message } = await loginUser(loginCredentials.value);
     if (data) {
-      localStorage.setItem(tokenName, data);
+      localStorage.setItem(gameVerseToken, data);
       router.push("/");
     } else {
       showToast(message, "error");
