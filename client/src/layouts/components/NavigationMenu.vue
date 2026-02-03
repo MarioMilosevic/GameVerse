@@ -7,7 +7,7 @@
     :class="[
       'z-40 text-xs sm:text-base flex',
       'lg:flex-row lg:gap-2 lg:static lg:w-full lg:rounded-xl lg:bg-transparent lg:translate-x-0',
-      'fixed top-0 right-0 h-full w-full flex-col gap-4 p-6 shadow-lg transition-transform duration-300 ease-in-out max-lg:bg-white max-lg:dark:bg-gray-900',
+      'fixed top-0 right-0 h-full w-full flex-col gap-4 p-6 transition-transform duration-300 ease-in-out max-lg:bg-white max-lg:dark:bg-gray-900',
       isOpened ? 'translate-x-0' : 'max-lg:translate-x-full',
     ]"
   >
