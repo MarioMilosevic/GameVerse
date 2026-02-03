@@ -8,12 +8,12 @@ export const accountSchema = z.object({
     })
     .refine(
       (value) => {
-        const names = value.trim().split(" ");
+        const names = value.trim().split(/\s+/);
         return names.length >= 2 && names[1].length >= 2;
       },
       {
         message: "Last name must have at least 2 characters",
-      }
+      },
     ),
   email: z.string().email(),
 });
@@ -28,17 +28,11 @@ export type AccountTouchedFields = {
   [key in AccountFields]?: boolean;
 };
 
-export function getAccountFieldError<
-  T extends AccountFields,
-  K extends AccountSchema[T]
->(property: T, value: K) {
+export function getAccountFieldError<T extends AccountFields, K extends AccountSchema[T]>(property: T, value: K) {
   const { error } = accountSchema.shape[property].safeParse(value);
-  return error
-    ? error.issues.map((issue) => issue.message).join(", ")
-    : undefined;
+  return error ? error.issues.map((issue) => issue.message).join(", ") : undefined;
 }
 
 export const accountPhotoSchema = z.object({
-  image:z.string()
-})
-
+  image: z.string(),
+});
