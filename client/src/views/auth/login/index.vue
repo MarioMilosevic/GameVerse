@@ -18,9 +18,7 @@
               <FormInput
                 @blur-event="blurHandler(input.name as LoginFields)"
                 v-bind="input"
-                v-model="
-                  loginCredentials[input.name as keyof typeof loginCredentials]
-                "
+                v-model="loginCredentials[input.name as keyof typeof loginCredentials]"
               />
             </template>
             <template #line>
@@ -36,12 +34,7 @@
       </SlotProvider>
     </template>
     <template #submit>
-      <Button
-        type="submit"
-        :disabled="!allFieldsCompleted"
-        :is-loading="isSubmiting"
-        :style="{ marginTop: '0.5rem' }"
-      >
+      <Button type="submit" :disabled="!allFieldsCompleted" :is-loading="isSubmiting" :style="{ marginTop: '0.5rem' }">
         LOG IN
       </Button>
     </template>
@@ -71,7 +64,7 @@ import {
   LoginFields,
   LoginTouchedFields,
   getLoginErrors,
-} from "@/schemas/loginPage";
+} from "@/schemas/login";
 import { loginUser } from "@/api/users";
 import { useRouter } from "vue-router";
 import { showToast } from "@/utils/toast";
@@ -91,10 +84,7 @@ const allFieldsCompleted = computed(() => {
 const router = useRouter();
 
 const blurHandler = (property: LoginFields) => {
-  const message = getLoginFieldError(
-    property,
-    loginCredentials.value[property],
-  );
+  const message = getLoginFieldError(property, loginCredentials.value[property]);
   loginFormErrors.value[property] = message;
   touchedFields.value[property] = true;
 };

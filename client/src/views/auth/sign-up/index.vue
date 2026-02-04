@@ -18,11 +18,7 @@
               <FormInput
                 @blur-event="blurHandler(input.name as SignUpFields)"
                 v-bind="input"
-                v-model="
-                  signUpCredentials[
-                    input.name as keyof typeof signUpCredentials
-                  ]
-                "
+                v-model="signUpCredentials[input.name as keyof typeof signUpCredentials]"
               />
             </template>
             <template #line>
@@ -38,12 +34,7 @@
       </SlotProvider>
     </template>
     <template #submit>
-      <Button
-        type="submit"
-        :style="{ marginTop: '0.5rem' }"
-        :disabled="!allFieldsCompleted"
-        :is-loading="isLoading"
-      >
+      <Button type="submit" :style="{ marginTop: '0.5rem' }" :disabled="!allFieldsCompleted" :is-loading="isLoading">
         SIGN UP
       </Button>
     </template>
@@ -72,7 +63,7 @@ import {
   SignUpFields,
   signUpSchema,
   SignUpTouchedFields,
-} from "@/schemas/signUpPage";
+} from "@/schemas/sign-up";
 import { SignUpCredentialsType } from "@/utils/types";
 import { showToast } from "@/utils/toast";
 import { createUser } from "@/api/users";
@@ -96,10 +87,7 @@ const allFieldsCompleted = computed(() => {
 const router = useRouter();
 
 const blurHandler = (property: SignUpFields) => {
-  const message = getSignUpFieldError(
-    property,
-    signUpCredentials.value[property],
-  );
+  const message = getSignUpFieldError(property, signUpCredentials.value[property]);
   signUpFormErrors.value[property] = message;
   touchedFields.value[property] = true;
 };
