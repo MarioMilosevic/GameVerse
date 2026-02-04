@@ -34,9 +34,10 @@ JWT workflow. Token is saved in local storage, sent from the client and then dec
 
 # To run locally
 
+**Note:** This project uses pnpm as the package manager. npm/yarn will not work due to the preinstall check.
+
 - git clone this repository
-- install dependencies in client folder using `pnpm install`
-- install dependencies in client folder using ``npm install` `
-- then `npx prisma generate` to generate Prisma client
-- then in server run `npm start` to start the the backend server
+- install dependencies in client and server folders using `pnpm install`
+- then in server folder `pnpm prisma generate` to generate Prisma client
+- then in server run `pnpm start` to start the backend server
 - in client open new terminal and run `pnpm run dev` to run client server
