@@ -17,16 +17,7 @@
       @blur="closeNavigationMenu"
       tabindex="0"
     >
-      <NavigationMenu
-        :class="[
-          '',
-          navigationMenuOpen ? 'scale-y-100 opacity-100' : 'scale-y-100 opacity-100',
-          'group-hover:opacity-100 group-hover:scale-y-100',
-        ]"
-        :theme="theme"
-        @navigation="handleNavigation"
-        @toggle-theme-event="handleTheme"
-      />
+      <NavigationMenu :theme="theme" @navigation="handleNavigation" />
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
@@ -151,7 +142,7 @@ const handleNavigation = (link: navLinkType) => {
     case "My Reviews":
       handleMyReviews();
       break;
-    case "Log Out":
+    case "Log out":
       handleSignOut();
       break;
   }
