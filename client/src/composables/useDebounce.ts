@@ -6,10 +6,10 @@ export function useDebounce(callback: (value: string) => void, delay = 500) {
   function handleSearch(value: string) {
     if (timeout.value) {
       clearTimeout(timeout.value);
-      timeout.value = setTimeout(() => {
-        callback(value);
-      }, delay);
     }
+    timeout.value = setTimeout(() => {
+      callback(value);
+    }, delay);
   }
 
   return {

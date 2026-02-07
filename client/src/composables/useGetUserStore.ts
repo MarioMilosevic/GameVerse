@@ -4,7 +4,10 @@ import { useUserStore } from "@/stores/userStore";
 export default function useGetUserStore() {
   const userStore = useUserStore();
   const { user } = storeToRefs(userStore);
-  const { setUser, resetUser } = useUserStore();
 
-  return { user, setUser, resetUser };
+  return {
+    user,
+    setUser: userStore.setUser,
+    resetUser: userStore.resetUser,
+  };
 }
