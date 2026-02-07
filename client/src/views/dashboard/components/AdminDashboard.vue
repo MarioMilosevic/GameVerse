@@ -66,7 +66,7 @@ import { UsersResponseType, UserType } from "@/utils/types";
 import { PropType, ref } from "vue";
 import { emptyUser } from "@/shared/constants";
 import { deleteUser } from "@/api/users";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 defineProps({
   usersObj: {
@@ -129,6 +129,5 @@ const submitHandler = (updatedUser: UserType) => {
 
 const sortHandler = (value: string) => emits("sort-value-event", value);
 
-const searchHandler = (value: string) =>
-  emits("search-event", value.toLowerCase());
+const searchHandler = (value: string) => emits("search-event", value.toLowerCase());
 </script>

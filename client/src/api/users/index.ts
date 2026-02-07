@@ -1,7 +1,6 @@
 import { AccountSettingsType, LoginCredentialsType, SignUpCredentialsType, UserType } from "@/utils/types";
 import { gameVerseToken, baseUrl, contentTypeJson, httpMethods } from "@/shared/constants";
-
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 const fetchAuth = async <T>(endpoint: string, data: T) => {
   try {

@@ -12,7 +12,7 @@ import { getUserReviews } from "@/api/users";
 
 import { onBeforeMount, ref } from "vue";
 import { MyReviewType } from "@/utils/types";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 const myReviews = ref<MyReviewType[]>([]);
 

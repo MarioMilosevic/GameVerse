@@ -37,11 +37,11 @@ import CreateReview from "@/views/game/components/CreateReview.vue";
 import FormReview from "@/shared/components/form/FormReview.vue";
 import { ref, computed, PropType } from "vue";
 import { emptyStarsArray, guestMessage } from "@/shared/constants";
-import { fillStars } from "@/utils/helpers";
+import { fillStars } from "@/utils/helpers/fillStars";
 import { GameReviewType, ReviewType } from "@/utils/types";
-import { gameReviewSchema } from "@/schemas/gameReview";
+import { gameReviewSchema } from "@/schemas/game-review";
 import { createReview } from "@/api/reviews";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import { useRouter } from "vue-router";
 
 const props = defineProps({
@@ -67,9 +67,7 @@ const router = useRouter();
 const { user } = useGetUserStore();
 
 const starsArray = ref<string[]>(
-  props.userReview?.rating
-    ? fillStars(props.userReview.rating - 1)
-    : [...emptyStarsArray],
+  props.userReview?.rating ? fillStars(props.userReview.rating - 1) : [...emptyStarsArray],
 );
 
 const gameReview = ref<GameReviewType>({
@@ -81,11 +79,7 @@ const allFieldsCompleted = computed(() => {
   return gameReviewSchema.safeParse(gameReview.value).success;
 });
 
-const emits = defineEmits([
-  "close-modal-event",
-  "submit-event",
-  "delete-event",
-]);
+const emits = defineEmits(["close-modal-event", "submit-event", "delete-event"]);
 
 const ratingClickHandler = (rating: number) => {
   starsArray.value = fillStars(rating);

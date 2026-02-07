@@ -31,10 +31,10 @@ import PreviewReview from "@/views/game/components/PreviewReview.vue";
 import EditReview from "@/views/game/components/EditReview.vue";
 import DeleteModal from "@/shared/components/DeleteModal.vue";
 import { deleteReview } from "@/api/reviews";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import { ReviewType } from "@/utils/types";
 import { PropType, ref, inject } from "vue";
-import { fillStars } from "@/utils/helpers";
+import { fillStars } from "@/utils/helpers/fillStars";
 
 const isEditing = ref<boolean>(false);
 
@@ -51,8 +51,7 @@ const { review } = props;
 
 const emits = defineEmits(["delete-event", "edit-event"]);
 
-const deleteReviewUI =
-  inject<(reviewId: number, avgRating: string) => void>("deleteReview");
+const deleteReviewUI = inject<(reviewId: number, avgRating: string) => void>("deleteReview");
 
 const editingStarsArray = ref(fillStars((props.review.rating ?? 0) - 1));
 const editRating = ref<number>(props.review.rating ?? 0);

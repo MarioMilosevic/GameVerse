@@ -65,7 +65,7 @@ import {
   SignUpTouchedFields,
 } from "@/schemas/sign-up";
 import { SignUpCredentialsType } from "@/utils/types";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import { createUser } from "@/api/users";
 import { useRouter } from "vue-router";
 

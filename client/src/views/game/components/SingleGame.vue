@@ -1,23 +1,16 @@
 <template>
   <main class="min-h-screen">
-    <img
-      :src="singleGame.thumbnail"
-      :alt="singleGame.thumbnail"
-      class="sm:h-[150px] h-[75px] w-full object-cover"
-    />
+    <img :src="singleGame.thumbnail" :alt="singleGame.thumbnail" class="sm:h-[150px] h-[75px] w-full object-cover" />
     <ContentSection>
       <template #title>
         {{ name }}
       </template>
       <template #main>
-        <iframe class="aspect-video w-full h-full" :src="embedTrailerUrl">
-        </iframe>
+        <iframe class="aspect-video w-full h-full" :src="embedTrailerUrl"> </iframe>
         <div class="col-start-2 col-end-3 flex flex-col gap-4 justify-between">
           <p class="text-justify text-sm sm:text-base">{{ description }}</p>
           <div class="flex flex-col justify-center gap-2 text-justify">
-            <GameInfo
-              class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1"
-            >
+            <GameInfo class="border-t border-sky-300 dark:border-t-dark-dark-red pt-1">
               <template #title> Writers: </template>
               <template #content>
                 {{ writers.join(" • ") }}
@@ -31,9 +24,7 @@
             </GameInfo>
             <GameInfo>
               <template #title> Duration: </template>
-              <template #content>
-                Main story is {{ gameplayHours }} hours long
-              </template>
+              <template #content> Main story is {{ gameplayHours }} hours long </template>
             </GameInfo>
           </div>
         </div>
@@ -44,9 +35,7 @@
             <template #default>{{ genre.name }} </template>
           </GenreTag>
         </div>
-        <div
-          class="flex items-center justify-between sm:gap-6 sm:justify-start"
-        >
+        <div class="flex items-center justify-between sm:gap-6 sm:justify-start">
           <h3>Available on:</h3>
           <ConsoleWrapper>
             <img
@@ -125,7 +114,7 @@ import AppFooter from "@/shared/components/AppFooter.vue";
 import GameRating from "@/views/game/components/GameRating.vue";
 import useGetUserStore from "@/composables/useGetUserStore";
 import { GameType, NewReviewResponseType } from "@/utils/types";
-import { createVideoUrl } from "@/utils/helpers";
+import { createVideoUrl } from "@/utils/helpers/createVideoUrl";
 import { PropType, ref, computed } from "vue";
 
 const props = defineProps({
@@ -137,21 +126,10 @@ const props = defineProps({
 
 const { user } = useGetUserStore();
 
-const {
-  name,
-  gameplayHours,
-  photos,
-  description,
-  writers,
-  stars,
-  genres,
-  consoles,
-} = props.singleGame;
+const { name, gameplayHours, photos, description, writers, stars, genres, consoles } = props.singleGame;
 
 const userReview = computed(() => {
-  return props.singleGame.reviews.find(
-    (review) => review.user.id === user.value.id,
-  );
+  return props.singleGame.reviews.find((review) => review.user.id === user.value.id);
 });
 
 const isGameImageModalOpen = ref<boolean>(false);
@@ -163,9 +141,7 @@ const emits = defineEmits(["create-review-event"]);
 
 const embedTrailerUrl = computed(() => {
   if (!props.singleGame.trailer) return "";
-  const videoIdMatch = props.singleGame.trailer.match(
-    /(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/,
-  );
+  const videoIdMatch = props.singleGame.trailer.match(/(?:youtu\.be\/|v=)([0-9A-Za-z_-]{11})/);
   const videoId = videoIdMatch ? videoIdMatch[1] : "";
   return createVideoUrl(videoId);
 });

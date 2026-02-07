@@ -163,7 +163,6 @@ describe("sign up schema", () => {
         passwordConfirm: "different123",
       });
 
-      // If parse does NOT throw, force test to fail
       throw new Error("Expected validation error");
     } catch (error) {
       expect(error).toBeInstanceOf(ZodError);

@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { onBeforeMount, ref, watch } from "vue";
 import { getUsers } from "@/api/users";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import { useDebounce } from "@/composables/useDebounce";
 import { UsersResponseType, UserType } from "@/utils/types";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
@@ -68,9 +68,7 @@ onBeforeMount(async () => {
 });
 
 const editUserHandler = (editedUser: UserType) => {
-  const index = usersObj.value.users.findIndex(
-    (user) => user.id === editedUser.id,
-  );
+  const index = usersObj.value.users.findIndex((user) => user.id === editedUser.id);
   if (index !== -1) {
     usersObj.value.users[index] = editedUser;
   }
@@ -99,20 +97,13 @@ const previousPage = () => {
   }
 };
 const nextPage = () => {
-  if (
-    paginationOptions.value.currentPage <
-    usersObj.value.count / usersPerPage
-  ) {
+  if (paginationOptions.value.currentPage < usersObj.value.count / usersPerPage) {
     paginationOptions.value.currentPage += 1;
   }
 };
 
 watch(
-  [
-    () => paginationOptions.value.sort,
-    () => paginationOptions.value.search,
-    () => paginationOptions.value.currentPage,
-  ],
+  [() => paginationOptions.value.sort, () => paginationOptions.value.search, () => paginationOptions.value.currentPage],
   async ([newSort, newSearch, newPage]) => {
     try {
       const { data, message } = await getUsers(newPage, newSort, newSearch);

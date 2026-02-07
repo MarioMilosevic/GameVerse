@@ -67,7 +67,7 @@ import {
 } from "@/schemas/login";
 import { loginUser } from "@/api/users";
 import { useRouter } from "vue-router";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 const loginCredentials = ref<LoginCredentialsType>({
   email: "",

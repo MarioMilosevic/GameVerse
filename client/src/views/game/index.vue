@@ -1,10 +1,6 @@
 <template>
   <LoadingSpinner v-if="loading" />
-  <SingleGame
-    v-else
-    :single-game="singleGame"
-    @create-review-event="createHandler"
-  />
+  <SingleGame v-else :single-game="singleGame" @create-review-event="createHandler" />
 </template>
 
 <script setup lang="ts">
@@ -12,7 +8,7 @@ import { useRoute } from "vue-router";
 import { getSingleGame } from "@/api/games";
 import { onBeforeMount, ref, provide } from "vue";
 import { GameType, NewReviewResponseType, ReviewType } from "@/utils/types";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 import SingleGame from "@/views/game/components/SingleGame.vue";
 import LoadingSpinner from "@/shared/components/LoadingSpinner.vue";
@@ -47,23 +43,15 @@ const createHandler = (response: NewReviewResponseType) => {
 };
 
 const deleteHandler = (reviewId: number, avgRating: string) => {
-  const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId,
-  );
+  const index = singleGame.value.reviews.findIndex((review) => review.id === reviewId);
   if (index !== -1) {
     singleGame.value.reviews.splice(index, 1);
     singleGame.value.rating = Number(avgRating);
   }
 };
 
-const editHandler = (
-  reviewId: number,
-  updatedReview: ReviewType,
-  avgRating: number,
-) => {
-  const index = singleGame.value.reviews.findIndex(
-    (review) => review.id === reviewId,
-  );
+const editHandler = (reviewId: number, updatedReview: ReviewType, avgRating: number) => {
+  const index = singleGame.value.reviews.findIndex((review) => review.id === reviewId);
   if (index !== -1) {
     singleGame.value.reviews[index] = {
       ...singleGame.value.reviews[index],

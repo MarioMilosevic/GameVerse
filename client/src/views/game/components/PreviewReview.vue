@@ -2,9 +2,7 @@
   <MainRatingStar :rating="props.rating" />
   <RatingStars :stars-array="starsArray" :cursor-pointer="false" />
   <p class="text-justify border p-4 rounded-xl w-full">{{ content }}</p>
-  <p class="pl-4 self-start text-sm">
-    Reviewed on {{ formattedDate(createdAt as string) }}
-  </p>
+  <p class="pl-4 self-start text-sm">Reviewed on {{ formatDate(createdAt as string) }}</p>
 
   <div class="flex w-full justify-between">
     <Button color="green" @click="emits('edit-event')">Edit Review</Button>
@@ -16,7 +14,8 @@
 import RatingStars from "@/views/game/components/RatingStars.vue";
 import MainRatingStar from "@/views/game/components/MainRatingStar.vue";
 import Button from "@/shared/components/Button.vue";
-import { fillStars, formattedDate } from "@/utils/helpers";
+import { formatDate } from "@/utils/helpers/formatDate";
+import { fillStars } from "@/utils/helpers/fillStars";
 import { computed } from "vue";
 
 const props = defineProps({

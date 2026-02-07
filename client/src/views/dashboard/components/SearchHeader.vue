@@ -1,28 +1,17 @@
 <template>
   <header class="w-full flex justify-between items-center mb-8 relative">
-    <p
-      class="sm:text-base text-sm semibold sm:static absolute -bottom-7 left-0"
-    >
+    <p class="sm:text-base text-sm semibold sm:static absolute -bottom-7 left-0">
       {{ usersObj.count }} <span>total users</span>
     </p>
     <div class="w-[50%] sm:w-[70%]">
-      <FormInput
-        placeholder="Search for user..."
-        v-model="searchValue"
-        @update:model-value="searchHandler"
-      />
+      <FormInput placeholder="Search for user..." v-model="searchValue" @update:model-value="searchHandler" />
     </div>
     <FormBlock position="row">
       <template #label>
         <FormLabel id="sort" class="sm:block hidden">Sort by:</FormLabel>
       </template>
       <template #input>
-        <FormSelect
-          id="sort"
-          :options="sortUserOptins"
-          v-model="sortValue"
-          @update:model-value="sortHandler"
-        />
+        <FormSelect id="sort" :options="sortUserOptins" v-model="sortValue" @update:model-value="sortHandler" />
       </template>
     </FormBlock>
   </header>
@@ -59,6 +48,5 @@ const emits = defineEmits(["sort-value-event", "search-event"]);
 
 const sortHandler = (value: string) => emits("sort-value-event", value);
 
-const searchHandler = (value: string) =>
-  emits("search-event", value.toLowerCase());
+const searchHandler = (value: string) => emits("search-event", value.toLowerCase());
 </script>

@@ -38,8 +38,8 @@ export type UserType = {
 
 export type UsersResponseType = {
   count: number;
-  users:UserType[]
-}
+  users: UserType[];
+};
 
 export type ConsoleType = {
   console: {

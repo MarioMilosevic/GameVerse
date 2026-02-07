@@ -65,7 +65,7 @@ import { userInputs, dashboardOptions } from "@/shared/constants";
 import { PropType, ref } from "vue";
 import { UserType } from "@/utils/types";
 import { editUserProfile } from "@/api/users";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 const emits = defineEmits(["close-modal-event", "submit-event"]);
 const props = defineProps({

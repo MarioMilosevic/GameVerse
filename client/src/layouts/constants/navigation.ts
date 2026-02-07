@@ -19,10 +19,7 @@ const BASE_LINKS: navLinkType[] = [
   },
 ];
 
-export const createNavLinks = (
-  theme: ThemeType,
-  user?: UserType,
-): navLinkType[] => {
+export const createNavLinks = (theme: ThemeType, user?: UserType): navLinkType[] => {
   const isDark = theme === THEME_OPTIONS.DARK;
 
   const themeLink: navLinkType = {

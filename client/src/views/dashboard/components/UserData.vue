@@ -23,24 +23,16 @@
       data-cell="Created Date"
       class="before:content-[attr(data-cell)':_'] before:font-semibold sm:before:content-none col-start-6 col-end-8"
     >
-      {{ formattedDate(user.createdDate) }}
+      {{ formatDate(user.createdDate) }}
     </td>
-    <td
-      data-cell="Role"
-      class="before:content-[attr(data-cell)':'] sm:before:content-none col-start-8 col-end-10"
-    >
+    <td data-cell="Role" class="before:content-[attr(data-cell)':'] sm:before:content-none col-start-8 col-end-10">
       {{ user.role }}
     </td>
     <td
       data-cell="Active"
       class="col-start-10 col-end-11 before:content-[attr(data-cell)':_'] before:font-semibold sm:before:content-none"
     >
-      <v-icon
-        data-cell="Active"
-        name="fc-checkmark"
-        fill="green"
-        v-if="user.active"
-      />
+      <v-icon data-cell="Active" name="fc-checkmark" fill="green" v-if="user.active" />
       <v-icon name="io-close-sharp" fill="red" v-else />
     </td>
     <v-icon
@@ -61,7 +53,8 @@
 <script lang="ts" setup>
 import { UserType } from "@/utils/types";
 import { PropType } from "vue";
-import { formattedDate, renderUserImage } from "@/utils/helpers";
+import { renderUserImage } from "@/utils/helpers/renderUserImage";
+import { formatDate } from "@/utils/helpers/formatDate";
 
 defineProps({
   user: {

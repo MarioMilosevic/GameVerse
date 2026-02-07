@@ -29,7 +29,7 @@ import LeaveReview from "@/views/game/components/LeaveReview.vue";
 import PageSubtitle from "@/shared/components/PageSubtitle.vue";
 import { PropType } from "vue";
 import { ReviewType } from "@/utils/types";
-import { translateElement } from "@/utils/helpers";
+import { translateElement } from "@/utils/helpers/translateElement";
 
 const props = defineProps({
   reviews: {

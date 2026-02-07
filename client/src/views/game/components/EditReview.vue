@@ -9,10 +9,7 @@
   />
   <FormTextarea v-model="localValue" />
   <div class="w-full flex justify-between">
-    <Button
-      @click="editReviewHandler"
-      color="green"
-      :disabled="localValue.length === 0 || disabledButton"
+    <Button @click="editReviewHandler" color="green" :disabled="localValue.length === 0 || disabledButton"
       >Save Changes</Button
     >
     <Button @click="emits('cancel-event')">Cancel</Button>
@@ -24,10 +21,10 @@ import FormTextarea from "@/shared/components/form/FormTextarea.vue";
 import Button from "@/shared/components/Button.vue";
 import RatingStars from "@/views/game/components/RatingStars.vue";
 import MainRatingStar from "@/views/game/components/MainRatingStar.vue";
-import { fillStars } from "@/utils/helpers";
+import { fillStars } from "@/utils/helpers/fillStars";
 import { ref, inject } from "vue";
 import { editReview } from "@/api/reviews";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import { ReviewType } from "@/utils/types";
 
 const props = defineProps({
@@ -52,18 +49,9 @@ const editRating = ref<number>(rating ?? 0);
 const localValue = ref<string>(content);
 const disabledButton = ref<boolean>(false);
 
-const editHandler =
-  inject<
-    (reviewId: number, updatedReview: ReviewType, avgRating: number) => void
-  >("editReview");
+const editHandler = inject<(reviewId: number, updatedReview: ReviewType, avgRating: number) => void>("editReview");
 
-const emits = defineEmits([
-  "cancel-event",
-  "mouse-enter-event",
-  "mouse-leave-event",
-  "click-event",
-  "edit-event",
-]);
+const emits = defineEmits(["cancel-event", "mouse-enter-event", "mouse-leave-event", "click-event", "edit-event"]);
 
 const editReviewHandler = async () => {
   try {

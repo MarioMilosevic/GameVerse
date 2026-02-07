@@ -15,7 +15,7 @@
         </p>
         <p class="sm:text-base text-sm font-semibold">
           Member since:
-          <span class="font-normal">{{ formattedDate(user.createdDate) }}</span>
+          <span class="font-normal">{{ formatDate(user.createdDate) }}</span>
         </p>
       </article>
     </section>
@@ -110,7 +110,8 @@ import AppFooter from "@/shared/components/AppFooter.vue";
 import Button from "@/shared/components/Button.vue";
 import { useRouter } from "vue-router";
 import { AccountSettingsType } from "@/utils/types";
-import { formattedDate, renderUserImage } from "@/utils/helpers";
+import { renderUserImage } from "@/utils/helpers/renderUserImage";
+import { formatDate } from "@/utils/helpers/formatDate";
 import { accountInputs, emptyAccountSettings, guestMessage } from "@/shared/constants";
 import { ref, computed } from "vue";
 import {
@@ -119,9 +120,9 @@ import {
   getAccountFieldError,
   AccountFields,
   AccountTouchedFields,
-} from "@/schemas/accountPage";
+} from "@/schemas/account";
 import { disableUserAccount, editUserNameAndEmail, signOut, updateUserImage } from "@/api/users";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 
 const { user, setUser, resetUser } = useGetUserStore();
 const router = useRouter();

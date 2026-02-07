@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getUserData } from "@/api/users";
 import { gameVerseToken, userRoles } from "@/shared/constants";
-import { showToast } from "@/utils/toast";
+import { showToast } from "@/utils/helpers/showToast";
 import useGetUserStore from "@/composables/useGetUserStore";
 import useGetLoadingStore from "@/composables/useGetLoadingStore";
 
