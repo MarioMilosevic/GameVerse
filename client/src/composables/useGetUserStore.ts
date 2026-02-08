@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { useUserStore } from "@/stores/userStore";
+import { useUserStore } from "@/stores/user";
 
 export default function useGetUserStore() {
   const userStore = useUserStore();

@@ -13,7 +13,6 @@
     <div
       v-if="user.id"
       class="flex items-center lg:justify-between rounded-xl relative sm:gap-2 gap-4"
-      @click="toggleMenu"
       @blur="closeNavigationMenu"
       tabindex="0"
     >
@@ -21,9 +20,6 @@
     </div>
 
     <div class="flex sm:gap-2 gap-2 items-center" v-else>
-      <v-icon v-if="theme === THEME_OPTIONS.DARK" name="md-darkmode" @toggle-theme-event="handleTheme" />
-      <v-icon v-if="theme === THEME_OPTIONS.LIGHT" name="md-lightmode" @toggle-theme-event="handleTheme" />
-      <!-- Todo add primary and transparent into constants maybe ? -->
       <Button
         v-for="(page, index) in authPages"
         :color="selectedPage === index ? 'primary' : 'transparent'"
@@ -77,13 +73,6 @@ const authPages = ["LOG IN", "SIGN UP"];
 const authRoutes = ["/login", "/sign-up"];
 
 const router = useRouter();
-
-const toggleMenu = () => {
-  // Todo: check if this function is neccessary ?
-  if (!window.matchMedia("(hover:hover)").matches) {
-    navigationMenuOpen.value = !navigationMenuOpen.value;
-  }
-};
 
 const closeNavigationMenu = () => {
   navigationMenuOpen.value = false;

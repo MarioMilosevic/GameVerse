@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { setActivePinia, createPinia } from "pinia";
-import { useUserStore } from "@/stores/userStore";
+import { useUserStore } from "@/stores/user";
 import useGetUserStore from "@/composables/useGetUserStore";
 import { UserType } from "@/utils/types";
 
